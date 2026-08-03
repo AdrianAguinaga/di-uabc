@@ -1,0 +1,200 @@
+# Políticas del curso: reglas de convivencia, criterios de acreditación y su
+# fundamento legal.
+#
+# Propósito: que ningún alumno pueda alegar desconocimiento. El Art. 66 del
+# Estatuto Escolar obliga al profesor a dar a conocer al inicio del curso el
+# programa, la metodología y los criterios de evaluación.
+#
+# Cada `citas` referencia un artículo de conocimiento/normatividad/. El renderizado
+# falla si una cita no resuelve: ningún modelo escribe "Art. 68" como texto libre.
+
+# ---------------------------------------------------------------------------
+# Artículos citables
+# ---------------------------------------------------------------------------
+articulos:
+  EE-65:
+    fuente: "Estatuto Escolar UABC, reforma 20 de mayo de 2021"
+    articulo: 65
+    resumen: >-
+      El resultado de las evaluaciones se expresa en escala centesimal de cero a cien.
+      La calificación mínima aprobatoria es de sesenta en licenciatura. Cuando el alumno
+      no presente examen teniendo derecho, se registra «no presentó» (NP); si no tiene
+      derecho, «sin derecho» (SD).
+  EE-66:
+    articulo: 66
+    resumen: >-
+      El profesor deberá dar a conocer a los alumnos, al inicio del curso, el programa de
+      la unidad de aprendizaje, incluyendo la metodología de trabajo y criterios de
+      evaluación. El alumno tiene derecho a ser evaluado conforme a los contenidos
+      impartidos y los criterios establecidos.
+  EE-67:
+    articulo: 67
+    resumen: >-
+      Los criterios de evaluación definirán los aspectos a evaluar y los porcentajes que
+      cada uno tendrá en la calificación, los medios de evaluación y los momentos para
+      evaluar durante el desarrollo de la unidad de aprendizaje.
+  EE-68:
+    articulo: 68
+    resumen: >-
+      Los profesores evaluarán de forma permanente. Los exámenes parciales no podrán ser
+      en número inferior a dos en cada periodo escolar. Si el profesor considera
+      suficientes estos elementos, exentará al alumno del examen ordinario; si el alumno
+      no estuviera de acuerdo con la calificación, tendrá derecho a presentarlo.
+  EE-70:
+    articulo: 70
+    resumen: >-
+      Tendrán derecho a presentar examen ordinario los alumnos que hayan cursado la
+      unidad de aprendizaje con ochenta por ciento o más de asistencias en clases
+      impartidas.
+  EE-71:
+    articulo: 71
+    resumen: >-
+      Tendrán derecho a examen extraordinario los alumnos que no presentaron el ordinario
+      o que no obtuvieron calificación aprobatoria, siempre que hayan cursado la unidad de
+      aprendizaje con sesenta por ciento o más de asistencias.
+  EE-74:
+    articulo: 74
+    resumen: >-
+      Las unidades de aprendizaje predominantemente prácticas se evalúan conforme al
+      artículo 67; cuando el resultado no sea aprobatorio, el alumno deberá inscribirse
+      nuevamente en la misma unidad de aprendizaje.
+  EE-75:
+    articulo: 75
+    resumen: >-
+      La evaluación de las unidades de aprendizaje impartidas en las modalidades
+      semipresencial y no presencial se regirá por lo previsto en el plan de clase, que
+      deberá incluir el registro de las evidencias de aprendizaje.
+  RPIDA-59:
+    fuente: "Reglamento de Propiedad Intelectual y Derechos de Autor de la UABC"
+    articulo: 59
+    resumen: >-
+      Establece las sanciones aplicables por el uso deshonesto de obra ajena.
+
+# Citas obligatorias en todo diseño instruccional.
+citas_obligatorias: [EE-65, EE-66, EE-67, EE-68, EE-70, EE-71, RPIDA-59]
+# Condicionales
+citas_si_practica: [EE-74]        # unidad de aprendizaje eminentemente práctica
+citas_si_no_presencial: [EE-75]   # modalidad semipresencial o a distancia
+
+# ---------------------------------------------------------------------------
+# Criterios de acreditación (texto que va al documento)
+# ---------------------------------------------------------------------------
+acreditacion:
+  - id: escala
+    texto: >-
+      La calificación se expresa en escala de 0 a 100, con calificación mínima aprobatoria
+      de 60.
+    citas: [EE-65]
+  - id: derecho_ordinario
+    texto: >-
+      Para tener derecho a presentar el examen ordinario se requiere haber cursado la
+      unidad de aprendizaje con 80 % o más de asistencias.
+    citas: [EE-70]
+  - id: derecho_extraordinario
+    texto: >-
+      Para tener derecho a presentar el examen extraordinario se requiere haber cursado la
+      unidad de aprendizaje con 60 % o más de asistencias.
+    citas: [EE-71]
+  - id: exencion
+    plantilla: >-
+      Para exentar el examen ordinario se requiere obtener un promedio igual o mayor a
+      {exencion}. Este criterio es determinación del docente conforme al artículo 68 del
+      Estatuto Escolar; el alumno que no esté de acuerdo con la calificación determinada
+      conserva su derecho a presentar el examen ordinario.
+    citas: [EE-68]
+  - id: asistencia_no_es_calificacion
+    texto: >-
+      La asistencia no forma parte de los criterios de calificación del curso. Es, en
+      cambio, requisito para tener derecho a los exámenes ordinario y extraordinario en
+      los porcentajes señalados.
+    citas: [EE-70, EE-71]
+  - id: plataforma
+    texto: >-
+      Ingresar al espacio del curso en la plataforma institucional cuando menos dos veces
+      por semana.
+    modalidades: [semipresencial, a_distancia]
+  - id: sin_extraordinario
+    texto: >-
+      Por ser una unidad de aprendizaje eminentemente práctica, no se evalúa en
+      extraordinario, según lo especifica el Estatuto Escolar vigente.
+    citas: [EE-74]
+    solo_si_practica: true
+
+# ---------------------------------------------------------------------------
+# Reglas de convivencia. Cada una con su sanción: sin sanción no es una regla.
+# ---------------------------------------------------------------------------
+convivencia:
+  - id: respeto
+    titulo: "Respeto mutuo"
+    texto: >-
+      Este es un espacio académico que promueve el intercambio de ideas y opiniones, donde
+      debe privar el respeto y la tolerancia a las diferencias. Se espera un trato
+      cordial entre compañeros y hacia el docente, tanto en el aula como en la plataforma.
+    sancion: "Amonestación verbal; en caso de reincidencia, registro de incidencia."
+
+  - id: puntualidad
+    titulo: "Puntualidad"
+    plantilla: >-
+      La tolerancia de ingreso a las sesiones será de {tolerancia} minutos. Después de ese
+      lapso podrá ingresarse al aula, pero se registrará retardo.
+    sancion: "Tres retardos equivalen a una falta."
+
+  - id: dispositivos
+    titulo: "Uso adecuado de dispositivos"
+    texto: >-
+      El uso de teléfonos y computadoras se limita a las actividades académicas de la
+      sesión. Durante exposiciones y evaluaciones los dispositivos permanecerán guardados,
+      salvo indicación expresa del docente.
+    sancion: "Retiro del dispositivo durante la sesión y registro de incidencia."
+
+  - id: honestidad
+    titulo: "Honestidad académica"
+    texto: >-
+      Las ideas, conceptos y metodologías de terceros deben citarse y referenciarse
+      explícitamente conforme al esquema APA. El plagio o la copia de trabajos constituye
+      una transgresión a los derechos de autor.
+    sancion: >-
+      Anulación de la evidencia correspondiente. Las sanciones se determinan conforme al
+      artículo 59 del Reglamento de Propiedad Intelectual y Derechos de Autor de la UABC.
+    citas: [RPIDA-59]
+
+  - id: entregas
+    titulo: "Entrega de trabajos"
+    texto: >-
+      Las actividades se entregan por el medio y en la fecha señalados. Las entregas
+      extemporáneas no se aceptan salvo justificación documentada notificada antes del
+      vencimiento; en ese caso podrá concederse una prórroga.
+    sancion: "La actividad entregada fuera de la fecha se califica con cero."
+
+  - id: plataforma
+    titulo: "Participación en plataforma"
+    texto: >-
+      El foro de dudas es el canal principal para preguntas sobre contenidos, uso de la
+      plataforma e instrucciones de las actividades. El correo se reserva para asuntos
+      personales. Es responsabilidad del estudiante revisar la plataforma y su correo
+      institucional de forma constante.
+    sancion: "La falta de revisión no justifica el incumplimiento de una entrega."
+    modalidades: [semipresencial, a_distancia]
+
+  - id: escritura
+    titulo: "Calidad de la escritura"
+    texto: >-
+      Se espera lenguaje apropiado, buena redacción y ortografía en toda comunicación
+      escrita: foros, mensajes y trabajos.
+    sancion: "El docente podrá penalizar la calificación por errores de redacción y ortografía."
+
+  - id: instalaciones
+    titulo: "Cuidado de las instalaciones"
+    texto: >-
+      El equipo y las instalaciones se usan conforme a su propósito académico. No se
+      permite el ingreso de alimentos ni bebidas al laboratorio.
+    sancion: "Reposición del daño causado y registro de incidencia."
+
+consecuencias: >-
+  El incumplimiento de estas reglas dará lugar, según su gravedad, a amonestación verbal,
+  registro de incidencia, reducción en la calificación de la actividad correspondiente y,
+  en casos graves, a solicitar al estudiante que abandone la sesión. Las faltas que
+  constituyan una transgresión a la normatividad universitaria se turnarán a la instancia
+  correspondiente.
+
+tolerancia_minutos_predeterminada: 15

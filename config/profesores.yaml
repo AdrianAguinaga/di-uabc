@@ -1,0 +1,12 @@
+# Profesores para los que se emiten diseños instruccionales.
+# El `id` es lo que se guarda en curso.yaml; el nombre se copia tal cual al documento.
+
+profesores:
+  - id: ara
+    nombre: "Adrian Rodriguez Aguiñaga"
+    correo: "adrian.aguinaga@uabc.edu.mx"
+    predeterminado: true
+
+  - id: zra
+    nombre: "Zurisaddai Rubio Arriaga"
+    correo: null        # completar cuando se confirme

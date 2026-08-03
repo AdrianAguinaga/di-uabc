@@ -1,0 +1,83 @@
+# Mapa modalidad → plantilla CIAD.
+#
+# Los índices y prototipos están VERIFICADOS contra los archivos reales. Si el CIAD
+# publica una versión nueva, el sha256 dejará de coincidir y el renderizado debe
+# fallar de forma ruidosa, no adaptarse en silencio.
+#
+# Las plantillas viven en referencias/ y NO se modifican jamás.
+
+modalidades:
+  semipresencial:
+    etiqueta: "Semipresencial"
+    archivo: "referencias/CIAD_DI_Plantilla_Semipresencial-2025.docx"
+    version: "2025-1"
+    modalidad_instruccional: "Semipresencial."
+    portada_linea: "modalidad semipresencial"
+    etiqueta_autores: "Diseño Instruccional para la modalidad semipresencial:"
+    celda_nombre_curso: "Nombre del curso"
+    semanas_nominal: 17
+    columnas_rejilla: 7
+    entrega_dividida: true          # Presencial/Sincrónico + Virtual/Asincrónico
+    tiene_pasos_ordinales: true     # Primero… Quinto
+    tiene_reflexion: true
+    tiene_criterios_evaluacion: true
+
+  escolarizada:
+    etiqueta: "Escolarizada"
+    archivo: "referencias/CIAD_DI_Plantilla_PRESENCIAL.docx"
+    version: "2023-1"
+    modalidad_instruccional: "Escolarizada."
+    portada_linea: "modalidad Escolarizada"
+    # La plantilla original dice «semipresencial» por error de origen; se corrige.
+    etiqueta_autores: "Diseño Instruccional para la modalidad escolarizada:"
+    celda_nombre_curso: "Nombre del curso"
+    semanas_nominal: 14
+    columnas_rejilla: 7
+    entrega_dividida: true
+    tiene_pasos_ordinales: false
+    tiene_reflexion: false
+    tiene_criterios_evaluacion: false
+    erratas:
+      - "La etiqueta de autores dice «modalidad semipresencial» aun siendo la escolarizada."
+      - "Trae una fila 33 huérfana con vMerge=continue vacía; no usarla como prototipo."
+
+  a_distancia:
+    etiqueta: "A distancia"
+    archivo: "referencias/CIAD_DI_Plantilla_A_Distancia-2025.docx"
+    version: "2025-1"
+    modalidad_instruccional: "A distancia."
+    portada_linea: "modalidad a distancia"
+    etiqueta_autores: "Diseño Instruccional para la modalidad a distancia:"
+    celda_nombre_curso: "Nombre de la asignatura"
+    semanas_nominal: 17
+    columnas_rejilla: 6
+    entrega_dividida: false         # no hay sesión presencial
+    tiene_pasos_ordinales: true
+    tiene_reflexion: true
+    tiene_criterios_evaluacion: true
+    nota_blackboard: >-
+      Blackboard Ultra no acepta contenido en tablas: la Sección 2 debe publicarse como
+      archivo descargable en Word o PDF.
+
+# Marcadores por los que el renderizador localiza el contenido. Se busca por TEXTO,
+# nunca por índice: los índices se mueven entre versiones.
+marcadores:
+  campos_seccion_1:
+    - "Nivel académico"
+    - "Clave"
+    - "Programa Educativo"
+    - "Vigencia de la unidad de Aprendizaje"
+    - "Créditos y total de horas"
+    - "Etapa formativa"
+    - "Carácter de la asignatura"
+    - "Modalidad Instruccional"
+  bloque_meta_inicio: "Meta 1.1."
+  bloque_meta_separador: "------------------------"
+  pie_version: "Versión"
+
+# Advertencias que aplican a las tres plantillas.
+advertencias:
+  - "Los nombres de estilo están duplicados (Heading 1-6, Title, Subtitle). Prohibido asignar estilos por nombre."
+  - "Los dos bloques de meta no son iguales: el segundo trae un párrafo extra y no lleva separador. Clonar siempre el primero."
+  - "tbl.tr_lst reconsulta el XML en cada acceso: hacer snapshot con list() antes de borrar filas."
+  - "Todo <w:tc> debe terminar con al menos un <w:p> o Word pide reparar el archivo."

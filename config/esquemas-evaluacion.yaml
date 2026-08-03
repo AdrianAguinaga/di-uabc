@@ -1,0 +1,57 @@
+# Esquemas de evaluación disponibles.
+#
+# Fundamento legal (Estatuto Escolar UABC, reforma 20 may 2021):
+#   Art. 67 — los criterios deben definir los aspectos a evaluar y sus porcentajes.
+#   Art. 68 — mínimo DOS exámenes parciales por periodo escolar. La exención del
+#             ordinario la decide el profesor; el alumno inconforme puede exigirlo.
+#   Art. 65 — escala 0 a 100, mínima aprobatoria 60 en licenciatura.
+#
+# El umbral de exención es criterio del docente amparado en el Art. 68. Los formatos
+# institucionales recomiendan 90, pero no lo imponen. Se declara como criterio del
+# docente, nunca como norma universitaria.
+
+predeterminado: estandar-2026
+
+esquemas:
+  estandar-2026:
+    nombre: "Estándar 2026"
+    descripcion: "Exámenes 20 · Tareas y actividades 40 · Proyecto final 40"
+    rubros:
+      - id: examenes
+        etiqueta: "Exámenes"
+        porcentaje: 20
+        detalle: "Dos evaluaciones parciales de 10 % cada una"
+        parciales: 2
+      - id: tareas
+        etiqueta: "Tareas y actividades de clase"
+        porcentaje: 40
+      - id: proyecto
+        etiqueta: "Proyecto final"
+        porcentaje: 40
+    exencion_ordinario: 80
+
+  practica-laboratorio:
+    nombre: "Práctica de laboratorio"
+    descripcion: "Para unidades de aprendizaje eminentemente prácticas"
+    rubros:
+      - id: examenes
+        etiqueta: "Evaluaciones parciales"
+        porcentaje: 20
+        parciales: 2
+      - id: practicas
+        etiqueta: "Prácticas de laboratorio"
+        porcentaje: 45
+      - id: tareas
+        etiqueta: "Tareas e investigaciones"
+        porcentaje: 15
+      - id: portafolio
+        etiqueta: "Portafolio de prácticas"
+        porcentaje: 20
+    exencion_ordinario: 80
+
+# Reglas que la validación aplica a cualquier esquema, incluidos los capturados a mano.
+reglas:
+  suma_exacta: 100
+  parciales_minimos: 2          # Art. 68
+  exencion_minima: 60           # no puede ser menor que la calificación aprobatoria (Art. 65)
+  exencion_maxima: 100

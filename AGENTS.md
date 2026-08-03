@@ -73,9 +73,10 @@ en `src/modelo.py`. Todo lo que aparece en el documento sale de ahí.
 Tres decisiones de diseño que sostienen las reglas invariables:
 
 1. **El horario vive en el grupo, no en el curso.** Si dos grupos tienen días de clase distintos,
-   *todas* las fechas divergen. `grupos/961.yaml` lleva días de sesión, hora de entrega y jefe de
-   grupo; el motor de semanas corre una vez por grupo. Si los horarios coinciden, los documentos
-   difieren en tres cadenas; si no, difieren en todas las fechas — y el sistema lo maneja igual.
+   *todas* las fechas divergen. Cada entrada de `grupos:` lleva su `horario` (días de sesión, día
+   y hora de entrega, aula) y su jefe de grupo; el motor de semanas corre una vez por grupo. Si
+   los horarios coinciden, los documentos difieren en tres cadenas; si no, difieren en todas las
+   fechas — y el sistema lo maneja igual.
 
 2. **Opus nunca escribe fechas.** Escribe marcadores que `calendario.py` resuelve después de
    asignar las semanas: `{{fecha_presencial}}`, `{{fecha_entrega}}`, `{{fecha_entrega_larga}}`,
@@ -89,6 +90,53 @@ Tres decisiones de diseño que sostienen las reglas invariables:
 
 Además, cada meta declara `cubre_temas` y `practica_pua` referidos al PUA. Es el ancla
 anti-alucinación: la validación rechaza referencias a temas o prácticas que no existen.
+
+### Contrato de `curso.yaml`
+
+Las claves de primer nivel, tal como las lee `modelo.desde_dict()`:
+
+```yaml
+meta:            {ciclo, clave, pua_ref, pua_sha256}
+profesor:        "ara"                      # id de config/profesores.yaml
+identificacion:  {nombre, modalidad, practica, …}   # literal del PUA §I
+contenido:       {competencia_general, proposito_general, estrategia_general,
+                  evidencias_desempeno, criterios_evaluacion}
+unidades:        [{numero, nombre, competencia, duracion_horas, temas}]
+metas:           [{id, unidad, semanas, valor, rubro, tipo, enunciado,
+                   sesiones, evidencias, criterios_evaluacion, reflexion,
+                   cubre_temas, practica_pua, caracter, que_voy_a_aprender}]
+evaluacion:      {esquema_id, exencion_ordinario, rubros:[{id, etiqueta,
+                                                           porcentaje, detalle, parciales}]}
+grupos:          [{numero, horario:{dias_presencial, dia_entrega, hora_entrega, aula},
+                   jefe_grupo, plataforma}]     # o la forma corta: ["961", "962"]
+citas:           [EE-65, EE-66, …]           # deben resolver en config/politicas.yaml
+tolerancia_minutos: 15
+avisos:          []                          # arrastrados desde la ingesta del PUA
+```
+
+`tipo` de meta: `encuadre · aprendizaje · examen_parcial · cierre`.
+`ambiente` de sesión: `presencial · virtual`. Solo `encuadre` y `cierre` pueden valer 0 %.
+
+### Las ocho reglas de validación (`src/validar.py`)
+
+| # | Qué verifica | Fundamento |
+|---|---|---|
+| R1 | Los porcentajes del esquema suman exactamente 100; la exención cae en [60, 100]. | Arts. 65 y 67 |
+| R2 | Las metas suman lo declarado **rubro por rubro**, no solo en total. | Art. 67 |
+| R3 | Hay al menos dos exámenes parciales. | Art. 68 |
+| R4 | Toda unidad del PUA tiene meta; ninguna meta cuelga de una unidad inexistente. | — |
+| R5 | Toda semana 1..N tiene actividad; ninguna meta cae fuera del ciclo. | Calendario |
+| R6 | Ninguna entrega cae en suspensión ni después del fin de cursos. | Calendario |
+| R7 | Citas obligatorias presentes, cada regla de convivencia con sanción, firma por grupo. | Art. 66 |
+| R8 | Indicadores indispensables del IEDI v2023-1 comprobables sobre el documento. | CIAD |
+
+Tres niveles de hallazgo: **error** (bloquea), **aviso** (decisión del docente) y
+**recordatorio** (indicador del IEDI que depende de Blackboard, no del documento).
+
+**R2 es la regla que justifica la capa entera.** El ejemplo dorado `ejemplos/961 (1).pdf` suma
+100 en total pero sus rubros no cuadran con su propio esquema declarado. Un validador que solo
+revise el total deja pasar ese error; este lo atrapa, y hay una prueba dedicada a demostrarlo
+(`test_detecta_el_defecto_del_ejemplo_961`).
 
 ## Mapa de directorios
 
