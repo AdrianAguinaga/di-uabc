@@ -70,6 +70,26 @@ config/*.yaml ──────────────────────
 `curso.yaml` es **el contrato** entre la etapa de planeación y la de renderizado. Su esquema está
 en `src/modelo.py`. Todo lo que aparece en el documento sale de ahí.
 
+Tres decisiones de diseño que sostienen las reglas invariables:
+
+1. **El horario vive en el grupo, no en el curso.** Si dos grupos tienen días de clase distintos,
+   *todas* las fechas divergen. `grupos/961.yaml` lleva días de sesión, hora de entrega y jefe de
+   grupo; el motor de semanas corre una vez por grupo. Si los horarios coinciden, los documentos
+   difieren en tres cadenas; si no, difieren en todas las fechas — y el sistema lo maneja igual.
+
+2. **Opus nunca escribe fechas.** Escribe marcadores que `calendario.py` resuelve después de
+   asignar las semanas: `{{fecha_presencial}}`, `{{fecha_entrega}}`, `{{fecha_entrega_larga}}`,
+   `{{fecha_tabla}}`. Esto elimina de raíz la peor clase de error del sistema —una fecha inventada
+   en un documento con valor legal— y hace trivial validarlo.
+
+3. **El énfasis es semántico, no tipográfico.** En `curso.yaml` se escribe
+   `{t: "M1.1_Mapa conceptual", enfasis: recurso}`, y el mapa a negrita/cursiva/subrayado vive
+   **solo** en `src/estilo.py`. Si el CIAD cambia su guía de estilo se toca una tabla, y el
+   validador puede exigir que toda meta con evidencia lleve al menos un run `evidencia`.
+
+Además, cada meta declara `cubre_temas` y `practica_pua` referidos al PUA. Es el ancla
+anti-alucinación: la validación rechaza referencias a temas o prácticas que no existen.
+
 ## Mapa de directorios
 
 | Ruta | Qué es | ¿Se edita? |
@@ -163,22 +183,66 @@ como norma universitaria.
 
 ## Notas técnicas
 
+Todo lo de esta sección está **verificado contra los archivos reales**, no supuesto.
+
+### Extracción
 - `pdftotext` **requiere `-enc UTF-8`**; sin él produce mojibake (`AUT�NOMA`).
 - La §VI del PUA (tabla de prácticas) se desordena con `pdftotext -layout` → usar
-  `pdfplumber.extract_table()`.
-- **python-docx, Sección 1**: los campos vienen con los runs ya separados —
-  `Clave:` es `[('Clave', bold=True), (': ', None)]`. Usa `add_run()`; **nunca** asignes
-  `paragraph.text`, porque colapsa los runs y destruye el formato.
-- **python-docx, Sección 2**: la tabla tiene **7 columnas de rejilla**, no las 6 lógicas del
-  encabezado (`Semana` está fusionada horizontalmente). Mapa real:
+  `pdfplumber.extract_tables()`. La práctica 3 se parte entre las páginas 8 y 9: las filas de
+  continuación llegan con el número vacío y hay que coserlas a la anterior.
+- Los PUA oficiales traen **defectos de origen**. El de Big Data repite la numeración de temas en
+  las cinco unidades y deja sin duración la práctica 3. **Se conservan literales y se avisa** —
+  renumerar o rellenar rompería la trazabilidad contra el documento oficial.
+
+### python-docx
+- **Sección 1**: los campos vienen con los runs ya separados —
+  `Clave:` es `[('Clave', bold=True), (': ', None)]`. Añade el valor con `add_run()`;
+  **nunca** asignes `paragraph.text`, porque colapsa todos los runs y destruye el formato.
+  Localiza los campos **por el texto de su etiqueta**, nunca por índice.
+- **La plantilla tiene nombres de estilo duplicados**: `Heading 1`–`Heading 6`, `Title` y
+  `Subtitle` aparecen **dos veces** en `doc.styles`. `doc.styles['Heading 2']` es ambiguo.
+  **Prohibido asignar estilos por nombre**; los estilos se heredan clonando (`pPr/pStyle` viaja
+  en el `deepcopy`).
+- **Sección 2**: la tabla tiene **7 columnas de rejilla**, no las 6 lógicas del encabezado
+  (`Semana` está fusionada horizontalmente). Mapa real:
   `0=Meta · 1=Semana · 2=modo · 3=Entrega · 4=Actividad · 5=Evidencia(s) · 6=Valor`.
-  Opera sobre columnas de rejilla. Clona filas con `copy.deepcopy(tr._tr)` +
-  `tbl._tbl.insert()`.
-- **Word COM**: `Visible=False`, `DisplayAlerts=False`, rutas **absolutas**, y `try/finally` con
-  `Quit()` para no dejar procesos `WINWORD.EXE` huérfanos.
-- La plantilla presencial trae un **error de origen**: dice `Diseño Instruccional para la modalidad
-  semipresencial:` aun siendo la escolarizada. Se reproduce corregido; queda constancia en
-  `conocimiento/plantillas/`.
+  Opera sobre columnas de rejilla. Clona filas con `copy.deepcopy(tr._tr)`.
+  - `tbl.tr_lst` reconsulta el XML en cada acceso: **haz snapshot con `list()`** antes de borrar,
+    o al iterar y borrar a la vez te saltas filas.
+  - Un `<w:tc>` **debe** terminar con al menos un `<w:p>`, o Word pide reparar el archivo.
+  - `vMerge` va en una posición fija dentro de `<w:tcPr>` según el esquema: usa
+    `get_or_add_vMerge()`, nunca `tcPr.append()`.
+  - No toques `<w:tblGrid>`: con `tblLayout=fixed` los anchos salen de ahí.
+- **Sección 3**: los dos bloques de meta de la plantilla **no son iguales**. El primero va de los
+  párrafos 59 a 89 y termina en el separador `------------------------`; el segundo (90–130) trae
+  un párrafo extra y **no** lleva separador. **Clona siempre el primero.**
+- Al borrar contenido de un `<w:p>`, elimina **solo** los `qn('w:r')`. Un `<w:p>` también contiene
+  `bookmarkStart/End`, `proofErr` e `hyperlink`; borrar un `bookmarkStart` sin su `End` hace que
+  Word pida reparar el archivo.
+- El espacio duro `\xa0` aparece literalmente en la plantilla (`'Primero.\xa0 '`). No lo
+  normalices: cambia el renderizado.
+
+### Word COM
+- Usa **`DispatchEx`**, no `Dispatch`: `Dispatch` se adhiere a la instancia de Word que el usuario
+  tenga abierta y `Quit()` le cerraría sus documentos.
+- `Visible=False`, `DisplayAlerts=0`, rutas **absolutas**, y `try/finally` con `Quit()`.
+- `word.Hwnd` vale 0 con `Visible=False`, así que no sirve para localizar el proceso. Para no dejar
+  huérfanos: toma un snapshot de los PID de `WINWORD.EXE` antes de arrancar y mata solo el nuevo.
+- Corre el export en un **subproceso con timeout**: un Word colgado en un diálogo invisible no debe
+  poder trabar el pipeline.
+- Requisito previo: Word debe haberse abierto interactivamente al menos una vez, o el diálogo de
+  primera ejecución cuelga COM indefinidamente.
+
+### Erratas conocidas de los documentos institucionales
+- La plantilla **presencial** dice `Diseño Instruccional para la modalidad semipresencial:` aun
+  siendo la escolarizada. Se reproduce corregido; queda constancia en `conocimiento/plantillas/`.
+- La plantilla presencial trae una fila 33 huérfana (`vMerge=continue`, vacía). No la uses como
+  prototipo.
+- La rúbrica IEDI repite el id `4.6` dos veces.
+- **El ejemplo 961 es oráculo de formato, no de contenido.** Tiene dos defectos reales: la semana 7
+  no lleva meta ni número de semana, y los porcentajes por rubro no cuadran con su propio esquema
+  declarado (Proyecto 22 % contra 40 % declarado, Tareas 58 % contra 40 %), aunque el total sí sume
+  100. La capa de validación debe **detectar** esos dos defectos: es la prueba de que sirve.
 
 ## Git
 
