@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Word / Office temporales
+~$*.docx
+~$*.xlsx
+*.tmp
+
+# Salidas regenerables — el .docx y .pdf se reconstruyen desde curso.yaml
+# (curso.yaml y MANIFIESTO.yaml SÍ se versionan: son la fuente de verdad)
+cursos/**/salida/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Scratch
+scratch/
+*.log
