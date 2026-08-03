@@ -14,10 +14,10 @@ validados.
 ## Fases
 
 - [x] **Fase 1: Cimientos y normalización** — repositorio, árbol, contratos de agentes
-- [ ] **Fase 2: Banco de conocimientos** — todos los documentos fuente a Markdown
-- [ ] **Fase 3: Motor de calendario** — ciclo → semanas numeradas, saltando suspensiones
-- [ ] **Fase 4: Ingesta de PUA** — PDF → Markdown normalizado + índice
-- [ ] **Fase 5: Modelo y validación** — `curso.yaml` y las 8 reglas
+- [x] **Fase 2: Banco de conocimientos** — todos los documentos fuente a Markdown
+- [x] **Fase 3: Motor de calendario** — ciclo → semanas numeradas, saltando suspensiones
+- [x] **Fase 4: Ingesta de PUA** — PDF → Markdown normalizado + índice
+- [x] **Fase 5: Modelo y validación** — `curso.yaml` y las 8 reglas
 - [ ] **Fase 6: Renderizado docx + pdf** — rellenar las plantillas CIAD reales
 - [ ] **Fase 7: Orquestador** — `/di-nuevo`, multi-grupo, de extremo a extremo
 - [ ] **Fase 8: Grafo de conocimiento** — cobertura PUA↔metas

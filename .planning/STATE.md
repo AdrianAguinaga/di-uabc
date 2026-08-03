@@ -2,20 +2,22 @@
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
 **Última actualización**: 2026-08-03
-**Fase actual**: 1 — Cimientos y normalización (en curso)
+**Fase actual**: 6 — Renderizado docx + pdf
 
 ## Progreso
 
-| Fase | Estado |
-|---|---|
-| 1. Cimientos y normalización | En curso |
-| 2. Banco de conocimientos | Pendiente |
-| 3. Motor de calendario | Pendiente |
-| 4. Ingesta de PUA | Pendiente |
-| 5. Modelo y validación | Pendiente |
-| 6. Renderizado docx + pdf | Pendiente |
-| 7. Orquestador | Pendiente |
-| 8. Grafo de conocimiento | Pendiente |
+| Fase | Estado | Commit |
+|---|---|---|
+| 1. Cimientos y normalización | Hecha | `3ab58e1` |
+| 2. Banco de conocimientos | Hecha | `66ffee4` |
+| 3. Motor de calendario | Hecha | `4e02016` |
+| 4. Ingesta de PUA | Hecha | `4385ea3` |
+| 5. Modelo y validación | Hecha | `0e30def` |
+| 6. Renderizado docx + pdf | Pendiente | — |
+| 7. Orquestador | Pendiente | — |
+| 8. Grafo de conocimiento | Pendiente | — |
+
+75 pruebas, todas pasan: `python -X utf8 -m unittest discover -s pruebas`.
 
 ## Decisiones tomadas
 
@@ -44,6 +46,14 @@
    semipresencial:` aun siendo la escolarizada.
 5. **La §VI del PUA se desordena** con `pdftotext -layout`; requiere `pdfplumber`.
 6. **`pdftotext` necesita `-enc UTF-8`**, si no produce mojibake.
+7. **El ejemplo 961 es oráculo de formato, no de contenido.** Sus porcentajes por rubro no cuadran
+   con el esquema que él mismo declara (Exámenes 20 ✓, pero Proyecto queda en 2 % o 22 % según
+   dónde se impute el portafolio, contra 40 % declarado), aunque el total sí sume 100. Además, las
+   metas divergen en redacción entre la Sección 2 y la Sección 3. De ahí que cada meta declare su
+   `rubro` y que su enunciado se escriba una sola vez.
+8. **De los 12 indicadores indispensables del IEDI, solo siete son comprobables sobre el
+   documento**; los otros cinco (2.4, 3.1, 3.2, 3.5, 4.1) dependen de cómo el docente monte el
+   curso en Blackboard. Se reportan como recordatorio, no como verificados.
 
 ## Riesgos abiertos
 
@@ -61,4 +71,6 @@
 
 ## Siguiente paso
 
-Terminar la Fase 1 (commit inicial) y continuar con la Fase 2 — banco de conocimientos.
+Fase 6 — `src/render_docx.py` y `src/export_pdf.py`. Criterio de aceptación: regenerar el DI de
+Big Data y compararlo contra `ejemplos/961 (1).pdf`, sabiendo que los defectos del ejemplo **no**
+deben reproducirse.
