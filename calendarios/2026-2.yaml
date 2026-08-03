@@ -1,0 +1,57 @@
+# Calendario escolar UABC — ciclo 2026-2
+#
+# Fuente: calendarios/fuente/Calendario-de-Actividades-2026-2-2027-1.pdf
+#         Coordinación General de Servicios Estudiantiles y Gestión Escolar, UABC
+#         https://fpie.mxl.uabc.mx/wp-content/uploads/2026/07/Calendario-de-Actividades-2026-2-2027-1-1.pdf
+#
+# Convención de ciclos: AAAA-2 = agosto–diciembre · AAAA-1 = enero–junio
+#
+# ATENCIÓN: el periodo de clases da exactamente 16 semanas (10 ago lunes – 28 nov sábado).
+# Las plantillas CIAD semipresencial y a distancia traen 17 filas de semana; sobra un par.
+# El número de semanas lo manda este archivo, nunca la plantilla.
+
+ciclo: "2026-2"
+descripcion: "Agosto–diciembre 2026"
+
+clases:
+  inicio: 2026-08-10   # lunes
+  fin: 2026-11-28      # sábado
+
+# Días de asueto dentro del periodo de clases. Ninguna entrega puede caer aquí.
+suspensiones:
+  - fecha: 2026-09-16
+    motivo: "Día de la Independencia de México"
+  - fecha: 2026-11-02
+    motivo: "Día de Muertos"
+  - fecha: 2026-11-16
+    motivo: "En sustitución del 20 de noviembre, Día de la Revolución Mexicana (3er. lunes del mes)"
+
+periodos:
+  reinscripcion:
+    inicio: 2026-07-30
+    fin: 2026-07-31
+  induccion:
+    inicio: 2026-08-03
+    fin: 2026-08-07
+  limite_baja: 2026-08-24
+  evaluacion_docente:
+    inicio: 2026-11-03
+    fin: 2026-11-20
+  examenes_ordinarios:        # incluye exámenes de competencias
+    inicio: 2026-11-30
+    fin: 2026-12-08
+  examenes_extraordinarios:
+    inicio: 2026-12-14
+    fin: 2026-12-17
+  vacaciones:
+    inicio: 2026-12-21
+    fin: 2027-01-03
+  cursos_intersemestrales:
+    inicio: 2026-12-07
+    fin: 2026-12-18
+
+# La fecha límite para solicitar examen extraordinario es el día hábil anterior
+# al inicio del periodo respectivo.
+notas:
+  - "El periodo de clases comprende 16 semanas."
+  - "La fecha límite para solicitar exámenes extraordinarios es el día hábil anterior al inicio del periodo."
