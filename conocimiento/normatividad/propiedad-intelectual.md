@@ -139,4 +139,3 @@ fines de enseñanza o investigación (**LFDA, art. 151**), se cite correctamente
   http://sriagral.uabc.mx/Externos/AbogadoGeneral/Reglamentos/ReglamentosInstitucionales/20_Reg_Prop_Intelectual.pdf
 
 **Mayores informes:** cead@uabc.edu.mx · http://cead.mxl.uabc.mx/ · /ceaduabc
-</content>

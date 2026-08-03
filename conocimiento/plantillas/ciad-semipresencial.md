@@ -123,4 +123,3 @@ Ahí mismo encontrará otros recursos como:
 - Instrumento de evaluación del diseño instruccional para cursos semipresenciales y a distancia.
 - Infografía: Propiedad Intelectual: Uso de recursos de terceros en la educación virtual.
 - Compendio de actividades de aprendizaje apoyadas en TICC.
-</content>

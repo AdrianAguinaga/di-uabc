@@ -577,4 +577,3 @@ alumnos especiales que se convierten en alumnos ordinarios, siempre que permanez
 el mismo plan de estudios. Esta disposición regirá también respecto a los estudios realizados
 por alumnos que se cambien de unidad académica para seguir cursando el mismo plan en que se
 encuentran inscritos.
-</content>

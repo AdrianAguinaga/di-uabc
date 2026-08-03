@@ -124,4 +124,3 @@ Ahí mismo encontrará otros recursos como:
 > `conocimiento/plantillas/instrucciones-llenado.md` documenta la restricción de que Blackboard
 > Ultra no acepta tablas — para la modalidad a distancia, la Sección 2 se publica como **archivo
 > descargable**, no como tabla ni imagen en la plataforma. Ver AGENTS.md § Modalidades.
-</content>

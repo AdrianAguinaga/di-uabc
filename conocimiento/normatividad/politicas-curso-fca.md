@@ -120,4 +120,3 @@ Bloque de firmas al final del documento:
 | **Nombre Docente:** | **Firma** |
 | **Correo:** | |
 | **Nombre del coordinador de área al que pertenece la materia** | |
-</content>

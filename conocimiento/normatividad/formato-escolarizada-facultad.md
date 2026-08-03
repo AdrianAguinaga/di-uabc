@@ -163,4 +163,3 @@ Tabla final (idéntica en estructura a la de `politicas-curso-fca.md`):
 | **Nombre del coordinador de área al que pertenece la materia** | |
 
 **Fecha:** (campo de captura al final del documento)
-</content>

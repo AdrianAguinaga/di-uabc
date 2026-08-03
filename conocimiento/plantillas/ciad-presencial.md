@@ -132,4 +132,3 @@ Ahí mismo encontrará otros recursos como:
 > esta plantilla presencial es la única de las tres que **no tiene** un documento
 > `..._Instrucciones-2025.docx` propio en `referencias/` — solo existen instrucciones para
 > semipresencial y a distancia. Ver `conocimiento/plantillas/instrucciones-llenado.md`.
-</content>
