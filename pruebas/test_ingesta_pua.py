@@ -70,7 +70,10 @@ class TestPUABigData(unittest.TestCase):
         No se fabrica un valor: se reporta."""
         p3 = next(p for p in self.pua.practicas if p.numero == "3")
         self.assertEqual(p3.duracion.strip(), "")
-        self.assertIn("no traen duración", " ".join(self.pua.avisos))
+        self.assertTrue(
+            any("duración" in a and "3" in a for a in self.pua.avisos),
+            f"ningún aviso menciona la duración ausente: {self.pua.avisos}",
+        )
 
     def test_las_demas_practicas_si_traen_duracion(self):
         for p in self.pua.practicas:
