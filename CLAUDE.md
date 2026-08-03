@@ -27,6 +27,11 @@ mapeo de temas a semanas, reparto de porcentajes) pertenece a la planeación, no
 Las plantillas de `referencias/` son la fuente de formato y **no se modifican**. Si necesitas
 entender su estructura, léela con `python-docx` en el scratchpad — no la abras para editarla.
 
+El renderizado nunca escribe sobre una plantilla: pide una copia con
+`plantillas.copia_de_trabajo(modalidad, destino)`, que verifica el sha256 antes de copiar, y
+rellena esa copia. Si `python src/plantillas.py verificar` falla, **para** y averigua qué escribió
+sobre la plantilla antes de seguir generando documentos.
+
 El criterio de aceptación del renderizador es reproducir `ejemplos/961 (1).pdf`. Compara contra él
 antes de dar por buena cualquier salida.
 

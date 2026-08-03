@@ -29,13 +29,18 @@ Estas reglas no se negocian. Un cambio que las viole está mal aunque los tests 
    de aprendizaje, evidencias y criterios de evaluación.
 3. **No modifiques `referencias/` ni `ejemplos/`.** Son documentos fuente originales. Solo se leen.
    Sus versiones en Markdown viven en `conocimiento/`.
-4. **Los porcentajes suman exactamente 100** y debe haber **≥ 2 exámenes parciales** (Art. 68).
-5. **Ninguna entrega cae en día de suspensión** ni después del fin de cursos.
-6. **Todo dato es trazable.** Cada DI generado lleva un `MANIFIESTO.yaml` que registra el PUA y su
+4. **Nunca escribas sobre una plantilla.** Cada documento nace de una **copia fresca** de
+   `plantillas/<modalidad>.docx`, obtenida con `plantillas.copia_de_trabajo()`, que verifica el
+   sha256 antes de copiar. Generar mil veces el mismo curso debe dejar la plantilla byte por byte
+   idéntica. Si una plantilla cambia sin pasar por `src/plantillas.py actualizar`, el renderizado
+   **falla**: un formato de origen desconocido no es aceptable en un documento con valor legal.
+5. **Los porcentajes suman exactamente 100** y debe haber **≥ 2 exámenes parciales** (Art. 68).
+6. **Ninguna entrega cae en día de suspensión** ni después del fin de cursos.
+7. **Todo dato es trazable.** Cada DI generado lleva un `MANIFIESTO.yaml` que registra el PUA y su
    hash, el calendario, la versión de plantilla, el profesor, el grupo, el esquema y el commit.
-7. **La asistencia no es criterio de calificación**, pero **sí es requisito de derecho a examen**
+8. **La asistencia no es criterio de calificación**, pero **sí es requisito de derecho a examen**
    (Arts. 70 y 71). Nunca los mezcles en el documento.
-8. **El generador no sustituye el criterio docente.** El resultado es un borrador que el profesor
+9. **El generador no sustituye el criterio docente.** El resultado es un borrador que el profesor
    debe revisar. No lo presentes como definitivo.
 
 ---
@@ -138,12 +143,40 @@ Tres niveles de hallazgo: **error** (bloquea), **aviso** (decisión del docente)
 revise el total deja pasar ese error; este lo atrapa, y hay una prueba dedicada a demostrarlo
 (`test_detecta_el_defecto_del_ejemplo_961`).
 
+### Custodia de las plantillas (`src/plantillas.py`)
+
+Tres capas, cada una con un dueño distinto:
+
+```
+referencias/<lo que subió el usuario>   ← original intocable. Solo el usuario lo repone.
+plantillas/<modalidad>.docx             ← juego de trabajo, con sha256 en REGISTRO.yaml
+cursos/<…>/salida/DI-….docx             ← copia desechable, es la que se rellena
+```
+
+`plantillas/` y su `REGISTRO.yaml` **están versionados en git**: quien clone el repositorio
+obtiene exactamente las plantillas con las que se generaron los documentos existentes.
+
+| Necesitas… | Comando |
+|---|---|
+| Comprobar que nadie las tocó | `python src/plantillas.py verificar` |
+| Recrear el juego desde `referencias/` | `python src/plantillas.py registrar` (idempotente) |
+| Meter una versión nueva del CIAD | `python src/plantillas.py actualizar <modalidad> <ruta.docx> --version <ver>` |
+| Copiar para rellenar (desde código) | `plantillas.copia_de_trabajo(modalidad, destino)` |
+
+`actualizar` archiva la plantilla saliente en `plantillas/historico/<modalidad>-<ver>-<sha8>.docx`
+y deja el rastro en `historial`, de modo que un DI generado hace un año se puede reproducir con la
+plantilla que realmente se usó. **Después de actualizar, vuelve a verificar los hechos
+estructurales de `config/plantillas.yaml`** (columnas de rejilla, filas de semana, pasos
+ordinales): dejan de ser ciertos en silencio.
+
 ## Mapa de directorios
 
 | Ruta | Qué es | ¿Se edita? |
 |---|---|---|
 | `referencias/` | Plantillas CIAD, Estatuto, IEDI — originales | **No** |
 | `ejemplos/` | DI reales de referencia | **No** |
+| `plantillas/` | Juego de trabajo con sha256 registrado | Solo vía `src/plantillas.py` |
+| `plantillas/historico/` | Plantillas sustituidas, para reproducir DI viejos | Generado |
 | `conocimiento/` | Los anteriores en Markdown, para consulta de agentes | Solo al reconvertir |
 | `puas/fuente/` | PDFs de PUA que deja el usuario | Solo el usuario |
 | `puas/md/` | PUAs normalizados | Generado |
@@ -163,6 +196,10 @@ python src/calendario.py 2026-2                        # imprime las semanas del
 python src/validar.py cursos/2026-2/<clave>/curso.yaml # 8 reglas de validación
 python src/render_docx.py cursos/2026-2/<clave>/curso.yaml
 python src/export_pdf.py <archivo>.docx                # requiere Word (Windows)
+
+python src/plantillas.py verificar                     # ¿siguen intactas? (sha256)
+python src/plantillas.py registrar                     # (re)crea el juego — idempotente
+python src/plantillas.py actualizar <modalidad> <ruta.docx> --version <ver>
 ```
 
 Skills equivalentes en Claude Code: `/di-pua`, `/di-nuevo`, `/di-validar`.

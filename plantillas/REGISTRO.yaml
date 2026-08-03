@@ -1,0 +1,29 @@
+# Registro de las plantillas de trabajo. Lo genera src/plantillas.py: no lo edites
+# a mano. El sha256 se verifica antes de cada renderizado; si no coincide, el
+# renderizado falla en vez de producir un documento de origen desconocido.
+#
+# Para cambiar una plantilla:
+#     python src/plantillas.py actualizar <modalidad> <ruta.docx> --version <ver>
+# La anterior no se pierde: se archiva en plantillas/historico/.
+plantillas:
+  a_distancia:
+    archivo: a_distancia.docx
+    origen: referencias/CIAD_DI_Plantilla_A_Distancia-2025.docx
+    version: 2025-1
+    sha256: 28adedddb9854da0b67050a6bcabb22b7fdd1de30d51ab638b6395905cf907c5
+    bytes: 219881
+    registrado: '2026-08-03'
+  escolarizada:
+    archivo: escolarizada.docx
+    origen: referencias/CIAD_DI_Plantilla_PRESENCIAL.docx
+    version: 2023-1
+    sha256: 59f468707657ee6a43904b5406eb34ff2acfc5fa4e1418d379000b2f9d0ee487
+    bytes: 42739
+    registrado: '2026-08-03'
+  semipresencial:
+    archivo: semipresencial.docx
+    origen: referencias/CIAD_DI_Plantilla_Semipresencial-2025.docx
+    version: 2025-1
+    sha256: ae3c1a67c1df2328fa95ed07887a0994281c4896346fd7fc31819ef03ae44332
+    bytes: 221520
+    registrado: '2026-08-03'

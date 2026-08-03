@@ -4,12 +4,18 @@
 # publica una versión nueva, el sha256 dejará de coincidir y el renderizado debe
 # fallar de forma ruidosa, no adaptarse en silencio.
 #
-# Las plantillas viven en referencias/ y NO se modifican jamás.
+# `origen` es el archivo original de referencias/, que NO se modifica jamás. De ahí
+# `src/plantillas.py` deriva la copia de trabajo `plantillas/<modalidad>.docx`, con su
+# sha256 en plantillas/REGISTRO.yaml. El renderizado siempre copia esa plantilla a la
+# salida y rellena la copia: nunca escribe sobre la plantilla.
+#
+# Todo lo demás de este archivo son HECHOS ESTRUCTURALES de cada plantilla. Si actualizas
+# una plantilla, vuelve a verificarlos: dejan de ser ciertos en silencio.
 
 modalidades:
   semipresencial:
     etiqueta: "Semipresencial"
-    archivo: "referencias/CIAD_DI_Plantilla_Semipresencial-2025.docx"
+    origen: "referencias/CIAD_DI_Plantilla_Semipresencial-2025.docx"
     version: "2025-1"
     modalidad_instruccional: "Semipresencial."
     portada_linea: "modalidad semipresencial"
@@ -24,7 +30,7 @@ modalidades:
 
   escolarizada:
     etiqueta: "Escolarizada"
-    archivo: "referencias/CIAD_DI_Plantilla_PRESENCIAL.docx"
+    origen: "referencias/CIAD_DI_Plantilla_PRESENCIAL.docx"
     version: "2023-1"
     modalidad_instruccional: "Escolarizada."
     portada_linea: "modalidad Escolarizada"
@@ -43,7 +49,7 @@ modalidades:
 
   a_distancia:
     etiqueta: "A distancia"
-    archivo: "referencias/CIAD_DI_Plantilla_A_Distancia-2025.docx"
+    origen: "referencias/CIAD_DI_Plantilla_A_Distancia-2025.docx"
     version: "2025-1"
     modalidad_instruccional: "A distancia."
     portada_linea: "modalidad a distancia"

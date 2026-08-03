@@ -7,6 +7,19 @@ grupos.
 Rellena las **plantillas CIAD reales** (no las reconstruye), de modo que el formato institucional
 se conserva intacto.
 
+Cada documento nace de una **copia fresca** de la plantilla: nunca se escribe sobre ella. El
+`sha256` de las tres plantillas está registrado y se verifica antes de cada copia, así que generar
+mil documentos las deja byte por byte idénticas. Si alguna cambiara sin pasar por el mecanismo de
+actualización, el renderizado falla en vez de producir un documento de origen desconocido.
+
+```
+python src/plantillas.py verificar    # ¿siguen intactas?
+python src/plantillas.py actualizar semipresencial <nueva.docx> --version 2026-1
+```
+
+La versión sustituida se archiva en `plantillas/historico/`, de modo que un DI generado hace un
+año se puede reproducir con la plantilla que realmente se usó.
+
 ## Qué produce
 
 Un documento por grupo, fusionando:
@@ -46,6 +59,7 @@ Exención del examen ordinario con promedio **≥ 80**. Configurable por curso.
 |---|---|
 | `referencias/` | Documentos fuente originales (plantillas CIAD, Estatuto, IEDI). **No se modifican.** |
 | `ejemplos/` | DI reales ya elaborados, usados como referencia de calidad |
+| `plantillas/` | Juego de trabajo con su `sha256` registrado, más las versiones sustituidas en `historico/` |
 | `conocimiento/` | Banco de conocimientos: todo lo anterior convertido a Markdown para consulta |
 | `puas/` | `fuente/` los PDF oficiales · `md/` normalizados · `INDICE.md` el registro |
 | `calendarios/` | Calendarios escolares por ciclo + los PDF oficiales de origen |
