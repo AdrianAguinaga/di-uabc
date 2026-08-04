@@ -1541,6 +1541,31 @@
     },
     {
       "origen": "meta:2026-2:39056:2.1",
+      "destino": "tema:39056:2ecbe154b419",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.1",
+      "destino": "tema:39056:92424cf840f7",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.1",
+      "destino": "tema:39056:acf187983461",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.1",
+      "destino": "tema:39056:bcd65f88d73f",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.1",
+      "destino": "tema:39056:c1ac59f6a93e",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.1",
       "destino": "unidad:39056:II",
       "tipo": "desarrolla"
     },
@@ -1563,6 +1588,21 @@
       "origen": "meta:2026-2:39056:2.1",
       "destino": "criterio:2026-2:39056:2.1:1",
       "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.2",
+      "destino": "tema:39056:38716fdd3e0c",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.2",
+      "destino": "tema:39056:3e1a9bd64d0b",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.2",
+      "destino": "tema:39056:52d7533515a8",
+      "tipo": "cubre"
     },
     {
       "origen": "meta:2026-2:39056:2.2",
@@ -1596,6 +1636,11 @@
     },
     {
       "origen": "meta:2026-2:39056:2.3",
+      "destino": "tema:39056:299e64622290",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.3",
       "destino": "unidad:39056:II",
       "tipo": "desarrolla"
     },
@@ -1608,6 +1653,11 @@
       "origen": "meta:2026-2:39056:2.3",
       "destino": "evidencia:2026-2:39056:2.3:0",
       "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.3",
+      "destino": "practica:39056:3",
+      "tipo": "realiza"
     },
     {
       "origen": "meta:2026-2:39056:2.3",
@@ -1661,12 +1711,32 @@
     },
     {
       "origen": "meta:2026-2:39056:3.2",
+      "destino": "tema:39056:033bcc52596a",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:3.2",
       "destino": "tema:39056:0394b11b942e",
       "tipo": "cubre"
     },
     {
       "origen": "meta:2026-2:39056:3.2",
       "destino": "tema:39056:05fa44e77597",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:3.2",
+      "destino": "tema:39056:2225a18551b1",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:3.2",
+      "destino": "tema:39056:55d6e199882a",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:3.2",
+      "destino": "tema:39056:d461ded6fa12",
       "tipo": "cubre"
     },
     {
@@ -1701,6 +1771,21 @@
     },
     {
       "origen": "meta:2026-2:39056:3.3",
+      "destino": "tema:39056:14e5345f3277",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:3.3",
+      "destino": "tema:39056:82a7fb6814ec",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:3.3",
+      "destino": "tema:39056:86cc4bfe0dcd",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:3.3",
       "destino": "unidad:39056:III",
       "tipo": "desarrolla"
     },
@@ -1728,6 +1813,36 @@
       "origen": "meta:2026-2:39056:3.3",
       "destino": "criterio:2026-2:39056:3.3:1",
       "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.1",
+      "destino": "tema:39056:5afe5c89ff2c",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.1",
+      "destino": "tema:39056:68bd3b6deb1e",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.1",
+      "destino": "tema:39056:950d8a69377f",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.1",
+      "destino": "tema:39056:9cfcfcff14b8",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.1",
+      "destino": "tema:39056:aeb326cd7a6a",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.1",
+      "destino": "tema:39056:bfc8c0664805",
+      "tipo": "cubre"
     },
     {
       "origen": "meta:2026-2:39056:4.1",
@@ -1761,6 +1876,36 @@
     },
     {
       "origen": "meta:2026-2:39056:4.2",
+      "destino": "tema:39056:3c74b474f369",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.2",
+      "destino": "tema:39056:4430378402e4",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.2",
+      "destino": "tema:39056:d320af759b2b",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.2",
+      "destino": "tema:39056:d87aa27a6173",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.2",
+      "destino": "tema:39056:e938a3b3c178",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.2",
+      "destino": "tema:39056:fedccf2f39c7",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.2",
       "destino": "unidad:39056:IV",
       "tipo": "desarrolla"
     },
@@ -1791,6 +1936,21 @@
     },
     {
       "origen": "meta:2026-2:39056:4.3",
+      "destino": "tema:39056:8c442226f5a9",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.3",
+      "destino": "tema:39056:a0c4563808a4",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.3",
+      "destino": "tema:39056:a11107728b75",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:4.3",
       "destino": "unidad:39056:IV",
       "tipo": "desarrolla"
     },
@@ -1818,6 +1978,56 @@
       "origen": "meta:2026-2:39056:4.3",
       "destino": "criterio:2026-2:39056:4.3:1",
       "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:1a793f0dd11f",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:208248fe3fa5",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:2a6fb743c055",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:3cd2dcaf5425",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:749d327aa576",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:ab1ec479195a",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:b44afc6a9f73",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:d03b8213ea8c",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:e20a63eca03e",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39056:5.1",
+      "destino": "tema:39056:fe8692668823",
+      "tipo": "cubre"
     },
     {
       "origen": "meta:2026-2:39056:5.1",
@@ -2091,7 +2301,22 @@
     },
     {
       "origen": "unidad:39056:II",
+      "destino": "tema:39056:299e64622290",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
       "destino": "tema:39056:2ecbe154b419",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
+      "destino": "tema:39056:2ecbe154b419",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
+      "destino": "tema:39056:38716fdd3e0c",
       "tipo": "tiene_tema"
     },
     {
@@ -2106,7 +2331,22 @@
     },
     {
       "origen": "unidad:39056:II",
+      "destino": "tema:39056:3e1a9bd64d0b",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
       "destino": "tema:39056:52d7533515a8",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
+      "destino": "tema:39056:52d7533515a8",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
+      "destino": "tema:39056:92424cf840f7",
       "tipo": "tiene_tema"
     },
     {
@@ -2121,7 +2361,22 @@
     },
     {
       "origen": "unidad:39056:II",
+      "destino": "tema:39056:acf187983461",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
       "destino": "tema:39056:bcd65f88d73f",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
+      "destino": "tema:39056:bcd65f88d73f",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:II",
+      "destino": "tema:39056:c1ac59f6a93e",
       "tipo": "tiene_tema"
     },
     {
@@ -2141,7 +2396,22 @@
     },
     {
       "origen": "unidad:39056:III",
+      "destino": "tema:39056:033bcc52596a",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
       "destino": "tema:39056:0394b11b942e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
+      "destino": "tema:39056:0394b11b942e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
+      "destino": "tema:39056:05fa44e77597",
       "tipo": "tiene_tema"
     },
     {
@@ -2156,7 +2426,22 @@
     },
     {
       "origen": "unidad:39056:III",
+      "destino": "tema:39056:14e5345f3277",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
       "destino": "tema:39056:2225a18551b1",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
+      "destino": "tema:39056:2225a18551b1",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
+      "destino": "tema:39056:55d6e199882a",
       "tipo": "tiene_tema"
     },
     {
@@ -2171,6 +2456,16 @@
     },
     {
       "origen": "unidad:39056:III",
+      "destino": "tema:39056:76c39a753590",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
+      "destino": "tema:39056:82a7fb6814ec",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
       "destino": "tema:39056:82a7fb6814ec",
       "tipo": "tiene_tema"
     },
@@ -2181,7 +2476,22 @@
     },
     {
       "origen": "unidad:39056:III",
+      "destino": "tema:39056:86cc4bfe0dcd",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
       "destino": "tema:39056:b3b505db6fe7",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
+      "destino": "tema:39056:b3b505db6fe7",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:III",
+      "destino": "tema:39056:d461ded6fa12",
       "tipo": "tiene_tema"
     },
     {
@@ -2201,7 +2511,22 @@
     },
     {
       "origen": "unidad:39056:IV",
+      "destino": "tema:39056:3c74b474f369",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
       "destino": "tema:39056:4430378402e4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:4430378402e4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:5afe5c89ff2c",
       "tipo": "tiene_tema"
     },
     {
@@ -2216,7 +2541,22 @@
     },
     {
       "origen": "unidad:39056:IV",
+      "destino": "tema:39056:68bd3b6deb1e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
       "destino": "tema:39056:8c442226f5a9",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:8c442226f5a9",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:950d8a69377f",
       "tipo": "tiene_tema"
     },
     {
@@ -2231,7 +2571,22 @@
     },
     {
       "origen": "unidad:39056:IV",
+      "destino": "tema:39056:9cfcfcff14b8",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
       "destino": "tema:39056:a0c4563808a4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:a0c4563808a4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:a11107728b75",
       "tipo": "tiene_tema"
     },
     {
@@ -2246,7 +2601,22 @@
     },
     {
       "origen": "unidad:39056:IV",
+      "destino": "tema:39056:aeb326cd7a6a",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
       "destino": "tema:39056:bfc8c0664805",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:bfc8c0664805",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:d320af759b2b",
       "tipo": "tiene_tema"
     },
     {
@@ -2261,7 +2631,22 @@
     },
     {
       "origen": "unidad:39056:IV",
+      "destino": "tema:39056:d87aa27a6173",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
       "destino": "tema:39056:e938a3b3c178",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:e938a3b3c178",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:IV",
+      "destino": "tema:39056:fedccf2f39c7",
       "tipo": "tiene_tema"
     },
     {
@@ -2281,7 +2666,22 @@
     },
     {
       "origen": "unidad:39056:V",
+      "destino": "tema:39056:1a793f0dd11f",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
       "destino": "tema:39056:208248fe3fa5",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
+      "destino": "tema:39056:208248fe3fa5",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
+      "destino": "tema:39056:2a6fb743c055",
       "tipo": "tiene_tema"
     },
     {
@@ -2296,7 +2696,22 @@
     },
     {
       "origen": "unidad:39056:V",
+      "destino": "tema:39056:3cd2dcaf5425",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
       "destino": "tema:39056:749d327aa576",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
+      "destino": "tema:39056:749d327aa576",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
+      "destino": "tema:39056:ab1ec479195a",
       "tipo": "tiene_tema"
     },
     {
@@ -2311,12 +2726,32 @@
     },
     {
       "origen": "unidad:39056:V",
+      "destino": "tema:39056:b44afc6a9f73",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
+      "destino": "tema:39056:d03b8213ea8c",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
       "destino": "tema:39056:d03b8213ea8c",
       "tipo": "tiene_tema"
     },
     {
       "origen": "unidad:39056:V",
       "destino": "tema:39056:e20a63eca03e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
+      "destino": "tema:39056:e20a63eca03e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39056:V",
+      "destino": "tema:39056:fe8692668823",
       "tipo": "tiene_tema"
     },
     {

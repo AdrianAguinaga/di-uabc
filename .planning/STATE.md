@@ -1,8 +1,8 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-03
-**Fase actual**: 7 — Orquestador
+**Última actualización**: 2026-08-04
+**Fase actual**: ninguna — las 8 fases del roadmap están hechas
 
 ## Progreso
 
@@ -15,17 +15,41 @@
 | 5. Modelo y validación | Hecha | `0e30def` |
 | 6. Renderizado docx + pdf | Hecha | `745f20e` |
 | 7. Orquestador | Hecha | `cb903c5` |
-| 8. Grafo de conocimiento | Hecha | — |
+| 8. Grafo de conocimiento | Hecha | `ca6efd4` |
 
 171 pruebas, todas pasan: `python -X utf8 -m unittest discover -s pruebas`.
 
 Fase 7: `/di-nuevo` (menú de seis pasos con su panel ASCII) y `src/generar.py`, que valida →
 renderiza por grupo → exporta a PDF → escribe `MANIFIESTO.yaml`. Corrido de extremo a extremo
-sobre Big Data 2026-2. Falta ejercer el camino de **materia nueva** (PUA que no está en el índice
-→ ingesta en caliente → metas desde cero): requiere el PDF de otra materia.
+sobre Big Data 2026-2.
 
 Fase 8: `src/grafo.py` → `grafo/grafo.json`, `grafo/index.html` y `grafo/AUDITORIA.md`.
-167 nodos y 209 aristas con un PUA y un curso.
+167 nodos y 296 aristas con un PUA y un curso. La auditoría cierra en **0 huecos y 0 anclas
+rotas**.
+
+## Cierre de la cobertura temática (4 de agosto de 2026)
+
+La auditoría de la Fase 8 destapó 41 temas y 1 práctica sin meta. No era un fallo del grafo: el
+`curso.yaml` solo declaraba `temas` en la unidad I —el grafo los leía del PUA— y casi ninguna meta
+declaraba `cubre_temas`. Se cerró así:
+
+- Las unidades II–V ya traen sus `temas` copiados literales del PUA §V, con sus defectos de
+  numeración de origen (la unidad IV repite el `4.6.`).
+- Las 16 metas declaran `cubre_temas`; los 52 temas quedan cubiertos.
+- La **Práctica 3** —la única del PUA sin horas asignadas— se ejerce en la meta 2.3, sobre las
+  fuentes de datos del caso de estudio. Decisión del profesor, 4 de agosto de 2026.
+
+Ni `temas` ni `cubre_temas` ni `practica_pua` llegan al documento: el renderizador solo lee
+`numero`, `nombre` y `competencia` de cada unidad. La cobertura es materia de validación y grafo,
+no del entregable. Aun así se regeneró el DI para que el `sha256` del `MANIFIESTO.yaml` vuelva a
+corresponder al `curso.yaml` (regla invariable 7).
+
+## Lo único que queda abierto
+
+Ejercer el camino de **materia nueva**: PUA que no está en el índice → ingesta en caliente →
+metas desde cero. Requiere el PDF de otra materia; con un solo PUA en `puas/fuente/` no se puede
+probar. Es la rama del paso 2 de `/di-nuevo` y vive en la prosa del skill, no en Python, así que
+tampoco hay nada que cubrir con una prueba automática — es UAT manual pendiente de material.
 
 ## Repositorio
 

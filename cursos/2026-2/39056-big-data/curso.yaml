@@ -100,6 +100,16 @@ unidades:
       Analizar datos masivos mediante la aplicación del Data warehouse, con la finalidad de
       generar información de utilidad para la toma de decisiones estratégica, con pensamiento
       analítico, reflexivo y honestidad.
+    temas:
+      - "2.1. Concepto de Data warehouse"
+      - "2.2. Características de un Data warehouse"
+      - "2.2.1. Data Marts"
+      - "2.3. Diseño de Data warehouse"
+      - "2.4. Data warehouse basado en la nube"
+      - "2.4.1. Solución analítica integrada"
+      - "2.5. Premisas del Data warehouse"
+      - "2.6. Inteligencia de negocios (Business Intelligence)"
+      - "2.7. Analítica de datos en tiempo real (Tracking de datos)"
 
   - numero: "III"
     nombre: "Herramientas y Arquitecturas de Datawarehouse"
@@ -108,6 +118,18 @@ unidades:
       Aplicar las herramientas y arquitectura del Data warehouse, para el análisis de datos
       masivos, que apoye la toma de decisiones estratégica, con pensamiento analítico, reflexivo
       y honestidad.
+    temas:
+      - "3.1. Redes sociales (facebook graph)"
+      - "3.2. Google trends"
+      - "3.3. Operational Data Store"
+      - "3.4. Sistemas de procesamiento analítico en línea"
+      - "3.4.1 OLAP (Online Analytical Processing)"
+      - "3.4.2 OLTP (Online Transaction Processing)"
+      - "3.4.3 ROLAP (Relational Online Analytical Processing)"
+      - "3.4.4 HOLAP (Hybrid Online Analytical Processing)"
+      - "3.5. Selección de plataformas analíticas."
+      - "3.6. HDFS (Hadoop Distributed File System) Architecture"
+      - "3.6.1. HDFS Usage Examples"
 
   - numero: "IV"
     nombre: "Minería de datos"
@@ -116,6 +138,24 @@ unidades:
       Aplicar la Minería de datos, mediante el uso de herramientas y algoritmos, para generar
       información objetiva, que apoye la toma de decisiones en las organizaciones, con
       pensamiento crítico y honestidad.
+    # El PUA repite la numeración 4.6 en «Evaluación de datos» y «Técnicas de minería de datos»;
+    # se citan literales, con su defecto.
+    temas:
+      - "4.1. Introducción a minería de datos"
+      - "4.2. Herramientas de minería de datos"
+      - "4.3. Exploración de datos"
+      - "4.4. Preprocesamiento de datos"
+      - "4.5. Clasificación de datos"
+      - "4.6. Evaluación de datos"
+      - "4.6. Técnicas de minería de datos"
+      - "4.6.1. Naive Bayes"
+      - "4.6.2. K-medias"
+      - "4.6.3. Redes Neuronales"
+      - "4.6.4. Modelización con redes neuronales"
+      - "4.6.5. Clasificación automática"
+      - "4.6.6. Reducción dimensión"
+      - "4.7. Análisis de componentes principales"
+      - "4.8. Análisis exploratorio"
 
   - numero: "V"
     nombre: "Visualización de datos"
@@ -124,6 +164,17 @@ unidades:
       Representar el comportamiento de los datos masivos, mediante la comparación de diferentes
       gráficas y diagramas, que permita su visualización e interpretación, con pensamiento
       analítico y honestidad.
+    temas:
+      - "5.1. Gráfica de Barras"
+      - "5.2. Gráfica de pastel"
+      - "5.3. Diagrama de Caja"
+      - "5.4. Diagrama de dispersión"
+      - "5.5. Gráfica de Mapa"
+      - "5.6. Diagrama de Grafo"
+      - "5.7. Mapa de calor con agrupamiento"
+      - "5.8. Diagramas de cuadrícula"
+      - "5.8.1. Cuadrícula de Par (Pair Grid)"
+      - "5.8.2. Cuadrícula de Facetas (Facet Grid)"
 
 evaluacion:
   esquema_id: estandar-2026
@@ -291,6 +342,12 @@ metas:
     reflexion:
       - "Identifiqué las diferencias entre Data warehouse, Data mart y Data lake."
       - "Comprendí el papel del Data warehouse en la toma de decisiones estratégica."
+    cubre_temas:
+      - "2.1. Concepto de Data warehouse"
+      - "2.2. Características de un Data warehouse"
+      - "2.2.1. Data Marts"
+      - "2.5. Premisas del Data warehouse"
+      - "2.6. Inteligencia de negocios (Business Intelligence)"
 
   - id: "2.2"
     unidad: "II"
@@ -323,6 +380,10 @@ metas:
     reflexion:
       - "Diseñé el modelo dimensional de un Data warehouse."
       - "Seleccioné y justifiqué una herramienta ETL para el proceso de carga."
+    cubre_temas:
+      - "2.3. Diseño de Data warehouse"
+      - "2.4. Data warehouse basado en la nube"
+      - "2.4.1. Solución analítica integrada"
 
   - id: "2.3"
     unidad: "II"
@@ -330,6 +391,9 @@ metas:
     valor: 5
     semanas: [6]
     enunciado: "Definir el caso de estudio del proyecto integrador."
+    # La Práctica 3 es la única del PUA sin horas asignadas; se ejerce aquí, sobre las fuentes
+    # de datos del caso de estudio que el equipo acaba de delimitar.
+    practica_pua: "3"
     caracter: colaborativa
     que_voy_a_aprender:
       - "Delimitar un problema real de una organización susceptible de análisis con Big Data."
@@ -354,6 +418,8 @@ metas:
     reflexion:
       - "Delimité un problema real abordable con herramientas de Big Data."
       - "Formulé las preguntas de negocio que guiarán mi proyecto."
+    cubre_temas:
+      - "2.7. Analítica de datos en tiempo real (Tracking de datos)"
 
   - id: "P1"
     unidad: "II"
@@ -446,7 +512,13 @@ metas:
     reflexion:
       - "Diferencié los sistemas OLAP de los OLTP con ejemplos propios."
       - "Identifiqué el papel del Operational Data Store en la arquitectura."
-    cubre_temas: ["3.3. Operational Data Store", "3.4. Sistemas de procesamiento analítico en línea"]
+    cubre_temas:
+      - "3.3. Operational Data Store"
+      - "3.4. Sistemas de procesamiento analítico en línea"
+      - "3.4.1 OLAP (Online Analytical Processing)"
+      - "3.4.2 OLTP (Online Transaction Processing)"
+      - "3.4.3 ROLAP (Relational Online Analytical Processing)"
+      - "3.4.4 HOLAP (Hybrid Online Analytical Processing)"
 
   - id: "3.3"
     unidad: "III"
@@ -479,6 +551,10 @@ metas:
     reflexion:
       - "Apliqué la arquitectura HDFS al almacenamiento de los datos de mi proyecto."
       - "Documenté un proceso de carga y limpieza reproducible."
+    cubre_temas:
+      - "3.5. Selección de plataformas analíticas."
+      - "3.6. HDFS (Hadoop Distributed File System) Architecture"
+      - "3.6.1. HDFS Usage Examples"
 
   - id: "4.1"
     unidad: "IV"
@@ -511,6 +587,13 @@ metas:
     reflexion:
       - "Reconocí las fases del proceso de minería de datos."
       - "Apliqué e interpreté un algoritmo de clasificación."
+    cubre_temas:
+      - "4.1. Introducción a minería de datos"
+      - "4.2. Herramientas de minería de datos"
+      - "4.3. Exploración de datos"
+      - "4.4. Preprocesamiento de datos"
+      - "4.5. Clasificación de datos"
+      - "4.6. Evaluación de datos"
 
   - id: "4.2"
     unidad: "IV"
@@ -543,6 +626,13 @@ metas:
     reflexion:
       - "Contrasté el comportamiento de tres técnicas sobre el mismo conjunto de datos."
       - "Justifiqué la selección de una técnica según el problema."
+    cubre_temas:
+      - "4.6. Técnicas de minería de datos"
+      - "4.6.1. Naive Bayes"
+      - "4.6.2. K-medias"
+      - "4.6.3. Redes Neuronales"
+      - "4.6.4. Modelización con redes neuronales"
+      - "4.6.5. Clasificación automática"
 
   - id: "P2"
     unidad: "IV"
@@ -601,6 +691,10 @@ metas:
     reflexion:
       - "Reduje la dimensionalidad de mis datos justificando las componentes retenidas."
       - "Interpreté las componentes en términos del problema de negocio."
+    cubre_temas:
+      - "4.6.6. Reducción dimensión"
+      - "4.7. Análisis de componentes principales"
+      - "4.8. Análisis exploratorio"
 
   - id: "5.1"
     unidad: "V"
@@ -633,6 +727,17 @@ metas:
     reflexion:
       - "Seleccioné la representación gráfica adecuada a cada tipo de dato."
       - "Construí un tablero interpretable por un tomador de decisiones."
+    cubre_temas:
+      - "5.1. Gráfica de Barras"
+      - "5.2. Gráfica de pastel"
+      - "5.3. Diagrama de Caja"
+      - "5.4. Diagrama de dispersión"
+      - "5.5. Gráfica de Mapa"
+      - "5.6. Diagrama de Grafo"
+      - "5.7. Mapa de calor con agrupamiento"
+      - "5.8. Diagramas de cuadrícula"
+      - "5.8.1. Cuadrícula de Par (Pair Grid)"
+      - "5.8.2. Cuadrícula de Facetas (Facet Grid)"
 
   - id: "5.2"
     unidad: "V"
