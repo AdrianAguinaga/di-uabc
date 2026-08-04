@@ -39,6 +39,11 @@ def texto_fecha(f: date, con_anio: bool = False) -> str:
     return f"{base} de {f.year}" if con_anio else base
 
 
+def texto_fecha_corta(f: date) -> str:
+    """`date(2026, 9, 1)` → `1 Sep`. La columna Entrega de la tabla es estrecha."""
+    return f"{f.day} {MESES[f.month - 1][:3].capitalize()}"
+
+
 @dataclass
 class Suspension:
     fecha: date

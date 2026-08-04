@@ -286,6 +286,28 @@ def desde_dict(d: dict) -> Curso:
     )
 
 
+def resolver_fechas(curso: Curso, grupo: Grupo, cal) -> Curso:
+    """Asigna a cada sesión su fecha real, según el horario **de ese grupo**.
+
+    Aquí es donde se cumple la regla de que Opus nunca escribe fechas: el planeador
+    asigna semanas y el calendario las convierte en días concretos, saltando las
+    suspensiones.
+
+    Ojo: las sesiones son compartidas por todos los grupos del curso, así que esto
+    **sobrescribe** la resolución anterior. Llámalo justo antes de renderizar cada
+    grupo, no una vez para todos.
+    """
+    h = grupo.horario
+    presencial = h.dias_presencial[0] if h.dias_presencial else 0
+    for m in curso.metas:
+        for s in m.sesiones:
+            dia = s.dia if s.dia is not None else (
+                presencial if s.ambiente == "presencial" else h.dia_entrega
+            )
+            s.fecha = cal.fecha_de(s.semana, dia)
+    return curso
+
+
 def cargar(ruta: Path | str) -> Curso:
     ruta = Path(ruta)
     if not ruta.exists():

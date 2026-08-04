@@ -18,7 +18,7 @@ validados.
 - [x] **Fase 3: Motor de calendario** — ciclo → semanas numeradas, saltando suspensiones
 - [x] **Fase 4: Ingesta de PUA** — PDF → Markdown normalizado + índice
 - [x] **Fase 5: Modelo y validación** — `curso.yaml` y las 8 reglas
-- [ ] **Fase 6: Renderizado docx + pdf** — rellenar las plantillas CIAD reales
+- [x] **Fase 6: Renderizado docx + pdf** — rellenar las plantillas CIAD reales
 - [ ] **Fase 7: Orquestador** — `/di-nuevo`, multi-grupo, de extremo a extremo
 - [ ] **Fase 8: Grafo de conocimiento** — cobertura PUA↔metas
 

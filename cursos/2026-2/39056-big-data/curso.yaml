@@ -1,0 +1,670 @@
+# Diseño Instruccional — Big Data, ciclo 2026-2.
+#
+# Este archivo es la fuente única de verdad del documento. El renderizador no inventa nada:
+# si algo falta aquí, falta en el documento.
+#
+# Las fechas NO se escriben: cada sesión declara su semana y `calendario.py` la convierte en
+# día concreto según el horario del grupo, saltando las suspensiones del ciclo.
+#
+# A diferencia del ejemplo 961, cada meta declara su `rubro`. Sin eso los porcentajes cuadran
+# en total pero no por concepto, y un alumno no puede reconstruir de dónde sale su calificación.
+
+meta:
+  ciclo: "2026-2"
+  clave: "39056"
+  pua_ref: "puas/md/39056-big-data.md"
+  pua_sha256: "baf8a83b994f72b965daffb4bbaef75e2be47d65ca1ebbf4e91d8b47266d9ba4"
+
+profesor: ara
+
+# Copiado literalmente del PUA §I. Regla del CIAD: no se parafrasea.
+identificacion:
+  nombre: "Big Data"
+  modalidad: semipresencial
+  nivel_academico: "Licenciatura."
+  programa_educativo: "Licenciado en Inteligencia de Negocios."
+  plan_estudios: "2021-2."
+  creditos_texto: "6 créditos (HC:1 HL:4 HE:1), 96 horas en el semestre."
+  etapa_formativa: "Disciplinaria."
+  caracter: "Obligatoria."
+  practica: true          # eminentemente práctica → activa la nota del Art. 74
+
+contenido:
+  # Literal del PUA §III.
+  competencia_general: >-
+    Gestionar datos masivos mediante la aplicación de herramientas y estrategias de Big Data,
+    para agilizar y optimizar el proceso de toma de decisiones en organizaciones, con
+    honestidad, confidencialidad y pensamiento crítico.
+
+  # PUA §II más un párrafo de contextualización, como en el ejemplo 961.
+  proposito_general: >-
+    La unidad de aprendizaje Big Data tiene el propósito de dotar al estudiante con los
+    conocimientos y habilidades para el procesamiento y el análisis de datos masivos, haciendo
+    uso de las herramientas tecnológicas, para la solución de problemas, que apoye en la toma de
+    decisiones de las organizaciones.
+
+    Esta asignatura se imparte en la etapa disciplinaria con carácter obligatorio y pertenece al
+    área de conocimiento Ciencia de Datos del programa de Licenciado en Inteligencia de Negocios.
+    Es eminentemente práctica y se orienta al desarrollo de competencias en el manejo de datos
+    masivos mediante herramientas especializadas como Jupyter Notebook, Pyspark, Hadoop y
+    técnicas de minería y visualización de datos.
+
+  estrategia_general: >-
+    Se utiliza el método de aprendizaje basado en prácticas de laboratorio, investigación
+    documental, resolución de casos prácticos y trabajo por proyectos. El curso opera en
+    modalidad semipresencial: se conduce en sesiones presenciales de laboratorio y mediante la
+    plataforma institucional Blackboard, donde el aprendizaje se lleva a cabo por actividades
+    sincrónicas (clases y laboratorios) y asincrónicas (tareas, reportes de práctica, foros de
+    discusión y portafolio de evidencias). El docente presenta ejercicios prácticos, dirige las
+    prácticas de laboratorio y muestra el uso de software especializado, propiciando la
+    participación activa del estudiante.
+
+  # Literal del PUA §IV.
+  evidencias_desempeno: >-
+    Portafolio de prácticas sobre la aplicación de las herramientas para el análisis de los datos
+    masivos que ofrece el Big Data. En cada unidad se especifican las metas y sus requisitos, y en
+    cada meta se especifica el producto que se debe entregar para que el alumno aplique lo
+    aprendido.
+
+  criterios_evaluacion: >-
+    Cada meta contiene los criterios específicos conforme a los cuales será evaluado el
+    estudiante. Estos criterios se presentan como requisitos para acreditar la meta o práctica y
+    como evidencias de desempeño de cada unidad.
+
+  autores_pua: >-
+    Roberto Carlos Valdés Hernández, Myriam Gabriela Aguilera Zertuche, Héctor Zatarain Aceves,
+    Eduardo Ahumada Tello. 10 de marzo de 2021.
+
+# PUA §V. Los temas se copian literales, con sus defectos de numeración de origen.
+unidades:
+  - numero: "I"
+    nombre: "Fundamentos de Big Data"
+    duracion_horas: 4
+    competencia: >-
+      Identificar los fundamentos del Big Data, mediante la revisión de sus modelos y estructura,
+      para comprender su aplicación en el manejo de datos de las organizaciones, con pensamiento
+      analítico y reflexivo.
+    temas:
+      - "1.1. Conceptos de Big Data"
+      - "1.2. Características del Big Data"
+      - "1.3. Casos de estudio de Big Data"
+      - "1.2. Introducción al reconocimiento de patrones"
+      - "1.3. Modelos de regresión lineal y regresión logística"
+      - "1.4. Exploración de la estructura de datos"
+      - "1.5. Introducción a Jupyter Notebook y Pyspark"
+
+  - numero: "II"
+    nombre: "Data warehouse"
+    duracion_horas: 4
+    competencia: >-
+      Analizar datos masivos mediante la aplicación del Data warehouse, con la finalidad de
+      generar información de utilidad para la toma de decisiones estratégica, con pensamiento
+      analítico, reflexivo y honestidad.
+
+  - numero: "III"
+    nombre: "Herramientas y Arquitecturas de Datawarehouse"
+    duracion_horas: 4
+    competencia: >-
+      Aplicar las herramientas y arquitectura del Data warehouse, para el análisis de datos
+      masivos, que apoye la toma de decisiones estratégica, con pensamiento analítico, reflexivo
+      y honestidad.
+
+  - numero: "IV"
+    nombre: "Minería de datos"
+    duracion_horas: 4
+    competencia: >-
+      Aplicar la Minería de datos, mediante el uso de herramientas y algoritmos, para generar
+      información objetiva, que apoye la toma de decisiones en las organizaciones, con
+      pensamiento crítico y honestidad.
+
+  - numero: "V"
+    nombre: "Visualización de datos"
+    duracion_horas: 4
+    competencia: >-
+      Representar el comportamiento de los datos masivos, mediante la comparación de diferentes
+      gráficas y diagramas, que permita su visualización e interpretación, con pensamiento
+      analítico y honestidad.
+
+evaluacion:
+  esquema_id: estandar-2026
+  exencion_ordinario: 80
+  rubros:
+    - id: examenes
+      etiqueta: "Exámenes"
+      porcentaje: 20
+      detalle: "dos evaluaciones parciales de 10 % cada una"
+      parciales: 2
+    - id: tareas
+      etiqueta: "Tareas y actividades de clase"
+      porcentaje: 40
+      detalle: "mapas conceptuales, cuadros comparativos, foros y reportes de práctica"
+    - id: proyecto
+      etiqueta: "Proyecto final"
+      porcentaje: 40
+      detalle: "proyecto integrador y portafolio de prácticas de laboratorio"
+
+grupos:
+  - numero: "961"
+    horario: {dias_presencial: [1], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
+    plataforma: Blackboard
+  - numero: "962"
+    horario: {dias_presencial: [3], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
+    plataforma: Blackboard
+
+citas: [EE-65, EE-66, EE-67, EE-68, EE-70, EE-71, EE-74, EE-75, RPIDA-59]
+tolerancia_minutos: 15
+
+metas:
+  - id: "0"
+    unidad: "I"
+    tipo: encuadre
+    rubro: tareas
+    valor: 0
+    semanas: [1]
+    enunciado: "Encuadre del curso."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Conocer el programa, la metodología de trabajo y los criterios de evaluación del curso."
+      - "Identificar las reglas de convivencia y las fechas de entrega del periodo."
+    sesiones:
+      - ambiente: presencial
+        semana: 1
+        actividad_tabla: "Encuadre y presentación del curso"
+        pasos:
+          - "En la sesión, el docente presentará el Diseño Instruccional: competencia, unidades, criterios de evaluación (Exámenes 20 %, Tareas y actividades de clase 40 %, Proyecto final 40 %), reglas de convivencia y calendario del periodo 2026-2."
+          - "Se revisará el espacio del curso en Blackboard y se resolverán dudas sobre su organización."
+      - ambiente: virtual
+        semana: 1
+        actividad_tabla: "Revisión de materiales introductorios"
+        pasos:
+          - "Revisa los materiales introductorios publicados en el módulo de bienvenida."
+          - "Preséntate en el foro M0_Foro de presentación e indica tu experiencia previa con análisis de datos."
+    evidencias: [{nombre: "Participación en el foro de presentación", tipo: "Foro", recurso: "M0_Foro de presentación"}]
+    criterios_evaluacion: ["Se registra la participación; esta meta no tiene valor porcentual."]
+    reflexion:
+      - "Conocí los criterios con los que seré evaluado y las fechas de entrega del curso."
+      - "Identifiqué las reglas de convivencia del aula y del laboratorio."
+    cubre_temas: []
+
+  - id: "1.1"
+    unidad: "I"
+    rubro: tareas
+    valor: 5
+    semanas: [2]
+    enunciado: "Identificar los conceptos y características fundamentales del Big Data."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Definir el Big Data y sus cinco características (Volumen, Velocidad, Variedad, Veracidad y Valor)."
+      - "Analizar casos de estudio donde se aplica Big Data en organizaciones."
+      - "Comprender los modelos de regresión lineal y logística como base del reconocimiento de patrones."
+    sesiones:
+      - ambiente: presencial
+        semana: 2
+        actividad_tabla: "Exposición docente y discusión grupal"
+        pasos:
+          - "En la clase, el docente conducirá la exposición sobre los fundamentos de Big Data: conceptos, características y estructura de datos."
+          - "Se revisarán y discutirán casos de estudio de Big Data en organizaciones reales."
+      - ambiente: virtual
+        semana: 2
+        actividad_tabla: "Búsqueda documental y análisis de casos"
+        pasos:
+          - "Realiza una búsqueda documental, en fuentes confiables, sobre las características y aplicaciones del Big Data en las organizaciones."
+          - "Elabora un mapa conceptual que integre: Big Data, las 5 V, casos de estudio, reconocimiento de patrones y modelos de regresión."
+          - "Adjunta tu archivo en el espacio de entrega M1.1_Mapa conceptual. Recuerda guardarlo con el formato M1.1_Apellido_Nombre."
+    evidencias: [{nombre: "Mapa conceptual", tipo: "Documento", recurso: "M1.1_Mapa conceptual"}]
+    criterios_evaluacion:
+      - "Integra los conceptos solicitados y establece relaciones entre ellos."
+      - "Cita las fuentes consultadas conforme al esquema APA."
+    reflexion:
+      - "Identifiqué los conceptos fundamentales y las características del Big Data."
+      - "Analicé casos reales donde se aplica Big Data en las organizaciones."
+    # El PUA repite la numeración 1.2 y 1.3 en la unidad I; se citan literales, con su defecto.
+    cubre_temas:
+      - "1.1. Conceptos de Big Data"
+      - "1.2. Características del Big Data"
+      - "1.3. Casos de estudio de Big Data"
+      - "1.2. Introducción al reconocimiento de patrones"
+      - "1.3. Modelos de regresión lineal y regresión logística"
+
+  - id: "1.2"
+    unidad: "I"
+    rubro: tareas
+    valor: 5
+    semanas: [3]
+    enunciado: "Aplicar las herramientas de Jupyter Notebook y Pyspark para la exploración de datos."
+    caracter: individual
+    practica_pua: "1"
+    que_voy_a_aprender:
+      - "Utilizar el entorno de Jupyter Notebook para el desarrollo de código en Python."
+      - "Aplicar Pyspark para el procesamiento distribuido de datos."
+    sesiones:
+      - ambiente: presencial
+        semana: 3
+        actividad_tabla: "Práctica 1: exploración de Jupyter Notebook y Pyspark"
+        pasos:
+          - "En el laboratorio, el docente guiará la instalación y configuración del entorno de trabajo."
+          - "Se desarrollará la Práctica 1 explorando la estructura de un conjunto de datos con Pyspark."
+      - ambiente: virtual
+        semana: 3
+        actividad_tabla: "Elaboración del informe de práctica"
+        pasos:
+          - "Completa la exploración del conjunto de datos y documenta los resultados obtenidos."
+          - "Elabora el reporte de la Práctica 1 e intégralo a tu portafolio de evidencias."
+          - "Adjunta tu archivo en el espacio de entrega M1.2_Reporte Práctica 1."
+    evidencias: [{nombre: "Reporte de Práctica 1", tipo: "Reporte de práctica", recurso: "M1.2_Reporte Práctica 1"}]
+    criterios_evaluacion:
+      - "El código se ejecuta sin errores y produce los resultados solicitados."
+      - "El reporte describe el procedimiento, los resultados y las conclusiones."
+    reflexion:
+      - "Configuré el entorno de Jupyter Notebook y Pyspark."
+      - "Exploré la estructura de un conjunto de datos con herramientas de procesamiento distribuido."
+    cubre_temas: ["1.4. Exploración de la estructura de datos", "1.5. Introducción a Jupyter Notebook y Pyspark"]
+
+  - id: "2.1"
+    unidad: "II"
+    rubro: tareas
+    valor: 5
+    semanas: [4]
+    enunciado: "Analizar los conceptos y características del Data warehouse."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Distinguir el Data warehouse del Data mart y del Data lake."
+      - "Identificar los componentes de un Data warehouse y su papel en la toma de decisiones."
+    sesiones:
+      - ambiente: presencial
+        semana: 4
+        actividad_tabla: "Exposición docente sobre Data warehouse"
+        pasos:
+          - "En la clase, el docente expondrá los conceptos y la arquitectura del Data warehouse."
+          - "Se discutirán las aplicaciones del Data warehouse en organizaciones reales."
+      - ambiente: virtual
+        semana: 4
+        actividad_tabla: "Búsqueda documental sobre Data marts"
+        pasos:
+          - "Realiza una búsqueda documental sobre Data warehouse, Data mart y Data lake."
+          - "Elabora un cuadro comparativo que contraste sus características, ventajas y casos de uso."
+          - "Adjunta tu archivo en el espacio de entrega M2.1_Cuadro comparativo."
+    evidencias: [{nombre: "Cuadro comparativo", tipo: "Documento", recurso: "M2.1_Cuadro comparativo"}]
+    criterios_evaluacion:
+      - "Contrasta al menos cuatro criterios entre las tres arquitecturas."
+      - "Cita las fuentes consultadas conforme al esquema APA."
+    reflexion:
+      - "Identifiqué las diferencias entre Data warehouse, Data mart y Data lake."
+      - "Comprendí el papel del Data warehouse en la toma de decisiones estratégica."
+
+  - id: "2.2"
+    unidad: "II"
+    rubro: tareas
+    valor: 5
+    semanas: [5]
+    enunciado: "Diseñar un modelo de Data warehouse aplicando herramientas ETL."
+    caracter: individual
+    practica_pua: "2"
+    que_voy_a_aprender:
+      - "Seleccionar la herramienta ETL adecuada para un caso de negocio."
+      - "Diseñar el modelo dimensional de un Data warehouse."
+    sesiones:
+      - ambiente: presencial
+        semana: 5
+        actividad_tabla: "Práctica 2: diseño de Data warehouse (parte 1)"
+        pasos:
+          - "En el laboratorio, el docente guiará la primera parte de la práctica de diseño."
+          - "Se identificarán las fuentes de datos y las dimensiones del modelo."
+      - ambiente: virtual
+        semana: 5
+        actividad_tabla: "Práctica 2: diseño de Data warehouse (parte 2)"
+        pasos:
+          - "Completa la segunda parte de la práctica: selecciona la herramienta ETL y documenta el proceso de carga."
+          - "Adjunta tu archivo en el espacio de entrega M2.2_Reporte Práctica 2."
+    evidencias: [{nombre: "Reporte de Práctica 2", tipo: "Reporte de práctica", recurso: "M2.2_Reporte Práctica 2"}]
+    criterios_evaluacion:
+      - "El modelo dimensional es coherente con las fuentes de datos identificadas."
+      - "Justifica la elección de la herramienta ETL."
+    reflexion:
+      - "Diseñé el modelo dimensional de un Data warehouse."
+      - "Seleccioné y justifiqué una herramienta ETL para el proceso de carga."
+
+  - id: "2.3"
+    unidad: "II"
+    rubro: proyecto
+    valor: 5
+    semanas: [6]
+    enunciado: "Definir el caso de estudio del proyecto integrador."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Delimitar un problema real de una organización susceptible de análisis con Big Data."
+      - "Formular las preguntas de negocio que guiarán el proyecto."
+    sesiones:
+      - ambiente: presencial
+        semana: 6
+        actividad_tabla: "Definición del caso de estudio en equipo"
+        pasos:
+          - "En la sesión, el docente presentará los requisitos del proyecto integrador y los criterios con que se evaluará."
+          - "Cada equipo delimitará su caso de estudio y lo someterá a revisión."
+      - ambiente: virtual
+        semana: 6
+        actividad_tabla: "Protocolo del proyecto"
+        pasos:
+          - "Redacta el protocolo del proyecto: organización, problema, preguntas de negocio y fuentes de datos previstas."
+          - "Adjunta el archivo en el espacio de entrega M2.3_Protocolo del proyecto."
+    evidencias: [{nombre: "Protocolo del proyecto", tipo: "Documento", recurso: "M2.3_Protocolo del proyecto"}]
+    criterios_evaluacion:
+      - "El problema está delimitado y es abordable con las herramientas del curso."
+      - "Las fuentes de datos son accesibles y están identificadas."
+    reflexion:
+      - "Delimité un problema real abordable con herramientas de Big Data."
+      - "Formulé las preguntas de negocio que guiarán mi proyecto."
+
+  - id: "P1"
+    unidad: "II"
+    tipo: examen_parcial
+    rubro: examenes
+    valor: 10
+    semanas: [7]
+    enunciado: "Primera evaluación parcial: fundamentos de Big Data y Data warehouse."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Demostrar el dominio de los contenidos de las unidades I y II."
+    sesiones:
+      - ambiente: presencial
+        semana: 7
+        actividad_tabla: "Evaluación parcial 1"
+        pasos:
+          - "Presenta la primera evaluación parcial, que cubre las unidades I y II."
+      - ambiente: virtual
+        semana: 7
+        actividad_tabla: "Retroalimentación de la evaluación"
+        pasos:
+          - "Revisa la retroalimentación publicada en plataforma y consulta tus dudas en el foro."
+    evidencias: [{nombre: "Examen parcial 1", tipo: "Examen", recurso: "M P1_Examen parcial 1"}]
+    criterios_evaluacion: ["Se califica conforme a la clave de respuestas publicada tras la aplicación."]
+    reflexion:
+      - "Demostré el dominio de los fundamentos de Big Data y del Data warehouse."
+
+  - id: "3.1"
+    unidad: "III"
+    rubro: tareas
+    valor: 5
+    semanas: [8]
+    enunciado: "Analizar datos de redes sociales mediante herramientas especializadas."
+    caracter: individual
+    practica_pua: "4"
+    que_voy_a_aprender:
+      - "Extraer datos de fuentes públicas de redes sociales."
+      - "Interpretar tendencias a partir de datos de Google Trends."
+    sesiones:
+      - ambiente: presencial
+        semana: 8
+        actividad_tabla: "Exposición sobre fuentes de datos sociales"
+        pasos:
+          - "En la clase, el docente mostrará el acceso a datos de redes sociales y a Google Trends."
+          - "Se analizará en grupo un caso de tendencias de consumo."
+      - ambiente: virtual
+        semana: 8
+        actividad_tabla: "Práctica 4: análisis de datos de redes sociales"
+        pasos:
+          - "Extrae y analiza un conjunto de datos de una fuente social pública."
+          - "Elabora el reporte de la Práctica 4 e intégralo al portafolio."
+          - "Adjunta tu archivo en el espacio de entrega M3.1_Reporte Práctica 4."
+    evidencias: [{nombre: "Reporte de Práctica 4", tipo: "Reporte de práctica", recurso: "M3.1_Reporte Práctica 4"}]
+    criterios_evaluacion:
+      - "El análisis parte de datos reales y documenta su procedencia."
+      - "Las conclusiones se sostienen en los datos presentados."
+    reflexion:
+      - "Extraje datos de fuentes públicas de redes sociales."
+      - "Interpreté tendencias a partir de datos reales."
+    cubre_temas: ["3.1. Redes sociales (facebook graph)", "3.2. Google trends"]
+
+  - id: "3.2"
+    unidad: "III"
+    rubro: tareas
+    valor: 5
+    semanas: [9]
+    enunciado: "Distinguir los sistemas de procesamiento analítico en línea."
+    caracter: individual
+    practica_pua: "5"
+    que_voy_a_aprender:
+      - "Diferenciar OLAP de OLTP y reconocer cuándo aplica cada uno."
+      - "Identificar el papel del Operational Data Store en la arquitectura."
+    sesiones:
+      - ambiente: presencial
+        semana: 9
+        actividad_tabla: "Práctica 5: procesamiento analítico (parte 1)"
+        pasos:
+          - "En el laboratorio, el docente guiará la primera parte de la Práctica 5 sobre procesamiento analítico."
+          - "Se compararán consultas OLAP y OLTP sobre el mismo conjunto de datos."
+      - ambiente: virtual
+        semana: 9
+        actividad_tabla: "Práctica 5: procesamiento analítico (parte 2)"
+        pasos:
+          - "Completa la segunda parte de la práctica identificando fuentes de datos y procesándolas."
+          - "Adjunta tu archivo en el espacio de entrega M3.2_Reporte Práctica 5."
+    evidencias: [{nombre: "Reporte de Práctica 5", tipo: "Reporte de práctica", recurso: "M3.2_Reporte Práctica 5"}]
+    criterios_evaluacion:
+      - "Distingue con ejemplos propios los escenarios OLAP y OLTP."
+      - "El reporte documenta el procedimiento y los resultados."
+    reflexion:
+      - "Diferencié los sistemas OLAP de los OLTP con ejemplos propios."
+      - "Identifiqué el papel del Operational Data Store en la arquitectura."
+    cubre_temas: ["3.3. Operational Data Store", "3.4. Sistemas de procesamiento analítico en línea"]
+
+  - id: "3.3"
+    unidad: "III"
+    rubro: proyecto
+    valor: 5
+    semanas: [10]
+    enunciado: "Construir el repositorio de datos del proyecto integrador."
+    caracter: colaborativa
+    practica_pua: "6"
+    que_voy_a_aprender:
+      - "Aplicar la arquitectura HDFS al almacenamiento de los datos del proyecto."
+      - "Documentar el proceso de carga y limpieza de los datos."
+    sesiones:
+      - ambiente: presencial
+        semana: 10
+        actividad_tabla: "Práctica 6: arquitectura HDFS"
+        pasos:
+          - "En el laboratorio, el docente guiará la configuración de la arquitectura HDFS."
+          - "Cada equipo cargará su conjunto de datos al repositorio."
+      - ambiente: virtual
+        semana: 10
+        actividad_tabla: "Avance 1 del proyecto"
+        pasos:
+          - "Completa la carga y la limpieza de los datos de tu proyecto."
+          - "Documenta el proceso en el primer avance y adjúntalo en M3.3_Avance 1 del proyecto."
+    evidencias: [{nombre: "Avance 1 del proyecto", tipo: "Avance de proyecto", recurso: "M3.3_Avance 1 del proyecto"}]
+    criterios_evaluacion:
+      - "El repositorio contiene los datos del caso definido en la meta 2.3."
+      - "El proceso de limpieza está documentado y es reproducible."
+    reflexion:
+      - "Apliqué la arquitectura HDFS al almacenamiento de los datos de mi proyecto."
+      - "Documenté un proceso de carga y limpieza reproducible."
+
+  - id: "4.1"
+    unidad: "IV"
+    rubro: tareas
+    valor: 5
+    semanas: [11]
+    enunciado: "Aplicar el proceso de minería de datos para la clasificación de la información."
+    caracter: individual
+    practica_pua: "7"
+    que_voy_a_aprender:
+      - "Reconocer las fases del proceso de minería de datos."
+      - "Aplicar un algoritmo de clasificación a un conjunto de datos."
+    sesiones:
+      - ambiente: presencial
+        semana: 11
+        actividad_tabla: "Exposición sobre el proceso de minería de datos"
+        pasos:
+          - "En la clase, el docente expondrá las fases del proceso de minería de datos."
+          - "Se aplicará un algoritmo de clasificación sobre un conjunto de datos de ejemplo."
+      - ambiente: virtual
+        semana: 11
+        actividad_tabla: "Práctica 7: clasificación de datos"
+        pasos:
+          - "Aplica el algoritmo de clasificación a un conjunto de datos propio."
+          - "Elabora el reporte de la Práctica 7 y adjúntalo en M4.1_Reporte Práctica 7."
+    evidencias: [{nombre: "Reporte de Práctica 7", tipo: "Reporte de práctica", recurso: "M4.1_Reporte Práctica 7"}]
+    criterios_evaluacion:
+      - "El reporte documenta las fases del proceso aplicadas al conjunto de datos."
+      - "Interpreta los resultados de la clasificación, no solo los reporta."
+    reflexion:
+      - "Reconocí las fases del proceso de minería de datos."
+      - "Apliqué e interpreté un algoritmo de clasificación."
+
+  - id: "4.2"
+    unidad: "IV"
+    rubro: tareas
+    valor: 5
+    semanas: [12]
+    enunciado: "Aplicar técnicas de minería de datos: Naive Bayes, K-medias y redes neuronales."
+    caracter: individual
+    practica_pua: "8"
+    que_voy_a_aprender:
+      - "Contrastar el comportamiento de tres técnicas sobre el mismo conjunto de datos."
+      - "Seleccionar la técnica adecuada según el problema."
+    sesiones:
+      - ambiente: presencial
+        semana: 12
+        actividad_tabla: "Práctica 8: técnicas de minería (parte 1)"
+        pasos:
+          - "En el laboratorio, el docente demostrará las tres técnicas sobre un conjunto de datos común."
+          - "Se compararán sus resultados y su costo computacional."
+      - ambiente: virtual
+        semana: 12
+        actividad_tabla: "Práctica 8: técnicas de minería (parte 2)"
+        pasos:
+          - "Aplica las tres técnicas a un conjunto de datos propio y compara los resultados."
+          - "Adjunta tu archivo en el espacio de entrega M4.2_Reporte Práctica 8."
+    evidencias: [{nombre: "Reporte de Práctica 8", tipo: "Reporte de práctica", recurso: "M4.2_Reporte Práctica 8"}]
+    criterios_evaluacion:
+      - "Compara las tres técnicas con criterios explícitos."
+      - "Justifica cuál conviene al problema planteado."
+    reflexion:
+      - "Contrasté el comportamiento de tres técnicas sobre el mismo conjunto de datos."
+      - "Justifiqué la selección de una técnica según el problema."
+
+  - id: "P2"
+    unidad: "IV"
+    tipo: examen_parcial
+    rubro: examenes
+    valor: 10
+    semanas: [13]
+    enunciado: "Segunda evaluación parcial: arquitecturas y minería de datos."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Demostrar el dominio de los contenidos de las unidades III y IV."
+    sesiones:
+      - ambiente: presencial
+        semana: 13
+        actividad_tabla: "Evaluación parcial 2"
+        pasos:
+          - "Presenta la segunda evaluación parcial, que cubre las unidades III y IV."
+      - ambiente: virtual
+        semana: 13
+        actividad_tabla: "Retroalimentación de la evaluación"
+        pasos:
+          - "Revisa la retroalimentación publicada en plataforma y consulta tus dudas en el foro."
+    evidencias: [{nombre: "Examen parcial 2", tipo: "Examen", recurso: "M P2_Examen parcial 2"}]
+    criterios_evaluacion: ["Se califica conforme a la clave de respuestas publicada tras la aplicación."]
+    reflexion:
+      - "Demostré el dominio de las arquitecturas de Data warehouse y de la minería de datos."
+
+  - id: "4.3"
+    unidad: "IV"
+    rubro: proyecto
+    valor: 5
+    semanas: [14]
+    enunciado: "Aplicar análisis de componentes principales a los datos del proyecto."
+    caracter: colaborativa
+    practica_pua: "9"
+    que_voy_a_aprender:
+      - "Reducir la dimensionalidad de un conjunto de datos sin perder poder explicativo."
+      - "Interpretar las componentes obtenidas en términos del problema de negocio."
+    sesiones:
+      - ambiente: presencial
+        semana: 14
+        actividad_tabla: "Práctica 9: análisis de componentes principales"
+        pasos:
+          - "En el laboratorio, el docente guiará la aplicación del análisis de componentes principales."
+          - "Cada equipo lo aplicará a los datos de su proyecto."
+      - ambiente: virtual
+        semana: 14
+        actividad_tabla: "Avance 2 del proyecto"
+        pasos:
+          - "Participa en el foro M4.3_Foro PCA compartiendo tus resultados y retroalimentando al menos a un compañero."
+          - "Documenta el análisis en el segundo avance y adjúntalo en M4.3_Avance 2 del proyecto."
+    evidencias: [{nombre: "Avance 2 del proyecto", tipo: "Avance de proyecto", recurso: "M4.3_Avance 2 del proyecto"}]
+    criterios_evaluacion:
+      - "Justifica el número de componentes retenidas."
+      - "Interpreta las componentes en términos del problema de negocio."
+    reflexion:
+      - "Reduje la dimensionalidad de mis datos justificando las componentes retenidas."
+      - "Interpreté las componentes en términos del problema de negocio."
+
+  - id: "5.1"
+    unidad: "V"
+    rubro: proyecto
+    valor: 5
+    semanas: [15]
+    enunciado: "Representar los datos masivos del proyecto mediante gráficas y diagramas."
+    caracter: colaborativa
+    practica_pua: "10"
+    que_voy_a_aprender:
+      - "Seleccionar la representación gráfica adecuada al tipo de dato y a la pregunta de negocio."
+      - "Construir un tablero de visualización interpretable por un tomador de decisiones."
+    sesiones:
+      - ambiente: presencial
+        semana: 15
+        actividad_tabla: "Práctica 10: visualización de datos"
+        pasos:
+          - "En el laboratorio, el docente mostrará los criterios de selección de gráficas según el tipo de dato."
+          - "Cada equipo construirá el tablero de visualización de su proyecto."
+      - ambiente: virtual
+        semana: 15
+        actividad_tabla: "Tablero de visualización"
+        pasos:
+          - "Termina el tablero de visualización y redacta la interpretación de cada gráfica."
+          - "Adjunta tu archivo en el espacio de entrega M5.1_Tablero de visualización."
+    evidencias: [{nombre: "Tablero de visualización", tipo: "Tablero", recurso: "M5.1_Tablero de visualización"}]
+    criterios_evaluacion:
+      - "Cada gráfica corresponde al tipo de dato que representa."
+      - "El tablero responde a las preguntas de negocio del protocolo."
+    reflexion:
+      - "Seleccioné la representación gráfica adecuada a cada tipo de dato."
+      - "Construí un tablero interpretable por un tomador de decisiones."
+
+  - id: "5.2"
+    unidad: "V"
+    tipo: cierre
+    rubro: proyecto
+    valor: 20
+    semanas: [16]
+    enunciado: "Integrar el portafolio de prácticas y presentar el proyecto integrador."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Integrar las diez prácticas de laboratorio en un portafolio de evidencias."
+      - "Comunicar los resultados del proyecto a un público no técnico."
+    sesiones:
+      - ambiente: presencial
+        semana: 16
+        actividad_tabla: "Presentación del proyecto integrador"
+        pasos:
+          - "Presenta ante el grupo los resultados de tu proyecto integrador, aplicando Big Data, Data warehouse, minería y visualización a un caso real."
+          - "Participa en la sesión de preguntas del resto del grupo."
+      - ambiente: virtual
+        semana: 16
+        actividad_tabla: "Integración final del portafolio"
+        pasos:
+          - "Integra las diez prácticas de laboratorio en el portafolio de evidencias."
+          - "Adjunta el portafolio y el documento final del proyecto en M5.2_Portafolio de prácticas."
+    evidencias:
+      - {nombre: "Portafolio de prácticas de laboratorio", tipo: "Portafolio", recurso: "M5.2_Portafolio de prácticas"}
+      - {nombre: "Proyecto integrador", tipo: "Proyecto", recurso: "M5.2_Proyecto integrador"}
+    criterios_evaluacion:
+      - "El portafolio contiene las diez prácticas con sus reportes corregidos."
+      - "El proyecto integra las herramientas de las cinco unidades sobre un caso real."
+      - "La presentación es comprensible para un público no técnico."
+    reflexion:
+      - "Integré las diez prácticas de laboratorio en un portafolio de evidencias."
+      - "Presenté los resultados del proyecto integrando los conocimientos del curso."

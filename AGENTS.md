@@ -75,7 +75,7 @@ config/*.yaml ──────────────────────
 `curso.yaml` es **el contrato** entre la etapa de planeación y la de renderizado. Su esquema está
 en `src/modelo.py`. Todo lo que aparece en el documento sale de ahí.
 
-Tres decisiones de diseño que sostienen las reglas invariables:
+Cuatro decisiones de diseño que sostienen las reglas invariables:
 
 1. **El horario vive en el grupo, no en el curso.** Si dos grupos tienen días de clase distintos,
    *todas* las fechas divergen. Cada entrada de `grupos:` lleva su `horario` (días de sesión, día
@@ -90,11 +90,32 @@ Tres decisiones de diseño que sostienen las reglas invariables:
 
 3. **El énfasis es semántico, no tipográfico.** En `curso.yaml` se escribe
    `{t: "M1.1_Mapa conceptual", enfasis: recurso}`, y el mapa a negrita/cursiva/subrayado vive
-   **solo** en `src/estilo.py`. Si el CIAD cambia su guía de estilo se toca una tabla, y el
-   validador puede exigir que toda meta con evidencia lleve al menos un run `evidencia`.
+   **solo** en `src/estilo.py`. Si el CIAD cambia su guía de estilo se toca una tabla.
+
+4. **El renderizado clona prototipos, no construye elementos.** Cada párrafo y cada fila que se
+   añade es un `deepcopy` de uno que ya trae la plantilla, con el contenido cambiado. Así hereda
+   sangría, espaciado, bordes y tipografía sin que el código tenga que conocerlos. Corolario: el
+   prototipo tiene que ser el correcto — usar el párrafo «Versión» como molde centra todo el
+   anexo, porque ese párrafo está centrado.
 
 Además, cada meta declara `cubre_temas` y `practica_pua` referidos al PUA. Es el ancla
 anti-alucinación: la validación rechaza referencias a temas o prácticas que no existen.
+
+### Anatomía del documento generado
+
+| Bloque | De dónde sale |
+|---|---|
+| Portada + Sección 1 | Plantilla CIAD; los campos se rellenan con `add_run()` sobre los runs que ya trae |
+| Sección 2 (tabla) | Una fila separadora por unidad, dos subfilas por meta (presencial + virtual) |
+| Sección 3 | Un bloque por meta, armado clonando prototipos, cerrado con `------------------------` |
+| Criterios de evaluación del curso | `config/esquemas-evaluacion.yaml` + periodos de examen del calendario |
+| Reglas de convivencia | `config/politicas.yaml`, cada regla con su sanción |
+| Fundamento normativo | Los artículos de `citas:`, verbatim |
+| `Versión <ciclo>.` + `Firma Jefe Grupo ____` | Uno por grupo |
+
+Los últimos cuatro bloques **no vienen en la plantilla CIAD**: son la fusión que reproduce el
+ejemplo 961. El pie de instrucciones del CIAD («Para descargar instrucciones de llenado…») se
+**elimina**: es una nota para quien llena la plantilla, no parte del entregable.
 
 ### Contrato de `curso.yaml`
 
