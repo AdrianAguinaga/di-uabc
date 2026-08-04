@@ -1,12 +1,22 @@
 # Profesores para los que se emiten diseños instruccionales.
-# El `id` es lo que se guarda en curso.yaml; el nombre se copia tal cual al documento.
+# El `id` es lo que se guarda en curso.yaml; el nombre se copia tal cual al documento,
+# con el título incluido si así firma la persona.
+#
+# `exencion_predeterminada` es el umbral que el profesor suele fijar; el `curso.yaml`
+# puede sobrescribirlo. No es norma universitaria: el Art. 68 deja la exención a
+# criterio del docente. Las políticas de acreditación propias de cada quien viven en
+# `politicas.yaml`, filtradas con `profesores:`.
 
 profesores:
   - id: ara
     nombre: "Adrian Rodriguez Aguiñaga"
     correo: "adrian.aguinaga@uabc.edu.mx"
+    exencion_predeterminada: 80
     predeterminado: true
 
   - id: zra
-    nombre: "Zurisaddai Rubio Arriaga"
-    correo: null        # completar cuando se confirme
+    # Firma con título en su propio DI; se copia tal cual.
+    nombre: "Dra. Zurisaddai Rubio Arriaga"
+    correo: "rubio.zurisaddai@uabc.edu.mx"
+    exencion_predeterminada: 90
+    coordinador_area: "Dra. Bianca Janeth López Campillo"

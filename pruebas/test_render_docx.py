@@ -247,6 +247,46 @@ class Determinismo(unittest.TestCase):
             shutil.rmtree(tmp, ignore_errors=True)
 
 
+class CriteriosPropiosDelDocente(unittest.TestCase):
+    """Cada docente tiene criterios de acreditación propios; no deben mezclarse.
+
+    Los de `zra` se tomaron de su DI de Contabilidad Financiera (`ejemplos/`). Los de
+    `ara` son los que ya producían Big Data y Patrones, y no deben moverse.
+    """
+
+    def setUp(self):
+        self.cfg = modelo.Config()
+        self.curso = modelo.cargar(CURSO)  # de `ara`
+
+    def _acreditacion(self, profesor_id: str) -> str:
+        self.curso.profesor_id = profesor_id
+        return render_docx._texto_acreditacion(self.curso, self.cfg)
+
+    def test_los_criterios_de_zra_no_salen_en_el_di_de_ara(self):
+        texto_ara = self._acreditacion("ara")
+        self.assertNotIn("trabajo final completo es requisito", texto_ara)
+        self.assertNotIn("código de ética", texto_ara)
+        self.assertNotIn("sella", texto_ara)
+
+    def test_los_criterios_de_zra_salen_en_su_di(self):
+        texto_zra = self._acreditacion("zra")
+        self.assertIn("trabajo final completo es requisito", texto_zra)
+        self.assertIn("código de ética", texto_zra)
+        self.assertIn("95 %", texto_zra)
+
+    def test_los_criterios_comunes_los_conservan_ambos(self):
+        """El filtro añade, no reemplaza: lo que no lleva `profesores` es de todos."""
+        for profesor in ("ara", "zra"):
+            with self.subTest(profesor=profesor):
+                self.assertIn("escala de 0 a 100", self._acreditacion(profesor))
+
+    def test_zra_firma_con_su_titulo_y_su_correo(self):
+        zra = self.cfg.profesor("zra")
+        self.assertEqual("Dra. Zurisaddai Rubio Arriaga", zra["nombre"])
+        self.assertEqual("rubio.zurisaddai@uabc.edu.mx", zra["correo"])
+        self.assertEqual(90, zra["exencion_predeterminada"])
+
+
 class ErroresDeEntrada(unittest.TestCase):
     def test_un_ciclo_sin_calendario_no_se_renderiza(self):
         curso = modelo.cargar(CURSO)

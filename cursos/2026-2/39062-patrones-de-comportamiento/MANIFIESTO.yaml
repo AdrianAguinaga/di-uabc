@@ -6,8 +6,8 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-04T14:08:51'
-commit: 251fab2-sucio
+generado: '2026-08-04T15:53:55'
+commit: 463183f-sucio
 curso:
   archivo: cursos/2026-2/39062-patrones-de-comportamiento/curso.yaml
   sha256: 733aaa219cda9c86c3db0f48e51600fcdd47e78cd1e0cda63370eebe91b0ce26
@@ -72,17 +72,17 @@ validacion:
 archivos:
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-971.docx
   grupo: '971'
-  sha256: 531700bc88d9657117496d5fc2ae9110cb2a466c26cc9a3f9be78530cd8bead0
+  sha256: 81dcc6aa03bffe7df94365c584e064497b4f7fbeafdee1ed53e31b8cd8f0006d
   bytes: 233000
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-971.pdf
   grupo: '971'
-  sha256: 6664a4904e0072b32a07b393541b543c2a32baad1e3f26824617618e413f9ee8
+  sha256: 1ee890fb49bd434285b09607689f12e53b1cc70e7bd2adebc83288a646ad49a7
   bytes: 399208
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-972.docx
   grupo: '972'
-  sha256: 2136a5d8b682df2877be282ea96b06eada00aac850227dc3012405336958929b
+  sha256: ed948933beab47d8a33036b75d34d1a90c4f050da18544da751b808a11dff092
   bytes: 232981
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-972.pdf
   grupo: '972'
-  sha256: d0e9b1067a3d65d55385feda2a774a4001c358ddcea83f728406d97466d9a5a2
+  sha256: 7021b1aacc1f6fe397bdee367a2d2114456c6e747f03bd63ba7aedb4e34bbe51
   bytes: 399232

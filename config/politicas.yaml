@@ -120,6 +120,64 @@ acreditacion:
     citas: [EE-74]
     solo_si_practica: true
 
+  # --- Criterios propios de cada docente -----------------------------------
+  #
+  # `profesores:` limita el criterio a quienes lo declaran, igual que `modalidades:`
+  # lo limita por modalidad. Sin la clave, el criterio aplica a todos: por eso añadir
+  # los de abajo no altera un documento existente.
+  #
+  # Los de `zra` se toman de su propio DI —Contabilidad Financiera 38985, grupo 531,
+  # ciclo 2026-1— guardado en `ejemplos/`. Son criterios suyos, no norma de la
+  # facultad: se citan los artículos solo donde el Estatuto efectivamente los ampara.
+
+  - id: trabajo_final_requisito
+    texto: >-
+      El trabajo final completo es requisito para acreditar la unidad de aprendizaje. Si
+      no se entrega completo y en tiempo y forma, la calificación máxima del curso será
+      de 50.
+    profesores: [zra]
+
+  - id: entrega_solo_por_plataforma
+    texto: >-
+      Las tareas virtuales se entregan por la plataforma institucional a más tardar el día
+      y la hora asignados. No se reciben por correo electrónico.
+    profesores: [zra]
+    modalidades: [semipresencial, a_distancia]
+
+  - id: sello_de_actividad_presencial
+    texto: >-
+      Las tareas asignadas en clase presencial se entregan durante esa misma sesión y el
+      docente las sella; sin el sello no se contabilizan como entregadas.
+    profesores: [zra]
+    modalidades: [semipresencial, escolarizada]
+
+  - id: exencion_requisitos_adicionales
+    texto: >-
+      Además del promedio, para exentar el examen ordinario se requiere haber cubierto el
+      95 % de las tareas y trabajos del semestre y entregar el trabajo final completo en
+      tiempo y forma.
+    citas: [EE-68]
+    profesores: [zra]
+
+  - id: extraordinario_trabajo_final
+    texto: >-
+      Quien no haya entregado el trabajo final en el periodo ordinario recibirá uno nuevo,
+      que deberá entregar en la fecha y el horario del examen extraordinario cumpliendo
+      los mismos requisitos de fondo y forma.
+    citas: [EE-71]
+    profesores: [zra]
+
+  # En su DI aparece rotulada «Nota inamovible». Se buscó en las cuatro plantillas CIAD,
+  # en las instrucciones de llenado y en las políticas de curso 2025: no está en ninguna.
+  # Es aportación suya, así que se registra como criterio propio y no como obligatorio.
+  - id: codigo_de_etica
+    texto: >-
+      Conducirse, dentro y fuera de la Universidad Autónoma de Baja California, conforme al
+      código de ética vigente, que cita los valores de confianza, democracia, honestidad,
+      humildad, justicia, lealtad, libertad, perseverancia, respeto, responsabilidad y
+      solidaridad.
+    profesores: [zra]
+
 # ---------------------------------------------------------------------------
 # Reglas de convivencia. Cada una con su sanción: sin sanción no es una regla.
 # ---------------------------------------------------------------------------

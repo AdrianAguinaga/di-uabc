@@ -123,6 +123,22 @@ Los últimos cuatro bloques **no vienen en la plantilla CIAD**: son la fusión q
 ejemplo 961. El pie de instrucciones del CIAD («Para descargar instrucciones de llenado…») se
 **elimina**: es una nota para quien llena la plantilla, no parte del entregable.
 
+### Criterios propios de cada docente
+
+Los criterios de acreditación de `config/politicas.yaml` aceptan tres filtros, que se combinan:
+`modalidades:`, `solo_si_practica:` y **`profesores:`**. Sin filtro, el criterio aplica a todos;
+con `profesores: [zra]`, solo a quien lo declara. El filtro **añade, nunca reemplaza**: los
+criterios comunes —escala 0–100, derechos a ordinario y extraordinario— los conserva todo el
+mundo.
+
+Por eso registrar los criterios de un docente nuevo no puede alterar el DI de otro, y hay
+pruebas que lo fijan (`CriteriosPropiosDelDocente`). Al añadir criterios, **regenera los
+documentos existentes y compara el texto**: si cambia algo de otro docente, el filtro falta.
+
+`config/profesores.yaml` guarda además `exencion_predeterminada` —el umbral que suele fijar cada
+quien, sobrescribible desde el `curso.yaml`— y el nombre **tal como firma**, con título si lo
+usa. La exención es criterio del docente amparado en el Art. 68, no norma universitaria.
+
 ### Contrato de `curso.yaml`
 
 Las claves de primer nivel, tal como las lee `modelo.desde_dict()`:

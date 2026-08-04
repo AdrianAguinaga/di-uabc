@@ -127,12 +127,61 @@ etiqueta `ESTILO`. Cuatro pruebas nuevas (175 en total). Documentado en `AGENTS.
 y en las fechas, que es lo que exige REQ-14. Ninguna de las tres suspensiones del ciclo cae en
 martes ni en jueves.
 
+## Criterios de Zurisaddai Rubio Arriaga (4 de agosto de 2026)
+
+Fuente: su propio DI, `ejemplos/38985-531-2026-1-Rubio Arriaga Zurisaddai.docx` —Contabilidad
+Financiera 38985, grupo 531, ciclo 2026-1, semipresencial. Solo lectura; `ejemplos/` no se toca.
+
+Hasta ahora todo el sistema codificaba los criterios de Adrian. Ya no: `config/politicas.yaml`
+acepta el filtro **`profesores:`**, hermano de los `modalidades:` y `solo_si_practica:` que ya
+existían. Sin filtro el criterio es de todos; con él, solo de quien lo declara. **Añade, nunca
+reemplaza.**
+
+Registrado de `zra`:
+
+| Dato | Valor |
+|---|---|
+| Correo | `rubio.zurisaddai@uabc.edu.mx` (llevaba `null` desde la Fase 5) |
+| Firma | «Dra. Zurisaddai Rubio Arriaga», con título |
+| Exención | **90**, no 80 |
+| Coordinadora de área | Dra. Bianca Janeth López Campillo |
+
+Y seis criterios propios: trabajo final como requisito de acreditación (sin él, máximo 50);
+entrega solo por plataforma, nunca por correo; sello del docente en las tareas presenciales;
+95 % de tareas cubiertas para exentar; trabajo final nuevo para el extraordinario; y el código
+de ética con sus once valores.
+
+Ese último aparece en su DI rotulado «Nota inamovible». Se buscó en las cuatro plantillas CIAD,
+en las instrucciones de llenado y en las políticas de curso 2025: **no está en ninguna**. Es
+aportación suya, así que se registró como criterio propio y no como obligatorio.
+
+Verificado que no contamina: se regeneraron Big Data y Patrones y **la huella del texto no
+cambió**. Cuatro pruebas nuevas lo fijan (179 en total).
+
+## Lo de Zurisaddai que NO cabe en el modelo actual
+
+Su DI usa una estructura de calificación distinta de la de Adrian. Esto **no** se construyó:
+sin un curso suyo que generar sería especulación, y toca el renderizador.
+
+| Su estructura | Qué asume el modelo hoy |
+|---|---|
+| Promedio 60 % + examen ordinario 40 % | Los rubros suman 100; no existe ese segundo nivel |
+| Metas en **puntos** (`10 pts`) | `valor` es porcentaje |
+| Metas `1.0`, `2.0`… (cada unidad abre en `.0`) | `0` de encuadre y luego `1.1`, `1.2` |
+| **Tres** exámenes dentro de la actividad de una meta | R3 cuenta metas de tipo `examen_parcial`; así contaría cero y fallaría |
+| Rúbrica del trabajo final, tabla de 100 puntos | No hay tabla de rúbrica |
+
+El cuarto punto es el que muerde: un DI suyo redactado a su estilo **no pasaría la validación**.
+
 ## Lo que queda abierto
 
-Nada del roadmap. Dos cosas, ambas decisiones del usuario:
+Nada del roadmap. Tres decisiones del usuario:
 
-- Decidir si la unidad V se rebalancea o si los dos cursos se quedan como están.
-- El correo de `zra` sigue en `null` en `config/profesores.yaml`.
+- Si se construye la estructura 60/40 y lo demás de la tabla de arriba, o se espera a tener un
+  curso de Zurisaddai que generar.
+- Si la unidad V se rebalancea o los dos cursos se quedan como están.
+- Confirmar con Zurisaddai que sus criterios se registraron bien: se dedujeron de un DI de
+  Contabilidad, y puede que algunos sean de esa materia y no suyos en general.
 
 ## Repositorio
 

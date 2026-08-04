@@ -201,6 +201,10 @@ def _texto_acreditacion(curso: Curso, cfg: Config) -> str:
             continue
         if (mods := c.get("modalidades")) and curso.modalidad not in mods:
             continue
+        # Sin `profesores`, el criterio es de todos. Con la clave, solo de quien la
+        # declara: así los criterios propios de un docente no se cuelan en el DI de otro.
+        if (profes := c.get("profesores")) and curso.profesor_id not in profes:
+            continue
         texto = c.get("texto") or c["plantilla"].format(exencion=curso.exencion_ordinario)
         if citas := c.get("citas"):
             texto += f" ({_citar(citas, cfg)})"
