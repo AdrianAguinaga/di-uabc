@@ -28,12 +28,6 @@ convertido: 2026-08-04
 > Convertido automáticamente desde el PDF oficial con `src/ingesta_pua.py`.
 > Las secciones I y III se copian **literalmente** al Diseño Instruccional; no las parafrasees.
 
-> **Notas de extracción:**
-> - La unidad I repite la numeración de temas (1.2) en el PUA oficial. Se conserva literal.
-> - La unidad III repite la numeración de temas (3.4) en el PUA oficial. Se conserva literal.
-> - La unidad IV repite la numeración de temas (4.1, 4.2) en el PUA oficial. Se conserva literal.
-> - La unidad V repite la numeración de temas (5.1, 5.2) en el PUA oficial. Se conserva literal.
-
 ## I. DATOS DE IDENTIFICACIÓN
 
 | # | Campo | Valor |

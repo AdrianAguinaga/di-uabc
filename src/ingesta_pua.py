@@ -302,8 +302,13 @@ def leer(pdf: Path) -> PUA:
     # Algunos PUA oficiales traen la numeración de temas repetida (el de Big Data
     # repite 1.2 y 1.3 en la Unidad I). Se conserva literal y se avisa: renumerar
     # rompería la trazabilidad contra el documento oficial.
+    #
+    # El número se toma completo. Truncarlo a dos niveles hacía que «1.2.1» colapsara
+    # en «1.2» y se denunciara como repetido a su propio padre: un subtema no es un
+    # duplicado. Patrones de Comportamiento, que anida hasta «1.2.1.1», daba cuatro
+    # avisos falsos.
     for u in unidades:
-        numeros = [n for c in u.contenido if (n := c.split(".", 2)[:2]) and (n := ".".join(n))]
+        numeros = [m[1] for c in u.contenido if (m := re.match(r"(\d+(?:\.\d+)*)\.?\s", c))]
         repetidos = sorted({n for n in numeros if numeros.count(n) > 1})
         if repetidos:
             avisos.append(

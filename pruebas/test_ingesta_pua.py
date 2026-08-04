@@ -3,6 +3,7 @@
     python -m unittest discover -s pruebas -v
 """
 
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -90,10 +91,18 @@ class TestPUABigData(unittest.TestCase):
         self.assertIn("Gestionar datos masivos", self.pua.secciones["III"])
 
     def test_avisa_de_la_numeracion_repetida_del_pua(self):
-        """El PUA oficial repite números de tema en las 5 unidades.
-        Se conserva literal y se avisa; renumerar rompería la trazabilidad."""
-        avisos = " ".join(self.pua.avisos)
-        self.assertIn("repite la numeración", avisos)
+        """El PUA oficial repite el 1.2 y el 1.3 en la unidad I, y el 4.6 en la IV: son
+        temas distintos con el mismo número. Se conserva literal y se avisa; renumerar
+        rompería la trazabilidad.
+
+        Las unidades II, III y V solo anidan subtemas (2.2 → 2.2.1). Un subtema no es un
+        duplicado de su padre y no debe generar aviso: cuando el número se truncaba a dos
+        niveles, las tres se denunciaban en falso."""
+        repetidas = {
+            m[1] for a in self.pua.avisos
+            if (m := re.match(r"La unidad (\S+) repite la numeración", a))
+        }
+        self.assertEqual(repetidas, {"I", "IV"})
 
     def test_nombre_de_archivo_derivado(self):
         self.assertEqual(self.pua.archivo_md, "39056-big-data.md")

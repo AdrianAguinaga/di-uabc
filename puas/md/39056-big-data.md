@@ -20,7 +20,7 @@ unidades: 5
 practicas: 10
 fuente: "puas/fuente/36.-39056-Big-Data.pdf"
 sha256: "baf8a83b994f72b965daffb4bbaef75e2be47d65ca1ebbf4e91d8b47266d9ba4"
-convertido: 2026-08-03
+convertido: 2026-08-04
 ---
 
 # PUA 39056 — Big Data
@@ -30,10 +30,7 @@ convertido: 2026-08-03
 
 > **Notas de extracción:**
 > - La unidad I repite la numeración de temas (1.2, 1.3) en el PUA oficial. Se conserva literal.
-> - La unidad II repite la numeración de temas (2.2, 2.4) en el PUA oficial. Se conserva literal.
-> - La unidad III repite la numeración de temas (3.4, 3.6) en el PUA oficial. Se conserva literal.
 > - La unidad IV repite la numeración de temas (4.6) en el PUA oficial. Se conserva literal.
-> - La unidad V repite la numeración de temas (5.8) en el PUA oficial. Se conserva literal.
 > - La práctica 3 no trae duración en el PUA oficial. Se deja vacía; confírmala con el programa impreso.
 
 ## I. DATOS DE IDENTIFICACIÓN
