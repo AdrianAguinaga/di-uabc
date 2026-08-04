@@ -225,7 +225,8 @@ python src/render_docx.py cursos/2026-2/<clave>/curso.yaml
 python src/export_pdf.py <archivo>.docx                # requiere Word (Windows)
 
 python src/generar.py cursos/2026-2/<clave>/curso.yaml # la cadena completa, con panel
-                                                       #   [--sin-pdf] si no hay Word
+                                                       #   [--sin-pdf]     si no hay Word
+                                                       #   [--grupo 961]   rehace un solo grupo
 
 python src/plantillas.py verificar                     # ¿siguen intactas? (sha256)
 python src/plantillas.py registrar                     # (re)crea el juego — idempotente

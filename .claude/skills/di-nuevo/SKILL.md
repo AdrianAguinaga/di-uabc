@@ -10,7 +10,8 @@ momento en qué paso está, qué ya contestó y qué falta.
 
 ## El menú se imprime, no se describe
 
-Al arrancar, imprime el rótulo **tal cual**, sin envolverlo en bloque de código:
+Al arrancar, imprime el rótulo **dentro de un bloque de código** — fuera de él, el renderizador
+de Markdown junta las líneas y el marco se deshace:
 
 ```
 ██████╗ ██╗    ███╗   ██╗██╗   ██╗███████╗██╗   ██╗ ██████╗
@@ -115,6 +116,10 @@ grupo, exporta a PDF y firma el manifiesto.
 ```bash
 python src/generar.py cursos/<ciclo>/<clave>-<slug>/curso.yaml     # --sin-pdf si no hay Word
 ```
+
+Para rehacer el documento de **un solo grupo**, `--grupo 961` (repetible). El `curso.yaml` no se
+toca: los demás grupos siguen declarados, el panel marca la corrida como `! parcial` y el
+manifiesto cubre solo lo generado.
 
 El panel de avance **lo imprime el comando**. Relaya su salida tal cual; no la redibujes:
 

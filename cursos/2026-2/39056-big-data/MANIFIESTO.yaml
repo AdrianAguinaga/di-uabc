@@ -6,8 +6,8 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-03T18:44:59'
-commit: 745f20e-sucio
+generado: '2026-08-03T20:05:19'
+commit: a9369d9-sucio
 curso:
   archivo: cursos/2026-2/39056-big-data/curso.yaml
   sha256: 7b92d970c01a09e24f65e93af0689df9dca0cbac66a79b55e081e7a4b6398af9
@@ -69,14 +69,18 @@ validacion:
   recordatorios: 5
 archivos:
 - ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-961.docx
-  sha256: d993d50ca743492a5996e46fbdf71a5b684ab1d82ba1ff10bb29c6e96cff58ac
+  grupo: '961'
+  sha256: d1871db778b6bdb44b0d964efbbd49e6c8251b503d3cd372def699b5cc2cde47
   bytes: 232806
 - ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-961.pdf
-  sha256: 57146ee4a4a19d8dc15afbbcd8fbf0f3ad9cb6b93f8b07b57de9063613211851
+  grupo: '961'
+  sha256: c3db5cbd41f175f5ba1b096881c92a979f012fc99c9956bd5754e20a385f87ef
   bytes: 394275
 - ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-962.docx
-  sha256: c281febf255b1280b566678baaa2ab0e86da28d5c64c3ad37aba0592dbdac0d4
+  grupo: '962'
+  sha256: 958ffbd5bcdb89bd410b1ea86ee769b1dc6b6baaa2e9d293d028e6faaa3ce3b4
   bytes: 232788
 - ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-962.pdf
-  sha256: 94b1ba724f83f543d38c9767bba684218ec16f8b80f19e12d9c93aa0b01ce6de
+  grupo: '962'
+  sha256: 70c2070dfb277eea9ee5d0acc54eb25090345ddd667ec1a4395e0dcbc70a4550
   bytes: 394315

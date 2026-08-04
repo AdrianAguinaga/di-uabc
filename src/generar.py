@@ -193,9 +193,12 @@ def manifiesto(
             "avisos": [h.mensaje for h in informe.de(validar.AVISO)],
             "recordatorios": len(informe.de(validar.RECORDATORIO)),
         },
+        # Solo los de esta corrida: si se regeneró un grupo suelto, el manifiesto lo dice.
+        # El número de grupo cierra el nombre del archivo (ver modelo.nombre_archivo).
         "archivos": [
             {
                 "ruta": _relativa(a),
+                "grupo": a.stem.rsplit("-", 1)[-1],
                 "sha256": plantillas.sha256(a),
                 "bytes": a.stat().st_size,
             }
@@ -213,11 +216,20 @@ def escribir_manifiesto(datos: dict, destino: Path) -> Path:
 # -- la cadena ---------------------------------------------------------------
 
 
-def paquete(ruta_curso: Path | str, pdf: bool = True, traza=None) -> Paquete:
+def paquete(
+    ruta_curso: Path | str,
+    pdf: bool = True,
+    traza=None,
+    grupos: list[str] | None = None,
+) -> Paquete:
     """Valida, renderiza un documento por grupo, exporta a PDF y escribe el manifiesto.
 
     `traza(glifo, etiqueta, detalle)` se llama al cerrar cada paso, para que la consola
     (o el orquestador) muestre el avance. Devuelve el `Paquete` con todo lo producido.
+
+    `grupos` limita la generación a esos números — para rehacer el documento de un grupo
+    sin volver a pasar por Word con los demás. El curso **no se toca**: los otros grupos
+    siguen declarados, y el manifiesto dice cuáles se generaron esta vez.
     """
     traza = traza or (lambda *_: None)
     ruta_curso = Path(ruta_curso).resolve()
@@ -225,6 +237,15 @@ def paquete(ruta_curso: Path | str, pdf: bool = True, traza=None) -> Paquete:
     curso = modelo.cargar(ruta_curso)
     cfg = Config()
     cal = calendario.cargar(curso.ciclo)
+
+    pedidos = curso.grupos
+    if grupos:
+        pedidos = [g for g in curso.grupos if g.numero in grupos]
+        if faltan := set(grupos) - {g.numero for g in pedidos}:
+            raise ErrorGenerar(
+                f"El curso no declara el/los grupo(s) {', '.join(sorted(faltan))}. "
+                f"Declarados: {', '.join(g.numero for g in curso.grupos)}."
+            )
 
     informe = validar.validar(curso, cfg, cal)
     if not informe.valido:
@@ -237,9 +258,16 @@ def paquete(ruta_curso: Path | str, pdf: bool = True, traza=None) -> Paquete:
         f"{len(informe.de(validar.RECORDATORIO))} recordatorios",
     )
 
+    if len(pedidos) < len(curso.grupos):
+        traza(
+            "!",
+            "parcial",
+            f"solo {', '.join(g.numero for g in pedidos)} — el manifiesto cubre eso",
+        )
+
     salida = ruta_curso.parent / "salida"
     archivos: list[Path] = []
-    for g in curso.grupos:
+    for g in pedidos:
         destino = salida / curso.nombre_archivo(g.numero, "docx")
         try:
             render_docx.generar(curso, g, destino, cfg)
@@ -276,9 +304,11 @@ def paquete(ruta_curso: Path | str, pdf: bool = True, traza=None) -> Paquete:
 def main(argv: list[str]) -> int:
     if len(argv) < 2:
         print(
-            "Uso: python src/generar.py <ruta a curso.yaml> [--sin-pdf]", file=sys.stderr
+            "Uso: python src/generar.py <ruta a curso.yaml> [--sin-pdf] [--grupo <n>]…",
+            file=sys.stderr,
         )
         return 2
+    grupos = [argv[i + 1] for i, a in enumerate(argv) if a == "--grupo" and i + 1 < len(argv)]
     # El panel usa caracteres de marco; en una consola cp1252 reventaría al imprimir.
     for flujo in (sys.stdout, sys.stderr):
         if hasattr(flujo, "reconfigure"):
@@ -290,6 +320,7 @@ def main(argv: list[str]) -> int:
             Path(argv[1]),
             pdf="--sin-pdf" not in argv,
             traza=lambda *a: print(linea(*a), flush=True),
+            grupos=grupos or None,
         )
     except (ErrorGenerar, modelo.ErrorModelo, calendario.ErrorCalendario) as e:
         print(PIE)

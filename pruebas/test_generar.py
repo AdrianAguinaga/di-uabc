@@ -152,6 +152,32 @@ class UnCursoInvalidoNoProduceNada(unittest.TestCase):
         self.assertFalse((self.tmp / "salida").exists())
 
 
+class UnGrupoSuelto(unittest.TestCase):
+    """Rehacer el documento de un grupo sin volver a pasar por Word con los demás."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="di-generar-961-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        self.ruta = copia_del_curso(self.tmp)
+
+    def test_genera_solo_el_grupo_pedido(self):
+        p = generar.paquete(self.ruta, pdf=False, grupos=["961"])
+        self.assertEqual(
+            ["DI-2026-2-39056-961.docx"], [a.name for a in p.archivos]
+        )
+        manifiesto = yaml.safe_load(p.manifiesto.read_text(encoding="utf-8"))
+        # El manifiesto cubre lo generado…
+        self.assertEqual({"961"}, {a["grupo"] for a in manifiesto["archivos"]})
+        # …pero el curso sigue declarando los dos grupos: no se editó.
+        self.assertEqual({"961", "962"}, {g["numero"] for g in manifiesto["grupos"]})
+
+    def test_un_grupo_que_el_curso_no_declara_se_rechaza(self):
+        with self.assertRaises(generar.ErrorGenerar) as ctx:
+            generar.paquete(self.ruta, pdf=False, grupos=["999"])
+        self.assertIn("999", str(ctx.exception))
+        self.assertFalse((self.tmp / "salida").exists())
+
+
 class Panel(unittest.TestCase):
     """El marco lo dibuja el script para que el orquestador no tenga que cuadrar anchuras."""
 
