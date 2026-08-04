@@ -98,7 +98,7 @@ def _commit() -> str:
     return f"{commit}-sucio" if git("status", "--porcelain") else commit
 
 
-def _relativa(p: Path) -> str:
+def relativa(p: Path) -> str:
     p = Path(p).resolve()
     try:
         return p.relative_to(RAIZ).as_posix()
@@ -145,7 +145,7 @@ def manifiesto(
         "generado": datetime.now().isoformat(timespec="seconds"),
         "commit": _commit(),
         "curso": {
-            "archivo": _relativa(ruta_curso),
+            "archivo": relativa(ruta_curso),
             "sha256": plantillas.sha256(ruta_curso),
             "ciclo": curso.ciclo,
             "clave": curso.clave,
@@ -154,7 +154,7 @@ def manifiesto(
         },
         "pua": _pua(curso),
         "calendario": {
-            "archivo": _relativa(calendario.DIR_CALENDARIOS / f"{curso.ciclo}.yaml"),
+            "archivo": relativa(calendario.DIR_CALENDARIOS / f"{curso.ciclo}.yaml"),
             "sha256": plantillas.sha256(calendario.DIR_CALENDARIOS / f"{curso.ciclo}.yaml"),
             "semanas": cal.total_semanas,
             "inicio": cal.inicio,
@@ -197,7 +197,7 @@ def manifiesto(
         # El número de grupo cierra el nombre del archivo (ver modelo.nombre_archivo).
         "archivos": [
             {
-                "ruta": _relativa(a),
+                "ruta": relativa(a),
                 "grupo": a.stem.rsplit("-", 1)[-1],
                 "sha256": plantillas.sha256(a),
                 "bytes": a.stat().st_size,
@@ -293,7 +293,7 @@ def paquete(
     if datos["pua"]["coincide"] is False:
         traza("!", "PUA", "el PDF de origen cambió desde que se escribió el curso")
     ruta_manifiesto = escribir_manifiesto(datos, ruta_curso.parent / "MANIFIESTO.yaml")
-    traza("✓", "MANIFIESTO", _relativa(ruta_manifiesto.parent) + "/")
+    traza("✓", "MANIFIESTO", relativa(ruta_manifiesto.parent) + "/")
 
     return Paquete(curso, informe, archivos, ruta_manifiesto)
 

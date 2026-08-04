@@ -196,6 +196,29 @@ plantilla que realmente se usó. **Después de actualizar, vuelve a verificar lo
 estructurales de `config/plantillas.yaml`** (columnas de rejilla, filas de semana, pasos
 ordinales): dejan de ser ciertos en silencio.
 
+### El grafo del dominio (`src/grafo.py`)
+
+`python src/grafo.py` recorre los PUAs de `puas/md/` y los `curso.yaml` de `cursos/`, y escribe
+`grafo/grafo.json`, `grafo/index.html` (navegable, sin dependencias externas) y
+`grafo/AUDITORIA.md`.
+
+Sirve para dos cosas distintas:
+
+1. **Navegar la lógica del proyecto.** Los nodos son las piezas del dominio —PUA, unidad, tema,
+   competencia, práctica, curso, meta, evidencia, criterio, semana, artículo, plantilla, profesor,
+   grupo— y las aristas, cómo se enganchan.
+2. **Auditar la cobertura.** Contesta qué temas del PUA quedaron sin meta, qué prácticas no las
+   realiza nadie, qué unidades o semanas están vacías y qué materias comparten competencias.
+
+Dos propiedades que lo hacen confiable: **no inventa relaciones** —cada arista sale de un campo
+declarado (`cubre_temas`, `practica_pua`, `unidad`, `semanas`, `citas`)— y **lee el PUA, no solo
+el `curso.yaml`**. Esto último es lo que le permite ver un hueco que la validación no puede ver:
+si un tema del programa oficial nunca se copió a `curso.yaml`, la regla R4 no tiene contra qué
+compararlo y calla; el grafo sí lo reporta.
+
+Las competencias compartidas se detectan por **texto normalizado idéntico** (sin acentos ni
+puntuación), nunca por parecido semántico. Una coincidencia significa que alguien copió literal.
+
 ## Mapa de directorios
 
 | Ruta | Qué es | ¿Se edita? |
@@ -227,6 +250,8 @@ python src/export_pdf.py <archivo>.docx                # requiere Word (Windows)
 python src/generar.py cursos/2026-2/<clave>/curso.yaml # la cadena completa, con panel
                                                        #   [--sin-pdf]     si no hay Word
                                                        #   [--grupo 961]   rehace un solo grupo
+
+python src/grafo.py                                    # grafo/ + auditoría de cobertura
 
 python src/plantillas.py verificar                     # ¿siguen intactas? (sha256)
 python src/plantillas.py registrar                     # (re)crea el juego — idempotente
@@ -362,5 +387,13 @@ Todo lo de esta sección está **verificado contra los archivos reales**, no sup
 
 ## Git
 
-Repositorio **local únicamente**. No hay remoto y **no se hace push** sin autorización explícita
-del usuario. Commits atómicos: uno por PUA ingerido, uno por fase GSD.
+Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`. El repositorio es
+**público** desde el 3 de agosto de 2026, por decisión explícita del usuario.
+
+- **Commits atómicos**: uno por PUA ingerido, uno por fase GSD. Directo a `master`, como todo el
+  historial. Nunca `git add -A`: se listan los archivos.
+- **El push se hace solo cuando el usuario lo pide.** Commitear es reversible; publicar no.
+- Ser público cambia el peso de lo que se agrega. Antes de versionar el PUA de otro profesor,
+  datos personales de terceros o cualquier documento institucional nuevo, **pregunta**. Lo que ya
+  está publicado (plantillas del CIAD, Estatuto, el ejemplo 961, `config/profesores.yaml`) se
+  subió con autorización; eso no autoriza lo siguiente.

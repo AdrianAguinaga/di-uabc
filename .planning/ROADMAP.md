@@ -19,8 +19,8 @@ validados.
 - [x] **Fase 4: Ingesta de PUA** — PDF → Markdown normalizado + índice
 - [x] **Fase 5: Modelo y validación** — `curso.yaml` y las 8 reglas
 - [x] **Fase 6: Renderizado docx + pdf** — rellenar las plantillas CIAD reales
-- [ ] **Fase 7: Orquestador** — `/di-nuevo`, multi-grupo, de extremo a extremo
-- [ ] **Fase 8: Grafo de conocimiento** — cobertura PUA↔metas
+- [x] **Fase 7: Orquestador** — `/di-nuevo`, multi-grupo, de extremo a extremo
+- [x] **Fase 8: Grafo de conocimiento** — cobertura PUA↔metas
 
 ## Detalle
 

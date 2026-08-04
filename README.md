@@ -43,6 +43,20 @@ Un documento por grupo, fusionando:
 El orquestador pregunta: **ciclo → materia → profesor → modalidad → grupos → esquema de evaluación**.
 Si el PUA de la materia todavía no está en `puas/md/`, lo pide y ofrece ingerirlo en el momento.
 
+### El grafo del dominio
+
+```
+python src/grafo.py     # → grafo/index.html, grafo.json y AUDITORIA.md
+```
+
+Recorre los PUAs y los cursos y arma el grafo de cómo se engancha todo: PUA, unidad, tema,
+competencia, práctica, curso, meta, evidencia, criterio, semana, artículo, plantilla, profesor y
+grupo. `grafo/index.html` se abre en el navegador y no depende de nada externo.
+
+Contesta lo que ningún archivo por separado puede contestar: **qué temas del PUA quedaron sin
+meta**, qué prácticas no las realiza ninguna meta, qué semanas están vacías y **qué materias
+comparten competencias**. No infiere relaciones: cada arista sale de un campo declarado.
+
 ### Esquema de evaluación predefinido
 
 | Concepto | Valor |

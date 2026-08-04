@@ -14,14 +14,23 @@
 | 4. Ingesta de PUA | Hecha | `4385ea3` |
 | 5. Modelo y validación | Hecha | `0e30def` |
 | 6. Renderizado docx + pdf | Hecha | `745f20e` |
-| 7. Orquestador | En curso | — |
-| 8. Grafo de conocimiento | Pendiente | — |
+| 7. Orquestador | Hecha | `cb903c5` |
+| 8. Grafo de conocimiento | Hecha | — |
 
-153 pruebas, todas pasan: `python -X utf8 -m unittest discover -s pruebas`.
+171 pruebas, todas pasan: `python -X utf8 -m unittest discover -s pruebas`.
 
-De la Fase 7 ya está la cadena: `/di-nuevo` (menú de seis pasos, con su panel ASCII) y
-`src/generar.py`, que valida → renderiza por grupo → exporta a PDF → escribe `MANIFIESTO.yaml`.
-Big Data 2026-2 con los grupos 961 y 962 produce los cuatro archivos y el manifiesto.
+Fase 7: `/di-nuevo` (menú de seis pasos con su panel ASCII) y `src/generar.py`, que valida →
+renderiza por grupo → exporta a PDF → escribe `MANIFIESTO.yaml`. Corrido de extremo a extremo
+sobre Big Data 2026-2. Falta ejercer el camino de **materia nueva** (PUA que no está en el índice
+→ ingesta en caliente → metas desde cero): requiere el PDF de otra materia.
+
+Fase 8: `src/grafo.py` → `grafo/grafo.json`, `grafo/index.html` y `grafo/AUDITORIA.md`.
+167 nodos y 209 aristas con un PUA y un curso.
+
+## Repositorio
+
+Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público** desde el
+3 de agosto de 2026 por decisión del usuario. El push se hace solo a petición explícita.
 
 ## Decisiones tomadas
 
@@ -58,6 +67,12 @@ Big Data 2026-2 con los grupos 961 y 962 produce los cuatro archivos y el manifi
 8. **De los 12 indicadores indispensables del IEDI, solo siete son comprobables sobre el
    documento**; los otros cinco (2.4, 3.1, 3.2, 3.5, 4.1) dependen de cómo el docente monte el
    curso en Blackboard. Se reportan como recordatorio, no como verificados.
+9. **El `curso.yaml` de Big Data solo copió los temas de la Unidad I.** Lo destapó el grafo en la
+   Fase 8: de los 52 temas del PUA, 41 no tienen ninguna meta que los cubra, y las unidades II–V
+   traen `temas: []`. La validación no podía verlo —R4 compara `cubre_temas` contra los temas que
+   el propio `curso.yaml` declara, así que una lista vacía pasa en silencio—. Es el hueco que
+   justifica que el grafo lea el PUA y no solo el curso. **Pendiente de decidir con el docente**:
+   completar los temas y repartirlos entre las metas existentes.
 
 ## Riesgos abiertos
 
@@ -75,7 +90,10 @@ Big Data 2026-2 con los grupos 961 y 962 produce los cuatro archivos y el manifi
 
 ## Siguiente paso
 
-Cerrar la Fase 7 corriendo `/di-nuevo` de extremo a extremo sobre una materia **nueva** (una que
-todavía no tenga `curso.yaml`): es lo único que aún no se ha probado del menú —el descubrimiento
-de PUAs, el paso de ingesta cuando falta, y la redacción de las metas desde cero—. Luego, Fase 8:
-el grafo de cobertura PUA↔metas.
+Decidir con el docente qué se hace con el hallazgo 9: completar los temas de las unidades II–V en
+el `curso.yaml` de Big Data y repartirlos entre las metas, o aceptar la cobertura actual. Es
+juicio pedagógico, no mecánico.
+
+Después, con el PDF de otra materia en `puas/fuente/`, correr `/di-nuevo` sobre ella para ejercer
+el único tramo del menú que sigue sin probarse: descubrir el PUA, ingerirlo en caliente y redactar
+las metas desde cero.
