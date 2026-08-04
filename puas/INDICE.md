@@ -13,3 +13,4 @@ python src/ingesta_pua.py puas/fuente/<archivo>.pdf
 | Clave | Nombre | Programa educativo | Plan | Créditos | Unidades | Markdown | SHA-256 |
 |---|---|---|---|---|---|---|---|
 | `39056` | Big Data | Licenciado en Inteligencia de Negocios | 2021-2 | 6 | 5 | [`39056-big-data.md`](md/39056-big-data.md) | `baf8a83b994f…` |
+| `39062` | Patrones de Comportamiento de Datos | Licenciado en Inteligencia de Negocios | 2021-2 | 6 | 5 | [`39062-patrones-de-comportamiento-de-datos.md`](md/39062-patrones-de-comportamiento-de-datos.md) | `a979be6c00a3…` |
