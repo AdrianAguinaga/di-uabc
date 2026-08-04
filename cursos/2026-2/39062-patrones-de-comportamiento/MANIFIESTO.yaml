@@ -6,11 +6,11 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-04T13:49:25'
-commit: 109c1d5-sucio
+generado: '2026-08-04T14:08:51'
+commit: 251fab2-sucio
 curso:
   archivo: cursos/2026-2/39062-patrones-de-comportamiento/curso.yaml
-  sha256: f8cb0207d626f5e0004fa62d41c9c39a39368dd8cca899d95d38f9f3eefe08d3
+  sha256: 733aaa219cda9c86c3db0f48e51600fcdd47e78cd1e0cda63370eebe91b0ce26
   ciclo: 2026-2
   clave: '39062'
   nombre: Patrones de Comportamiento de Datos
@@ -51,25 +51,38 @@ evaluacion:
   - id: proyecto
     porcentaje: 40
 grupos:
-- numero: POR-DEFINIR
+- numero: '971'
   aula: Laboratorio de cómputo
   dias_presencial:
   - 1
   dia_entrega: 5
   hora_entrega: '23:59'
   jefe_grupo: null
+- numero: '972'
+  aula: Laboratorio de cómputo
+  dias_presencial:
+  - 3
+  dia_entrega: 5
+  hora_entrega: '23:59'
+  jefe_grupo: null
 validacion:
   errores: 0
-  avisos:
-  - 'El grupo está sin definir: número, aula y día presencial son marcadores. Corrígelos
-    antes de entregar el documento; el nombre del archivo sale como DI-2026-2-39062-POR-DEFINIR.'
+  avisos: []
   recordatorios: 5
 archivos:
-- ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-POR-DEFINIR.docx
-  grupo: DEFINIR
-  sha256: 907f7f7ef43a9bd842c291edb8dc57814187991024303dbb42d154d488108795
-  bytes: 233028
-- ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-POR-DEFINIR.pdf
-  grupo: DEFINIR
-  sha256: 4904f31a7496f1d4252b8a2367c921a8abf789736ddf3d9533181f9d922cc7a3
-  bytes: 399720
+- ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-971.docx
+  grupo: '971'
+  sha256: 531700bc88d9657117496d5fc2ae9110cb2a466c26cc9a3f9be78530cd8bead0
+  bytes: 233000
+- ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-971.pdf
+  grupo: '971'
+  sha256: 6664a4904e0072b32a07b393541b543c2a32baad1e3f26824617618e413f9ee8
+  bytes: 399208
+- ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-972.docx
+  grupo: '972'
+  sha256: 2136a5d8b682df2877be282ea96b06eada00aac850227dc3012405336958929b
+  bytes: 232981
+- ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-972.pdf
+  grupo: '972'
+  sha256: d0e9b1067a3d65d55385feda2a774a4001c358ddcea83f728406d97466d9a5a2
+  bytes: 399232

@@ -173,22 +173,22 @@ evaluacion:
     - id: practicas
       etiqueta: "Prácticas de laboratorio"
       porcentaje: 30
-      detalle: "nueve prácticas conforme a la §VI del PUA"
+      detalle: "nueve prácticas de laboratorio con su reporte"
     - id: proyecto
       etiqueta: "Proyecto"
       porcentaje: 40
       detalle: "caso de estudio, reporte técnico y exposición"
 
 grupos:
-  - numero: "POR-DEFINIR"
+  - numero: "971"
     horario: {dias_presencial: [1], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
+    plataforma: Blackboard
+  - numero: "972"
+    horario: {dias_presencial: [3], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
     plataforma: Blackboard
 
 citas: [EE-65, EE-66, EE-67, EE-68, EE-70, EE-71, EE-74, EE-75, RPIDA-59]
 tolerancia_minutos: 15
-
-avisos:
-  - "El grupo está sin definir: número, aula y día presencial son marcadores. Corrígelos antes de entregar el documento; el nombre del archivo sale como DI-2026-2-39062-POR-DEFINIR."
 
 metas:
   - id: "0"

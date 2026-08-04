@@ -101,12 +101,37 @@ que evalúa, y la V —que es donde cae el proyecto final— se queda con dos se
 deliberado: la unidad V es sobre todo integración y presentación. **No se tocó**: rebalancear
 mueve el calendario de documentos ya generados y es decisión del profesor, no del generador.
 
+## Jerga interna impresa en el documento (4 de agosto de 2026)
+
+El usuario detectó `§` en el documento de 39062. No era codificación: era la taquigrafía que
+`AGENTS.md` usa para mapear secciones del PUA (`§I`, `§VI`) escrita dentro de un campo que **sí
+se imprime** — `detalle: "nueve prácticas conforme a la §VI del PUA"`. Big Data tenía cero
+ocurrencias; la fuga se introdujo al registrar el esquema `pua-39062`.
+
+Barrido completo de los dos documentos, carácter por carácter. Todo lo demás está justificado:
+
+| Carácter | Origen | Veredicto |
+|---|---|---|
+| `_` × 98/93 | nombres de recurso `M2.1_…` | convención CIAD |
+| `►` × 68 | viñetas de la plantilla | plantilla |
+| `\|` × 32 | encabezados «Actividad \| ¿Cómo lo voy a aprender?» | plantilla |
+| `«»` × 2 | cita literal del Artículo 65 | Estatuto |
+| `§` × 2 | **jerga propia** | corregido |
+
+Para evitar que vuelva: `Validador.estilo` barre todo el texto imprimible y avisa bajo la
+etiqueta `ESTILO`. Cuatro pruebas nuevas (175 en total). Documentado en `AGENTS.md`.
+
+## Grupos de 39062
+
+**971 y 972**, presencial martes y jueves. Los dos documentos difieren solo en «Grupo 971/972»
+y en las fechas, que es lo que exige REQ-14. Ninguna de las tres suspensiones del ciclo cae en
+martes ni en jueves.
+
 ## Lo que queda abierto
 
-Nada del roadmap. Tres cosas, todas decisiones del usuario:
+Nada del roadmap. Dos cosas, ambas decisiones del usuario:
 
 - Decidir si la unidad V se rebalancea o si los dos cursos se quedan como están.
-- Capturar el grupo real de 39062 y regenerar.
 - El correo de `zra` sigue en `null` en `config/profesores.yaml`.
 
 ## Repositorio

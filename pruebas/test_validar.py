@@ -358,6 +358,43 @@ class Regla8IEDI(unittest.TestCase):
         self.assertTrue(inf.valido, "\n".join(str(h) for h in inf.errores))
 
 
+class GuardiaDeEstilo(unittest.TestCase):
+    """El documento lo lee un alumno sin el PUA ni el repositorio delante.
+
+    La fuga que motivó el guardia fue real: un `detalle` de rubro se escribió como
+    «nueve prácticas conforme a la §VI del PUA» —la taquigrafía que AGENTS.md usa para
+    mapear secciones— y acabó impresa en el .docx entregable.
+    """
+
+    def _avisos_de_estilo(self, inf) -> list[str]:
+        return [h.mensaje for h in inf.de(validar.AVISO) if h.regla == "ESTILO"]
+
+    def test_el_curso_base_no_tiene_jerga(self):
+        self.assertEqual([], self._avisos_de_estilo(informe()))
+
+    def test_denuncia_la_taquigrafia_de_seccion_en_un_rubro(self):
+        ev = copy.deepcopy(CURSO_VALIDO["evaluacion"])
+        ev["rubros"][0]["detalle"] = "dos parciales conforme a la §VIII del PUA"
+        avisos = self._avisos_de_estilo(informe(evaluacion=ev))
+        self.assertEqual(1, len(avisos), avisos)
+        self.assertIn("§VIII", avisos[0])
+
+    def test_denuncia_la_jerga_en_lo_que_el_alumno_lee(self):
+        """No solo en los rubros: cualquier texto que acabe impreso."""
+        metas = copy.deepcopy(CURSO_VALIDO["metas"])
+        metas[0]["enunciado"] = "Revisar el curso.yaml del proyecto."
+        self.assertEqual(1, len(self._avisos_de_estilo(informe(metas=metas))))
+
+    def test_la_jerga_avisa_pero_no_invalida(self):
+        """Si el PUA trae literalmente la marca, copiarla es lo correcto: decide el
+        profesor. Por eso es aviso y no error."""
+        ev = copy.deepcopy(CURSO_VALIDO["evaluacion"])
+        ev["rubros"][0]["detalle"] = "según la §VIII"
+        inf = informe(evaluacion=ev)
+        self.assertTrue(inf.valido)
+        self.assertNotIn("ESTILO", reglas_con_error(inf))
+
+
 class ArrastreDeAvisos(unittest.TestCase):
     def test_los_avisos_del_pua_llegan_al_informe(self):
         inf = informe(avisos=["La práctica 3 no trae duración en el PUA oficial."])

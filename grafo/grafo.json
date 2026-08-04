@@ -819,13 +819,24 @@
       }
     },
     {
-      "id": "grupo:2026-2:39062:POR-DEFINIR",
+      "id": "grupo:2026-2:39062:971",
       "tipo": "grupo",
-      "etiqueta": "Grupo POR-DEFINIR",
+      "etiqueta": "Grupo 971",
       "datos": {
         "aula": "Laboratorio de cómputo",
         "dias_presencial": [
           1
+        ]
+      }
+    },
+    {
+      "id": "grupo:2026-2:39062:972",
+      "tipo": "grupo",
+      "etiqueta": "Grupo 972",
+      "datos": {
+        "aula": "Laboratorio de cómputo",
+        "dias_presencial": [
+          3
         ]
       }
     },
@@ -2500,7 +2511,12 @@
     },
     {
       "origen": "curso:2026-2:39062",
-      "destino": "grupo:2026-2:39062:POR-DEFINIR",
+      "destino": "grupo:2026-2:39062:971",
+      "tipo": "tiene_grupo"
+    },
+    {
+      "origen": "curso:2026-2:39062",
+      "destino": "grupo:2026-2:39062:972",
       "tipo": "tiene_grupo"
     },
     {

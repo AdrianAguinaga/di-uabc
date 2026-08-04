@@ -165,6 +165,17 @@ avisos:          []                          # arrastrados desde la ingesta del 
 Tres niveles de hallazgo: **error** (bloquea), **aviso** (decisión del docente) y
 **recordatorio** (indicador del IEDI que depende de Blackboard, no del documento).
 
+Además de las ocho, `Validador.estilo` monta un **guardia bajo la etiqueta `ESTILO`**: barre
+todo el texto que acaba impreso —detalle de rubros, enunciados, pasos, criterios, reflexiones,
+evidencias— y avisa si se coló la taquigrafía que este repositorio usa entre agentes: `§`,
+`PUA`, `REQ-nn`, `curso.yaml`, `IEDI`, nombres de campos del modelo. **En comentarios del
+`curso.yaml` esa taquigrafía es correcta**; lo que no puede es imprimirse, porque el alumno no
+tiene el programa ni el repositorio delante. Es aviso y no error: si el PUA trae literalmente
+una de esas marcas, copiarla es lo correcto y decide el profesor.
+
+> Nació de una fuga real: `detalle: "nueve prácticas conforme a la §VI del PUA"` llegó al
+> `.docx` entregable de 39062. Cuando escribas texto que se imprime, redáctalo para el alumno.
+
 **R2 es la regla que justifica la capa entera.** El ejemplo dorado `ejemplos/961 (1).pdf` suma
 100 en total pero sus rubros no cuadran con su propio esquema declarado. Un validador que solo
 revise el total deja pasar ese error; este lo atrapa, y hay una prueba dedicada a demostrarlo

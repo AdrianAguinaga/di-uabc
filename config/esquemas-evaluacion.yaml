@@ -44,14 +44,16 @@ esquemas:
       - id: tareas
         etiqueta: "Tareas"
         porcentaje: 10
+      # `detalle` se imprime en el documento: se redacta para el alumno, sin la
+      # taquigrafía de secciones que se usa en los comentarios y en AGENTS.md.
       - id: practicas
         etiqueta: "Prácticas de laboratorio"
         porcentaje: 30
-        detalle: "Nueve prácticas conforme a la §VI del PUA"
+        detalle: "nueve prácticas de laboratorio con su reporte"
       - id: proyecto
         etiqueta: "Proyecto"
         porcentaje: 40
-        detalle: "Reporte técnico y exposición del caso de estudio (§IV del PUA)"
+        detalle: "caso de estudio, reporte técnico y exposición"
     exencion_ordinario: 80
 
   practica-laboratorio:

@@ -32,6 +32,19 @@ SIMBOLO = {ERROR: "✗", AVISO: "!", RECORDATORIO: "·"}
 # El IEDI evalúa cursos semipresenciales y a distancia (CIAD, v2023-1).
 MODALIDADES_IEDI = ("semipresencial", "a_distancia")
 
+# Taquigrafía que este repositorio usa entre agentes y que no significa nada para un
+# alumno. Se vigila solo en el texto que acaba impreso; en comentarios del `curso.yaml`
+# es correcta y necesaria. Ver `Validador.estilo`.
+JERGA_INTERNA = {
+    "§": "el símbolo de sección, que aquí abrevia apartados del PUA",
+    "PUA": "la palabra «PUA», que nombra un documento que el alumno no tiene",
+    "REQ-": "un identificador de requisito del proyecto",
+    "curso.yaml": "el nombre de un archivo interno",
+    "cubre_temas": "el nombre de un campo del modelo",
+    "practica_pua": "el nombre de un campo del modelo",
+    "IEDI": "la rúbrica interna de evaluación docente",
+}
+
 # Indicadores indispensables que dependen de la plataforma institucional, no del
 # documento. Se reportan al docente como recordatorio: el generador no puede
 # comprobarlos. Ver conocimiento/rubricas/iedi-2023-1.md.
@@ -432,10 +445,54 @@ class _Validador:
         for indicador, texto in IEDI_PLATAFORMA.items():
             self._add(f"IEDI {indicador}", RECORDATORIO, texto)
 
+    # -- Guardia de estilo: nada de jerga interna en lo que el alumno lee ----
+
+    def estilo(self) -> None:
+        """El documento lo lee un alumno que no tiene el PUA ni este repositorio delante.
+
+        No es una novena regla —las ocho son el contrato— sino un guardia contra una fuga
+        concreta que ya ocurrió: `detalle: "nueve prácticas conforme a la §VI del PUA"` se
+        escribió con la taquigrafía que `AGENTS.md` usa para mapear secciones, y acabó
+        impresa en el documento. Se avisa, no se falla: si el PUA trae literalmente una de
+        estas marcas, copiarla es lo correcto y el profesor decide.
+        """
+        for texto, donde in self._texto_visible():
+            for marca, motivo in JERGA_INTERNA.items():
+                if marca in texto:
+                    self.aviso(
+                        "ESTILO",
+                        f"{donde} contiene {motivo}: «{texto.strip()[:70]}». El alumno no "
+                        f"tiene esa referencia a la vista; redáctalo en sus términos.",
+                    )
+                    break
+
+    def _texto_visible(self):
+        """Cada cadena que acaba impresa en el documento, con su procedencia."""
+        for r in self.c.rubros:
+            yield r.detalle, f"El detalle del rubro «{r.etiqueta}»"
+        for campo, valor in self.c.contenido.items():
+            yield str(valor), f"El campo «{campo}»"
+        for m in self.c.metas:
+            yield m.enunciado, f"El enunciado de la {m.etiqueta}"
+            for lista, nombre in (
+                (m.que_voy_a_aprender, "qué voy a aprender"),
+                (m.criterios_evaluacion, "criterios de evaluación"),
+                (m.reflexion, "reflexión"),
+            ):
+                for t in lista:
+                    yield str(t), f"La {nombre} de la {m.etiqueta}"
+            for s in m.sesiones:
+                yield s.actividad_tabla, f"La actividad de la {m.etiqueta} ({s.ambiente})"
+                for p in s.pasos:
+                    yield str(p), f"Un paso de la {m.etiqueta} ({s.ambiente})"
+            for e in m.evidencias:
+                yield e.nombre, f"Una evidencia de la {m.etiqueta}"
+
     def correr(self) -> list[Hallazgo]:
         for regla in (
             self.regla_1, self.regla_2, self.regla_3, self.regla_4,
             self.regla_5, self.regla_6, self.regla_7, self.regla_8,
+            self.estilo,
         ):
             regla()
         for a in self.c.avisos:
