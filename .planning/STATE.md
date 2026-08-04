@@ -173,6 +173,23 @@ sin un curso suyo que generar sería especulación, y toca el renderizador.
 
 El cuarto punto es el que muerde: un DI suyo redactado a su estilo **no pasaría la validación**.
 
+## Instalación en otra máquina (4 de agosto de 2026)
+
+El proyecto se va a copiar a la computadora de Zurisaddai, así que se documentó el montaje:
+
+- **`INSTALACION.md`** — paso a paso para Windows. El punto que más falla es Poppler: `pdftotext`
+  no viene con Python, hay que registrar su carpeta `Library\bin` en el PATH y abrir una terminal
+  nueva. También cubre qué hacer sin Word y qué NO tocar (`referencias/`, `ejemplos/`).
+- **`src/comprobar.py`** — revisa Python, los cinco paquetes, `pdftotext`, Word, los archivos de
+  configuración y la integridad de las plantillas. Sale con código 1 si falta algo indispensable.
+- **`README.md`** — actualizado: los tres esquemas de evaluación, el filtro `profesores:`, los
+  requisitos reales y los cursos ya generados.
+- Sin Poppler, la ingesta reventaba con un `WinError 2` que no decía qué faltaba. Ahora explica
+  qué instalar y remite a `INSTALACION.md`.
+
+`pandoc` figuraba en REQ-32 como parte del toolchain, pero **no se usa en ningún punto del
+código**. No se listó como requisito.
+
 ## Lo que queda abierto
 
 Nada del roadmap. Tres decisiones del usuario:

@@ -7,6 +7,10 @@ grupos.
 Rellena las **plantillas CIAD reales** (no las reconstruye), de modo que el formato institucional
 se conserva intacto.
 
+> **¿Montándolo en otra computadora?** Sigue **[INSTALACION.md](INSTALACION.md)** y termina con
+> `python src/comprobar.py`, que revisa Python, los paquetes, `pdftotext`, Word y las plantillas,
+> y dice exactamente qué falta.
+
 Cada documento nace de una **copia fresca** de la plantilla: nunca se escribe sobre ella. El
 `sha256` de las tres plantillas está registrado y se verifica antes de cada copia, así que generar
 mil documentos las deja byte por byte idénticas. Si alguna cambiara sin pasar por el mecanismo de
@@ -57,15 +61,32 @@ Contesta lo que ningún archivo por separado puede contestar: **qué temas del P
 meta**, qué prácticas no las realiza ninguna meta, qué semanas están vacías y **qué materias
 comparten competencias**. No infiere relaciones: cada arista sale de un campo declarado.
 
-### Esquema de evaluación predefinido
+### Esquemas de evaluación
 
-| Concepto | Valor |
+Viven en `config/esquemas-evaluacion.yaml`. El orquestador ofrece el predeterminado y admite uno
+capturado a mano; la validación exige, sea cual sea, que **sume exactamente 100** y que haya
+**al menos dos parciales** (Art. 68).
+
+| Esquema | Reparto |
 |---|---|
-| Exámenes (mínimo 2 parciales, Art. 68) | 20 % |
-| Tareas y actividades de clase | 40 % |
-| Proyecto final | 40 % |
+| `estandar-2026` *(predeterminado)* | Exámenes 20 · Tareas y actividades 40 · Proyecto final 40 |
+| `practica-laboratorio` | Parciales 20 · Prácticas 45 · Tareas 15 · Portafolio 20 |
+| `pua-39062` | Parciales 20 · Tareas 10 · Prácticas 30 · Proyecto 40 |
 
-Exención del examen ordinario con promedio **≥ 80**. Configurable por curso.
+El tercero sale de la sección VIII del PUA de Patrones de Comportamiento. Cuando el programa
+oficial ya fijó los porcentajes conviene usarlos: frente a un alumno inconforme, lo que se
+defiende es el PUA y no un catálogo interno.
+
+### Cada docente, sus criterios
+
+Los criterios de acreditación de `config/politicas.yaml` se filtran por `modalidades:`,
+`solo_si_practica:` y **`profesores:`**. Sin filtro, el criterio aplica a todo el mundo; con
+`profesores: [zra]`, solo a quien lo declara. **Añade, nunca reemplaza:** lo común —escala 0–100,
+derechos a ordinario y extraordinario— lo conserva todo el mundo.
+
+Así conviven en el mismo repositorio docentes con exigencias distintas. Hoy hay dos registrados,
+con umbral de exención propio: 80 y 90. Al añadir criterios a alguien, **regenera los documentos
+de los demás y compara el texto**: si cambia algo ajeno, falta el filtro.
 
 ## Estructura
 
@@ -79,6 +100,7 @@ Exención del examen ordinario con promedio **≥ 80**. Configurable por curso.
 | `calendarios/` | Calendarios escolares por ciclo + los PDF oficiales de origen |
 | `config/` | Profesores, esquemas de evaluación, políticas y mapa de plantillas |
 | `src/` | Código Python del generador |
+| `pruebas/` | Suite de pruebas — `python -X utf8 -m unittest discover -s pruebas` |
 | `cursos/` | Salida: un directorio por ciclo y materia |
 | `grafo/` | Grafo de conocimiento del dominio |
 | `.planning/` | Artefactos GSD del propio proyecto |
@@ -91,14 +113,34 @@ Exención del examen ordinario con promedio **≥ 80**. Configurable por curso.
 
 ## Requisitos
 
-Python 3.11 · `python-docx` · `pdfplumber` · `PyYAML` · `pdftotext` (poppler) · Microsoft Word
-(para exportar a PDF por COM; solo Windows).
+Python **3.11 o mayor** · `python-docx` · `pdfplumber` · `PyYAML` · `openpyxl` · `pywin32` ·
+`pdftotext` (viene en **Poppler**, es un programa aparte) · Microsoft Word, solo para exportar a
+PDF por COM en Windows.
 
 ```powershell
 python -m pip install -r requirements.txt
+python src/comprobar.py                 # ¿está todo? dice qué falta
 ```
+
+Sin Word se generan igual los `.docx`; lo único que se pierde es el `.pdf`. Sin `pdftotext` no se
+puede ingerir un PUA. **Paso a paso en [INSTALACION.md](INSTALACION.md)**, incluido el registro de
+Poppler en el PATH, que es lo que más suele fallar.
 
 ## Ciclo vigente
 
 **2026-2** — clases del 10 de agosto al 28 de noviembre de 2026 (**16 semanas**).
 Ver `calendarios/2026-2.yaml`.
+
+Las plantillas CIAD semipresencial y a distancia traen 17 filas de semana; **para 2026-2 sobra
+una**. El número de semanas lo manda el calendario oficial, no la plantilla: las fechas tienen
+que sostenerse frente a un alumno.
+
+## Cursos generados
+
+| Ciclo | Clave | Materia | Grupos |
+|---|---|---|---|
+| 2026-2 | 39056 | Big Data | 961, 962 |
+| 2026-2 | 39062 | Patrones de Comportamiento de Datos | 971, 972 |
+
+Todo documento sale marcado como **borrador**: requiere la revisión del profesor antes de
+entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).

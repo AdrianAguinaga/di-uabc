@@ -87,11 +87,23 @@ def sha256(ruta: Path) -> str:
 
 
 def _texto_plano(pdf: Path) -> str:
-    r = subprocess.run(
-        ["pdftotext", "-layout", "-enc", "UTF-8", str(pdf), "-"],
-        capture_output=True,
-        check=True,
-    )
+    try:
+        r = subprocess.run(
+            ["pdftotext", "-layout", "-enc", "UTF-8", str(pdf), "-"],
+            capture_output=True,
+            check=True,
+        )
+    except FileNotFoundError as e:
+        # En una máquina recién montada esto es lo primero que falla, y el error de
+        # Windows —«El sistema no puede encontrar el archivo especificado»— no dice
+        # cuál. Ver INSTALACION.md.
+        raise ErrorIngesta(
+            "No se encontró `pdftotext`, que es lo que lee el PDF del PUA.\n"
+            "    Viene en Poppler. En Windows: descarga poppler-windows, descomprime\n"
+            "    y añade su carpeta `Library\\bin` al PATH.\n"
+            "    Comprueba con: pdftotext -v\n"
+            "    Detalle en INSTALACION.md."
+        ) from e
     return r.stdout.decode("utf-8")
 
 
