@@ -76,10 +76,36 @@ Dos defectos reales que solo aparecieron al usar un PUA distinto del de Big Data
 - **El panel de `/di-nuevo` pegaba la etiqueta al detalle** cuando el grupo pasaba de 15
   caracteres. Cosmético, arreglado.
 
+## Falla metodológica corregida (4 de agosto de 2026)
+
+Al asignar la Práctica 3 a la meta 2.3 de Big Data quedó declarada en el modelo pero **ausente
+del documento**: ninguna sesión la instruía. Se evaluaba algo que al alumno nunca se le pedía.
+Corregido: la sesión presencial de la semana 6 es ahora «Práctica 3: analítica de datos en tiempo
+real», la virtual pide su reporte, y el reporte es evidencia junto al protocolo.
+
+El barrido que lo encontró también revisó las otras metas con práctica. Las de Big Data 3.3, 4.3
+y 5.1 sí la instruyen —lo hacen desde `actividad_tabla`, no desde los pasos— y las nueve de
+Patrones también. No queda ninguna práctica declarada sin instruir en los dos cursos.
+
+## Hallazgo abierto: la unidad V va comprimida en los dos cursos
+
+Contrastando las horas que el PUA asigna a cada unidad contra las semanas que el DI le da:
+
+| Curso | Unidad V | Semanas esperadas | Asignadas |
+|---|---|---|---|
+| Big Data | 4 h de 20 · 10 temas | 3.2 | **2** (15, 16) |
+| Patrones | 6 h de 32 · 11 temas | 3.0 | **2** (15, 16) |
+
+En ambos, las unidades II y IV salen infladas porque el parcial se contabiliza contra la unidad
+que evalúa, y la V —que es donde cae el proyecto final— se queda con dos semanas. Puede ser
+deliberado: la unidad V es sobre todo integración y presentación. **No se tocó**: rebalancear
+mueve el calendario de documentos ya generados y es decisión del profesor, no del generador.
+
 ## Lo que queda abierto
 
-Nada del roadmap. Dos cosas menores, ambas decisiones del usuario y no del generador:
+Nada del roadmap. Tres cosas, todas decisiones del usuario:
 
+- Decidir si la unidad V se rebalancea o si los dos cursos se quedan como están.
 - Capturar el grupo real de 39062 y regenerar.
 - El correo de `zra` sigue en `null` en `config/profesores.yaml`.
 

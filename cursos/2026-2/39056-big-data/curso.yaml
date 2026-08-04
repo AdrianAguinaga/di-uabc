@@ -398,26 +398,33 @@ metas:
     que_voy_a_aprender:
       - "Delimitar un problema real de una organización susceptible de análisis con Big Data."
       - "Formular las preguntas de negocio que guiarán el proyecto."
+      - "Extraer y analizar datos en tiempo real de las fuentes del caso de estudio."
     sesiones:
       - ambiente: presencial
         semana: 6
-        actividad_tabla: "Definición del caso de estudio en equipo"
+        actividad_tabla: "Práctica 3: analítica de datos en tiempo real"
         pasos:
           - "En la sesión, el docente presentará los requisitos del proyecto integrador y los criterios con que se evaluará."
           - "Cada equipo delimitará su caso de estudio y lo someterá a revisión."
+          - "Atiende las indicaciones del docente para realizar la práctica de analítica de datos en tiempo real: identifica las fuentes de datos de tu caso, extrae los datos y analiza su comportamiento."
       - ambiente: virtual
         semana: 6
-        actividad_tabla: "Protocolo del proyecto"
+        actividad_tabla: "Protocolo del proyecto y reporte de la práctica 3"
         pasos:
           - "Redacta el protocolo del proyecto: organización, problema, preguntas de negocio y fuentes de datos previstas."
-          - "Adjunta el archivo en el espacio de entrega M2.3_Protocolo del proyecto."
-    evidencias: [{nombre: "Protocolo del proyecto", tipo: "Documento", recurso: "M2.3_Protocolo del proyecto"}]
+          - "Elabora el reporte de la práctica 3 documentando las fuentes en tiempo real que consultaste y el comportamiento que observaste en los datos."
+          - "Adjunta ambos archivos en los espacios de entrega M2.3_Protocolo del proyecto y M2.3_Reporte práctica 3."
+    evidencias:
+      - {nombre: "Protocolo del proyecto", tipo: "Documento", recurso: "M2.3_Protocolo del proyecto"}
+      - {nombre: "Reporte de práctica 3", tipo: "Reporte de práctica", recurso: "M2.3_Reporte práctica 3"}
     criterios_evaluacion:
       - "El problema está delimitado y es abordable con las herramientas del curso."
       - "Las fuentes de datos son accesibles y están identificadas."
+      - "El reporte de la práctica documenta la extracción en tiempo real y el comportamiento observado."
     reflexion:
       - "Delimité un problema real abordable con herramientas de Big Data."
       - "Formulé las preguntas de negocio que guiarán mi proyecto."
+      - "Extraje y analicé datos en tiempo real de las fuentes de mi caso de estudio."
     cubre_temas:
       - "2.7. Analítica de datos en tiempo real (Tracking de datos)"
 

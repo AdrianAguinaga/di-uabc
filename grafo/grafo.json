@@ -209,6 +209,11 @@
       "etiqueta": "Las fuentes de datos son accesibles y están identificadas."
     },
     {
+      "id": "criterio:2026-2:39056:2.3:2",
+      "tipo": "criterio",
+      "etiqueta": "El reporte de la práctica documenta la extracción en tiempo real y el comportamiento observado."
+    },
+    {
       "id": "criterio:2026-2:39056:3.1:0",
       "tipo": "criterio",
       "etiqueta": "El análisis parte de datos reales y documenta su procedencia."
@@ -528,6 +533,15 @@
       "datos": {
         "clase": "Documento",
         "recurso": "M2.3_Protocolo del proyecto"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39056:2.3:1",
+      "tipo": "evidencia",
+      "etiqueta": "Reporte de práctica 3",
+      "datos": {
+        "clase": "Reporte de práctica",
+        "recurso": "M2.3_Reporte práctica 3"
       }
     },
     {
@@ -2801,6 +2815,11 @@
     },
     {
       "origen": "meta:2026-2:39056:2.3",
+      "destino": "evidencia:2026-2:39056:2.3:1",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.3",
       "destino": "practica:39056:3",
       "tipo": "realiza"
     },
@@ -2812,6 +2831,11 @@
     {
       "origen": "meta:2026-2:39056:2.3",
       "destino": "criterio:2026-2:39056:2.3:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39056:2.3",
+      "destino": "criterio:2026-2:39056:2.3:2",
       "tipo": "se_evalua_con"
     },
     {
