@@ -36,8 +36,9 @@ Estas reglas no se negocian. Un cambio que las viole está mal aunque los tests 
    **falla**: un formato de origen desconocido no es aceptable en un documento con valor legal.
 5. **Los porcentajes suman exactamente 100** y debe haber **≥ 2 exámenes parciales** (Art. 68).
 6. **Ninguna entrega cae en día de suspensión** ni después del fin de cursos.
-7. **Todo dato es trazable.** Cada DI generado lleva un `MANIFIESTO.yaml` que registra el PUA y su
-   hash, el calendario, la versión de plantilla, el profesor, el grupo, el esquema y el commit.
+7. **Todo dato es trazable.** Cada DI generado lleva un `MANIFIESTO.yaml` —lo escribe
+   `src/generar.py`— que registra el PUA y su hash, el calendario, la versión de plantilla, el
+   profesor, el grupo, el esquema, el commit y el sha256 de cada archivo producido.
 8. **La asistencia no es criterio de calificación**, pero **sí es requisito de derecho a examen**
    (Arts. 70 y 71). Nunca los mezcles en el documento.
 9. **El generador no sustituye el criterio docente.** El resultado es un borrador que el profesor
@@ -71,6 +72,11 @@ config/*.yaml ──────────────────────
                                                        validar.py                          │
                                                      (8 reglas)                          .pdf
 ```
+
+`src/generar.py` encadena los tres últimos pasos —valida, renderiza un documento por grupo,
+exporta a PDF— y cierra escribiendo `MANIFIESTO.yaml`. Si la validación falla, **no escribe nada**:
+un DI con errores no debe llegar a existir en disco, porque en cuanto existe alguien lo entrega.
+Es el único comando que necesita el orquestador `/di-nuevo`.
 
 `curso.yaml` es **el contrato** entre la etapa de planeación y la de renderizado. Su esquema está
 en `src/modelo.py`. Todo lo que aparece en el documento sale de ahí.
@@ -217,6 +223,9 @@ python src/calendario.py 2026-2                        # imprime las semanas del
 python src/validar.py cursos/2026-2/<clave>/curso.yaml # 8 reglas de validación
 python src/render_docx.py cursos/2026-2/<clave>/curso.yaml
 python src/export_pdf.py <archivo>.docx                # requiere Word (Windows)
+
+python src/generar.py cursos/2026-2/<clave>/curso.yaml # la cadena completa, con panel
+                                                       #   [--sin-pdf] si no hay Word
 
 python src/plantillas.py verificar                     # ¿siguen intactas? (sha256)
 python src/plantillas.py registrar                     # (re)crea el juego — idempotente

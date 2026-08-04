@@ -2,7 +2,7 @@
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
 **Última actualización**: 2026-08-03
-**Fase actual**: 6 — Renderizado docx + pdf
+**Fase actual**: 7 — Orquestador
 
 ## Progreso
 
@@ -13,11 +13,15 @@
 | 3. Motor de calendario | Hecha | `4e02016` |
 | 4. Ingesta de PUA | Hecha | `4385ea3` |
 | 5. Modelo y validación | Hecha | `0e30def` |
-| 6. Renderizado docx + pdf | Pendiente | — |
-| 7. Orquestador | Pendiente | — |
+| 6. Renderizado docx + pdf | Hecha | `745f20e` |
+| 7. Orquestador | En curso | — |
 | 8. Grafo de conocimiento | Pendiente | — |
 
-75 pruebas, todas pasan: `python -X utf8 -m unittest discover -s pruebas`.
+153 pruebas, todas pasan: `python -X utf8 -m unittest discover -s pruebas`.
+
+De la Fase 7 ya está la cadena: `/di-nuevo` (menú de seis pasos, con su panel ASCII) y
+`src/generar.py`, que valida → renderiza por grupo → exporta a PDF → escribe `MANIFIESTO.yaml`.
+Big Data 2026-2 con los grupos 961 y 962 produce los cuatro archivos y el manifiesto.
 
 ## Decisiones tomadas
 
@@ -71,6 +75,7 @@
 
 ## Siguiente paso
 
-Fase 6 — `src/render_docx.py` y `src/export_pdf.py`. Criterio de aceptación: regenerar el DI de
-Big Data y compararlo contra `ejemplos/961 (1).pdf`, sabiendo que los defectos del ejemplo **no**
-deben reproducirse.
+Cerrar la Fase 7 corriendo `/di-nuevo` de extremo a extremo sobre una materia **nueva** (una que
+todavía no tenga `curso.yaml`): es lo único que aún no se ha probado del menú —el descubrimiento
+de PUAs, el paso de ingesta cuando falta, y la redacción de las metas desde cero—. Luego, Fase 8:
+el grafo de cobertura PUA↔metas.

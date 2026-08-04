@@ -1,0 +1,82 @@
+# Manifiesto de generación. Lo escribe src/generar.py: no lo edites a mano.
+#
+# Regla invariable 7 — todo dato es trazable. De aquí se reconstruye con qué PUA, qué
+# calendario, qué plantilla y qué versión del código salió cada archivo. Si alguien pone
+# en duda una fecha o un porcentaje del documento, se empieza por este archivo.
+#
+# El documento generado es un BORRADOR: requiere la revisión del profesor antes de
+# entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
+generado: '2026-08-03T18:44:59'
+commit: 745f20e-sucio
+curso:
+  archivo: cursos/2026-2/39056-big-data/curso.yaml
+  sha256: 7b92d970c01a09e24f65e93af0689df9dca0cbac66a79b55e081e7a4b6398af9
+  ciclo: 2026-2
+  clave: '39056'
+  nombre: Big Data
+  modalidad: semipresencial
+pua:
+  md: puas/md/39056-big-data.md
+  sha256_declarado: baf8a83b994f72b965daffb4bbaef75e2be47d65ca1ebbf4e91d8b47266d9ba4
+  md_sha256: ca01320a847cda15436480e9fb9d43fcee72c27aa979ee45aa992a4584878900
+  fuente: puas/fuente/36.-39056-Big-Data.pdf
+  fuente_sha256: baf8a83b994f72b965daffb4bbaef75e2be47d65ca1ebbf4e91d8b47266d9ba4
+  coincide: true
+calendario:
+  archivo: calendarios/2026-2.yaml
+  sha256: 537e09b8db7782be4b14ef3508cb4742462e2e1cb3725df0613531517910aa37
+  semanas: 16
+  inicio: 2026-08-10
+  fin: 2026-11-28
+plantilla:
+  modalidad: semipresencial
+  archivo: semipresencial.docx
+  version: 2025-1
+  sha256: ae3c1a67c1df2328fa95ed07887a0994281c4896346fd7fc31819ef03ae44332
+  origen: referencias/CIAD_DI_Plantilla_Semipresencial-2025.docx
+profesor:
+  id: ara
+  nombre: Adrian Rodriguez Aguiñaga
+  correo: adrian.aguinaga@uabc.edu.mx
+evaluacion:
+  esquema_id: estandar-2026
+  exencion_ordinario: 80
+  rubros:
+  - id: examenes
+    porcentaje: 20
+  - id: tareas
+    porcentaje: 40
+  - id: proyecto
+    porcentaje: 40
+grupos:
+- numero: '961'
+  aula: Laboratorio de cómputo
+  dias_presencial:
+  - 1
+  dia_entrega: 5
+  hora_entrega: '23:59'
+  jefe_grupo: null
+- numero: '962'
+  aula: Laboratorio de cómputo
+  dias_presencial:
+  - 3
+  dia_entrega: 5
+  hora_entrega: '23:59'
+  jefe_grupo: null
+validacion:
+  errores: 0
+  avisos: []
+  recordatorios: 5
+archivos:
+- ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-961.docx
+  sha256: d993d50ca743492a5996e46fbdf71a5b684ab1d82ba1ff10bb29c6e96cff58ac
+  bytes: 232806
+- ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-961.pdf
+  sha256: 57146ee4a4a19d8dc15afbbcd8fbf0f3ad9cb6b93f8b07b57de9063613211851
+  bytes: 394275
+- ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-962.docx
+  sha256: c281febf255b1280b566678baaa2ab0e86da28d5c64c3ad37aba0592dbdac0d4
+  bytes: 232788
+- ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-962.pdf
+  sha256: 94b1ba724f83f543d38c9767bba684218ec16f8b80f19e12d9c93aa0b01ce6de
+  bytes: 394315
