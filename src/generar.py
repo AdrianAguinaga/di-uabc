@@ -72,7 +72,9 @@ PIE = "└" + "─" * ANCHO + "┘"
 
 
 def linea(glifo: str, etiqueta: str, detalle: str = "") -> str:
-    cuerpo = f"  {glifo} {etiqueta:<15}{detalle}"
+    # El ancho mínimo es 15, pero una etiqueta más larga —«grupo POR-DEFINIR»— se comía
+    # el separador y quedaba pegada al detalle. Siempre queda al menos un espacio.
+    cuerpo = f"  {glifo} {etiqueta:<{max(15, len(etiqueta) + 1)}}{detalle}"
     if len(cuerpo) > ANCHO:
         cuerpo = cuerpo[: ANCHO - 1] + "…"
     return "│" + cuerpo.ljust(ANCHO) + "│"

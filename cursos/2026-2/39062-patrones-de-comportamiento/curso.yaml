@@ -1,0 +1,749 @@
+# Diseño Instruccional — Patrones de Comportamiento de Datos, ciclo 2026-2.
+#
+# Este archivo es la fuente única de verdad del documento. El renderizador no inventa nada:
+# si algo falta aquí, falta en el documento.
+#
+# Las fechas NO se escriben: cada sesión declara su semana y `calendario.py` la convierte en
+# día concreto según el horario del grupo, saltando las suspensiones del ciclo.
+#
+# El esquema de evaluación es el de la §VIII del propio PUA (20/10/30/40), no el estándar del
+# proyecto. Está registrado como `pua-39062` en config/esquemas-evaluacion.yaml.
+
+meta:
+  ciclo: "2026-2"
+  clave: "39062"
+  pua_ref: "puas/md/39062-patrones-de-comportamiento-de-datos.md"
+  pua_sha256: "a979be6c00a38f2ffbc982966214859f4d3c6df66f529999751d99ca909cc095"
+
+profesor: ara
+
+# Copiado literalmente del PUA §I. Regla del CIAD: no se parafrasea.
+identificacion:
+  nombre: "Patrones de Comportamiento de Datos"
+  modalidad: semipresencial
+  nivel_academico: "Licenciatura."
+  programa_educativo: "Licenciado en Inteligencia de Negocios."
+  plan_estudios: "2021-2."
+  creditos_texto: "6 créditos (HC:2 HT:0 HL:2 HE:2), 96 horas en el semestre."
+  etapa_formativa: "Terminal."
+  caracter: "Obligatoria."
+  practica: true          # 9 prácticas de laboratorio → activa la nota del Art. 74
+
+contenido:
+  # Literal del PUA §III.
+  competencia_general: >-
+    Desarrollar el proceso general del descubrimiento de conocimiento en datos, mediante las
+    herramientas de vanguardia, que permitan identificar patrones ocultos en los datos para la
+    toma de decisiones, con honestidad, actitud analítica y propositiva.
+
+  # PUA §II más un párrafo de contextualización, como en el ejemplo 961.
+  proposito_general: >-
+    La unidad de aprendizaje proporciona el proceso general y las herramientas para el
+    descubrimiento de conocimiento en datos, lo que permite identificar patrones ocultos en los
+    datos para apoyar la toma de decisiones. Se imparte en la etapa terminal con carácter
+    obligatorio y pertenece al área de conocimiento de Ciencia de Datos.
+
+    Al ubicarse en la etapa terminal, la asignatura supone que el estudiante ya maneja el
+    tratamiento de datos masivos y se concentra en descubrir estructura donde a simple vista no
+    la hay: redes complejas, fenómenos de escalamiento y comportamiento caótico. El curso opera
+    en modalidad semipresencial, con sesiones presenciales de laboratorio y trabajo asincrónico
+    en la plataforma institucional Blackboard.
+
+  estrategia_general: >-
+    Se utiliza el método de aprendizaje basado en prácticas de laboratorio, análisis de casos y
+    trabajo por proyectos. El curso opera en modalidad semipresencial: se conduce en sesiones
+    presenciales de laboratorio y mediante la plataforma institucional Blackboard, donde el
+    aprendizaje se lleva a cabo por actividades sincrónicas (clases y laboratorios) y
+    asincrónicas (tareas, reportes de práctica, foros de discusión y avances del proyecto). El
+    docente presenta los fundamentos, dirige las nueve prácticas de laboratorio y acompaña el
+    desarrollo del caso de estudio que integra el curso.
+
+  # Literal del PUA §IV.
+  evidencias_desempeno: >-
+    Un proyecto que incluya un caso de estudio de la aplicación de las herramientas de
+    descubrimiento e interpretación de patrones. Debe presentarse un reporte técnico que
+    documente el proyecto y una exposición del mismo.
+
+  criterios_evaluacion: >-
+    Cada meta contiene los criterios específicos conforme a los cuales será evaluado el
+    estudiante. Estos criterios se presentan como requisitos para acreditar la meta o práctica y
+    como evidencias de desempeño de cada unidad.
+
+  autores_pua: >-
+    Karina Caro Corrales, Francisco Flores Resendiz, Karina Raya Diaz, Jesús Antonio Padilla
+    Sánchez. 12 de noviembre de 2020.
+
+# PUA §V. Los temas se copian literales, con sus defectos de numeración de origen.
+unidades:
+  - numero: "I"
+    nombre: "Fundamentos de patrones de comportamiento de datos"
+    duracion_horas: 4
+    competencia: >-
+      Distinguir los fundamentos de patrones de comportamiento de datos, mediante la revisión de
+      su clasificación y comportamiento, para entender el proceso general de descubrimiento de
+      los mismos, con actitud analítica y reflexiva.
+    temas:
+      - "1.1. Antecedentes de los patrones de comportamiento"
+      - "1.2. Comportamiento emergente"
+      - "1.2.1. Formación de un patrón"
+      - "1.2.1.1. Patrones conectados"
+      - "1.2.1.2. Patrones no conectados"
+      - "1.3. Clasificación de patrones de comportamiento"
+
+  - numero: "II"
+    nombre: "Proceso de descubrimiento del conocimiento en datos (KDD)"
+    duracion_horas: 6
+    competencia: >-
+      Aplicar el proceso de descubrimiento del conocimiento en datos, a través de la examinación
+      de sus fases, con la finalidad de identificar e interpretar patrones en los datos, con
+      confidencialidad y actitud analítica.
+    temas:
+      - "2.1. Selección de datos"
+      - "2.2. Preprocesamiento"
+      - "2.3. Transformación"
+      - "2.4. Minería de datos"
+      - "2.5. Interpretación"
+
+  - numero: "III"
+    nombre: "Patrones de comportamiento basados en redes complejas"
+    duracion_horas: 8
+    competencia: >-
+      Distinguir los patrones de comportamiento basados en redes complejas, a través del análisis
+      de sus tipos y métricas, para identificar su proceso de aplicación, con una actitud
+      analítica, crítica y organizada.
+    temas:
+      - "3.1. Matriz de adyacencia"
+      - "3.2. Grafos dirigidos y no dirigidos"
+      - "3.3. Árboles de decisiones"
+      - "3.4. Métricas de redes complejas"
+      - "3.4.1. Intermediación"
+      - "3.4.2. Grado de agrupamiento"
+
+  - numero: "IV"
+    nombre: "Patrones de comportamiento basados en escalamiento"
+    duracion_horas: 8
+    competencia: >-
+      Distinguir los patrones de comportamiento basados en escalamiento, a través del análisis de
+      sus tipos, para identificar su proceso de aplicación, con una actitud analítica, crítica y
+      organizada.
+    temas:
+      - "4.1. Fractales"
+      - "4.1.1. Ley de potencias"
+      - "4.1.2. Frecuencia de rango"
+      - "4.2. Patrones de comportamiento Caótico"
+      - "4.2.1. Bifurcaciones"
+      - "4.2.2. Efecto mariposa"
+      - "4.2.3. Atractores extraños"
+      - "4.3. Autoorganización"
+
+  - numero: "V"
+    nombre: "Herramientas para la toma decisiones basada en patrones y sus aplicaciones"
+    duracion_horas: 6
+    competencia: >-
+      Aplicar el proceso de descubrimiento del conocimiento en datos, a través del uso de las
+      herramientas de vanguardia, para identificar diferentes tipos de patrones ocultos en los
+      datos en sus distintas áreas de aplicación, con actitud propositiva, lógica y colaborativa.
+    temas:
+      - "5.1. Herramientas para el descubrimiento de patrones de datos"
+      - "5.1.1. Netlogo"
+      - "5.1.2. IBM Watson Studio"
+      - "5.1.3. R Studio"
+      - "5.1.4. Python NetworkX"
+      - "5.1.5. Otras"
+      - "5.2. Casos de estudio de descubrimiento de patrones de datos"
+      - "5.2.1. Finanzas"
+      - "5.2.2. Redes sociales"
+      - "5.2.3. Ciencias de la salud"
+      - "5.2.4. Otros"
+
+# Los porcentajes son los de la §VIII del PUA, no los del esquema estándar del proyecto.
+evaluacion:
+  esquema_id: pua-39062
+  exencion_ordinario: 80
+  rubros:
+    - id: examenes
+      etiqueta: "Evaluaciones parciales"
+      porcentaje: 20
+      detalle: "dos evaluaciones parciales de 10 % cada una"
+      parciales: 2
+    - id: tareas
+      etiqueta: "Tareas"
+      porcentaje: 10
+      detalle: "cuadro comparativo y reporte de análisis"
+    - id: practicas
+      etiqueta: "Prácticas de laboratorio"
+      porcentaje: 30
+      detalle: "nueve prácticas conforme a la §VI del PUA"
+    - id: proyecto
+      etiqueta: "Proyecto"
+      porcentaje: 40
+      detalle: "caso de estudio, reporte técnico y exposición"
+
+grupos:
+  - numero: "POR-DEFINIR"
+    horario: {dias_presencial: [1], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
+    plataforma: Blackboard
+
+citas: [EE-65, EE-66, EE-67, EE-68, EE-70, EE-71, EE-74, EE-75, RPIDA-59]
+tolerancia_minutos: 15
+
+avisos:
+  - "El grupo está sin definir: número, aula y día presencial son marcadores. Corrígelos antes de entregar el documento; el nombre del archivo sale como DI-2026-2-39062-POR-DEFINIR."
+
+metas:
+  - id: "0"
+    unidad: "I"
+    tipo: encuadre
+    rubro: tareas
+    valor: 0
+    semanas: [1]
+    enunciado: "Encuadre del curso."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Conocer el programa, la metodología de trabajo y los criterios de evaluación del curso."
+      - "Identificar las reglas de convivencia y las fechas de entrega del periodo."
+    sesiones:
+      - ambiente: presencial
+        semana: 1
+        actividad_tabla: "Encuadre y presentación del curso"
+        pasos:
+          - "En la sesión, el docente presentará el Diseño Instruccional: competencia, unidades, criterios de evaluación (Evaluaciones parciales 20 %, Tareas 10 %, Prácticas de laboratorio 30 %, Proyecto 40 %), reglas de convivencia y calendario del periodo 2026-2."
+          - "Se revisará el espacio del curso en Blackboard y se resolverán dudas sobre su organización."
+      - ambiente: virtual
+        semana: 1
+        actividad_tabla: "Revisión de materiales introductorios"
+        pasos:
+          - "Revisa los materiales introductorios publicados en el módulo de bienvenida."
+          - "Preséntate en el foro M0_Foro de presentación e indica tu experiencia previa con análisis de datos y redes."
+    evidencias: [{nombre: "Participación en el foro de presentación", tipo: "Foro", recurso: "M0_Foro de presentación"}]
+    criterios_evaluacion: ["Se registra la participación; esta meta no tiene valor porcentual."]
+    reflexion:
+      - "Conocí los criterios con los que seré evaluado y las fechas de entrega del curso."
+      - "Identifiqué las reglas de convivencia del aula y del laboratorio."
+    cubre_temas: []
+
+  - id: "1.1"
+    unidad: "I"
+    rubro: tareas
+    valor: 5
+    semanas: [2]
+    enunciado: "Distinguir los fundamentos y la clasificación de los patrones de comportamiento de datos."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Reconocer el origen y la evolución del estudio de los patrones de comportamiento."
+      - "Diferenciar un patrón conectado de uno no conectado y clasificar los tipos de patrón."
+    sesiones:
+      - ambiente: presencial
+        semana: 2
+        actividad_tabla: "Fundamentos del comportamiento emergente"
+        pasos:
+          - "En la sesión, el docente expondrá los antecedentes de los patrones de comportamiento y el concepto de comportamiento emergente."
+          - "Se analizarán en grupo ejemplos de formación de patrones conectados y no conectados."
+      - ambiente: virtual
+        semana: 2
+        actividad_tabla: "Cuadro comparativo de tipos de patrón"
+        pasos:
+          - "Elabora un cuadro comparativo que contraste los tipos de patrón de comportamiento según su clasificación, indicando cómo se forma cada uno y en qué se distingue de los demás."
+          - "Adjunta tu archivo en el espacio de entrega M1.1_Cuadro comparativo."
+    evidencias: [{nombre: "Cuadro comparativo", tipo: "Documento", recurso: "M1.1_Cuadro comparativo"}]
+    criterios_evaluacion:
+      - "Distingue los patrones conectados de los no conectados con ejemplos propios."
+      - "Cita las fuentes consultadas conforme al esquema APA."
+    reflexion:
+      - "Identifiqué los antecedentes y el concepto de comportamiento emergente."
+      - "Clasifiqué los patrones de comportamiento según su forma de conexión."
+    cubre_temas:
+      - "1.1. Antecedentes de los patrones de comportamiento"
+      - "1.2. Comportamiento emergente"
+      - "1.2.1. Formación de un patrón"
+      - "1.2.1.1. Patrones conectados"
+      - "1.2.1.2. Patrones no conectados"
+      - "1.3. Clasificación de patrones de comportamiento"
+
+  - id: "2.1"
+    unidad: "II"
+    rubro: practicas
+    valor: 3
+    semanas: [3]
+    enunciado: "Seleccionar datos de un conjunto para iniciar el proceso de descubrimiento del conocimiento."
+    practica_pua: "1"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Ubicar la fase de selección dentro del proceso KDD."
+      - "Extraer un subconjunto de datos pertinente a una pregunta de análisis."
+    sesiones:
+      - ambiente: presencial
+        semana: 3
+        actividad_tabla: "Práctica 1. Selección de datos"
+        pasos:
+          - "Atiende las orientaciones del docente para realizar la selección de datos de una base o conjunto de datos."
+          - "Accede a los datos, realiza la selección a partir del conjunto y clasifica lo seleccionado."
+      - ambiente: virtual
+        semana: 3
+        actividad_tabla: "Reporte de la práctica 1"
+        pasos:
+          - "Elabora el reporte de la práctica documentando la fuente, el criterio de selección y el subconjunto obtenido."
+          - "Adjunta tu reporte en el espacio de entrega M2.1_Reporte práctica 1."
+    evidencias: [{nombre: "Reporte de práctica 1", tipo: "Reporte de práctica", recurso: "M2.1_Reporte práctica 1"}]
+    criterios_evaluacion:
+      - "El criterio de selección responde a una pregunta de análisis explícita."
+      - "La fuente de datos está identificada y es accesible."
+    reflexion:
+      - "Ubiqué la selección de datos como primera fase del proceso KDD."
+      - "Justifiqué el criterio con el que extraje mi subconjunto de datos."
+    cubre_temas:
+      - "2.1. Selección de datos"
+
+  - id: "2.2"
+    unidad: "II"
+    rubro: practicas
+    valor: 3
+    semanas: [4]
+    enunciado: "Aplicar el preprocesamiento y la transformación a un conjunto de datos."
+    practica_pua: "2"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Detectar y tratar valores faltantes, atípicos y duplicados."
+      - "Transformar los datos al formato que exige la técnica de minería elegida."
+    sesiones:
+      - ambiente: presencial
+        semana: 4
+        actividad_tabla: "Práctica 2. Preprocesamiento y transformación"
+        pasos:
+          - "Atiende las orientaciones del docente para realizar el preprocesamiento y la transformación de un conjunto de datos."
+          - "Carga el conjunto, examina los datos y aplica el preprocesamiento y la transformación."
+      - ambiente: virtual
+        semana: 4
+        actividad_tabla: "Reporte de la práctica 2"
+        pasos:
+          - "Documenta en el reporte qué problemas encontraste en los datos y qué transformación aplicaste a cada variable."
+          - "Adjunta tu reporte en el espacio de entrega M2.2_Reporte práctica 2."
+    evidencias: [{nombre: "Reporte de práctica 2", tipo: "Reporte de práctica", recurso: "M2.2_Reporte práctica 2"}]
+    criterios_evaluacion:
+      - "El tratamiento de valores faltantes y atípicos está justificado, no solo aplicado."
+      - "La transformación es coherente con la técnica de minería prevista."
+    reflexion:
+      - "Traté los valores faltantes y atípicos de mi conjunto de datos justificando cada decisión."
+      - "Transformé las variables al formato que requiere la técnica de análisis."
+    cubre_temas:
+      - "2.2. Preprocesamiento"
+      - "2.3. Transformación"
+
+  - id: "2.3"
+    unidad: "II"
+    rubro: practicas
+    valor: 3
+    semanas: [5]
+    enunciado: "Aplicar una técnica de minería de datos e interpretar los patrones obtenidos."
+    practica_pua: "3"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Elegir una técnica de minería acorde al tipo de patrón buscado."
+      - "Interpretar el resultado en términos del problema, no solo del algoritmo."
+    sesiones:
+      - ambiente: presencial
+        semana: 5
+        actividad_tabla: "Práctica 3. Minería de datos"
+        pasos:
+          - "Atiende las orientaciones del docente para aplicar técnicas de minería de datos."
+          - "Carga un conjunto de datos, examínalo y aplica una técnica de minería (clasificación, asociación o agrupamiento)."
+      - ambiente: virtual
+        semana: 5
+        actividad_tabla: "Reporte de la práctica 3"
+        pasos:
+          - "Interpreta los patrones obtenidos y redacta qué significan para el problema analizado."
+          - "Adjunta tu reporte en el espacio de entrega M2.3_Reporte práctica 3."
+    evidencias: [{nombre: "Reporte de práctica 3", tipo: "Reporte de práctica", recurso: "M2.3_Reporte práctica 3"}]
+    criterios_evaluacion:
+      - "La técnica elegida corresponde al tipo de patrón que se busca."
+      - "La interpretación se expresa en términos del problema y no solo del algoritmo."
+    reflexion:
+      - "Apliqué una técnica de minería de datos y obtuve patrones de un conjunto real."
+      - "Interpreté los patrones en términos del problema que analizaba."
+    cubre_temas:
+      - "2.4. Minería de datos"
+      - "2.5. Interpretación"
+
+  - id: "P1"
+    unidad: "II"
+    tipo: examen_parcial
+    rubro: examenes
+    valor: 10
+    semanas: [6]
+    enunciado: "Primera evaluación parcial: fundamentos de patrones y proceso KDD."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Integrar los fundamentos de los patrones de comportamiento con las fases del proceso KDD."
+    sesiones:
+      - ambiente: presencial
+        semana: 6
+        actividad_tabla: "Primera evaluación parcial"
+        pasos:
+          - "Presenta la primera evaluación parcial, que abarca las unidades I y II: clasificación de patrones y las cinco fases del proceso KDD."
+      - ambiente: virtual
+        semana: 6
+        actividad_tabla: "Guía de repaso"
+        pasos:
+          - "Revisa la guía de repaso publicada en el módulo de la primera evaluación parcial."
+          - "Plantea tus dudas en el foro del curso antes de la fecha del examen."
+    evidencias: [{nombre: "Primera evaluación parcial", tipo: "Examen", recurso: "M P1_Primera evaluación parcial"}]
+    criterios_evaluacion:
+      - "Se evalúan las unidades I y II conforme a los criterios del Art. 67 del Estatuto Escolar."
+    reflexion:
+      - "Integré los fundamentos de los patrones con las fases del proceso KDD."
+    cubre_temas: []
+
+  - id: "3.1"
+    unidad: "III"
+    rubro: practicas
+    valor: 3
+    semanas: [7]
+    enunciado: "Representar un conjunto de datos como matriz de adyacencia."
+    practica_pua: "4"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Traducir relaciones entre entidades a una matriz de adyacencia."
+      - "Reconocer qué información de la red conserva y cuál pierde esa representación."
+    sesiones:
+      - ambiente: presencial
+        semana: 7
+        actividad_tabla: "Práctica 4. Matriz de adyacencia"
+        pasos:
+          - "Atiende las orientaciones del docente para descubrir matrices de adyacencia a partir de un conjunto de datos."
+          - "Sobre el caso práctico que proporcione el docente, carga el conjunto, examina los datos y representa las relaciones como matriz."
+      - ambiente: virtual
+        semana: 7
+        actividad_tabla: "Reporte de la práctica 4"
+        pasos:
+          - "Documenta la matriz obtenida y explica qué relación representa cada entrada."
+          - "Adjunta tu reporte en el espacio de entrega M3.1_Reporte práctica 4."
+    evidencias: [{nombre: "Reporte de práctica 4", tipo: "Reporte de práctica", recurso: "M3.1_Reporte práctica 4"}]
+    criterios_evaluacion:
+      - "La matriz corresponde a las relaciones presentes en el conjunto de datos."
+      - "Explica qué representa una entrada distinta de cero."
+    reflexion:
+      - "Traduje las relaciones de un conjunto de datos a una matriz de adyacencia."
+      - "Reconocí qué información conserva y cuál pierde esa representación."
+    cubre_temas:
+      - "3.1. Matriz de adyacencia"
+
+  - id: "3.2"
+    unidad: "III"
+    rubro: practicas
+    valor: 3
+    semanas: [8]
+    enunciado: "Construir grafos dirigidos y no dirigidos a partir de un conjunto de datos."
+    practica_pua: "5"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Decidir cuándo una relación exige un grafo dirigido y cuándo no."
+      - "Visualizar una red y leer su estructura."
+    sesiones:
+      - ambiente: presencial
+        semana: 8
+        actividad_tabla: "Práctica 5. Grafos"
+        pasos:
+          - "Atiende las orientaciones del docente para descubrir grafos dirigidos y no dirigidos a partir de un conjunto de datos."
+          - "Sobre el caso práctico que proporcione el docente, carga el conjunto, examina los datos y representa la red como grafo."
+      - ambiente: virtual
+        semana: 8
+        actividad_tabla: "Reporte de la práctica 5"
+        pasos:
+          - "Justifica en el reporte por qué tu red es dirigida o no dirigida, y describe lo que revela su estructura."
+          - "Adjunta tu reporte en el espacio de entrega M3.2_Reporte práctica 5."
+    evidencias: [{nombre: "Reporte de práctica 5", tipo: "Reporte de práctica", recurso: "M3.2_Reporte práctica 5"}]
+    criterios_evaluacion:
+      - "La elección entre grafo dirigido y no dirigido está justificada por la naturaleza de la relación."
+      - "La visualización es legible e identifica los nodos relevantes."
+    reflexion:
+      - "Construí grafos dirigidos y no dirigidos a partir de datos reales."
+      - "Leí la estructura de una red a partir de su representación gráfica."
+    cubre_temas:
+      - "3.2. Grafos dirigidos y no dirigidos"
+
+  - id: "3.3"
+    unidad: "III"
+    rubro: practicas
+    valor: 3
+    semanas: [9]
+    enunciado: "Construir árboles de decisiones a partir de un conjunto de datos."
+    practica_pua: "6"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Derivar un árbol de decisiones de un conjunto de datos etiquetado."
+      - "Leer un árbol como una secuencia de reglas explicables."
+    sesiones:
+      - ambiente: presencial
+        semana: 9
+        actividad_tabla: "Práctica 6. Árboles de decisiones"
+        pasos:
+          - "Atiende las orientaciones del docente para descubrir árboles de decisiones a partir de un conjunto de datos."
+          - "Sobre el caso práctico que proporcione el docente, carga el conjunto, examina los datos y construye el árbol."
+      - ambiente: virtual
+        semana: 9
+        actividad_tabla: "Reporte de la práctica 6"
+        pasos:
+          - "Traduce el árbol obtenido a reglas en lenguaje natural y valora cuáles son accionables."
+          - "Adjunta tu reporte en el espacio de entrega M3.3_Reporte práctica 6."
+    evidencias: [{nombre: "Reporte de práctica 6", tipo: "Reporte de práctica", recurso: "M3.3_Reporte práctica 6"}]
+    criterios_evaluacion:
+      - "El árbol se deriva de los datos y no de una intuición previa."
+      - "Las reglas están expresadas en lenguaje comprensible para un no especialista."
+    reflexion:
+      - "Construí un árbol de decisiones a partir de datos etiquetados."
+      - "Traduje el árbol a reglas explicables en lenguaje natural."
+    cubre_temas:
+      - "3.3. Árboles de decisiones"
+
+  - id: "3.4"
+    unidad: "III"
+    rubro: proyecto
+    valor: 10
+    semanas: [10]
+    enunciado: "Definir el caso de estudio del proyecto y caracterizar su red mediante métricas de redes complejas."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Delimitar un caso de estudio real susceptible de análisis de patrones."
+      - "Calcular e interpretar la intermediación y el grado de agrupamiento de una red."
+    sesiones:
+      - ambiente: presencial
+        semana: 10
+        actividad_tabla: "Métricas de redes complejas y definición del caso"
+        pasos:
+          - "En la sesión, el docente expondrá las métricas de redes complejas —intermediación y grado de agrupamiento— y los requisitos del proyecto."
+          - "Cada equipo delimitará su caso de estudio y lo someterá a revisión."
+      - ambiente: virtual
+        semana: 10
+        actividad_tabla: "Protocolo del proyecto"
+        pasos:
+          - "Redacta el protocolo del proyecto: problema, preguntas, fuentes de datos y la red que se analizará."
+          - "Calcula la intermediación y el grado de agrupamiento de tu red e interpreta qué nodos resultan centrales."
+          - "Adjunta el archivo en el espacio de entrega M3.4_Protocolo del proyecto."
+    evidencias: [{nombre: "Protocolo del proyecto", tipo: "Documento", recurso: "M3.4_Protocolo del proyecto"}]
+    criterios_evaluacion:
+      - "El problema está delimitado y es abordable con las herramientas del curso."
+      - "Las fuentes de datos son accesibles y están identificadas."
+      - "Las métricas se interpretan en términos del caso, no solo como números."
+    reflexion:
+      - "Delimité un caso de estudio real abordable con análisis de patrones."
+      - "Calculé e interpreté las métricas de intermediación y agrupamiento de mi red."
+    cubre_temas:
+      - "3.4. Métricas de redes complejas"
+      - "3.4.1. Intermediación"
+      - "3.4.2. Grado de agrupamiento"
+
+  - id: "4.1"
+    unidad: "IV"
+    rubro: practicas
+    valor: 4
+    semanas: [11]
+    enunciado: "Realizar un análisis fractal aplicando la ley de potencias y la frecuencia de rango."
+    practica_pua: "7"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Reconocer autosimilitud en un conjunto de datos."
+      - "Ajustar una ley de potencias y leer una gráfica de frecuencia de rango."
+    sesiones:
+      - ambiente: presencial
+        semana: 11
+        actividad_tabla: "Práctica 7. Fractales"
+        pasos:
+          - "Atiende las orientaciones del docente para realizar un análisis fractal a partir de un conjunto de datos."
+          - "Sobre el caso práctico que proporcione el docente, carga el conjunto, examina los datos y realiza el análisis fractal."
+      - ambiente: virtual
+        semana: 11
+        actividad_tabla: "Reporte de la práctica 7"
+        pasos:
+          - "Documenta el ajuste de la ley de potencias y la gráfica de frecuencia de rango obtenida."
+          - "Adjunta tu reporte en el espacio de entrega M4.1_Reporte práctica 7."
+    evidencias: [{nombre: "Reporte de práctica 7", tipo: "Reporte de práctica", recurso: "M4.1_Reporte práctica 7"}]
+    criterios_evaluacion:
+      - "El ajuste de la ley de potencias se acompaña de una medida de bondad del ajuste."
+      - "La gráfica de frecuencia de rango está correctamente escalada e interpretada."
+    reflexion:
+      - "Reconocí autosimilitud en un conjunto de datos reales."
+      - "Ajusté una ley de potencias e interpreté la frecuencia de rango."
+    cubre_temas:
+      - "4.1. Fractales"
+      - "4.1.1. Ley de potencias"
+      - "4.1.2. Frecuencia de rango"
+
+  - id: "4.2"
+    unidad: "IV"
+    rubro: practicas
+    valor: 4
+    semanas: [12]
+    enunciado: "Analizar patrones de comportamiento caótico en un conjunto de datos."
+    practica_pua: "8"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Distinguir un sistema caótico de uno meramente aleatorio."
+      - "Identificar bifurcaciones y atractores extraños en la evolución de un sistema."
+    sesiones:
+      - ambiente: presencial
+        semana: 12
+        actividad_tabla: "Práctica 8. Patrones de comportamiento caótico"
+        pasos:
+          - "Atiende las orientaciones del docente para realizar un análisis de patrones de comportamiento caótico."
+          - "Sobre el caso práctico que proporcione el docente, carga el conjunto, examina los datos y analiza bifurcaciones, efecto mariposa y atractores extraños."
+      - ambiente: virtual
+        semana: 12
+        actividad_tabla: "Reporte de la práctica 8"
+        pasos:
+          - "Documenta el diagrama de bifurcación obtenido y la sensibilidad a las condiciones iniciales."
+          - "Adjunta tu reporte en el espacio de entrega M4.2_Reporte práctica 8."
+    evidencias: [{nombre: "Reporte de práctica 8", tipo: "Reporte de práctica", recurso: "M4.2_Reporte práctica 8"}]
+    criterios_evaluacion:
+      - "Distingue el comportamiento caótico del aleatorio con evidencia del propio conjunto."
+      - "El diagrama de bifurcación está correctamente construido e interpretado."
+    reflexion:
+      - "Distinguí un sistema caótico de uno aleatorio con evidencia de los datos."
+      - "Identifiqué bifurcaciones y atractores extraños en la evolución de un sistema."
+    cubre_temas:
+      - "4.2. Patrones de comportamiento Caótico"
+      - "4.2.1. Bifurcaciones"
+      - "4.2.2. Efecto mariposa"
+      - "4.2.3. Atractores extraños"
+
+  - id: "P2"
+    unidad: "IV"
+    tipo: examen_parcial
+    rubro: examenes
+    valor: 10
+    semanas: [13]
+    enunciado: "Segunda evaluación parcial: redes complejas y escalamiento."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Integrar el análisis de redes complejas con el de patrones de escalamiento."
+    sesiones:
+      - ambiente: presencial
+        semana: 13
+        actividad_tabla: "Segunda evaluación parcial"
+        pasos:
+          - "Presenta la segunda evaluación parcial, que abarca las unidades III y IV: redes complejas, fractales y comportamiento caótico."
+      - ambiente: virtual
+        semana: 13
+        actividad_tabla: "Guía de repaso"
+        pasos:
+          - "Revisa la guía de repaso publicada en el módulo de la segunda evaluación parcial."
+          - "Plantea tus dudas en el foro del curso antes de la fecha del examen."
+    evidencias: [{nombre: "Segunda evaluación parcial", tipo: "Examen", recurso: "M P2_Segunda evaluación parcial"}]
+    criterios_evaluacion:
+      - "Se evalúan las unidades III y IV conforme a los criterios del Art. 67 del Estatuto Escolar."
+    reflexion:
+      - "Integré el análisis de redes complejas con el de patrones de escalamiento."
+    cubre_temas: []
+
+  - id: "4.3"
+    unidad: "IV"
+    rubro: tareas
+    valor: 5
+    semanas: [14]
+    enunciado: "Analizar la autoorganización como patrón de comportamiento emergente."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Reconocer procesos de autoorganización en sistemas reales."
+      - "Relacionar la autoorganización con el comportamiento emergente de la unidad I."
+    sesiones:
+      - ambiente: presencial
+        semana: 14
+        actividad_tabla: "Autoorganización en sistemas complejos"
+        pasos:
+          - "En la sesión, el docente expondrá el concepto de autoorganización y su relación con el comportamiento emergente."
+          - "Se analizarán en grupo casos de autoorganización en sistemas naturales y sociales."
+      - ambiente: virtual
+        semana: 14
+        actividad_tabla: "Reporte de análisis"
+        pasos:
+          - "Elabora un reporte que identifique un proceso de autoorganización en un sistema real y lo relacione con los patrones estudiados."
+          - "Adjunta tu archivo en el espacio de entrega M4.3_Reporte de análisis."
+    evidencias: [{nombre: "Reporte de análisis", tipo: "Documento", recurso: "M4.3_Reporte de análisis"}]
+    criterios_evaluacion:
+      - "El caso elegido presenta autoorganización y no solo orden impuesto desde fuera."
+      - "Cita las fuentes consultadas conforme al esquema APA."
+    reflexion:
+      - "Reconocí procesos de autoorganización en un sistema real."
+      - "Relacioné la autoorganización con el comportamiento emergente."
+    cubre_temas:
+      - "4.3. Autoorganización"
+
+  - id: "5.1"
+    unidad: "V"
+    rubro: practicas
+    valor: 4
+    semanas: [15]
+    enunciado: "Aplicar una herramienta especializada para el descubrimiento de patrones de datos."
+    practica_pua: "9"
+    caracter: individual
+    que_voy_a_aprender:
+      - "Operar al menos una herramienta de descubrimiento de patrones."
+      - "Elegir la herramienta adecuada al tipo de patrón y al volumen de datos."
+    sesiones:
+      - ambiente: presencial
+        semana: 15
+        actividad_tabla: "Práctica 9. Herramientas para el descubrimiento de patrones"
+        pasos:
+          - "Atiende las orientaciones del docente para utilizar una herramienta de descubrimiento de patrones de datos."
+          - "Sobre el caso práctico que proporcione el docente, aplica las funciones de la herramienta: NetLogo, IBM Watson Studio, R Studio, Python NetworkX u otra."
+      - ambiente: virtual
+        semana: 15
+        actividad_tabla: "Reporte de la práctica 9"
+        pasos:
+          - "Documenta el procedimiento seguido en la herramienta y justifica por qué la elegiste frente a las demás."
+          - "Adjunta tu reporte en el espacio de entrega M5.1_Reporte práctica 9."
+    evidencias: [{nombre: "Reporte de práctica 9", tipo: "Reporte de práctica", recurso: "M5.1_Reporte práctica 9"}]
+    criterios_evaluacion:
+      - "El procedimiento es reproducible por un tercero a partir del reporte."
+      - "La elección de la herramienta está justificada frente a al menos otra alternativa."
+    reflexion:
+      - "Operé una herramienta especializada de descubrimiento de patrones."
+      - "Justifiqué la elección de la herramienta frente a otras alternativas."
+    cubre_temas:
+      - "5.1. Herramientas para el descubrimiento de patrones de datos"
+      - "5.1.1. Netlogo"
+      - "5.1.2. IBM Watson Studio"
+      - "5.1.3. R Studio"
+      - "5.1.4. Python NetworkX"
+      - "5.1.5. Otras"
+
+  - id: "5.2"
+    unidad: "V"
+    tipo: cierre
+    rubro: proyecto
+    valor: 30
+    semanas: [16]
+    enunciado: "Presentar el reporte técnico y la exposición del caso de estudio del proyecto."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Documentar un proyecto de descubrimiento de patrones como reporte técnico."
+      - "Comunicar los hallazgos a un público no técnico y situarlos en su área de aplicación."
+    sesiones:
+      - ambiente: presencial
+        semana: 16
+        actividad_tabla: "Exposición del proyecto"
+        pasos:
+          - "Expón ante el grupo el caso de estudio de tu proyecto: la red analizada, los patrones descubiertos y su lectura para la toma de decisiones."
+          - "Participa en la sesión de preguntas del resto del grupo."
+      - ambiente: virtual
+        semana: 16
+        actividad_tabla: "Entrega del reporte técnico"
+        pasos:
+          - "Integra el reporte técnico del proyecto: problema, datos, herramientas, patrones descubiertos e interpretación."
+          - "Sitúa tu caso en su área de aplicación —finanzas, redes sociales, ciencias de la salud u otra— y contrasta tus hallazgos con al menos un caso documentado."
+          - "Adjunta el reporte en el espacio de entrega M5.2_Reporte técnico del proyecto."
+    evidencias:
+      - {nombre: "Reporte técnico del proyecto", tipo: "Proyecto", recurso: "M5.2_Reporte técnico del proyecto"}
+      - {nombre: "Exposición del proyecto", tipo: "Exposición", recurso: "M5.2_Exposición del proyecto"}
+    criterios_evaluacion:
+      - "El reporte documenta el proceso completo, de la selección de datos a la interpretación."
+      - "Los hallazgos se contrastan con al menos un caso documentado del área de aplicación."
+      - "La exposición es comprensible para un público no técnico."
+    reflexion:
+      - "Documenté un proyecto completo de descubrimiento de patrones como reporte técnico."
+      - "Comuniqué mis hallazgos a un público no técnico y los situé en su área de aplicación."
+    cubre_temas:
+      - "5.2. Casos de estudio de descubrimiento de patrones de datos"
+      - "5.2.1. Finanzas"
+      - "5.2.2. Redes sociales"
+      - "5.2.3. Ciencias de la salud"
+      - "5.2.4. Otros"

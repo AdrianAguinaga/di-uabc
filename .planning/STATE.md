@@ -24,8 +24,14 @@ renderiza por grupo → exporta a PDF → escribe `MANIFIESTO.yaml`. Corrido de 
 sobre Big Data 2026-2.
 
 Fase 8: `src/grafo.py` → `grafo/grafo.json`, `grafo/index.html` y `grafo/AUDITORIA.md`.
-167 nodos y 296 aristas con un PUA y un curso. La auditoría cierra en **0 huecos y 0 anclas
+290 nodos y 542 aristas con dos PUAs y dos cursos. La auditoría cierra en **0 huecos y 0 anclas
 rotas**.
+
+Con dos materias en el grafo, la segunda pregunta de REQ-31 —qué materias comparten
+competencias— ya tiene con qué contrastar y responde «nada»: Big Data y Patrones declaran
+competencias distintas. Es la respuesta correcta. La comparación es por texto literal
+normalizado, nunca por parecido semántico, así que solo se enciende cuando alguien copió y
+pegó una competencia entre programas, que es justo para lo que se hizo.
 
 ## Cierre de la cobertura temática (4 de agosto de 2026)
 
@@ -44,12 +50,38 @@ Ni `temas` ni `cubre_temas` ni `practica_pua` llegan al documento: el renderizad
 no del entregable. Aun así se regeneró el DI para que el `sha256` del `MANIFIESTO.yaml` vuelva a
 corresponder al `curso.yaml` (regla invariable 7).
 
-## Lo único que queda abierto
+## Materia nueva, ejercida de extremo a extremo (4 de agosto de 2026)
 
-Ejercer el camino de **materia nueva**: PUA que no está en el índice → ingesta en caliente →
-metas desde cero. Requiere el PDF de otra materia; con un solo PUA en `puas/fuente/` no se puede
-probar. Es la rama del paso 2 de `/di-nuevo` y vive en la prosa del skill, no en Python, así que
-tampoco hay nada que cubrir con una prueba automática — es UAT manual pendiente de material.
+Era lo último que quedaba abierto. Se corrió con **Patrones de Comportamiento de Datos**
+(clave 39062, etapa terminal, HC:2 HL:2), desde el PDF hasta el `.pdf` firmable:
+
+1. Ingesta: 10 secciones completas, 5 unidades, 9 prácticas. La §VI —la frágil— salió íntegra;
+   sus duraciones suman 32 h, que es HL:2 por 16 semanas, y cuadra con el propio encabezado.
+2. Esquema de evaluación **`pua-39062`** nuevo en `config/esquemas-evaluacion.yaml`: 20/10/30/40.
+   Lo dicta la §VIII del programa; frente a un alumno inconforme la defensa es el PUA, no el
+   catálogo interno del proyecto.
+3. `curso.yaml` desde cero: 16 metas sobre 16 semanas, los 36 temas cubiertos, las 9 prácticas
+   ancladas. **Validó a la primera**, sin un solo error.
+4. Documento generado y exportado a PDF. Tabla de 39 filas × 7 columnas, 16 semanas distintas.
+
+**El grupo quedó como marcador** (`POR-DEFINIR`): número, aula y día presencial hay que
+capturarlos antes de entregar nada. El propio `curso.yaml` lo declara en `avisos:` y la
+validación lo repite en cada corrida.
+
+Dos defectos reales que solo aparecieron al usar un PUA distinto del de Big Data:
+
+- **El detector de numeración repetida truncaba a dos niveles**, así que `1.2.1` se denunciaba
+  como duplicado de su padre `1.2`. Cuatro avisos falsos aquí y tres en Big Data, que llevaban
+  ahí desde la Fase 4 sin que nadie los mirara. Arreglado en `109c1d5`.
+- **El panel de `/di-nuevo` pegaba la etiqueta al detalle** cuando el grupo pasaba de 15
+  caracteres. Cosmético, arreglado.
+
+## Lo que queda abierto
+
+Nada del roadmap. Dos cosas menores, ambas decisiones del usuario y no del generador:
+
+- Capturar el grupo real de 39062 y regenerar.
+- El correo de `zra` sigue en `null` en `config/profesores.yaml`.
 
 ## Repositorio
 

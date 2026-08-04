@@ -30,6 +30,30 @@ esquemas:
         porcentaje: 40
     exencion_ordinario: 80
 
+  pua-39062:
+    nombre: "Patrones de Comportamiento de Datos (§VIII del PUA)"
+    descripcion: "Parciales 20 · Tareas 10 · Prácticas de laboratorio 30 · Proyecto 40"
+    # Lo dicta la §VIII del PUA 39062. No se toma del catálogo general porque el programa
+    # oficial ya fijó los porcentajes: frente a un alumno inconforme, la defensa es el PUA.
+    rubros:
+      - id: examenes
+        etiqueta: "Evaluaciones parciales"
+        porcentaje: 20
+        detalle: "Dos evaluaciones parciales de 10 % cada una"
+        parciales: 2
+      - id: tareas
+        etiqueta: "Tareas"
+        porcentaje: 10
+      - id: practicas
+        etiqueta: "Prácticas de laboratorio"
+        porcentaje: 30
+        detalle: "Nueve prácticas conforme a la §VI del PUA"
+      - id: proyecto
+        etiqueta: "Proyecto"
+        porcentaje: 40
+        detalle: "Reporte técnico y exposición del caso de estudio (§IV del PUA)"
+    exencion_ordinario: 80
+
   practica-laboratorio:
     nombre: "Práctica de laboratorio"
     descripcion: "Para unidades de aprendizaje eminentemente prácticas"
