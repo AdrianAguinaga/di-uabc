@@ -210,6 +210,43 @@ calificación (Fase 11), la rúbrica (Fase 12), el documento en la unidad real (
 - **D-22:** Los documentos de control son **39056 (Big Data, grupos 961 y 962) y 39062 (Patrones)**,
   los de Adrian. 38985 no entra: es el curso que va a cambiar.
 
+### Resueltas tras la investigación (2026-08-05)
+
+- **D-23:** `huella verificar` **restaura los `MANIFIESTO.yaml`** de los cursos de control al
+  terminar (`git checkout` sobre esos archivos). `generar.paquete()` reescribe `generado:` y
+  `commit:` en cada corrida y ambos archivos están versionados, así que sin esto cada verificación
+  ensuciaría el árbol. Con esto, **`verificar` es de solo lectura sobre el repo**: si `git status`
+  sale sucio después de verificar, es señal de verdad. `huella registrar` **sí** los deja escritos
+  — ahí el cambio es deliberado y debe quedar en el commit.
+
+- **D-24:** El rename de D-14 arrastra **`python src/grafo.py`** como paso explícito de la
+  secuencia de D-15, inmediatamente después del renombrado y antes de `huella registrar`.
+  `grafo/grafo.json` está versionado y dice «Meta 0. Encuadre del curso.» dos veces; sin
+  regenerar, el repo queda mencionando una meta que ya no existe con ese id. **No contradice
+  D-10:** D-10 protege la *forma* del grafo —su esquema de nodos y aristas, que no cambia y sigue
+  sin conocer los componentes—; lo que cambia aquí es una cadena de texto, igual que en el `.docx`.
+  La secuencia de D-15 queda así:
+
+  ```
+  1. huella registrar            # línea base del repo tal como está HOY
+  2. …contrato: unidad, total, componentes, conversión…
+  3. huella verificar            # ✓ nada cambió
+  4. renombrar 0 -> 1.0 en Big Data
+  5. python src/grafo.py         # el grafo sigue al curso.yaml
+  6. huella verificar            # ! cambió 39056
+     git diff                    # solo "Meta 0." -> "Meta 1.0." (+ grafo/)
+  7. huella registrar            # se acepta, con el diff como constancia
+  ```
+
+- **D-25:** Los documentos de control son **cuatro**: 39056 grupos **961** y **962**, y 39062
+  grupos **971** y **972**. El «39062 grupo 1» del ejemplo de salida de `<specifics>` es
+  ilustrativo y no corresponde a ningún grupo real —39062 declara 971 y 972 en su `curso.yaml`—.
+  Vigilar los cuatro cuesta lo mismo y evita que un cambio que solo afecte al 972 pase inadvertido.
+
+- **D-26:** `Componente.tipo` es **obligatorio, sin default**. Es el mismo razonamiento de D-08: un
+  default silencioso `"actividad"` convertiría un typo en un componente que nadie cuenta, que es
+  justo lo que D-08 quiso evitar. Quien declara un componente declara de qué tipo es.
+
 ### Criterio de Claude
 
 - El nombre exacto de la propiedad de conversión de D-04, la firma de las funciones de
