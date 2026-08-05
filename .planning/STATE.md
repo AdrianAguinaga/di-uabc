@@ -3,7 +3,7 @@
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
 **Última actualización**: 2026-08-04
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (sin empezar)
+**Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (contexto recogido)
 
 ## Posición actual
 
@@ -12,14 +12,20 @@
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 9 — El valor de una meta deja de ser un porcentaje |
 | Plan | — |
-| Estado | Roadmap levantado; falta desglosar la fase |
-| Última actividad | 2026-08-04 — roadmap de la v2.0, fases 9 a 14 |
+| Estado | Contexto recogido; falta planear |
+| Última actividad | 2026-08-04 — 22 decisiones de la Fase 9, en `09-CONTEXT.md` |
+
+Se retoma en `.planning/phases/09-valor-de-una-meta/09-CONTEXT.md`. Dos decisiones se apartan de
+cómo el roadmap describió la fase y están razonadas ahí: la evidencia de un componente toca
+`render_docx.py` (D-11), y el encuadre de Big Data se renombra de verdad, gastando la primera
+excepción a REQ-48 (D-14) — con el orden de pasos fijado en D-15 para que el instrumento demuestre
+algo antes de que se le pida esa excepción.
 
 ## Progreso de la v2.0
 
 | Fase | Requisitos | Estado |
 |---|---|---|
-| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Sin empezar |
+| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Contexto recogido |
 | 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | Sin empezar |
 | 11. El segundo nivel de la calificación | REQ-41, REQ-46 | Sin empezar |
 | 12. La rúbrica en el contrato | REQ-43, REQ-47 | Sin empezar |
