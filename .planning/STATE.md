@@ -1,7 +1,7 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-05
+**Última actualización**: 2026-08-05 (ola 3, plan 09-04)
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
 **Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (en ejecución)
 
@@ -11,9 +11,9 @@
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 9 — El valor de una meta deja de ser un porcentaje |
-| Plan | 6 planes en 5 olas — 09-01, 09-02 y 09-03 hechos (3/6) |
+| Plan | 6 planes en 5 olas — 09-01, 09-02, 09-03 y 09-04 hechos (4/6) |
 | Estado | Ejecutando |
-| Última actividad | 2026-08-05 — olas 1 y 2 cerradas: la huella, el contrato nuevo y la colisión de ids |
+| Última actividad | 2026-08-05 — ola 3 cerrada: la evidencia de un componente llega a la Sección 2 |
 
 Se retoma con `/gsd-execute-phase 9`. Tres decisiones se apartan de cómo el roadmap describió la
 fase y están razonadas en `09-CONTEXT.md`: la evidencia de un componente toca `render_docx.py`
@@ -43,11 +43,21 @@ otro—. La aritmética de R1 y R2 no se tocó: contar en la unidad declarada es
 
 212 pruebas en verde después del merge de los dos worktrees.
 
+**09-04 (ola 3) quedó hecho el 5 de agosto de 2026.** El desvío deliberado D-11 ya está construido:
+`_evidencias(meta)` concatena las evidencias de una meta con las de sus componentes, y la celda de
+evidencias de la Sección 2 la usa en vez de leer `meta.evidencias` directamente. Los dos puntos que
+imprimen `f"{meta.valor:g}%"` —columna Valor y Sección 3— quedaron intactos, confirmados línea a
+línea contra el diff: son de la Fase 13. `huella verificar` (de solo lectura) confirma que los
+cuatro documentos de control siguen con huella intacta, porque ninguno declara `componentes:` —
+REQ-48 sostenido sin gastar la excepción que corresponde a 09-05.
+
+216 pruebas en verde.
+
 ## Progreso de la v2.0
 
 | Fase | Requisitos | Estado |
 |---|---|---|
-| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Planeada — 6 planes |
+| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Ejecutando — 4/6 planes |
 | 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | Sin empezar |
 | 11. El segundo nivel de la calificación | REQ-41, REQ-46 | Sin empezar |
 | 12. La rúbrica en el contrato | REQ-43, REQ-47 | Sin empezar |

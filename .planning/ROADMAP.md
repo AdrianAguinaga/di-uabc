@@ -71,7 +71,7 @@ renombrado del encuadre va al final.
 - [x] 09-01-PLAN.md — `src/huella.py` y la línea base de las cuatro huellas de control (paso 1)
 - [x] 09-02-PLAN.md — el contrato: rubro en puntos, componentes de meta, ids libres
 - [x] 09-03-PLAN.md — R2 detecta metas con id duplicado
-- [ ] 09-04-PLAN.md — la evidencia del componente llega a la Sección 2
+- [x] 09-04-PLAN.md — la evidencia del componente llega a la Sección 2
 - [ ] 09-05-PLAN.md — verificar, renombrar el encuadre a 1.0, grafo, medir y aceptar (pasos 3 a 7)
 - [ ] 09-06-PLAN.md — cierre: Word, revisión del diff y la decisión sobre el MANIFIESTO
 
