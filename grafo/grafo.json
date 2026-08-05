@@ -154,6 +154,186 @@
       }
     },
     {
+      "id": "criterio:2026-2:38985:1.0:0",
+      "tipo": "criterio",
+      "etiqueta": "Se registra la participación; esta meta no tiene valor porcentual."
+    },
+    {
+      "id": "criterio:2026-2:38985:1.1:0",
+      "tipo": "criterio",
+      "etiqueta": "Los asientos contables corresponden al método de valuación indicado."
+    },
+    {
+      "id": "criterio:2026-2:38985:1.1:1",
+      "tipo": "criterio",
+      "etiqueta": "Las tarjetas de almacén cuadran con los registros del libro diario."
+    },
+    {
+      "id": "criterio:2026-2:38985:1.2:0",
+      "tipo": "criterio",
+      "etiqueta": "El cuadro contrasta los tres métodos en las características solicitadas."
+    },
+    {
+      "id": "criterio:2026-2:38985:1.2:1",
+      "tipo": "criterio",
+      "etiqueta": "El criterio de selección se justifica según el tipo de empresa."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.0:0",
+      "tipo": "criterio",
+      "etiqueta": "La investigación cita la normatividad contable vigente aplicable."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.0:1",
+      "tipo": "criterio",
+      "etiqueta": "Las fuentes se citan conforme al esquema APA."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.1:0",
+      "tipo": "criterio",
+      "etiqueta": "Los asientos aplican el tratamiento que corresponde a cada operación especial."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.1:1",
+      "tipo": "criterio",
+      "etiqueta": "Los auxiliares cuadran con los saldos del libro diario."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.2:0",
+      "tipo": "criterio",
+      "etiqueta": "El tratamiento de mercancías en tránsito y anticipos es el que marca la normatividad."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.2:1",
+      "tipo": "criterio",
+      "etiqueta": "Los auxiliares cuadran con los saldos del libro diario."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.3:0",
+      "tipo": "criterio",
+      "etiqueta": "La conversión aplica el tipo de cambio y el método que corresponden."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.3:1",
+      "tipo": "criterio",
+      "etiqueta": "Los auxiliares de moneda extranjera cuadran con el libro diario."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.4:0",
+      "tipo": "criterio",
+      "etiqueta": "Identifica el momento de reconocimiento del ingreso con fundamento normativo."
+    },
+    {
+      "id": "criterio:2026-2:38985:2.4:1",
+      "tipo": "criterio",
+      "etiqueta": "Las fuentes se citan conforme al esquema APA."
+    },
+    {
+      "id": "criterio:2026-2:38985:3.0:0",
+      "tipo": "criterio",
+      "etiqueta": "Distingue los métodos de estimación con fundamento normativo."
+    },
+    {
+      "id": "criterio:2026-2:38985:3.0:1",
+      "tipo": "criterio",
+      "etiqueta": "Las fuentes se citan conforme al esquema APA."
+    },
+    {
+      "id": "criterio:2026-2:38985:3.1:0",
+      "tipo": "criterio",
+      "etiqueta": "Contrasta ambos procedimientos señalando cuándo conviene cada uno."
+    },
+    {
+      "id": "criterio:2026-2:38985:3.1:1",
+      "tipo": "criterio",
+      "etiqueta": "Las fuentes se citan conforme al esquema APA."
+    },
+    {
+      "id": "criterio:2026-2:38985:3.2:0",
+      "tipo": "criterio",
+      "etiqueta": "Los cálculos de depreciación corresponden al método señalado."
+    },
+    {
+      "id": "criterio:2026-2:38985:3.2:1",
+      "tipo": "criterio",
+      "etiqueta": "Las fuentes se citan conforme al esquema APA."
+    },
+    {
+      "id": "criterio:2026-2:38985:3.3:0",
+      "tipo": "criterio",
+      "etiqueta": "Los asientos de ajuste reflejan la acumulación en el periodo que corresponde."
+    },
+    {
+      "id": "criterio:2026-2:38985:3.3:1",
+      "tipo": "criterio",
+      "etiqueta": "Las fuentes se citan conforme al esquema APA."
+    },
+    {
+      "id": "criterio:2026-2:38985:4.0:0",
+      "tipo": "criterio",
+      "etiqueta": "Los saldos ajustados cuadran con la balanza de comprobación y los ajustes."
+    },
+    {
+      "id": "criterio:2026-2:38985:4.0:1",
+      "tipo": "criterio",
+      "etiqueta": "Las columnas de la hoja de trabajo suman correctamente."
+    },
+    {
+      "id": "criterio:2026-2:38985:5.0:0",
+      "tipo": "criterio",
+      "etiqueta": "Distingue los valores ajenos de los contingentes."
+    },
+    {
+      "id": "criterio:2026-2:38985:5.0:1",
+      "tipo": "criterio",
+      "etiqueta": "Los registros en cuentas de orden guardan su correlativa."
+    },
+    {
+      "id": "criterio:2026-2:38985:6.0:0",
+      "tipo": "criterio",
+      "etiqueta": "Los estados financieros se derivan de la hoja de trabajo y cuadran con ella."
+    },
+    {
+      "id": "criterio:2026-2:38985:6.0:1",
+      "tipo": "criterio",
+      "etiqueta": "Las notas explicativas acompañan a cada estado."
+    },
+    {
+      "id": "criterio:2026-2:38985:6.1:0",
+      "tipo": "criterio",
+      "etiqueta": "El trabajo integra los trece conceptos de la rúbrica, que suma 100 puntos."
+    },
+    {
+      "id": "criterio:2026-2:38985:6.1:1",
+      "tipo": "criterio",
+      "etiqueta": "El libro diario, que concentra 40 de los 100 puntos, enlaza por hipervínculo con el libro mayor."
+    },
+    {
+      "id": "criterio:2026-2:38985:6.1:2",
+      "tipo": "criterio",
+      "etiqueta": "Los estados financieros cuadran con la hoja de trabajo y llevan sus notas explicativas."
+    },
+    {
+      "id": "criterio:2026-2:38985:6.1:3",
+      "tipo": "criterio",
+      "etiqueta": "Entregarlo completo es requisito para acreditar la unidad de aprendizaje."
+    },
+    {
+      "id": "criterio:2026-2:38985:E1:0",
+      "tipo": "criterio",
+      "etiqueta": "Se evalúan las unidades 1 y 2 conforme a los criterios del Art. 67 del Estatuto Escolar."
+    },
+    {
+      "id": "criterio:2026-2:38985:E2:0",
+      "tipo": "criterio",
+      "etiqueta": "Se evalúa la unidad 3 conforme a los criterios del Art. 67 del Estatuto Escolar."
+    },
+    {
+      "id": "criterio:2026-2:38985:E3:0",
+      "tipo": "criterio",
+      "etiqueta": "Se evalúan las unidades 4, 5 y 6 conforme a los criterios del Art. 67 del Estatuto Escolar."
+    },
+    {
       "id": "criterio:2026-2:39056:0:0",
       "tipo": "criterio",
       "etiqueta": "Se registra la participación; esta meta no tiene valor porcentual."
@@ -464,6 +644,15 @@
       "etiqueta": "Se evalúan las unidades III y IV conforme a los criterios del Art. 67 del Estatuto Escolar."
     },
     {
+      "id": "curso:2026-2:38985",
+      "tipo": "curso",
+      "etiqueta": "Contabilidad Financiera · 2026-2",
+      "datos": {
+        "modalidad": "semipresencial",
+        "ruta": "cursos/2026-2/38985-contabilidad-financiera/curso.yaml"
+      }
+    },
+    {
       "id": "curso:2026-2:39056",
       "tipo": "curso",
       "etiqueta": "Big Data · 2026-2",
@@ -479,6 +668,177 @@
       "datos": {
         "modalidad": "semipresencial",
         "ruta": "cursos/2026-2/39062-patrones-de-comportamiento/curso.yaml"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:1.0:0",
+      "tipo": "evidencia",
+      "etiqueta": "Examen diagnóstico",
+      "datos": {
+        "clase": "Examen",
+        "recurso": "M1.0_Examen diagnóstico"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:1.1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Libro diario y tarjetas de almacén",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M1.1_Libro diario y tarjetas de almacén"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:1.2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Cuadro comparativo",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M1.2_Cuadro comparativo"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:2.0:0",
+      "tipo": "evidencia",
+      "etiqueta": "Investigación documental",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M2.0_Investigación documental"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:2.1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Registros contables y tarjetas auxiliares",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M2.1_Registros contables"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:2.2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Registros contables y tarjetas auxiliares",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M2.2_Registros contables"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:2.3:0",
+      "tipo": "evidencia",
+      "etiqueta": "Registros contables y auxiliares",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M2.3_Registros contables"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:2.4:0",
+      "tipo": "evidencia",
+      "etiqueta": "Investigación documental",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M2.4_Investigación documental"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:3.0:0",
+      "tipo": "evidencia",
+      "etiqueta": "Investigación documental",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M3.0_Investigación documental"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:3.1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Investigación documental",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M3.1_Investigación documental"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:3.2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Investigación documental",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M3.2_Investigación documental"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:3.3:0",
+      "tipo": "evidencia",
+      "etiqueta": "Investigación documental",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M3.3_Investigación documental"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:4.0:0",
+      "tipo": "evidencia",
+      "etiqueta": "Hoja de trabajo",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M4.0_Hoja de trabajo"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:5.0:0",
+      "tipo": "evidencia",
+      "etiqueta": "Registros contables",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M5.0_Registros contables"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:6.0:0",
+      "tipo": "evidencia",
+      "etiqueta": "Estados financieros",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M6.0_Estados financieros"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:6.1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Trabajo final",
+      "datos": {
+        "clase": "Proyecto",
+        "recurso": "M6.1_Trabajo final"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:E1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Examen I",
+      "datos": {
+        "clase": "Examen",
+        "recurso": "ME1_Examen I"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:E2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Examen II",
+      "datos": {
+        "clase": "Examen",
+        "recurso": "ME2_Examen II"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:38985:E3:0",
+      "tipo": "evidencia",
+      "etiqueta": "Examen III",
+      "datos": {
+        "clase": "Examen",
+        "recurso": "ME3_Examen III"
       }
     },
     {
@@ -797,6 +1157,17 @@
       }
     },
     {
+      "id": "grupo:2026-2:38985:531",
+      "tipo": "grupo",
+      "etiqueta": "Grupo 531",
+      "datos": {
+        "aula": "Aula",
+        "dias_presencial": [
+          1
+        ]
+      }
+    },
+    {
       "id": "grupo:2026-2:39056:961",
       "tipo": "grupo",
       "etiqueta": "Grupo 961",
@@ -837,6 +1208,253 @@
         "aula": "Laboratorio de cómputo",
         "dias_presencial": [
           3
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:1.0",
+      "tipo": "meta",
+      "etiqueta": "Meta 1.0. Presentar el encuadre del curso.",
+      "datos": {
+        "clase": "encuadre",
+        "rubro": "actividades",
+        "valor": 0,
+        "semanas": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:1.1",
+      "tipo": "meta",
+      "etiqueta": "Meta 1.1. Identificar las fórmulas de asignación de costos de inventarios.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:1.2",
+      "tipo": "meta",
+      "etiqueta": "Meta 1.2. Comparar los criterios de selección para los sistemas de asignación de inventarios.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          3
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:2.0",
+      "tipo": "meta",
+      "etiqueta": "Meta 2.0. Registrar operaciones especiales conforme a la normatividad contable.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:2.1",
+      "tipo": "meta",
+      "etiqueta": "Meta 2.1. Registrar las operaciones especiales en libro diario y auxiliares.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2.5,
+        "semanas": [
+          5
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:2.2",
+      "tipo": "meta",
+      "etiqueta": "Meta 2.2. Registrar las operaciones especiales de mercancías en tránsito y anticipos.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2.5,
+        "semanas": [
+          6
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:2.3",
+      "tipo": "meta",
+      "etiqueta": "Meta 2.3. Registrar las operaciones especiales en moneda extranjera.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2.5,
+        "semanas": [
+          7
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:2.4",
+      "tipo": "meta",
+      "etiqueta": "Meta 2.4. Reconocer las ventas y su tratamiento contable.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          8
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:3.0",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.0. Identificar la estimación de cuentas incobrables.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          9
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:3.1",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.1. Comparar los métodos de registro de inventario perpetuo y analítico.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          10
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:3.2",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.2. Identificar los métodos de depreciación y amortización.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          11
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:3.3",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.3. Registrar gastos y productos acumulados y pagados por anticipado.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          12
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:4.0",
+      "tipo": "meta",
+      "etiqueta": "Meta 4.0. Elaborar saldos ajustados en la hoja de trabajo.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2.5,
+        "semanas": [
+          13
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:5.0",
+      "tipo": "meta",
+      "etiqueta": "Meta 5.0. Registrar los valores ajenos y contingentes en cuentas de orden.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          14
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:6.0",
+      "tipo": "meta",
+      "etiqueta": "Meta 6.0. Elaborar el estado de resultados y el balance general con sus notas.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "actividades",
+        "valor": 2,
+        "semanas": [
+          15
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:6.1",
+      "tipo": "meta",
+      "etiqueta": "Meta 6.1. Entregar el trabajo final completo.",
+      "datos": {
+        "clase": "cierre",
+        "rubro": "trabajo_final",
+        "valor": 20,
+        "semanas": [
+          16
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:E1",
+      "tipo": "meta",
+      "etiqueta": "Meta E1. Examen I: fórmulas de asignación de costos y operaciones especiales.",
+      "datos": {
+        "clase": "examen_parcial",
+        "rubro": "examenes",
+        "valor": 15,
+        "semanas": [
+          8
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:E2",
+      "tipo": "meta",
+      "etiqueta": "Meta E2. Examen II: ajustes.",
+      "datos": {
+        "clase": "examen_parcial",
+        "rubro": "examenes",
+        "valor": 15,
+        "semanas": [
+          12
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:38985:E3",
+      "tipo": "meta",
+      "etiqueta": "Meta E3. Examen III: hoja de trabajo, cuentas de orden y estados financieros.",
+      "datos": {
+        "clase": "examen_parcial",
+        "rubro": "examenes",
+        "valor": 20,
+        "semanas": [
+          15
         ]
       }
     },
@@ -1417,6 +2035,19 @@
       "id": "profesor:ara",
       "tipo": "profesor",
       "etiqueta": "Adrian Rodriguez Aguiñaga"
+    },
+    {
+      "id": "profesor:zra",
+      "tipo": "profesor",
+      "etiqueta": "Dra. Zurisaddai Rubio Arriaga"
+    },
+    {
+      "id": "pua:38985",
+      "tipo": "pua",
+      "etiqueta": "38985 (sin ingerir)",
+      "datos": {
+        "ausente": true
+      }
     },
     {
       "id": "pua:39056",
@@ -2223,6 +2854,54 @@
       }
     },
     {
+      "id": "unidad:38985:1",
+      "tipo": "unidad",
+      "etiqueta": "Unidad 1. Fórmulas de asignación de costos",
+      "datos": {
+        "nombre": "Fórmulas de asignación de costos"
+      }
+    },
+    {
+      "id": "unidad:38985:2",
+      "tipo": "unidad",
+      "etiqueta": "Unidad 2. Operaciones especiales",
+      "datos": {
+        "nombre": "Operaciones especiales"
+      }
+    },
+    {
+      "id": "unidad:38985:3",
+      "tipo": "unidad",
+      "etiqueta": "Unidad 3. Ajustes",
+      "datos": {
+        "nombre": "Ajustes"
+      }
+    },
+    {
+      "id": "unidad:38985:4",
+      "tipo": "unidad",
+      "etiqueta": "Unidad 4. Elaboración de la hoja de trabajo",
+      "datos": {
+        "nombre": "Elaboración de la hoja de trabajo"
+      }
+    },
+    {
+      "id": "unidad:38985:5",
+      "tipo": "unidad",
+      "etiqueta": "Unidad 5. Cuentas de orden",
+      "datos": {
+        "nombre": "Cuentas de orden"
+      }
+    },
+    {
+      "id": "unidad:38985:6",
+      "tipo": "unidad",
+      "etiqueta": "Unidad 6. Estados financieros",
+      "datos": {
+        "nombre": "Estados financieros"
+      }
+    },
+    {
       "id": "unidad:39056:I",
       "tipo": "unidad",
       "etiqueta": "Unidad I. Fundamentos de Big Data",
@@ -2304,6 +2983,161 @@
     }
   ],
   "aristas": [
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "articulo:EE-65",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "articulo:EE-66",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "articulo:EE-67",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "articulo:EE-68",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "articulo:EE-70",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "articulo:EE-71",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "articulo:EE-75",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "articulo:RPIDA-59",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "profesor:zra",
+      "tipo": "impartido_por"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "pua:38985",
+      "tipo": "se_basa_en"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "grupo:2026-2:38985:531",
+      "tipo": "tiene_grupo"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:1.0",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:1.1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:1.2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:2.0",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:2.1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:2.2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:2.3",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:2.4",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:3.0",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:3.1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:3.2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:3.3",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:4.0",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:5.0",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:6.0",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:6.1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:E1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:E2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "meta:2026-2:38985:E3",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:38985",
+      "destino": "plantilla:semipresencial",
+      "tipo": "usa_plantilla"
+    },
     {
       "origen": "curso:2026-2:39056",
       "destino": "articulo:EE-65",
@@ -2603,6 +3437,471 @@
       "origen": "curso:2026-2:39062",
       "destino": "plantilla:semipresencial",
       "tipo": "usa_plantilla"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.0",
+      "destino": "unidad:38985:1",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.0",
+      "destino": "semana:2026-2:1",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.0",
+      "destino": "evidencia:2026-2:38985:1.0:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.0",
+      "destino": "criterio:2026-2:38985:1.0:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.1",
+      "destino": "unidad:38985:1",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.1",
+      "destino": "semana:2026-2:2",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.1",
+      "destino": "evidencia:2026-2:38985:1.1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.1",
+      "destino": "criterio:2026-2:38985:1.1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.1",
+      "destino": "criterio:2026-2:38985:1.1:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.2",
+      "destino": "unidad:38985:1",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.2",
+      "destino": "semana:2026-2:3",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.2",
+      "destino": "evidencia:2026-2:38985:1.2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.2",
+      "destino": "criterio:2026-2:38985:1.2:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:1.2",
+      "destino": "criterio:2026-2:38985:1.2:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.0",
+      "destino": "unidad:38985:2",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.0",
+      "destino": "semana:2026-2:4",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.0",
+      "destino": "evidencia:2026-2:38985:2.0:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.0",
+      "destino": "criterio:2026-2:38985:2.0:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.0",
+      "destino": "criterio:2026-2:38985:2.0:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.1",
+      "destino": "unidad:38985:2",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.1",
+      "destino": "semana:2026-2:5",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.1",
+      "destino": "evidencia:2026-2:38985:2.1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.1",
+      "destino": "criterio:2026-2:38985:2.1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.1",
+      "destino": "criterio:2026-2:38985:2.1:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.2",
+      "destino": "unidad:38985:2",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.2",
+      "destino": "semana:2026-2:6",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.2",
+      "destino": "evidencia:2026-2:38985:2.2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.2",
+      "destino": "criterio:2026-2:38985:2.2:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.2",
+      "destino": "criterio:2026-2:38985:2.2:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.3",
+      "destino": "unidad:38985:2",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.3",
+      "destino": "semana:2026-2:7",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.3",
+      "destino": "evidencia:2026-2:38985:2.3:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.3",
+      "destino": "criterio:2026-2:38985:2.3:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.3",
+      "destino": "criterio:2026-2:38985:2.3:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.4",
+      "destino": "unidad:38985:2",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.4",
+      "destino": "semana:2026-2:8",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.4",
+      "destino": "evidencia:2026-2:38985:2.4:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.4",
+      "destino": "criterio:2026-2:38985:2.4:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:2.4",
+      "destino": "criterio:2026-2:38985:2.4:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.0",
+      "destino": "unidad:38985:3",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.0",
+      "destino": "semana:2026-2:9",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.0",
+      "destino": "evidencia:2026-2:38985:3.0:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.0",
+      "destino": "criterio:2026-2:38985:3.0:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.0",
+      "destino": "criterio:2026-2:38985:3.0:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.1",
+      "destino": "unidad:38985:3",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.1",
+      "destino": "semana:2026-2:10",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.1",
+      "destino": "evidencia:2026-2:38985:3.1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.1",
+      "destino": "criterio:2026-2:38985:3.1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.1",
+      "destino": "criterio:2026-2:38985:3.1:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.2",
+      "destino": "unidad:38985:3",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.2",
+      "destino": "semana:2026-2:11",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.2",
+      "destino": "evidencia:2026-2:38985:3.2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.2",
+      "destino": "criterio:2026-2:38985:3.2:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.2",
+      "destino": "criterio:2026-2:38985:3.2:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.3",
+      "destino": "unidad:38985:3",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.3",
+      "destino": "semana:2026-2:12",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.3",
+      "destino": "evidencia:2026-2:38985:3.3:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.3",
+      "destino": "criterio:2026-2:38985:3.3:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:3.3",
+      "destino": "criterio:2026-2:38985:3.3:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:4.0",
+      "destino": "unidad:38985:4",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:4.0",
+      "destino": "semana:2026-2:13",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:4.0",
+      "destino": "evidencia:2026-2:38985:4.0:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:4.0",
+      "destino": "criterio:2026-2:38985:4.0:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:4.0",
+      "destino": "criterio:2026-2:38985:4.0:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:5.0",
+      "destino": "unidad:38985:5",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:5.0",
+      "destino": "semana:2026-2:14",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:5.0",
+      "destino": "evidencia:2026-2:38985:5.0:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:5.0",
+      "destino": "criterio:2026-2:38985:5.0:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:5.0",
+      "destino": "criterio:2026-2:38985:5.0:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.0",
+      "destino": "unidad:38985:6",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.0",
+      "destino": "semana:2026-2:15",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.0",
+      "destino": "evidencia:2026-2:38985:6.0:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.0",
+      "destino": "criterio:2026-2:38985:6.0:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.0",
+      "destino": "criterio:2026-2:38985:6.0:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.1",
+      "destino": "unidad:38985:6",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.1",
+      "destino": "semana:2026-2:16",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.1",
+      "destino": "evidencia:2026-2:38985:6.1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.1",
+      "destino": "criterio:2026-2:38985:6.1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.1",
+      "destino": "criterio:2026-2:38985:6.1:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.1",
+      "destino": "criterio:2026-2:38985:6.1:2",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:6.1",
+      "destino": "criterio:2026-2:38985:6.1:3",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:E1",
+      "destino": "unidad:38985:2",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:E1",
+      "destino": "semana:2026-2:8",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:E1",
+      "destino": "evidencia:2026-2:38985:E1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:E1",
+      "destino": "criterio:2026-2:38985:E1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:E2",
+      "destino": "unidad:38985:3",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:E2",
+      "destino": "semana:2026-2:12",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:E2",
+      "destino": "evidencia:2026-2:38985:E2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:E2",
+      "destino": "criterio:2026-2:38985:E2:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:38985:E3",
+      "destino": "unidad:38985:6",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:38985:E3",
+      "destino": "semana:2026-2:15",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:38985:E3",
+      "destino": "evidencia:2026-2:38985:E3:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:38985:E3",
+      "destino": "criterio:2026-2:38985:E3:0",
+      "tipo": "se_evalua_con"
     },
     {
       "origen": "meta:2026-2:39056:0",

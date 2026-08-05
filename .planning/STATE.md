@@ -158,6 +158,28 @@ aportación suya, así que se registró como criterio propio y no como obligator
 Verificado que no contamina: se regeneraron Big Data y Patrones y **la huella del texto no
 cambió**. Cuatro pruebas nuevas lo fijan (179 en total).
 
+## Reconstrucción del curso de Zurisaddai (4 de agosto de 2026)
+
+`cursos/2026-2/38985-contabilidad-financiera/` — su DI pasado por el generador, para ver cómo
+queda. **Validó a la primera**, y con sus criterios impresos: exención en 90, trabajo final como
+requisito, sello en presenciales, 95 % de tareas, código de ética y firma con título. Los
+documentos de Adrian se regeneraron y su huella de texto no cambió.
+
+Lo que se apartó del original, declarado en `avisos:` del propio `curso.yaml`:
+
+| Cambio | Razón |
+|---|---|
+| Ciclo 2026-2, no 2026-1 | Solo existe `calendarios/2026-2.yaml`; el suyo ya pasó |
+| Los tres exámenes son metas propias | En su DI van dentro de la actividad; así, R3 contaría cero y no validaría |
+| Valores en porcentaje, no en puntos | Su rubro declara 150 pts y solo hay 140. No se reproduce el defecto |
+
+La auditoría del grafo reporta **un hueco: «Contabilidad Financiera · 2026-2»** en cursos cuyo PUA
+no está ingerido. Es correcto —falta el PUA 38985— y desaparece en cuanto se ingiera.
+
+Antes de esto se escribió `conocimiento/ejemplos/531-contabilidad-financiera-2026-1.md`, el espejo
+en Markdown de su documento. El banco de conocimientos existe para no abrir binarios y yo llevaba
+tres turnos leyendo el `.docx` con `python-docx` en cada consulta.
+
 ## Lo de Zurisaddai que NO cabe en el modelo actual
 
 Su DI usa una estructura de calificación distinta de la de Adrian. Esto **no** se construyó:

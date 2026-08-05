@@ -1,6 +1,6 @@
 # Auditoría del grafo
 
-Generado: 2026-08-04T15:56:17 · 293 nodos · 545 aristas
+Generado: 2026-08-04T19:17:23 · 377 nodos · 669 aristas
 
 Lo escribe `src/grafo.py`. Cada sección vacía es una buena noticia; una entrada es
 un hueco del diseño que alguien tiene que decidir si cierra o acepta.
@@ -9,20 +9,20 @@ un hueco del diseño que alguien tiene que decidir si cierra o acepta.
 
 | Tipo | Nodos |
 |---|---|
-| pua | 2 |
-| unidad | 10 |
+| pua | 3 |
+| unidad | 16 |
 | tema | 88 |
 | competencia | 12 |
 | practica | 19 |
-| curso | 2 |
-| meta | 32 |
-| evidencia | 35 |
-| criterio | 62 |
+| curso | 3 |
+| meta | 51 |
+| evidencia | 54 |
+| criterio | 98 |
 | semana | 16 |
 | articulo | 9 |
 | plantilla | 1 |
-| profesor | 1 |
-| grupo | 4 |
+| profesor | 2 |
+| grupo | 5 |
 
 ## Temas sin meta que los cubra
 
@@ -54,4 +54,4 @@ _Nada que reportar._
 
 ## Cursos cuyo PUA no está ingerido
 
-_Nada que reportar._
+- Contabilidad Financiera · 2026-2

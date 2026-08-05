@@ -56,6 +56,31 @@ esquemas:
         detalle: "caso de estudio, reporte técnico y exposición"
     exencion_ordinario: 80
 
+  zra-contabilidad:
+    nombre: "Contabilidad Financiera (esquema de Zurisaddai Rubio)"
+    descripcion: "Actividades 30 · Exámenes parciales 50 · Trabajo final 20"
+    # Tomado de la primera tabla de su DI 2026-1. Dos rasgos suyos: los exámenes pesan la
+    # mitad de la calificación, y el trabajo final es además requisito de acreditación
+    # —sin entregarlo completo, la máxima es 50—, criterio que vive en politicas.yaml.
+    #
+    # Su documento reparte las actividades en puntos (10 por meta, 150 declarados) y añade
+    # un segundo nivel: el promedio vale 60 % y el examen ordinario 40 %. Ese segundo nivel
+    # NO existe en el modelo; ver conocimiento/ejemplos/531-contabilidad-financiera-2026-1.md.
+    rubros:
+      - id: actividades
+        etiqueta: "Entrega de actividades en clases y tareas"
+        porcentaje: 30
+      - id: examenes
+        etiqueta: "Exámenes parciales"
+        porcentaje: 50
+        detalle: "tres exámenes: 15 %, 15 % y 20 %"
+        parciales: 3
+      - id: trabajo_final
+        etiqueta: "Trabajo final completo"
+        porcentaje: 20
+        detalle: "conforme a los requisitos de forma y fondo de la rúbrica"
+    exencion_ordinario: 90
+
   practica-laboratorio:
     nombre: "Práctica de laboratorio"
     descripcion: "Para unidades de aprendizaje eminentemente prácticas"

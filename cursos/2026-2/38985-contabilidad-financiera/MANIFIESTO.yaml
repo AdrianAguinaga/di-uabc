@@ -1,0 +1,76 @@
+# Manifiesto de generación. Lo escribe src/generar.py: no lo edites a mano.
+#
+# Regla invariable 7 — todo dato es trazable. De aquí se reconstruye con qué PUA, qué
+# calendario, qué plantilla y qué versión del código salió cada archivo. Si alguien pone
+# en duda una fecha o un porcentaje del documento, se empieza por este archivo.
+#
+# El documento generado es un BORRADOR: requiere la revisión del profesor antes de
+# entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
+generado: '2026-08-04T19:16:19'
+commit: 0d3430c-sucio
+curso:
+  archivo: cursos/2026-2/38985-contabilidad-financiera/curso.yaml
+  sha256: 6f30dd96fba9e6bb4a3ce61e4af45c1c85a83847e2982f5f403216482ac10847
+  ciclo: 2026-2
+  clave: '38985'
+  nombre: Contabilidad Financiera
+  modalidad: semipresencial
+pua:
+  md: ''
+  sha256_declarado: ''
+  coincide: null
+calendario:
+  archivo: calendarios/2026-2.yaml
+  sha256: 537e09b8db7782be4b14ef3508cb4742462e2e1cb3725df0613531517910aa37
+  semanas: 16
+  inicio: 2026-08-10
+  fin: 2026-11-28
+plantilla:
+  modalidad: semipresencial
+  archivo: semipresencial.docx
+  version: 2025-1
+  sha256: ae3c1a67c1df2328fa95ed07887a0994281c4896346fd7fc31819ef03ae44332
+  origen: referencias/CIAD_DI_Plantilla_Semipresencial-2025.docx
+profesor:
+  id: zra
+  nombre: Dra. Zurisaddai Rubio Arriaga
+  correo: rubio.zurisaddai@uabc.edu.mx
+evaluacion:
+  esquema_id: zra-contabilidad
+  exencion_ordinario: 90
+  rubros:
+  - id: actividades
+    porcentaje: 30
+  - id: examenes
+    porcentaje: 50
+  - id: trabajo_final
+    porcentaje: 20
+grupos:
+- numero: '531'
+  aula: Aula
+  dias_presencial:
+  - 1
+  dia_entrega: 5
+  hora_entrega: '10:00'
+  jefe_grupo: null
+validacion:
+  errores: 0
+  avisos:
+  - 'Reconstrucción del DI 2026-1 de la docente sobre el calendario 2026-2: las fechas
+    no son las de su documento original.'
+  - El PUA 38985 no está ingerido. Sin él, las unidades van sin temas y el manifiesto
+    queda sin hash de PUA.
+  - Su documento reparte las actividades en puntos (10 por meta) y declara 150 cuando
+    solo hay 140. Aquí van en porcentaje y suman 30 exacto.
+  - Los tres exámenes se modelaron como metas propias; en su documento viven dentro
+    de la actividad de la meta de esa semana.
+  recordatorios: 5
+archivos:
+- ruta: cursos/2026-2/38985-contabilidad-financiera/salida/DI-2026-2-38985-531.docx
+  grupo: '531'
+  sha256: 352fbc08ad36deb232545c15cd651f66715e9eaf04f057afd75fa0c6ac385a2f
+  bytes: 233739
+- ruta: cursos/2026-2/38985-contabilidad-financiera/salida/DI-2026-2-38985-531.pdf
+  grupo: '531'
+  sha256: 719b3e5e11f57361d392d8919ee2092836dee6e30e5abd689668924d0e9a3be4
+  bytes: 404502
