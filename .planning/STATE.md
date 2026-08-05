@@ -11,9 +11,9 @@
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 9 — El valor de una meta deja de ser un porcentaje |
-| Plan | 6 planes en 5 olas — 09-01 hecho (1/6) |
+| Plan | 6 planes en 5 olas — 09-01, 09-02 y 09-03 hechos (3/6) |
 | Estado | Ejecutando |
-| Última actividad | 2026-08-05 — 09-01: `src/huella.py` construido y la línea base de las cuatro huellas de control registrada (paso 1 de D-15) |
+| Última actividad | 2026-08-05 — olas 1 y 2 cerradas: la huella, el contrato nuevo y la colisión de ids |
 
 Se retoma con `/gsd-execute-phase 9`. Tres decisiones se apartan de cómo el roadmap describió la
 fase y están razonadas en `09-CONTEXT.md`: la evidencia de un componente toca `render_docx.py`
@@ -31,6 +31,17 @@ por documento —texto del `.docx`, informe de validación y forma del `MANIFIES
 39056/962, 39062/971, 39062/972), tomada antes de que ningún plan posterior toque `src/modelo.py`.
 `huella verificar` corre en verde y deja `cursos/` sin cambios (D-23/D-28: no invoca git, restaura
 los bytes que leyó). Detalle en `09-01-SUMMARY.md`.
+
+**La ola 2 —09-02 y 09-03— quedó hecha el 5 de agosto de 2026, en paralelo.** El contrato
+`curso.yaml` ya sabe decir «10 pts de 150»: `Rubro` acepta `unidad`, `total` y `base`, y convierte a
+porcentaje cuando alguien se lo pide; `Meta` acepta `componentes` con su tipo y su evidencia; y los
+identificadores de meta quedaron libres. `src/modelo.py` se extendió, nunca se reemplazó, y
+`pruebas/test_modelo.py` nace con 18 pruebas que hasta ahora vivían implícitas dentro de
+`test_validar.py`. En el otro frente, R2 gana tres líneas que denuncian dos metas con el mismo id
+—el hueco que abrían los ids libres, y que habría hecho que `src/grafo.py` pisara un nodo con
+otro—. La aritmética de R1 y R2 no se tocó: contar en la unidad declarada es la Fase 10.
+
+212 pruebas en verde después del merge de los dos worktrees.
 
 ## Progreso de la v2.0
 

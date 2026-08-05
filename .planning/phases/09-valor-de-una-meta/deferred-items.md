@@ -13,3 +13,9 @@
   (los únicos archivos de 09-03). Fuera de alcance según la regla de límite del executor.
 - **Siguiente paso sugerido:** re-verificar en solitario (sin ejecución paralela) al cerrar la
   fase, antes de dar la suite completa por buena.
+- **Resuelto (5 de agosto de 2026, al cerrar la ola 2):** la causa probable era la correcta. Con
+  los dos worktrees ya fusionados y sin ejecución concurrente, la suite completa da 212 pruebas en
+  verde, esta incluida. No hay defecto que arreglar. Queda como nota de operación: la suite dispara
+  Word por COM y `tasklist` ve toda la máquina, así que **esta prueba no tolera dos corridas
+  simultáneas** —el aislamiento por worktree no la cubre, porque Word no es un recurso del
+  directorio de trabajo—.
