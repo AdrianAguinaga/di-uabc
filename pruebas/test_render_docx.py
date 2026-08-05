@@ -301,5 +301,61 @@ class ErroresDeEntrada(unittest.TestCase):
             render_docx.generar(curso, curso.grupos[0], Path(tempfile.gettempdir()) / "x.docx")
 
 
+class EvidenciaDeComponente(unittest.TestCase):
+    """La evidencia de un componente tiene que llegar al documento; su ausencia, no cambiarlo.
+
+    La segunda mitad es la que defiende REQ-48: Big Data no declara componentes y su
+    documento debe salir carácter por carácter igual que antes de esta fase.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = Path(tempfile.mkdtemp(prefix="di-componente-"))
+        cls.base = cls.render(modelo.cargar(CURSO), "base")
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(cls.tmp, ignore_errors=True)
+
+    @classmethod
+    def render(cls, curso, nombre):
+        destino = cls.tmp / f"{nombre}.docx"
+        render_docx.generar(curso, curso.grupos[0], destino)
+        return texto(docx.Document(str(destino)))
+
+    def test_una_lista_de_componentes_vacia_no_cambia_ni_un_caracter(self):
+        """Es la mitad de REQ-48 que se puede probar sin generar el paquete completo."""
+        curso = modelo.cargar(CURSO)
+        for m in curso.metas:
+            m.componentes = []
+        self.assertEqual(self.base, self.render(curso, "vacios"))
+
+    def test_la_evidencia_del_componente_se_concatena_a_las_de_su_meta(self):
+        curso = modelo.cargar(CURSO)
+        meta = next(m for m in curso.metas if m.evidencias)
+        meta.componentes = [
+            modelo.Componente(
+                rubro="examenes", valor=15, etiqueta="Examen I", tipo="examen_parcial",
+                evidencia=modelo.Evidencia(nombre="Examen I resuelto", tipo="examen"),
+            )
+        ]
+        salida = self.render(curso, "con-componente")
+        self.assertNotIn("Examen I resuelto", self.base)
+        self.assertIn(f"{meta.evidencias[-1].nombre}, Examen I resuelto", salida)
+
+    def test_un_componente_sin_evidencia_no_agrega_nada(self):
+        """Un componente puede existir solo para imputar valor a otro rubro."""
+        curso = modelo.cargar(CURSO)
+        curso.metas[1].componentes = [
+            modelo.Componente(rubro="examenes", valor=15, etiqueta="Examen I",
+                              tipo="examen_parcial")
+        ]
+        self.assertEqual(self.base, self.render(curso, "sin-evidencia"))
+
+    def test_la_columna_valor_sigue_en_porcentaje(self):
+        """Frontera con la Fase 13: imprimir el valor en puntos no es de esta fase."""
+        self.assertIn("10%", self.base)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
