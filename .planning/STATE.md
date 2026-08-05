@@ -1,9 +1,9 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-04
+**Última actualización**: 2026-08-05
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (contexto recogido)
+**Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (planeada)
 
 ## Posición actual
 
@@ -11,21 +11,25 @@
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 9 — El valor de una meta deja de ser un porcentaje |
-| Plan | — |
-| Estado | Contexto recogido; falta planear |
-| Última actividad | 2026-08-04 — 22 decisiones de la Fase 9, en `09-CONTEXT.md` |
+| Plan | 6 planes en 5 olas, sin ejecutar |
+| Estado | Lista para ejecutar |
+| Última actividad | 2026-08-05 — Fase 9 planeada; verificación de planes en verde |
 
-Se retoma en `.planning/phases/09-valor-de-una-meta/09-CONTEXT.md`. Dos decisiones se apartan de
-cómo el roadmap describió la fase y están razonadas ahí: la evidencia de un componente toca
-`render_docx.py` (D-11), y el encuadre de Big Data se renombra de verdad, gastando la primera
-excepción a REQ-48 (D-14) — con el orden de pasos fijado en D-15 para que el instrumento demuestre
-algo antes de que se le pida esa excepción.
+Se retoma con `/gsd-execute-phase 9`. Tres decisiones se apartan de cómo el roadmap describió la
+fase y están razonadas en `09-CONTEXT.md`: la evidencia de un componente toca `render_docx.py`
+(D-11); el encuadre de Big Data se renombra de verdad, gastando la primera excepción a REQ-48
+(D-14) —con el orden de pasos fijado en D-15/D-24 para que el instrumento demuestre algo antes de
+que se le pida esa excepción—; y la forma del `MANIFIESTO.yaml` acabó entrando en la huella (D-27),
+que D-19 había dejado fuera.
+
+Las cinco olas no son fruto de optimizar paralelismo: las fija D-15. `src/huella.py` y su línea
+base van primero, antes de que nada toque el modelo; el renombrado de Big Data es lo último.
 
 ## Progreso de la v2.0
 
 | Fase | Requisitos | Estado |
 |---|---|---|
-| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Contexto recogido |
+| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Planeada — 6 planes |
 | 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | Sin empezar |
 | 11. El segundo nivel de la calificación | REQ-41, REQ-46 | Sin empezar |
 | 12. La rúbrica en el contrato | REQ-43, REQ-47 | Sin empezar |
