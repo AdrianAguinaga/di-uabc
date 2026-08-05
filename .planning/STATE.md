@@ -1,7 +1,7 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-05 (ola 3, plan 09-04)
+**Última actualización**: 2026-08-05 (ola 4, plan 09-05)
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
 **Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (en ejecución)
 
@@ -11,9 +11,9 @@
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 9 — El valor de una meta deja de ser un porcentaje |
-| Plan | 6 planes en 5 olas — 09-01, 09-02, 09-03 y 09-04 hechos (4/6) |
-| Estado | Ejecutando |
-| Última actividad | 2026-08-05 — ola 3 cerrada: la evidencia de un componente llega a la Sección 2 |
+| Plan | 6 planes en 5 olas — 09-01 a 09-05 hechos (5/6) |
+| Estado | Ejecutando — 09-06 esperando la verificación humana |
+| Última actividad | 2026-08-05 — ola 4 cerrada: el encuadre de Big Data se llama 1.0 y su huella se aceptó |
 
 Se retoma con `/gsd-execute-phase 9`. Tres decisiones se apartan de cómo el roadmap describió la
 fase y están razonadas en `09-CONTEXT.md`: la evidencia de un componente toca `render_docx.py`
@@ -53,11 +53,29 @@ REQ-48 sostenido sin gastar la excepción que corresponde a 09-05.
 
 216 pruebas en verde.
 
+**09-05 (ola 4) quedó hecho el 5 de agosto de 2026.** La secuencia de D-15/D-24 corrió en su orden:
+`huella verificar` en verde tras abrir el contrato (el rasgo nuevo no se activa si el `curso.yaml` no
+lo declara), renombrado del encuadre de Big Data de `0` a `1.0` en una sola línea, `src/grafo.py`
+regenerado con **la misma forma —377 nodos, 669 aristas—**, `huella verificar` señalando solo 39056 y
+dejando 39062 intacto, y `huella registrar` aceptando el cambio.
+
+**Criterio 3 demostrado con medición, no con inspección**: revirtiendo en el texto del `.docx` las
+apariciones del identificador, el sha coincide **exacto** con la línea base previa al renombrado, en
+961 y en 962. Ninguna función de `src/` deducía el encuadre por su id. Un matiz que el plan no
+preveía: el id aparece en **tres** cadenas, no en una —«Meta 1.0.» en la Sección 2, «Meta 1.0.» en la
+Sección 3 y «La meta 1.0 equivale al 0%…» en la línea de valor—. Las tres son el identificador
+impreso; no hay ninguna otra diferencia.
+
+Dos cosas quedaron anotadas para el cierre de la fase: el recurso `M0_Foro de presentación` sigue
+llamándose `M0_` con su meta ya en `1.0` (deliberado, D-14, a acordar con el docente), y
+`huella registrar` genera con `pdf=False`, así que los `MANIFIESTO.yaml` **dejaron de listar los
+`.pdf`** y los PDFs de 39056 que hay en disco son anteriores al renombrado.
+
 ## Progreso de la v2.0
 
 | Fase | Requisitos | Estado |
 |---|---|---|
-| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Ejecutando — 4/6 planes |
+| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Ejecutando — 5/6 planes |
 | 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | Sin empezar |
 | 11. El segundo nivel de la calificación | REQ-41, REQ-46 | Sin empezar |
 | 12. La rúbrica en el contrato | REQ-43, REQ-47 | Sin empezar |
