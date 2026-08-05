@@ -3,7 +3,7 @@
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
 **Última actualización**: 2026-08-05
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (planeada)
+**Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (en ejecución)
 
 ## Posición actual
 
@@ -11,9 +11,9 @@
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 9 — El valor de una meta deja de ser un porcentaje |
-| Plan | 6 planes en 5 olas, sin ejecutar |
-| Estado | Lista para ejecutar |
-| Última actividad | 2026-08-05 — Fase 9 planeada; verificación de planes en verde |
+| Plan | 6 planes en 5 olas, en ejecución |
+| Estado | Ejecutando |
+| Última actividad | 2026-08-05 — arranca la ejecución de la Fase 9 por olas |
 
 Se retoma con `/gsd-execute-phase 9`. Tres decisiones se apartan de cómo el roadmap describió la
 fase y están razonadas en `09-CONTEXT.md`: la evidencia de un componente toca `render_docx.py`
