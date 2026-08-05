@@ -148,8 +148,11 @@ def _generar_control(restaurar_manifiesto: bool) -> dict[str, dict]:
         except generar.ErrorGenerar as e:
             raise ErrorHuella(f"{rel}: no se pudo generar — {e}") from e
         finally:
-            if restaurar_manifiesto and previo is not None:
-                manifiesto.write_bytes(previo)
+            if restaurar_manifiesto:
+                if previo is not None:
+                    manifiesto.write_bytes(previo)
+                else:
+                    manifiesto.unlink(missing_ok=True)
         informe = sha_texto(paq.informe.texto())
         for a in paq.archivos:
             if a.suffix != ".docx":

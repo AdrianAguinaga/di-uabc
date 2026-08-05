@@ -13,6 +13,7 @@ from __future__ import annotations
 import shutil
 import sys
 import tempfile
+import types
 import unittest
 from pathlib import Path
 
@@ -194,6 +195,61 @@ class FormaDelManifiesto(EnRegistroTemporal):
         h1 = huella.forma_del_manifiesto(self._escribir(a))
         h2 = huella.forma_del_manifiesto(self._escribir(b))
         self.assertNotEqual(h1, h2)
+
+
+class GeneracionDeControl(EnRegistroTemporal):
+    """Ejercita `_generar_control`, lo único que toca archivos reales del repo.
+
+    `generar.paquete` se sustituye por un doble ligero que solo escribe un
+    MANIFIESTO.yaml, como hace el real, sin invocar Word: generar dos cursos
+    completos aquí rompería el tiempo de la suite (D-18)."""
+
+    def setUp(self):
+        super().setUp()
+        self._raiz = huella.RAIZ
+        self._control = huella.CONTROL
+        self._paquete_original = huella.generar.paquete
+        huella.RAIZ = self.tmp
+        curso_dir = self.tmp / "curso-control"
+        curso_dir.mkdir()
+        (curso_dir / "curso.yaml").write_text("x: 1\n", encoding="utf-8")
+        huella.CONTROL = (("curso-control/curso.yaml", ("961",)),)
+        self.manifiesto = curso_dir / "MANIFIESTO.yaml"
+
+        def falso(ruta, pdf, grupos):
+            ruta.parent.joinpath("MANIFIESTO.yaml").write_text(
+                yaml.safe_dump(MANIFIESTO_DE_PRUEBA, allow_unicode=True, sort_keys=False),
+                encoding="utf-8",
+            )
+            return types.SimpleNamespace(
+                curso=types.SimpleNamespace(ciclo="2026-2", clave="39056"),
+                informe=types.SimpleNamespace(texto=lambda: "informe de prueba"),
+                archivos=[],
+                manifiesto=self.manifiesto,
+            )
+
+        huella.generar.paquete = falso
+
+    def tearDown(self):
+        huella.RAIZ = self._raiz
+        huella.CONTROL = self._control
+        huella.generar.paquete = self._paquete_original
+        super().tearDown()
+
+    def test_verificar_no_deja_el_manifiesto_si_no_existia_antes(self):
+        """WR-01: si el MANIFIESTO.yaml no existía antes de la corrida,
+        restaurar_manifiesto=True debe borrarlo, no dejarlo escrito -- de lo
+        contrario verificar() deja de ser de solo lectura sobre el repo (D-28)."""
+        self.assertFalse(self.manifiesto.exists())
+        huella._generar_control(restaurar_manifiesto=True)
+        self.assertFalse(self.manifiesto.exists())
+
+    def test_verificar_restaura_el_manifiesto_que_ya_existia(self):
+        """La otra mitad del mismo `if`: si sí había un MANIFIESTO.yaml antes,
+        debe quedar exactamente como estaba, no con lo recién generado."""
+        self.manifiesto.write_text("previo: true\n", encoding="utf-8")
+        huella._generar_control(restaurar_manifiesto=True)
+        self.assertEqual("previo: true\n", self.manifiesto.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
