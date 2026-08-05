@@ -263,6 +263,18 @@ def _seccion_2(doc, curso: Curso, grupo: Grupo, cal: calendario.Calendario, cfg:
                 ancla = tr
 
 
+def _evidencias(meta: Meta) -> list[str]:
+    """Los nombres de evidencia que se imprimen para una meta: las suyas y las de sus
+    componentes.
+
+    Una meta sin componentes produce exactamente la lista de siempre — de eso depende que
+    los cursos que no declaran el rasgo salgan carácter por carácter iguales.
+    """
+    return [e.nombre for e in meta.evidencias] + [
+        c.evidencia.nombre for c in meta.componentes if c.evidencia
+    ]
+
+
 def _filas_de_meta(meta: Meta, proto: list, cal, dividida: bool) -> list:
     """Las filas de la tabla que corresponden a una meta (dos si la entrega se divide)."""
     sesiones = meta.sesiones or []
@@ -281,7 +293,7 @@ def _filas_de_meta(meta: Meta, proto: list, cal, dividida: bool) -> list:
                calendario.texto_fecha_corta(s.fecha) if s and s.fecha else "")
         _celda(tr, 4 if dividida else 3, s.actividad_tabla if s else "")
         _celda(tr, 5 if dividida else 4,
-               ", ".join(e.nombre for e in meta.evidencias) if ultima else "")
+               ", ".join(_evidencias(meta)) if ultima else "")
         _celda(tr, 6 if dividida else 5,
                f"{meta.valor:g}%" if ultima else "")
         filas.append(tr)
