@@ -30,6 +30,7 @@ DIR_CONFIG = RAIZ / "config"
 MODALIDADES = ("semipresencial", "escolarizada", "a_distancia")
 TIPOS_META = ("encuadre", "aprendizaje", "examen_parcial", "cierre")
 AMBIENTES = ("presencial", "virtual")
+UNIDADES_RUBRO = ("puntos",)  # ausente = porcentaje
 
 
 class ErrorModelo(Exception):
@@ -120,7 +121,7 @@ class Meta:
     unidad: str  # romano, coincide con el PUA
     tipo: str = "aprendizaje"
     rubro: str = "tareas"
-    valor: float = 0.0  # porcentaje de la calificación final
+    valor: float = 0.0  # en la unidad de su rubro: porcentaje, o puntos si el rubro los declara
     semanas: list[int] = field(default_factory=list)
     caracter: str = "individual"
     que_voy_a_aprender: list[str] = field(default_factory=list)
@@ -162,6 +163,41 @@ class Rubro:
     porcentaje: float
     detalle: str = ""
     parciales: int = 0
+    unidad: str = ""            # ausente = porcentaje; "puntos" = los valores de sus metas son pts
+    total: float | None = None  # los puntos que reparte el rubro. Obligatorio si unidad == "puntos"
+
+    def __post_init__(self) -> None:
+        if self.unidad and self.unidad not in UNIDADES_RUBRO:
+            raise ErrorModelo(
+                f"Rubro {self.id}: unidad inválida {self.unidad!r}. "
+                f"Válidas: {', '.join(UNIDADES_RUBRO)} (o ausente, para porcentaje)."
+            )
+        if self.unidad == "puntos":
+            if self.total is None:
+                raise ErrorModelo(
+                    f"Rubro {self.id}: declara unidad «puntos» sin `total`. "
+                    f"Un rubro en puntos debe declarar su total (p. ej. `total: 150`). "
+                    f"No se infiere de la suma de sus metas: esa diferencia es justo lo que "
+                    f"las reglas tienen que poder ver."
+                )
+            if self.total <= 0:
+                raise ErrorModelo(
+                    f"Rubro {self.id}: `total` debe ser mayor que 0, no {self.total:g}."
+                )
+
+    @property
+    def base(self) -> float:
+        """El total contra el que se leen los valores de sus metas."""
+        return float(self.total) if self.unidad == "puntos" else float(self.porcentaje)
+
+    def a_porcentaje(self, valor: float) -> float:
+        """Convierte un valor escrito en la unidad de este rubro a % de la calificación final.
+
+        Para un rubro en porcentaje es la identidad, así que quien compara nunca tiene que
+        preguntar en qué unidad está: llama siempre a esto. No redondea — el redondeo es
+        decisión de quien compara.
+        """
+        return 0.0 if not self.base else valor / self.base * self.porcentaje
 
 
 @dataclass
