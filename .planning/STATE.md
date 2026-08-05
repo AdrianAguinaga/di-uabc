@@ -3,21 +3,40 @@
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
 **Última actualización**: 2026-08-04
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: ninguna todavía — definiendo requisitos
+**Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (sin empezar)
 
 ## Posición actual
 
 | | |
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
-| Fase | Sin empezar (definiendo requisitos) |
+| Fase | 9 — El valor de una meta deja de ser un porcentaje |
 | Plan | — |
-| Estado | Definiendo requisitos |
-| Última actividad | 2026-08-04 — arranca el milestone v2.0 |
+| Estado | Roadmap levantado; falta desglosar la fase |
+| Última actividad | 2026-08-04 — roadmap de la v2.0, fases 9 a 14 |
+
+## Progreso de la v2.0
+
+| Fase | Requisitos | Estado |
+|---|---|---|
+| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Sin empezar |
+| 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | Sin empezar |
+| 11. El segundo nivel de la calificación | REQ-41, REQ-46 | Sin empezar |
+| 12. La rúbrica en el contrato | REQ-43, REQ-47 | Sin empezar |
+| 13. El documento en la unidad real | REQ-44 | Sin empezar |
+| 14. 38985 sin traducirse | REQ-49 | Sin empezar |
+
+El orden es el de la v1.0 y por la misma razón: **modelo → validación → renderizado → ejercicio
+real**. `curso.yaml` es el contrato; si el renderizador tuviera que decidir algo, faltaría un campo
+en el modelo.
+
+**REQ-48 —la no contaminación— no es una fase, es el criterio de cierre de las seis.** Al terminar
+cada una se regeneran 39056 y 39062 y se comprueba que su huella de texto no cambió. El comando que
+lo comprueba se construye en la Fase 9. Las 179 pruebas actuales pasan al final de cada fase:
+ninguna se rompe, se añaden.
 
 La **v1.0 quedó cerrada** con sus 8 fases hechas y tres materias generadas de extremo a extremo.
-Todo lo que sigue bajo «Progreso» y más abajo es su registro, que se conserva como contexto
-acumulado.
+Todo lo que sigue es su registro, que se conserva como contexto acumulado.
 
 ---
 
@@ -313,8 +332,10 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
 
 ## Siguiente paso
 
-Definir los requisitos del milestone v2.0 y levantar su roadmap. Después, `/gsd-discuss-phase` de
-la primera fase.
+`/gsd-plan-phase 9` — desglosar la Fase 9. El juicio pedagógico que toca esa fase pertenece a la
+planeación, no a la ejecución: cómo se redacta el segundo nivel para que el alumno lo entienda, y
+cómo se reparte una meta que aporta a dos rubros sin dejar de ser una sola meta con una sola semana.
 
 Fuera del roadmap, en cuanto el usuario deje el PDF en `puas/fuente/`: `/di-pua` sobre el PUA 38985.
-Eso no pasa por GSD — es poner en marcha lo que ya existe.
+Eso no pasa por GSD — es poner en marcha lo que ya existe. No bloquea la v2.0, pero la Fase 14 sale
+más completa con él: sin el PUA, las unidades de Contabilidad van sin temas y el manifiesto sin hash.

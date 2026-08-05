@@ -151,3 +151,34 @@ hubo que **traducir** su estructura para que validara. Estos requisitos cierran 
   —rubro en puntos, segundo nivel 60/40, metas `1.0`, tres exámenes dentro de la actividad, rúbrica
   de 100 puntos— y **valida sin traducirse**, con el defecto de los 150/140 puntos reportado como
   error y no reproducido en silencio.
+
+## Trazabilidad
+
+Cada requisito de la v2.0 se entrega en **una sola** fase. La numeración continúa la de la v1.0,
+cuyas ocho fases cerraron (REQ-01 a REQ-37, validados).
+
+| Requisito | Fase | Estado |
+|---|---|---|
+| REQ-38 · rubro en puntos | Fase 9 — El valor de una meta deja de ser un porcentaje | Pendiente |
+| REQ-39 · meta con componentes | Fase 9 | Pendiente |
+| REQ-42 · identificador de meta libre | Fase 9 | Pendiente |
+| REQ-40 · R3 cuenta componentes `examen_parcial` | Fase 10 — Las reglas cuentan en la unidad declarada | Pendiente |
+| REQ-45 · R1 y R2 en la unidad de cada rubro | Fase 10 | Pendiente |
+| REQ-41 · segundo nivel promedio + ordinario | Fase 11 — El segundo nivel de la calificación | Pendiente |
+| REQ-46 · R1 con segundo nivel y exención contra el promedio | Fase 11 | Pendiente |
+| REQ-43 · rúbrica declarada en `curso.yaml` | Fase 12 — La rúbrica en el contrato | Pendiente |
+| REQ-47 · los puntos de la rúbrica suman su total | Fase 12 | Pendiente |
+| REQ-44 · la rúbrica se renderiza como tabla | Fase 13 — El documento en la unidad real | Pendiente |
+| REQ-49 · 38985 valida sin traducirse | Fase 14 — 38985 sin traducirse | Pendiente |
+| **REQ-48 · no contaminación** | **Criterio de cierre de las seis fases** | Pendiente |
+
+**REQ-48 no es una fase.** Es la condición de cierre de cada una: al terminar la 9, la 10, la 11,
+la 12, la 13 y la 14 se regeneran 39056 y 39062 y se comprueba que su huella de texto no cambió.
+Su instrumento —el comando que compara— se construye en la Fase 9 y lo heredan las demás.
+
+El renderizado de los puntos, de los componentes y del segundo nivel no lleva requisito propio:
+son la cara visible de REQ-38, REQ-39 y REQ-41, y se entregan en la Fase 13 junto a REQ-44, que sí
+es exclusivamente de renderizado. Ninguno de los tres se da por cerrado hasta que aparece
+correctamente en el documento.
+
+**Cobertura: 12/12 requisitos de la v2.0 mapeados. Ningún huérfano, ningún duplicado.**

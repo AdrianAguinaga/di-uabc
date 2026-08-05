@@ -1,17 +1,186 @@
 # Roadmap: Generador de Diseño Instruccional UABC
 
-## Panorama
+## Panorama — v2.0 Estructura de calificación variable
+
+La v1.0 dejó un generador que produce el DI de Adrian de extremo a extremo. Este milestone hace
+que produzca también el de **otra docente**, cuya aritmética de la nota no se parece a la suya:
+las metas valen puntos, los exámenes viven dentro de la actividad de otra meta, y todo el promedio
+del curso vale a su vez el 60 % de la calificación final.
+
+El orden es el mismo que en la v1.0 y por la misma razón: **modelo → validación → renderizado →
+ejercicio real**. `curso.yaml` es el contrato; si al llegar al renderizado hiciera falta *decidir*
+algo —si estos 10 son puntos o por cientos, si este examen cuenta o no—, es que faltó un campo en
+el modelo. Por eso el contrato se abre primero (Fase 9), las reglas se reescriben contra un
+contrato ya estable (Fase 10), y el documento se toca al final (Fase 13), cuando ya no queda nada
+que inferir.
+
+Dos rasgos —el segundo nivel y la rúbrica— son **aditivos**: no tocan la aritmética existente y su
+regla es nueva, así que cada uno entra entero, modelo y regla en la misma fase (11 y 12). Los otros
+tres —puntos, componentes, identificadores libres— sí muerden R1, R2 y R3, que ya están escritas y
+tienen pruebas; por eso ahí sí se separa el contrato de las reglas.
+
+**El criterio de cierre de todas las fases es el mismo (REQ-48): la no contaminación.** Ningún
+rasgo se enciende si el `curso.yaml` no lo declara. Regenerar Big Data (39056) y Patrones (39062)
+al terminar cada fase debe dejar su **huella de texto idéntica**, y ni `grafo/` ni
+`MANIFIESTO.yaml` deben cambiar de forma. Si cambia un carácter de un documento de Adrian, la fase
+está mal aunque las pruebas pasen. Es la misma prueba que se aplicó al registrar los criterios
+propios de cada docente, y el instrumento para correrla se construye en la Fase 9 para que las
+cinco siguientes lo hereden.
+
+Las 179 pruebas actuales pasan al final de cada fase. Ninguna se rompe; se añaden.
+
+El punto de mayor riesgo es la Fase 13: la tabla de rúbrica es un elemento que **la plantilla CIAD
+no trae**. Hay que decidir de qué prototipo del propio documento se clona, porque el renderizado
+clona y no construye — y elegir mal el molde no da error, da un documento con el formato torcido.
+Todo lo anterior existe para que al llegar ahí los datos ya estén completos y validados.
+
+## Fases
+
+- [ ] **Fase 9: El valor de una meta deja de ser un porcentaje** — puntos, componentes e identificadores libres en el contrato
+- [ ] **Fase 10: Las reglas cuentan en la unidad declarada** — R2 en puntos, R3 con exámenes dentro de la actividad
+- [ ] **Fase 11: El segundo nivel de la calificación** — promedio 60 % + ordinario 40 %, y la exención contra el promedio
+- [ ] **Fase 12: La rúbrica en el contrato** — filas, puntos y total declarados, con su regla
+- [ ] **Fase 13: El documento en la unidad real** — puntos, componentes, dos niveles y la tabla de rúbrica
+- [ ] **Fase 14: 38985 sin traducirse** — la prueba de fuego del milestone
+
+## Detalle
+
+### Fase 9: El valor de una meta deja de ser un porcentaje
+**Meta**: que `curso.yaml` pueda decir en qué unidad vale cada meta, a qué rubros aporta y cómo se
+llama, sin que nada de eso cambie el significado de un curso que no lo declare.
+**Depende de**: nada nuevo — parte del modelo de la Fase 5.
+**Requisitos**: REQ-38, REQ-39, REQ-42
+**Criterios de éxito**:
+1. Un `curso.yaml` que declare «Actividades 30 %» con sus valores **en puntos** y total `150`,
+   junto a «Exámenes 50 %» en porcentaje, carga sin `ErrorModelo`. Lo que se reporte después son
+   hallazgos de reglas, no un esquema rechazado.
+2. Una meta que declare un componente adicional —rubro, valor, etiqueta, tipo— sigue siendo **una
+   sola meta con una sola semana**: ni `len(curso.metas)` ni sus semanas cambian respecto a la
+   misma meta sin componente.
+3. Metas con id `1.0`, `2.0` y `6.0` cargan y conservan el orden en que se declararon. Renombrar
+   el encuadre `0` de Big Data a `1.0` deja el documento igual salvo esa cadena: ninguna función
+   de `src/` deduce el encuadre por su id ni supone que la primera meta de una unidad termina
+   en `.1`.
+4. Existe un comando que regenera 39056 y 39062 y compara su huella de texto contra la registrada,
+   y corre en verde. Es el instrumento de REQ-48 para las cinco fases siguientes.
+5. `python -X utf8 -m unittest discover -s pruebas` pasa: las 179 anteriores intactas más las
+   nuevas.
+**Planes**: TBD
+
+### Fase 10: Las reglas cuentan en la unidad declarada
+**Meta**: que R2 y R3 sigan atrapando lo que atrapaban, y además atrapen el defecto real del 531.
+**Depende de**: Fase 9.
+**Requisitos**: REQ-40, REQ-45
+**Criterios de éxito**:
+1. `python src/validar.py` sobre un curso cuyo rubro en puntos declara **150** y cuyas metas suman
+   **140** reporta un error de R2 redactado en puntos, no en por cientos. Es el defecto verificado
+   del DI de Contabilidad, hermano del que ya se atrapa en el 961.
+2. Corregido el total a 140 pts, ese mismo curso pasa R2 aunque el rubro vecino esté en porcentaje:
+   R2 compara dentro de cada rubro y **nunca suma unidades distintas entre sí**.
+3. `test_detecta_el_defecto_del_ejemplo_961` sigue pasando **sin tocarse**. El defecto en
+   porcentajes se sigue denunciando; la regla se amplió, no se reescribió.
+4. R3 cuenta los exámenes que viven como componente de la actividad de otra meta: un curso con tres
+   componentes `examen_parcial` y **ninguna** meta de ese tipo pasa R3, y con uno solo falla con el
+   mensaje del Art. 68. Hay una prueba que lo hace fallar a propósito.
+5. Cierre (REQ-48): 39056 y 39062 conservan su huella de texto y sus informes de validación no
+   cambian ni un hallazgo.
+**Planes**: TBD
+
+### Fase 11: El segundo nivel de la calificación
+**Meta**: que un curso pueda declarar que todo lo anterior vale el 60 % y el examen ordinario el
+40 %, y que la exención se entienda contra el promedio y no contra la nota final.
+**Depende de**: Fase 9 (contrato estable). No depende de la Fase 10: es aritmética nueva sobre
+reglas nuevas.
+**Requisitos**: REQ-41, REQ-46
+**Criterios de éxito**:
+1. Un curso que declare promedio 60 % + ordinario 40 % valida; con 60 y 30, R1 reporta error
+   diciendo que el segundo nivel no suma 100.
+2. Un curso que **no** declara segundo nivel se comporta exactamente como hoy —el promedio *es* la
+   calificación—: 39056 y 39062 producen el mismo informe y el mismo documento, carácter por
+   carácter.
+3. Un `curso.yaml` con segundo nivel que declare la exención contra la **calificación final** es
+   rechazado por R1, con un mensaje que explica la diferencia. La exención de 90 de `zra` se lee
+   contra el promedio del curso, que es lo que dice su DI.
+4. Cierre (REQ-48): huella de 39056 y 39062 sin cambios; `grafo/` y `MANIFIESTO.yaml` conservan su
+   forma.
+**Planes**: TBD
+
+### Fase 12: La rúbrica en el contrato
+**Meta**: que la rúbrica del trabajo final se pueda **declarar** y verificar, sin que el generador
+redacte un solo criterio.
+**Depende de**: Fase 9 solo por orden de trabajo; toca claves nuevas del contrato, no las que
+cambiaron antes.
+**Requisitos**: REQ-43, REQ-47
+**Criterios de éxito**:
+1. `curso.yaml` declara una rúbrica —concepto, puntos y descripción por fila, con su total— asociada
+   a una meta o al trabajo final del curso, y el modelo la carga.
+2. `python src/validar.py` reporta error cuando las filas suman 98 o 102 contra un total declarado
+   de 100. Hay una prueba que lo hace fallar a propósito.
+3. Los textos de la rúbrica salen tal cual del `curso.yaml`: no hay ninguna ruta del código que
+   componga, complete o reformule una descripción (sigue vigente REQ-26).
+4. Cierre (REQ-48): un curso sin `rubrica:` no cambia en nada; 39056 y 39062 conservan su huella.
+**Planes**: TBD
+
+### Fase 13: El documento en la unidad real
+**Meta**: que lo que el alumno lee diga lo que el `curso.yaml` declara — puntos donde hay puntos,
+los dos niveles de la nota, y la rúbrica como tabla.
+**Depende de**: Fases 10, 11 y 12.
+**Requisitos**: REQ-44
+**Criterios de éxito**:
+1. El `.docx` abre en Word y la columna Valor de una meta en puntos dice «10 pts»; las metas de un
+   rubro en porcentaje siguen diciendo «%», en el mismo documento.
+2. La Sección 3 de una meta con componente imprime las dos cosas: su valor en la unidad de su
+   rubro y el componente con su etiqueta y su valor —«Examen I, 15 %»— sin partir la meta en dos.
+3. «Criterios de evaluación del curso» imprime los dos niveles: los rubros que suman 100 y, debajo,
+   promedio 60 % + examen ordinario 40 % = 100 %.
+4. La tabla de rúbrica aparece con sus filas y su renglón de total, con los bordes y la tipografía
+   de las demás tablas del documento, clonada de un prototipo del propio documento y no construida
+   desde cero. Word la abre sin pedir reparar el archivo.
+5. `python src/plantillas.py verificar` pasa después de generar, y cierre (REQ-48): la huella de
+   39056 y 39062 no cambia ni un carácter.
+**Planes**: TBD
+
+### Fase 14: 38985 sin traducirse
+**Meta**: la prueba de fuego. El curso de Zurisaddai, con su estructura real, validado y generado
+sin haber tenido que reescribir su forma de calificar.
+**Depende de**: Fase 13.
+**Requisitos**: REQ-49
+**Criterios de éxito**:
+1. `cursos/2026-2/38985-contabilidad-financiera/curso.yaml` declara la estructura de su DI de
+   origen: «Actividades 30 %» en puntos, «Exámenes 50 %» y «Trabajo final 20 %» en porcentaje,
+   segundo nivel 60/40, metas `1.0`…`6.1`, los tres exámenes como componentes de las metas 2.4, 3.3
+   y 6.0, y la rúbrica de 100 puntos del trabajo final.
+2. `python src/validar.py` sobre ese archivo reporta **el defecto de origen y no otra cosa**: el
+   rubro de actividades declara 150 pts y sus metas suman 140. Ni se reproduce en silencio ni se
+   disimula repartiendo los puntos.
+3. Resuelto el defecto por decisión documentada —declarar 140 o añadir la meta que falta—,
+   `python src/generar.py` produce el `.docx` y el `.pdf` del grupo 531 con su `MANIFIESTO.yaml`.
+4. Los `avisos:` de ese `curso.yaml` ya no mencionan ninguna traducción: quedan solo el ciclo
+   2026-2 —porque su calendario 2026-1 ya pasó— y las metas redactadas por el agente, pendientes de
+   revisión de la docente.
+5. Cierre (REQ-48): 39056 y 39062 regenerados conservan su huella de texto, y la suite completa
+   —179 anteriores más las del milestone— pasa.
+**Planes**: TBD
+
+---
+
+## Milestone v1.0 — cerrado
+
+Ocho fases hechas, tres materias generadas de extremo a extremo. Se conserva el detalle porque es
+el registro de lo que cada fase prometió y de contra qué se verificó.
+
+### Panorama
 
 De un PDF de PUA a un DI firmable en `.docx` y `.pdf`. Se construye de abajo hacia arriba: primero
 los cimientos y el banco de conocimientos que da contexto a los agentes, luego los dos motores que
 aportan los datos duros (calendario y PUA), después el modelo que los une y lo valida, y al final
 el renderizado, el orquestador que lo hace usable y el grafo que lo hace consultable.
 
-El punto de mayor riesgo es la Fase 6: rellenar las plantillas CIAD reales sin destruir su formato.
-Por eso todo lo anterior existe — para que cuando se llegue ahí, los datos ya estén completos y
-validados.
+El punto de mayor riesgo fue la Fase 6: rellenar las plantillas CIAD reales sin destruir su
+formato. Por eso todo lo anterior existía — para que cuando se llegara ahí, los datos ya estuvieran
+completos y validados.
 
-## Fases
+### Fases
 
 - [x] **Fase 1: Cimientos y normalización** — repositorio, árbol, contratos de agentes
 - [x] **Fase 2: Banco de conocimientos** — todos los documentos fuente a Markdown
@@ -21,8 +190,6 @@ validados.
 - [x] **Fase 6: Renderizado docx + pdf** — rellenar las plantillas CIAD reales
 - [x] **Fase 7: Orquestador** — `/di-nuevo`, multi-grupo, de extremo a extremo
 - [x] **Fase 8: Grafo de conocimiento** — cobertura PUA↔metas
-
-## Detalle
 
 ### Fase 1: Cimientos y normalización
 **Meta**: repositorio listo y contratos de agentes escritos.
