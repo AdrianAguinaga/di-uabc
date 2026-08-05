@@ -1,5 +1,8 @@
 # Requisitos
 
+> **REQ-01 a REQ-37 son de la v1.0** y están validados: las 8 fases cerraron y hay tres materias
+> generadas de extremo a extremo. **REQ-38 en adelante son del milestone v2.0.**
+
 ## Funcionales
 
 ### Ingesta y banco de conocimientos
@@ -79,14 +82,72 @@
 
 - **REQ-32** — Reutilizar el toolchain ya instalado (pandoc, pdftotext, python-docx, Word COM)
   antes que añadir dependencias.
-- **REQ-33** — Git local únicamente; sin remoto ni push sin autorización explícita.
+- **REQ-33** — El push es del usuario. El remoto `github.com/AdrianAguinaga/di-uabc` existe y es
+  público desde el 3 de agosto de 2026; se empuja solo a petición explícita, y ningún PUA ni dato
+  de un tercero se versiona sin preguntar antes.
 - **REQ-34** — `AGENTS.md` como contrato canónico para interoperar con Codex y agy; `CLAUDE.md`
   como puntero.
 - **REQ-35** — Opus planifica y redacta las metas; Sonnet ejecuta. Perfil GSD `adaptive`.
 - **REQ-36** — No modificar `referencias/` ni `ejemplos/`.
 - **REQ-37** — Todo el proyecto en español, incluidos código y nombres de archivo.
 
-## Criterio de aceptación global
+## Criterio de aceptación global (v1.0)
 
 Regenerar el DI de Big Data y compararlo contra `ejemplos/961 (1).pdf`. Debe ser equivalente en
 estructura, formato y contenido derivable, con las fechas corregidas al ciclo en curso.
+
+---
+
+# Milestone v2.0 — Estructura de calificación variable
+
+Origen: el DI real de Zurisaddai Rubio Arriaga, espejado en
+`conocimiento/ejemplos/531-contabilidad-financiera-2026-1.md`. Al reconstruirlo con el generador
+hubo que **traducir** su estructura para que validara. Estos requisitos cierran esa deuda.
+
+## Composición de la calificación
+
+- **REQ-38** — Un **rubro** puede expresar los valores de sus metas en **puntos** en lugar de
+  porcentaje, declarando su total (`150 pts`). El porcentaje del rubro sigue siendo lo que cuenta
+  contra el 100 del esquema. Rubros en puntos y rubros en porcentaje **conviven en el mismo
+  curso**: en el 531, «Actividades 30 %» va en puntos y «Exámenes 50 %» en porcentaje.
+- **REQ-39** — Una meta puede aportar a **más de un rubro**: su valor principal más componentes
+  adicionales, cada uno con su rubro, su valor y su etiqueta. Es lo que hace la meta 2.4 del 531
+  —«10 pts / Examen I 15 %»— sin dejar de ser una sola meta con una sola semana.
+- **REQ-40** — Un componente de meta puede ser de tipo `examen_parcial`, y **R3 lo cuenta igual
+  que a una meta de ese tipo**. Los tres exámenes del 531 viven dentro de la actividad de las
+  metas 2.4, 3.3 y 6.0; hoy R3 contaría cero y el documento no validaría.
+- **REQ-41** — El esquema puede declarar un **segundo nivel**: el promedio del curso vale X % y el
+  examen ordinario Y %, con X + Y = 100. Un curso que no lo declare se comporta exactamente como
+  hoy — el promedio *es* la calificación.
+- **REQ-42** — El identificador de una meta es **libre dentro de su unidad**: `1.0`, `2.0`, `1.1`,
+  `0`. Ni las reglas ni el renderizado pueden asumir que la primera meta de una unidad es `.1`, ni
+  que el encuadre se llama `0`.
+
+## Rúbricas
+
+- **REQ-43** — `curso.yaml` puede declarar una **rúbrica**: filas de concepto, puntos y
+  descripción, con su total declarado. Se asocia a una meta o al trabajo final del curso.
+- **REQ-44** — La rúbrica se renderiza como tabla en el documento, con el formato de las demás
+  tablas del DI. El renderizador **no redacta** sus criterios: los imprime. Sigue vigente REQ-26.
+
+## Validación
+
+- **REQ-45** — R1 y R2 operan **en la unidad de cada rubro**. Un rubro en puntos que declara 150 y
+  cuyas metas suman 140 es un **error** — es el defecto real del 531, hermano del defecto en
+  porcentajes del 961 que ya atrapa `test_detecta_el_defecto_del_ejemplo_961`.
+- **REQ-46** — Con segundo nivel, R1 verifica además que promedio + ordinario sumen 100, y que la
+  exención quede declarada **contra el promedio del curso**, no contra la calificación final.
+- **REQ-47** — Los puntos de una rúbrica suman su total declarado.
+
+## No contaminación
+
+- **REQ-48** — Ningún rasgo de la v2.0 se activa si el `curso.yaml` no lo declara. Regenerar 39056
+  y 39062 tras **cada fase** produce la **misma huella de texto**, y ni `grafo/` ni
+  `MANIFIESTO.yaml` cambian de forma. Es el criterio de aceptación del milestone entero.
+
+## Criterio de aceptación global (v2.0)
+
+- **REQ-49** — El `curso.yaml` de 38985 se reescribe a la **estructura real** de su DI de origen
+  —rubro en puntos, segundo nivel 60/40, metas `1.0`, tres exámenes dentro de la actividad, rúbrica
+  de 100 puntos— y **valida sin traducirse**, con el defecto de los 150/140 puntos reportado como
+  error y no reproducido en silencio.
