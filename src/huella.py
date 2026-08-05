@@ -147,6 +147,10 @@ def _generar_control(restaurar_manifiesto: bool) -> dict[str, dict]:
             forma = forma_del_manifiesto(paq.manifiesto)
         except generar.ErrorGenerar as e:
             raise ErrorHuella(f"{rel}: no se pudo generar — {e}") from e
+        except ErrorHuella:
+            raise
+        except Exception as e:
+            raise ErrorHuella(f"{rel}: no se pudo calcular la forma del manifiesto — {e}") from e
         finally:
             if restaurar_manifiesto:
                 if previo is not None:
