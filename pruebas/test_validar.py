@@ -197,6 +197,24 @@ class Regla2Metas(unittest.TestCase):
         self.assertIn("R2", reglas_con_error(inf))
         self.assertIn("participacion", " ".join(h.mensaje for h in inf.errores))
 
+    def test_dos_metas_con_el_mismo_id_son_error_de_regla(self):
+        """Con ids libres la colisión deja de ser evidente al leer el YAML, y el grafo
+        construye la clave de cada nodo con el id: la segunda pisaría a la primera."""
+        metas = copy.deepcopy(CURSO_VALIDO["metas"])
+        metas[2]["id"] = metas[1]["id"]      # dos metas "1.1"
+        inf = informe(metas=metas)
+        self.assertIn("R2", reglas_con_error(inf))
+        mensajes = " ".join(h.mensaje for h in inf.errores if h.regla == "R2")
+        self.assertIn(metas[1]["id"], mensajes)
+
+    def test_el_curso_con_ids_repetidos_carga_igual(self):
+        """Es un defecto de regla, no de esquema: el curso tiene que poder cargarse para
+        poder inspeccionarlo. Si reventara al cargar, quien lo escribió no vería el resto."""
+        metas = copy.deepcopy(CURSO_VALIDO["metas"])
+        metas[2]["id"] = metas[1]["id"]
+        c = curso(metas=metas)               # no lanza ErrorModelo
+        self.assertEqual(len(metas), len(c.metas))
+
 
 class Regla3Parciales(unittest.TestCase):
     def test_exige_dos_parciales_segun_el_articulo_68(self):
