@@ -36,7 +36,7 @@ Todo lo anterior existe para que al llegar ahí los datos ya estén completos y 
 
 ## Fases
 
-- [ ] **Fase 9: El valor de una meta deja de ser un porcentaje** — puntos, componentes e identificadores libres en el contrato
+- [x] **Fase 9: El valor de una meta deja de ser un porcentaje** — puntos, componentes e identificadores libres en el contrato *(hecha el 2026-08-05)*
 - [ ] **Fase 10: Las reglas cuentan en la unidad declarada** — R2 en puntos, R3 con exámenes dentro de la actividad
 - [ ] **Fase 11: El segundo nivel de la calificación** — promedio 60 % + ordinario 40 %, y la exención contra el promedio
 - [ ] **Fase 12: La rúbrica en el contrato** — filas, puntos y total declarados, con su regla

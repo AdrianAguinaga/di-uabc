@@ -3,19 +3,19 @@
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
 **Última actualización**: 2026-08-05 (ola 4, plan 09-05)
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: Fase 9 — El valor de una meta deja de ser un porcentaje (en ejecución)
+**Fase actual**: Fase 10 — Las reglas cuentan en la unidad declarada (sin empezar)
 
 ## Posición actual
 
 | | |
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
-| Fase | 9 — El valor de una meta deja de ser un porcentaje |
-| Plan | 6 planes en 5 olas — 09-01 a 09-05 hechos (5/6) |
-| Estado | Ejecutando — 09-06 esperando la verificación humana |
-| Última actividad | 2026-08-05 — ola 4 cerrada: el encuadre de Big Data se llama 1.0 y su huella se aceptó |
+| Fase | 10 — Las reglas cuentan en la unidad declarada |
+| Plan | Sin planear |
+| Estado | Fase 9 hecha y verificada; la 10 sin empezar |
+| Última actividad | 2026-08-05 — Fase 9 completa: 5/5 criterios y 24/24 must-haves verificados |
 
-Se retoma con `/gsd-execute-phase 9`. Tres decisiones se apartan de cómo el roadmap describió la
+Se sigue con `/gsd-discuss-phase 10`. Tres decisiones se apartaron de cómo el roadmap describió la
 fase y están razonadas en `09-CONTEXT.md`: la evidencia de un componente toca `render_docx.py`
 (D-11); el encuadre de Big Data se renombra de verdad, gastando la primera excepción a REQ-48
 (D-14) —con el orden de pasos fijado en D-15/D-24 para que el instrumento demuestre algo antes de
@@ -75,7 +75,7 @@ llamándose `M0_` con su meta ya en `1.0` (deliberado, D-14, a acordar con el do
 
 | Fase | Requisitos | Estado |
 |---|---|---|
-| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | Ejecutando — 5/6 planes |
+| 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | **Hecha** — 6/6 planes, verificada |
 | 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | Sin empezar |
 | 11. El segundo nivel de la calificación | REQ-41, REQ-46 | Sin empezar |
 | 12. La rúbrica en el contrato | REQ-43, REQ-47 | Sin empezar |
@@ -388,9 +388,18 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
 
 ## Siguiente paso
 
-`/gsd-plan-phase 9` — desglosar la Fase 9. El juicio pedagógico que toca esa fase pertenece a la
-planeación, no a la ejecución: cómo se redacta el segundo nivel para que el alumno lo entienda, y
-cómo se reparte una meta que aporta a dos rubros sin dejar de ser una sola meta con una sola semana.
+`/gsd-discuss-phase 10` — Las reglas cuentan en la unidad declarada (REQ-40, REQ-45). El contrato
+ya sabe decir «10 pts de 150»; falta que R2 lo cuente en esa unidad y que R3 sepa ver un examen que
+vive dentro de la actividad de una meta, que es el defecto real del 531.
+
+Dos pendientes que dejó la Fase 9, ninguno bloqueante:
+
+- El recurso `M0_Foro de presentación` de Big Data conserva el prefijo viejo con su meta ya
+  renombrada a `1.0`. Fue deliberado (D-14) para no contaminar la medición del criterio 3, que ya
+  está hecha. Queda por acordar con el docente.
+- `huella registrar` genera con `pdf=False`, así que los `MANIFIESTO.yaml` de los dos cursos de
+  control **dejaron de listar los `.pdf`**, y los PDFs de 39056 que hay en disco son anteriores al
+  renombrado: todavía dicen «Meta 0.». Hay un `.pdf` en disco que contradice al `.docx` de al lado.
 
 Fuera del roadmap, en cuanto el usuario deje el PDF en `puas/fuente/`: `/di-pua` sobre el PUA 38985.
 Eso no pasa por GSD — es poner en marcha lo que ya existe. No bloquea la v2.0, pero la Fase 14 sale
