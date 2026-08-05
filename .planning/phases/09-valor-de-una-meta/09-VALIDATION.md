@@ -54,9 +54,11 @@ created: 2026-08-05
 | REQ-42 (D-17) | Dos metas con el mismo id → error de **R2**, no `ErrorModelo` (el curso carga y se puede inspeccionar) | unitario | `python -X utf8 -m unittest pruebas.test_validar -v` | ✅ ampliar existente | ⬜ pendiente |
 | REQ-42 (regresión) | `test_detecta_el_defecto_del_ejemplo_961` sigue pasando **sin tocarse** | unitario | `python -X utf8 -m unittest pruebas.test_validar -v` | ✅ ya existe | ⬜ pendiente |
 | Criterio 4 (D-18/D-19) | `huella.extraer_texto()` es determinista: dos lecturas del mismo `.docx` dan el mismo sha256, y celdas con `vMerge` no duplican texto | unitario | `python -X utf8 -m unittest pruebas.test_huella -v` (contra un `.docx` sintético en memoria, **sin** `generar.paquete`) | ❌ Ola 0 | ⬜ pendiente |
-| Criterio 4 (REQ-48) | `huella verificar` regenera los 4 documentos de control y compara contra `pruebas/huellas.yaml`; corre en verde | integración / manual | `python src/huella.py verificar` — **fuera de `pruebas/`** por D-18 | N/A — manual por decisión | ⬜ pendiente |
-| Criterio 4 (D-23) | Tras `huella verificar`, `git status` está limpio: los `MANIFIESTO.yaml` de control quedan restaurados | manual | `python src/huella.py verificar && git status --porcelain` | N/A — manual | ⬜ pendiente |
+| Criterio 4 (D-27) | `huella.forma_del_manifiesto()` ignora `generado`, `commit` y el `sha256`/`bytes` de los archivos, pero **cambia** si aparece una clave o un archivo nuevos | unitario | `python -X utf8 -m unittest pruebas.test_huella.FormaDelManifiesto -v` (contra un YAML sintético en un temporal, **sin** `generar.paquete`) | ❌ Ola 0 | ⬜ pendiente |
+| Criterio 4 (REQ-48) | `huella verificar` regenera los 4 documentos de control y compara **tres** hashes por documento —`texto_docx`, `informe`, `manifiesto`— contra `pruebas/huellas.yaml`; corre en verde | integración / manual | `python src/huella.py verificar` — **fuera de `pruebas/`** por D-18 | N/A — manual por decisión | ⬜ pendiente |
+| Criterio 4 (D-23/D-28) | Tras `huella verificar`, `git status` está limpio: los `MANIFIESTO.yaml` de control quedan restaurados con los bytes leídos antes de generar, sin invocar git | manual | `python src/huella.py verificar && git status --porcelain` | N/A — manual | ⬜ pendiente |
 | D-15 paso 6 | Tras el rename, la única diferencia del texto del `.docx` de 39056 es `"Meta 0." → "Meta 1.0."` | manual | comparar el texto extraído antes/después: `texto_a.replace("Meta 0.", "Meta 1.0.") == texto_b`, con `git diff` como constancia | N/A — manual, requiere generar dos veces | ⬜ pendiente |
+| D-15 paso 6 (D-27) | Tras el rename, `huella verificar` reporta **dos** hashes cambiados por grupo de 39056 —`texto_docx` y `manifiesto`, este último porque el manifiesto registra el `sha256` del `curso.yaml`— y **ninguno** de 39062 | manual | `python src/huella.py verificar` (sale 1) | N/A — manual | ⬜ pendiente |
 | Criterio 5 | Las 179 pruebas anteriores pasan intactas, más las nuevas | integración | `python -X utf8 -m unittest discover -s pruebas` | ✅ ya existe (179/179 en verde) | ⬜ pendiente |
 | Invariante del proyecto | Ninguna plantilla de `referencias/` fue modificada | integración | `python src/plantillas.py verificar` | ✅ ya existe | ⬜ pendiente |
 
@@ -68,10 +70,11 @@ created: 2026-08-05
       `ErrorModelo`, la conversión de D-04), REQ-39 (componentes, vocabulario cerrado, no
       contaminación de `len(metas)`/`semanas`, unidad cruzada de D-07) y REQ-42 (ids libres, orden
       preservado). Hoy no existe: las pruebas de carga viven implícitamente en `test_validar.py`.
-- [ ] `pruebas/test_huella.py` — archivo nuevo, **acotado**: solo `extraer_texto()` contra un
-      `.docx` sintético armado en memoria. Nunca invoca `generar.paquete()` — D-18 prohíbe colgar la
-      generación completa del ciclo de pruebas unitarias. Replica el patrón `EnDirectorioTemporal`
-      de `test_plantillas.py` si necesita tocar disco.
+- [ ] `pruebas/test_huella.py` — archivo nuevo, **acotado**: `extraer_texto()` contra un `.docx`
+      sintético armado en memoria, y `forma_del_manifiesto()` contra un YAML sintético escrito en un
+      temporal (D-27). Nunca invoca `generar.paquete()` — D-18 prohíbe colgar la generación completa
+      del ciclo de pruebas unitarias. Replica el patrón `EnDirectorioTemporal` de
+      `test_plantillas.py` para no tocar `pruebas/huellas.yaml` de verdad.
 - [ ] Ampliación de `pruebas/test_validar.py` — una prueba para D-17 (dos metas con el mismo id →
       error de R2). No se toca `test_detecta_el_defecto_del_ejemplo_961`.
 - [ ] Ampliación de `pruebas/test_render_docx.py` — regresión de D-11: la evidencia del componente
