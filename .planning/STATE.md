@@ -11,9 +11,9 @@
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 9 — El valor de una meta deja de ser un porcentaje |
-| Plan | 6 planes en 5 olas, en ejecución |
+| Plan | 6 planes en 5 olas — 09-01 hecho (1/6) |
 | Estado | Ejecutando |
-| Última actividad | 2026-08-05 — arranca la ejecución de la Fase 9 por olas |
+| Última actividad | 2026-08-05 — 09-01: `src/huella.py` construido y la línea base de las cuatro huellas de control registrada (paso 1 de D-15) |
 
 Se retoma con `/gsd-execute-phase 9`. Tres decisiones se apartan de cómo el roadmap describió la
 fase y están razonadas en `09-CONTEXT.md`: la evidencia de un componente toca `render_docx.py`
@@ -24,6 +24,13 @@ que D-19 había dejado fuera.
 
 Las cinco olas no son fruto de optimizar paralelismo: las fija D-15. `src/huella.py` y su línea
 base van primero, antes de que nada toque el modelo; el renombrado de Big Data es lo último.
+
+**09-01 (paso 1 de D-15) quedó hecho el 5 de agosto de 2026.** `src/huella.py` compara tres hashes
+por documento —texto del `.docx`, informe de validación y forma del `MANIFIESTO.yaml` (D-27)— y
+`pruebas/huellas.yaml` ya guarda la línea base de los cuatro documentos de control (39056/961,
+39056/962, 39062/971, 39062/972), tomada antes de que ningún plan posterior toque `src/modelo.py`.
+`huella verificar` corre en verde y deja `cursos/` sin cambios (D-23/D-28: no invoca git, restaura
+los bytes que leyó). Detalle en `09-01-SUMMARY.md`.
 
 ## Progreso de la v2.0
 

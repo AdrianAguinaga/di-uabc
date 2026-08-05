@@ -68,7 +68,7 @@ llama, sin que nada de eso cambie el significado de un curso que no lo declare.
 **Planes**: 6 planes en 5 olas. El orden de las olas no es negociable: lo fija D-15/D-24 del
 contexto de la fase — la línea base de la huella se registra antes de tocar el modelo y el
 renombrado del encuadre va al final.
-- [ ] 09-01-PLAN.md — `src/huella.py` y la línea base de las cuatro huellas de control (paso 1)
+- [x] 09-01-PLAN.md — `src/huella.py` y la línea base de las cuatro huellas de control (paso 1)
 - [ ] 09-02-PLAN.md — el contrato: rubro en puntos, componentes de meta, ids libres
 - [ ] 09-03-PLAN.md — R2 detecta metas con id duplicado
 - [ ] 09-04-PLAN.md — la evidencia del componente llega a la Sección 2
