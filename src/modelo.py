@@ -30,6 +30,9 @@ DIR_CONFIG = RAIZ / "config"
 MODALIDADES = ("semipresencial", "escolarizada", "a_distancia")
 TIPOS_META = ("encuadre", "aprendizaje", "examen_parcial", "cierre")
 AMBIENTES = ("presencial", "virtual")
+UNIDADES_RUBRO = ("puntos",)  # ausente = porcentaje
+# Vocabulario propio, distinto de TIPOS_META: un componente no es una meta.
+TIPOS_COMPONENTE = ("examen_parcial", "examen_ordinario", "actividad", "proyecto")
 
 
 class ErrorModelo(Exception):
@@ -96,6 +99,31 @@ class Evidencia:
 
 
 @dataclass
+class Componente:
+    """Un aporte adicional de una meta a otro rubro.
+
+    No es una meta aparte: la meta sigue teniendo una sola semana y un solo enunciado. Es
+    lo que hace la meta 2.4 del 531 —10 pts de actividades y, en la misma sesión, el
+    Examen I que vale 15 % de exámenes—.
+
+    `valor` se lee en la unidad del rubro al que se imputa, que puede no ser el de su meta.
+    """
+
+    rubro: str
+    valor: float
+    etiqueta: str
+    tipo: str                       # sin valor por omisión: quien declara un componente dice de qué tipo es
+    evidencia: Evidencia | None = None
+
+    def __post_init__(self) -> None:
+        if self.tipo not in TIPOS_COMPONENTE:
+            raise ErrorModelo(
+                f"Componente «{self.etiqueta}»: tipo inválido {self.tipo!r}. "
+                f"Válidos: {', '.join(TIPOS_COMPONENTE)}."
+            )
+
+
+@dataclass
 class Sesion:
     """Un tramo de la actividad de una meta, en un ambiente concreto."""
 
@@ -120,12 +148,13 @@ class Meta:
     unidad: str  # romano, coincide con el PUA
     tipo: str = "aprendizaje"
     rubro: str = "tareas"
-    valor: float = 0.0  # porcentaje de la calificación final
+    valor: float = 0.0  # en la unidad de su rubro: porcentaje, o puntos si el rubro los declara
     semanas: list[int] = field(default_factory=list)
     caracter: str = "individual"
     que_voy_a_aprender: list[str] = field(default_factory=list)
     sesiones: list[Sesion] = field(default_factory=list)
     evidencias: list[Evidencia] = field(default_factory=list)
+    componentes: list[Componente] = field(default_factory=list)
     criterios_evaluacion: list[str] = field(default_factory=list)
     reflexion: list[str] = field(default_factory=list)  # siempre en pasado
     # Anclas anti-alucinación: deben existir en el PUA.
@@ -162,6 +191,41 @@ class Rubro:
     porcentaje: float
     detalle: str = ""
     parciales: int = 0
+    unidad: str = ""            # ausente = porcentaje; "puntos" = los valores de sus metas son pts
+    total: float | None = None  # los puntos que reparte el rubro. Obligatorio si unidad == "puntos"
+
+    def __post_init__(self) -> None:
+        if self.unidad and self.unidad not in UNIDADES_RUBRO:
+            raise ErrorModelo(
+                f"Rubro {self.id}: unidad inválida {self.unidad!r}. "
+                f"Válidas: {', '.join(UNIDADES_RUBRO)} (o ausente, para porcentaje)."
+            )
+        if self.unidad == "puntos":
+            if self.total is None:
+                raise ErrorModelo(
+                    f"Rubro {self.id}: declara unidad «puntos» sin `total`. "
+                    f"Un rubro en puntos debe declarar su total (p. ej. `total: 150`). "
+                    f"No se infiere de la suma de sus metas: esa diferencia es justo lo que "
+                    f"las reglas tienen que poder ver."
+                )
+            if self.total <= 0:
+                raise ErrorModelo(
+                    f"Rubro {self.id}: `total` debe ser mayor que 0, no {self.total:g}."
+                )
+
+    @property
+    def base(self) -> float:
+        """El total contra el que se leen los valores de sus metas."""
+        return float(self.total) if self.unidad == "puntos" else float(self.porcentaje)
+
+    def a_porcentaje(self, valor: float) -> float:
+        """Convierte un valor escrito en la unidad de este rubro a % de la calificación final.
+
+        Para un rubro en porcentaje es la identidad, así que quien compara nunca tiene que
+        preguntar en qué unidad está: llama siempre a esto. No redondea — el redondeo es
+        decisión de quien compara.
+        """
+        return 0.0 if not self.base else valor / self.base * self.porcentaje
 
 
 @dataclass
@@ -238,16 +302,40 @@ class Curso:
 # -- carga -------------------------------------------------------------------
 
 
+def _construir_componente(c: dict) -> Componente:
+    c = dict(c)
+    if "tipo" not in c:
+        raise ErrorModelo(
+            f"Componente «{c.get('etiqueta', '?')}»: falta `tipo`. "
+            f"Válidos: {', '.join(TIPOS_COMPONENTE)}. No hay valor por omisión a propósito: "
+            f"un tipo supuesto convertiría un examen mal escrito en un componente que nadie cuenta."
+        )
+    ev = c.pop("evidencia", None)
+    evidencia = (
+        Evidencia(**ev) if isinstance(ev, dict)
+        else Evidencia(nombre=ev) if ev
+        else None
+    )
+    return Componente(evidencia=evidencia, **c)
+
+
 def _construir_meta(d: dict) -> Meta:
     sesiones = [Sesion(**s) for s in d.pop("sesiones", [])]
     evidencias = [
         Evidencia(**e) if isinstance(e, dict) else Evidencia(nombre=e)
         for e in d.pop("evidencias", [])
     ]
+    componentes = [_construir_componente(c) for c in d.pop("componentes", [])]
     semanas = d.pop("semanas", None)
     if semanas is None and (s := d.pop("semana", None)) is not None:
         semanas = [s]
-    return Meta(semanas=semanas or [], sesiones=sesiones, evidencias=evidencias, **d)
+    return Meta(
+        semanas=semanas or [],
+        sesiones=sesiones,
+        evidencias=evidencias,
+        componentes=componentes,
+        **d,
+    )
 
 
 def _construir_grupo(g: Any) -> Grupo:
