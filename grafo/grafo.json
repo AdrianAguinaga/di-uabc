@@ -334,7 +334,7 @@
       "etiqueta": "Se evalúan las unidades 4, 5 y 6 conforme a los criterios del Art. 67 del Estatuto Escolar."
     },
     {
-      "id": "criterio:2026-2:39056:0:0",
+      "id": "criterio:2026-2:39056:1.0:0",
       "tipo": "criterio",
       "etiqueta": "Se registra la participación; esta meta no tiene valor porcentual."
     },
@@ -842,7 +842,7 @@
       }
     },
     {
-      "id": "evidencia:2026-2:39056:0:0",
+      "id": "evidencia:2026-2:39056:1.0:0",
       "tipo": "evidencia",
       "etiqueta": "Participación en el foro de presentación",
       "datos": {
@@ -1459,9 +1459,9 @@
       }
     },
     {
-      "id": "meta:2026-2:39056:0",
+      "id": "meta:2026-2:39056:1.0",
       "tipo": "meta",
-      "etiqueta": "Meta 0. Encuadre del curso.",
+      "etiqueta": "Meta 1.0. Encuadre del curso.",
       "datos": {
         "clase": "encuadre",
         "rubro": "tareas",
@@ -3205,7 +3205,7 @@
     },
     {
       "origen": "curso:2026-2:39056",
-      "destino": "meta:2026-2:39056:0",
+      "destino": "meta:2026-2:39056:1.0",
       "tipo": "tiene_meta"
     },
     {
@@ -3904,23 +3904,23 @@
       "tipo": "se_evalua_con"
     },
     {
-      "origen": "meta:2026-2:39056:0",
+      "origen": "meta:2026-2:39056:1.0",
       "destino": "unidad:39056:I",
       "tipo": "desarrolla"
     },
     {
-      "origen": "meta:2026-2:39056:0",
+      "origen": "meta:2026-2:39056:1.0",
       "destino": "semana:2026-2:1",
       "tipo": "ocurre_en"
     },
     {
-      "origen": "meta:2026-2:39056:0",
-      "destino": "evidencia:2026-2:39056:0:0",
+      "origen": "meta:2026-2:39056:1.0",
+      "destino": "evidencia:2026-2:39056:1.0:0",
       "tipo": "produce"
     },
     {
-      "origen": "meta:2026-2:39056:0",
-      "destino": "criterio:2026-2:39056:0:0",
+      "origen": "meta:2026-2:39056:1.0",
+      "destino": "criterio:2026-2:39056:1.0:0",
       "tipo": "se_evalua_con"
     },
     {

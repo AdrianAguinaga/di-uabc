@@ -206,7 +206,7 @@ citas: [EE-65, EE-66, EE-67, EE-68, EE-70, EE-71, EE-74, EE-75, RPIDA-59]
 tolerancia_minutos: 15
 
 metas:
-  - id: "0"
+  - id: "1.0"
     unidad: "I"
     tipo: encuadre
     rubro: tareas

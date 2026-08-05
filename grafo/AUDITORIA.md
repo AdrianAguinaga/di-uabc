@@ -1,6 +1,6 @@
 # Auditoría del grafo
 
-Generado: 2026-08-04T19:17:23 · 377 nodos · 669 aristas
+Generado: 2026-08-05T10:10:38 · 377 nodos · 669 aristas
 
 Lo escribe `src/grafo.py`. Cada sección vacía es una buena noticia; una entrada es
 un hueco del diseño que alguien tiene que decidir si cierra o acepta.
