@@ -43,7 +43,9 @@ del curso + reglas de convivencia con sanciones + fundamento legal + firma del j
    alumno pueda alegar desconocimiento.
 4. **Trazabilidad total.** Cada salida registra su PUA y hash, calendario, versión de plantilla,
    profesor, grupo, esquema y commit.
-5. **Git local únicamente.** Sin remoto, sin push.
+5. **El push es del usuario.** El remoto existe —`github.com/AdrianAguinaga/di-uabc`, público desde
+   el 3 de agosto de 2026— pero commitear es reversible y publicar no: se empuja solo a petición
+   explícita. Ningún PUA ni dato de un tercero se versiona sin preguntar antes.
 6. **Opus planifica, Sonnet ejecuta.** Perfil GSD `adaptive`.
 
 ## Alcance de la v1
@@ -52,8 +54,65 @@ Las tres modalidades (semipresencial, escolarizada, a distancia), ciclo 2026-2, 
 multi-grupo, salida `.docx` + `.pdf`, banco de conocimientos en Markdown, grafo de conocimiento del
 dominio.
 
-**Fuera de alcance por ahora:** publicación automática en Blackboard, generación de rúbricas
-detalladas, remoto git.
+**Fuera de alcance por ahora:** publicación automática en Blackboard, redacción automática del
+contenido de una rúbrica.
+
+## Milestone actual: v2.0 Estructura de calificación variable
+
+**Meta:** que el generador soporte el esquema de calificación de un segundo docente sin que el de
+Adrian cambie ni un carácter — lo mismo que hizo el filtro `profesores:` con los criterios de
+acreditación, pero ahora en la aritmética de la nota.
+
+**Rasgos a construir:**
+
+| # | Rasgo | Qué asume el modelo hoy |
+|---|---|---|
+| 1 | Segundo nivel de calificación: promedio de metas **60 %** + examen ordinario **40 %** | Los rubros suman 100 y ahí termina |
+| 2 | Metas en **puntos** (`10 pts`), con R1 y R2 operando en la unidad declarada | `valor` es siempre porcentaje |
+| 3 | Numeración de metas **`1.0`, `2.0`** — cada unidad abre en `.0` | `0` de encuadre y luego `1.1`, `1.2` |
+| 4 | **Varios exámenes parciales dentro de la actividad** de una meta, contables por R3 | R3 cuenta metas de tipo `examen_parcial`; así contaría cero y fallaría |
+| 5 | **Tabla de rúbrica** del trabajo final, 100 puntos, renderizada en el documento | No existe |
+
+**Origen:** el DI real de Zurisaddai Rubio Arriaga
+(`ejemplos/38985-531-2026-1-Rubio Arriaga Zurisaddai.docx`, Contabilidad Financiera 38985, grupo
+531, 2026-1, semipresencial). Al reconstruirlo con el generador
+(`cursos/2026-2/38985-contabilidad-financiera/`) hubo que **traducir** su estructura —puntos a
+porcentajes, exámenes a metas propias— para que validara. Esa traducción es la deuda que cierra
+este milestone.
+
+**Criterio de aceptación del milestone entero — la no contaminación:** regenerar Big Data (39056) y
+Patrones (39062) después de cada fase debe dejar la **huella de texto idéntica**. Si cambia algo de
+un documento de Adrian, el trabajo está mal aunque las pruebas pasen. Es la misma prueba que se
+aplicó al registrar los criterios propios de cada docente.
+
+**Restricciones heredadas que no se relajan:**
+
+- El renderizador **no inventa** (REQ-26): la rúbrica se **declara** en `curso.yaml` y se imprime.
+  Redactar sus criterios sigue siendo del docente, y por eso «rúbricas detalladas» sale de
+  *fuera de alcance* solo como renderizado, no como generación de contenido.
+- R2 debe seguir atrapando el defecto del ejemplo 961 —`test_detecta_el_defecto_del_ejemplo_961`—
+  y su análogo en puntos: el rubro de trabajos de ella declara **150 pts cuando solo suman 140**.
+- Las 179 pruebas actuales pasan. Ninguna se rompe.
+
+**Prueba de fuego:** reescribir el `curso.yaml` de 38985 a su **estructura real** —puntos, 60/40,
+metas `1.0`, exámenes dentro de la actividad— y que valide sin traducirlo.
+
+## Evolution
+
+Este documento evoluciona en las transiciones de fase y en las fronteras de milestone.
+
+**Tras cada transición de fase** (vía `/gsd-transition`):
+1. ¿Algún requisito quedó invalidado? → a *Fuera de alcance*, con su razón
+2. ¿Algún requisito quedó validado? → a *Validados*, con la fase que lo validó
+3. ¿Surgieron requisitos nuevos? → a *Activos*
+4. ¿Hay decisiones que registrar? → a *Decisiones clave*
+5. ¿«Qué es» sigue siendo exacto? → corregir si derivó
+
+**Tras cada milestone** (vía `/gsd-complete-milestone`):
+1. Revisión completa de todas las secciones
+2. Comprobar el valor central — ¿sigue siendo la prioridad correcta?
+3. Auditar *Fuera de alcance* — ¿siguen valiendo las razones?
+4. Actualizar el contexto al estado real
 
 ## Lo que el sistema no hace
 

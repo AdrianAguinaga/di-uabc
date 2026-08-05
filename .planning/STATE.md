@@ -2,9 +2,26 @@
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
 **Última actualización**: 2026-08-04
-**Fase actual**: ninguna — las 8 fases del roadmap están hechas
+**Milestone actual**: **v2.0 — Estructura de calificación variable**
+**Fase actual**: ninguna todavía — definiendo requisitos
 
-## Progreso
+## Posición actual
+
+| | |
+|---|---|
+| Milestone | v2.0 Estructura de calificación variable |
+| Fase | Sin empezar (definiendo requisitos) |
+| Plan | — |
+| Estado | Definiendo requisitos |
+| Última actividad | 2026-08-04 — arranca el milestone v2.0 |
+
+La **v1.0 quedó cerrada** con sus 8 fases hechas y tres materias generadas de extremo a extremo.
+Todo lo que sigue bajo «Progreso» y más abajo es su registro, que se conserva como contexto
+acumulado.
+
+---
+
+## Progreso de la v1.0
 
 | Fase | Estado | Commit |
 |---|---|---|
@@ -214,11 +231,22 @@ código**. No se listó como requisito.
 
 ## Lo que queda abierto
 
-Nada del roadmap. Tres decisiones del usuario:
+**Decidido el 4 de agosto de 2026**: se construye la estructura completa de la tabla de arriba —no
+solo el 60/40 y la rúbrica—, en el **milestone v2.0**. Los cinco rasgos están entrelazados: si las
+metas valen puntos, el segundo nivel tiene que saber convertirlos, y mientras R3 solo cuente metas
+de tipo `examen_parcial`, un DI suyo redactado a su estilo sigue sin validar.
 
-- Si se construye la estructura 60/40 y lo demás de la tabla de arriba, o se espera a tener un
-  curso de Zurisaddai que generar.
-- Si la unidad V se rebalancea o los dos cursos se quedan como están.
+Sigue abierto, y no es del roadmap:
+
+- **El PDF del PUA 38985 no está en `puas/fuente/`.** Sin él las unidades de Contabilidad van sin
+  temas, el manifiesto queda sin hash de PUA y la auditoría del grafo reporta el hueco
+  «Contabilidad Financiera · 2026-2» — correctamente. No bloquea la v2.0: el `curso.yaml` de 38985
+  ya existe.
+- **Las metas 2.1 a 6.0 de Contabilidad las redactó el agente**, a partir de los títulos y
+  actividades de la tabla de su DI, porque su Sección 3 no las detalla todas con el nivel de la
+  1.1. El contenido es plausible para Contabilidad **pero no es de ella**: tiene que revisarlas
+  antes de usarlas. Está declarado en `avisos:` del `curso.yaml`.
+- Si la unidad V se rebalancea o los dos cursos de Adrian se quedan como están.
 - Confirmar con Zurisaddai que sus criterios se registraron bien: se dedujeron de un DI de
   Contabilidad, y puede que algunos sean de esa materia y no suyos en general.
 
@@ -285,10 +313,8 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
 
 ## Siguiente paso
 
-Decidir con el docente qué se hace con el hallazgo 9: completar los temas de las unidades II–V en
-el `curso.yaml` de Big Data y repartirlos entre las metas, o aceptar la cobertura actual. Es
-juicio pedagógico, no mecánico.
+Definir los requisitos del milestone v2.0 y levantar su roadmap. Después, `/gsd-discuss-phase` de
+la primera fase.
 
-Después, con el PDF de otra materia en `puas/fuente/`, correr `/di-nuevo` sobre ella para ejercer
-el único tramo del menú que sigue sin probarse: descubrir el PUA, ingerirlo en caliente y redactar
-las metas desde cero.
+Fuera del roadmap, en cuanto el usuario deje el PDF en `puas/fuente/`: `/di-pua` sobre el PUA 38985.
+Eso no pasa por GSD — es poner en marcha lo que ya existe.
