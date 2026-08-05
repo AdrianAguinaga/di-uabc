@@ -205,6 +205,9 @@ class _Validador:
 
         if negativas := [m.id for m in self.c.metas if m.valor < 0]:
             self.error("R2", f"Metas con valor negativo: {', '.join(negativas)}.")
+        cuenta = Counter(m.id for m in self.c.metas)
+        if repetidos := [i for i, n in cuenta.items() if n > 1]:
+            self.error("R2", f"Metas duplicadas: {', '.join(sorted(repetidos))}.")
 
     # -- Regla 3: mínimo dos exámenes parciales (Art. 68) --------------------
 
