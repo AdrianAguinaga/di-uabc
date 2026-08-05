@@ -6,8 +6,8 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-05T09:50:13'
-commit: 476c5ea-sucio
+generado: '2026-08-05T14:44:08'
+commit: 90bca69-sucio
 curso:
   archivo: cursos/2026-2/39062-patrones-de-comportamiento/curso.yaml
   sha256: 733aaa219cda9c86c3db0f48e51600fcdd47e78cd1e0cda63370eebe91b0ce26
@@ -72,9 +72,9 @@ validacion:
 archivos:
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-971.docx
   grupo: '971'
-  sha256: 73274901ed059c16dd96d8ca890ae85ae5b0e77fb8a22cf306f0aafbc22a0376
+  sha256: 60616d77504b634d5c12c3dc67c3625a566e4d5d301094cd4588e88a56dd0637
   bytes: 233000
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-972.docx
   grupo: '972'
-  sha256: 39360e257bddc47aaff9df5d94cf67bb652bddebb5c7a0b0bbb254ce91e19e67
+  sha256: eeac4fb4e32d5959dbace565cbcc7249fe36fb9f6039629156db2afe279ece16
   bytes: 232981

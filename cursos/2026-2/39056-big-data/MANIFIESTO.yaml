@@ -6,11 +6,11 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-05T09:50:12'
-commit: 476c5ea-sucio
+generado: '2026-08-05T14:44:07'
+commit: 90bca69-sucio
 curso:
   archivo: cursos/2026-2/39056-big-data/curso.yaml
-  sha256: d688f6c434b3dea187b51f8ffe056fc7bb7fd6656a9d81ea18aefb1afc51d69a
+  sha256: d4f9c90b24609bc024ad53f71ac03f067da7278bb676a16159cbeabc8d38b168
   ciclo: 2026-2
   clave: '39056'
   nombre: Big Data
@@ -70,9 +70,9 @@ validacion:
 archivos:
 - ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-961.docx
   grupo: '961'
-  sha256: 0746c4efddf96d8e098385c0e41b18481dc7792448536220f2f9d6d22f4a7c7d
-  bytes: 233051
+  sha256: 724a8680d0889770f1d78e5698954748350181962b9d863a7fa305be9a642b38
+  bytes: 233053
 - ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-962.docx
   grupo: '962'
-  sha256: de847ce228e94c15b8de03dc6d49e7a35aa7d6cb5734aea1e6bd69d9bba2764c
-  bytes: 233036
+  sha256: 7f9b5d241f4fcba08813d2937a4aacfbad6adb542b201e2c2bc844ea77c1ea0b
+  bytes: 233037
