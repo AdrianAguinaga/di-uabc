@@ -1,0 +1,47 @@
+# Huellas de texto de los documentos de control (REQ-48). Lo genera
+# src/huella.py: no lo edites a mano.
+#
+#     python src/huella.py verificar    # compara contra este registro
+#     python src/huella.py registrar    # acepta el estado actual como línea base
+#
+# Tres hashes por documento:
+#   texto_docx  el texto extraído del .docx — no su binario, cuyo zip lleva marcas
+#               de tiempo y cambiaría en cada corrida.
+#   informe     la salida de validar.py. Es por curso, así que se repite entre los
+#               grupos de un mismo curso: es correcto, no está duplicado por error.
+#   manifiesto  la FORMA del MANIFIESTO.yaml: qué claves emite y con qué estructura,
+#               sin `generado`, `commit` ni el sha256/bytes de los archivos, que
+#               cambian en cada corrida por diseño. También es por curso.
+documentos:
+  2026-2:39056:961:
+    ciclo: 2026-2
+    clave: '39056'
+    grupo: '961'
+    texto_docx: d33cea2ed243a21876635f07f7c2ba2a124b01d91fcf4f3c25f910509590c7f8
+    informe: 8d48c4b9c168fb6dbb41647b6f13db68f11979b84be3e891fbb302a6c6858bee
+    manifiesto: b82cb94d137e537647fb3e6cd04f68ae73bffa2929c192d923cf895ee26af80d
+    registrado: '2026-08-05'
+  2026-2:39056:962:
+    ciclo: 2026-2
+    clave: '39056'
+    grupo: '962'
+    texto_docx: 3ba6984a78b82ea35f287326b6d3901c57094c5b92b207d59bfe8dcc0c0e1892
+    informe: 8d48c4b9c168fb6dbb41647b6f13db68f11979b84be3e891fbb302a6c6858bee
+    manifiesto: b82cb94d137e537647fb3e6cd04f68ae73bffa2929c192d923cf895ee26af80d
+    registrado: '2026-08-05'
+  2026-2:39062:971:
+    ciclo: 2026-2
+    clave: '39062'
+    grupo: '971'
+    texto_docx: c4255d53778030c85643025f5261e4982a1f5b48cbd9b9134cd49bacd9708187
+    informe: 7874fb9ed4ddabd1cf1c46dda0a112203da6cdfa6e5bb339efdbd688ffa35cfa
+    manifiesto: 2932d5b2fc0d53ac422f2b00fbe2b22446f827697f88befd0130e5a70eb943e7
+    registrado: '2026-08-05'
+  2026-2:39062:972:
+    ciclo: 2026-2
+    clave: '39062'
+    grupo: '972'
+    texto_docx: 60265f66576b74f0d20d9ec602b9f724907e64eb6c780b352b59f8434482b3be
+    informe: 7874fb9ed4ddabd1cf1c46dda0a112203da6cdfa6e5bb339efdbd688ffa35cfa
+    manifiesto: 2932d5b2fc0d53ac422f2b00fbe2b22446f827697f88befd0130e5a70eb943e7
+    registrado: '2026-08-05'
