@@ -247,6 +247,27 @@ calificación (Fase 11), la rúbrica (Fase 12), el documento en la unidad real (
   default silencioso `"actividad"` convertiría un typo en un componente que nadie cuenta, que es
   justo lo que D-08 quiso evitar. Quien declara un componente declara de qué tipo es.
 
+- **D-27 — corrige la salvedad de D-19:** **la forma del `MANIFIESTO.yaml` sí entra en la huella**,
+  como un tercer hash por documento, calculado sobre el manifiesto con las claves volátiles fuera:
+  `generado`, `commit`, y los `sha256`/`bytes` de los archivos. Lo que se vigila es su **forma** —qué
+  claves emite y con qué estructura—, no sus valores por corrida.
+
+  D-19 lo había dejado fuera porque «definir forma abre una decisión que esta fase no necesita», y
+  pidió que el planeador lo levantara si veía REQ-48 incompleto. Lo levantó: hoy el manifiesto está
+  protegido **por construcción** —`generar.py` arma su bloque de rubros como
+  `[{"id": r.id, "porcentaje": r.porcentaje}]`, filtrando explícitamente, y las metas ni aparecen—,
+  pero eso es una propiedad del código actual, no una promesa verificada. Las Fases 11 y 12 añaden
+  segundo nivel y rúbrica, y cualquiera podría querer reflejarlos ahí sin que nada lo señalara.
+  «Se revisa a ojo al cerrar» es la comprobación que deja de hacerse a la tercera fase.
+
+  Se decide **antes** de ejecutar 09-01 porque cambia el formato de `pruebas/huellas.yaml` y la
+  línea base. Sale de `<deferred>`.
+
+- **D-28:** `huella verificar` restaura los `MANIFIESTO.yaml` **leyendo sus bytes antes de generar
+  y reescribiéndolos después**, no con `git checkout`. Cumple lo que D-23 pedía —que `verificar`
+  sea de solo lectura sobre el repo— y además no destruye una edición sin commitear que ya
+  estuviera en el archivo. `huella.py` no invoca git, así que funciona igual fuera de un repo.
+
 ### Criterio de Claude
 
 - El nombre exacto de la propiedad de conversión de D-04, la firma de las funciones de
@@ -377,8 +398,9 @@ calificación (Fase 11), la rúbrica (Fase 12), el documento en la unidad real (
 - **Los componentes como nodos del grafo** (D-10). Haría visible cada examen como entidad
   consultable, pero cambia la forma de `grafo/` y REQ-48 la quiere intacta durante todo el
   milestone. Es su propia decisión, después de la v2.0.
-- **La «forma» del `MANIFIESTO.yaml` dentro de la huella** (D-19). Requiere definir qué cuenta
-  como forma frente a valores que cambian por diseño (fecha, commit). Fuera de la Fase 9.
+- ~~**La «forma» del `MANIFIESTO.yaml` dentro de la huella** (D-19)~~ — **entra en la Fase 9**.
+  Ver D-27: el planeador levantó que REQ-48 quedaba incompleto sin ella y se decidió añadirla.
+  «Forma» quedó definido como el manifiesto sin `generado`, `commit`, `sha256` ni `bytes`.
 - **Que `di-nuevo` pregunte por la unidad de cada rubro.** El orquestador seguirá produciendo
   rubros en porcentaje; un curso en puntos se escribe a mano por ahora. Cuando el rasgo esté
   probado de extremo a extremo (Fase 14), tiene sentido subirlo al menú.
