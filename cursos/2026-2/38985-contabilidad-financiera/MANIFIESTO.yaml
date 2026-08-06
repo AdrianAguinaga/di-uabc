@@ -6,11 +6,11 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-04T19:16:19'
-commit: 0d3430c-sucio
+generado: '2026-08-06T15:17:17'
+commit: f5068f2-sucio
 curso:
   archivo: cursos/2026-2/38985-contabilidad-financiera/curso.yaml
-  sha256: 6f30dd96fba9e6bb4a3ce61e4af45c1c85a83847e2982f5f403216482ac10847
+  sha256: f0d940e1b5d239dbaf00b3d6d097f749dc76b7e9ba2aa9e03e131b84f04c06c6
   ciclo: 2026-2
   clave: '38985'
   nombre: Contabilidad Financiera
@@ -45,6 +45,66 @@ evaluacion:
     porcentaje: 50
   - id: trabajo_final
     porcentaje: 20
+  segundo_nivel:
+    promedio:
+      porcentaje: 60
+      etiqueta: Valor del promedio antes del Examen Ordinario
+    ordinario:
+      porcentaje: 40
+      etiqueta: Valor del examen Ordinario
+  exencion_contra: promedio
+  rubrica:
+    meta: '6.1'
+    total: 100
+    filas:
+    - concepto: Portada
+      puntos: 2
+      descripcion: Nombre de la universidad, facultad y unidad académica, nombre completo
+        del alumno comenzando por apellido paterno, materno y nombres, logo universitario,  fotografía
+        de ambos integrantes del equipo de frente del alumno que presenta el trabajo,
+        nombre del trabajo, materia, grupo y fecha, en la parte inferior derecha anotar
+        el tipo de trabajo final que le fue asignado.
+    - concepto: Introducción
+      puntos: 2
+      descripcion: Resumen de lo que será desarrollado en el cuerpo del trabajo.
+    - concepto: Catálogo de cuentas
+      puntos: 2
+      descripcion: Elaboración del catálogo de cuentas de acuerdo al tipo de empresa
+        y método a emplear, añadiendo las sub-cuentas de acuerdo a cada caso y la
+        redacción de los asientos adicionales que diseñaron.
+    - concepto: Redacción del caso práctico
+      puntos: 2
+      descripcion: Incorporar la información referente a la redacción que se tomó
+        como base para la elaboración de asientos y datos adicionales.
+    - concepto: Libro diario
+      puntos: 40
+      descripcion: Elaboración de asientos contables hipervínculos del libro mayor.
+    - concepto: Libro Mayor
+      puntos: 10
+      descripcion: Elaboración del libro Mayor con hipervínculos del libro diario.
+    - concepto: Hoja de trabajo
+      puntos: 10
+      descripcion: Elaboración de la hoja de trabajo, a partir de los saldos en libro
+        Mayor.
+    - concepto: Tarjetas de almacén
+      puntos: 5
+      descripcion: Tarjetas de almacén con hipervínculos con el libro diario en caso
+        de que corresponda (métodos perpetuo en costos de venta y en el caso de analitico
+        en el inventario final)
+    - concepto: Auxiliares de moneda extranjera
+      puntos: 5
+      descripcion: Auxiliares de acuerdo al método empleado.
+    - concepto: Estado de resultados y sus notas
+      puntos: 10
+      descripcion: Estado de resultados con hipervínculos con el libro mayor y sus
+        notas explicativas
+    - concepto: Balance general y sus notas
+      puntos: 10
+      descripcion: Balance general con hipervínculos en forma de cuenta sin desglose
+        de rubros y con notas explicativas.
+    - concepto: Conclusión
+      puntos: 2
+      descripcion: Deducción lógica y relevante de los aspectos abordados en el trabajo.
 grupos:
 - numero: '531'
   aula: Aula
@@ -60,17 +120,15 @@ validacion:
     no son las de su documento original.'
   - El PUA 38985 no está ingerido. Sin él, las unidades van sin temas y el manifiesto
     queda sin hash de PUA.
-  - Su documento reparte las actividades en puntos (10 por meta) y declara 150 cuando
-    solo hay 140. Aquí van en porcentaje y suman 30 exacto.
-  - Los tres exámenes se modelaron como metas propias; en su documento viven dentro
-    de la actividad de la meta de esa semana.
+  - Las metas y actividades son un borrador redactado por el agente y la docente debe
+    revisarlas antes de su entrega.
   recordatorios: 5
 archivos:
 - ruta: cursos/2026-2/38985-contabilidad-financiera/salida/DI-2026-2-38985-531.docx
   grupo: '531'
-  sha256: 352fbc08ad36deb232545c15cd651f66715e9eaf04f057afd75fa0c6ac385a2f
-  bytes: 233739
+  sha256: a29795bf18b8e4477139b9accbde5754b9643e56e4035be54dbb0f519a3eb4b8
+  bytes: 233978
 - ruta: cursos/2026-2/38985-contabilidad-financiera/salida/DI-2026-2-38985-531.pdf
   grupo: '531'
-  sha256: 719b3e5e11f57361d392d8919ee2092836dee6e30e5abd689668924d0e9a3be4
-  bytes: 404502
+  sha256: 8b74cfef8582b5cece7ba264c567e66fe0dc6266ba0148b94786f7ec26806b72
+  bytes: 403707

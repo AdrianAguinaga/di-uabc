@@ -28,6 +28,7 @@ import plantillas  # noqa: E402
 import render_docx  # noqa: E402
 
 CURSO = RAIZ / "cursos" / "2026-2" / "39056-big-data" / "curso.yaml"
+CONTABILIDAD = RAIZ / "cursos" / "2026-2" / "38985-contabilidad-financiera" / "curso.yaml"
 
 
 def texto(doc) -> str:
@@ -449,6 +450,46 @@ class RenderizadoDeLaUnidadDeclarada(unittest.TestCase):
         self.assertEqual("100", celdas(tabla.rows[-1])[1])
         self.assertEqual(self.doc.tables[0]._tbl.tblPr.xml, tabla._tbl.tblPr.xml)
         self.assertEqual(self.doc.tables[0]._tbl.tblGrid.xml, tabla._tbl.tblGrid.xml)
+
+
+class RenderizadoDeContabilidadSinTraducirse(unittest.TestCase):
+    """REQ-49: el curso real llega al documento sin convertir puntos ni parciales en metas."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = Path(tempfile.mkdtemp(prefix="di-38985-"))
+        cls.addClassCleanup(shutil.rmtree, cls.tmp, True)
+        cls.curso = modelo.cargar(CONTABILIDAD)
+        destino = cls.tmp / "DI-2026-2-38985-531.docx"
+        render_docx.generar(cls.curso, cls.curso.grupos[0], destino)
+        cls.doc = docx.Document(str(destino))
+        cls.salida = texto(cls.doc)
+
+    def test_imprime_los_puntos_componentes_y_segundo_nivel(self):
+        valores = [
+            "".join(t.text or "" for t in tc.iter(qn("w:t")))
+            for tr in self.doc.tables[0]._tbl.tr_lst
+            for tc in tr.findall(qn("w:tc"))
+        ]
+        self.assertIn("10 pts / 15%", valores)
+        self.assertIn("10 pts / 20%", valores)
+        for esperado in (
+            "Entrega de actividades en clases y tareas: 30% (140 pts)",
+            "Valor del promedio antes del Examen Ordinario: 60%",
+            "Valor del examen Ordinario: 40%",
+            "Examen I equivale a 15% de Exámenes parciales.",
+        ):
+            self.assertIn(esperado, self.salida)
+        self.assertNotIn("Primero. Primero.", self.salida)
+
+    def test_imprime_la_rubrica_literal_de_cien_puntos(self):
+        self.assertEqual(2, len(self.doc.tables))
+        tabla = self.doc.tables[1]
+        self.assertEqual(15, len(tabla.rows))
+        self.assertIn("Rúbrica de evaluación", texto(self.doc))
+        self.assertIn("Elaboración de asientos contables hipervínculos del libro mayor.", self.salida)
+        self.assertIn("Puntos totales", self.salida)
+        self.assertIn("100", self.salida)
 
 
 if __name__ == "__main__":

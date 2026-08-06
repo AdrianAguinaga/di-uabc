@@ -482,16 +482,15 @@ class Aportes(unittest.TestCase):
         self.assertAlmostEqual(2.0, c.rubro("actividades").a_porcentaje(a.valor))
 
 
-class LosCursosExistentesNoCambian(unittest.TestCase):
-    """REQ-48 por construcción: cargar los tres cursos reales sin declarar nada nuevo."""
+class LosCursosDeControlNoCambian(unittest.TestCase):
+    """REQ-48 por construcción: los dos cursos de control no declaran rasgos nuevos."""
 
     RUTAS = [
         RAIZ / "cursos/2026-2/39056-big-data/curso.yaml",
         RAIZ / "cursos/2026-2/39062-patrones-de-comportamiento/curso.yaml",
-        RAIZ / "cursos/2026-2/38985-contabilidad-financiera/curso.yaml",
     ]
 
-    def test_los_tres_cursos_cargan_sin_declarar_nada_nuevo(self):
+    def test_los_cursos_de_control_cargan_sin_declarar_nada_nuevo(self):
         """Es la mitad de REQ-48 resuelta por construcción — si algún campo nuevo dejara
         de tener default, esta prueba lo delata."""
         for ruta in self.RUTAS:
@@ -504,6 +503,29 @@ class LosCursosExistentesNoCambian(unittest.TestCase):
                     self.assertEqual(m.componentes, [])
                 self.assertIsNone(c.segundo_nivel)
                 self.assertEqual("", c.exencion_contra)
+
+
+class ContabilidadSinTraducirse(unittest.TestCase):
+    """REQ-49: el 531 declara la forma real de su evaluación, ya corregida a 140 pts."""
+
+    RUTA = RAIZ / "cursos/2026-2/38985-contabilidad-financiera/curso.yaml"
+
+    def test_declara_puntos_componentes_dos_niveles_y_rubrica(self):
+        c = modelo.cargar(self.RUTA)
+
+        actividades = c.rubro("actividades")
+        self.assertEqual(("puntos", 140), (actividades.unidad, actividades.total))
+        self.assertEqual([], [m for m in c.metas if m.tipo == "examen_parcial"])
+        self.assertEqual(
+            [("2.4", "Examen I", 15), ("3.3", "Examen II", 15), ("6.0", "Examen III", 20)],
+            [(a.meta.id, a.etiqueta, a.valor) for a in c.aportes() if a.es_componente],
+        )
+        self.assertEqual((60, 40), (
+            c.segundo_nivel.promedio.porcentaje, c.segundo_nivel.ordinario.porcentaje,
+        ))
+        self.assertEqual(("6.1", 100, 100), (
+            c.rubrica.meta, c.rubrica.total, sum(f.puntos for f in c.rubrica.filas),
+        ))
 
 
 if __name__ == "__main__":

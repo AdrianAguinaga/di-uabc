@@ -4,16 +4,10 @@
 # —`conocimiento/ejemplos/531-contabilidad-financiera-2026-1.md`, espejo del .docx de
 # `ejemplos/`— y sirve para ver cómo queda su curso pasado por el generador.
 #
-# Tres cosas que NO son como en su documento original, y por qué:
+# Dos cosas que NO son como en su documento original, y por qué:
 #
 #   1. Ciclo 2026-2, no 2026-1. Solo existe `calendarios/2026-2.yaml`; el suyo ya pasó.
 #      Las fechas, por tanto, son las de agosto-noviembre y no las de su enero-junio.
-#   2. Los tres exámenes son metas propias. En su DI viven dentro de la actividad de la
-#      meta de esa semana; así trazados, la regla R3 —que cuenta metas de tipo
-#      `examen_parcial`— encontraría cero y el curso no validaría.
-#   3. Los valores van en porcentaje, no en puntos. Su rubro de actividades declara 150
-#      puntos pero solo hay catorce metas de diez: son 140. No se reproduce el defecto
-#      (R2 existe para atraparlo), así que el 30 % se reparte entre las catorce reales.
 #
 # Falta el PUA 38985: no está ingerido. Sin él no hay `pua_ref` ni temas por unidad.
 
@@ -121,14 +115,26 @@ unidades:
       proporcionar información útil para la toma de decisiones, con profesionalismo, oportunidad y
       veracidad.
 
-# Sus rubros, tal como los declara la primera tabla de su DI.
+# Sus rubros, tal como los declara la primera tabla de su DI. La fuente dice 150 puntos
+# para actividades, pero sus catorce actividades de 10 puntos suman 140. La corrección
+# documentada para este borrador es declarar 140, no inventar una decimoquinta actividad.
 evaluacion:
   esquema_id: zra-contabilidad
   exencion_ordinario: 90        # el suyo, no el 80 predeterminado del proyecto
+  exencion_contra: promedio
+  segundo_nivel:
+    promedio:
+      porcentaje: 60
+      etiqueta: "Valor del promedio antes del Examen Ordinario"
+    ordinario:
+      porcentaje: 40
+      etiqueta: "Valor del examen Ordinario"
   rubros:
     - id: actividades
       etiqueta: "Entrega de actividades en clases y tareas"
       porcentaje: 30
+      unidad: puntos
+      total: 140
       detalle: "catorce entregas a lo largo del semestre"
     - id: examenes
       etiqueta: "Exámenes parciales"
@@ -139,6 +145,49 @@ evaluacion:
       etiqueta: "Trabajo final completo"
       porcentaje: 20
       detalle: "conforme a los requisitos de forma y fondo de la rúbrica"
+
+# La rúbrica se transcribe literalmente de la tabla «Criterios de fondo de trabajo final»
+# del DI fuente; sus puntos no son porcentajes de la calificación final.
+rubrica:
+  meta: "6.1"
+  total: 100
+  filas:
+    - concepto: "Portada"
+      puntos: 2
+      descripcion: "Nombre de la universidad, facultad y unidad académica, nombre completo del alumno comenzando por apellido paterno, materno y nombres, logo universitario,  fotografía de ambos integrantes del equipo de frente del alumno que presenta el trabajo, nombre del trabajo, materia, grupo y fecha, en la parte inferior derecha anotar el tipo de trabajo final que le fue asignado."
+    - concepto: "Introducción"
+      puntos: 2
+      descripcion: "Resumen de lo que será desarrollado en el cuerpo del trabajo."
+    - concepto: "Catálogo de cuentas"
+      puntos: 2
+      descripcion: "Elaboración del catálogo de cuentas de acuerdo al tipo de empresa y método a emplear, añadiendo las sub-cuentas de acuerdo a cada caso y la redacción de los asientos adicionales que diseñaron."
+    - concepto: "Redacción del caso práctico"
+      puntos: 2
+      descripcion: "Incorporar la información referente a la redacción que se tomó como base para la elaboración de asientos y datos adicionales."
+    - concepto: "Libro diario"
+      puntos: 40
+      descripcion: "Elaboración de asientos contables hipervínculos del libro mayor."
+    - concepto: "Libro Mayor"
+      puntos: 10
+      descripcion: "Elaboración del libro Mayor con hipervínculos del libro diario."
+    - concepto: "Hoja de trabajo"
+      puntos: 10
+      descripcion: "Elaboración de la hoja de trabajo, a partir de los saldos en libro Mayor."
+    - concepto: "Tarjetas de almacén"
+      puntos: 5
+      descripcion: "Tarjetas de almacén con hipervínculos con el libro diario en caso de que corresponda (métodos perpetuo en costos de venta y en el caso de analitico en el inventario final)"
+    - concepto: "Auxiliares de moneda extranjera"
+      puntos: 5
+      descripcion: "Auxiliares de acuerdo al método empleado."
+    - concepto: "Estado de resultados y sus notas"
+      puntos: 10
+      descripcion: "Estado de resultados con hipervínculos con el libro mayor y sus notas explicativas"
+    - concepto: "Balance general y sus notas"
+      puntos: 10
+      descripcion: "Balance general con hipervínculos en forma de cuenta sin desglose de rubros y con notas explicativas."
+    - concepto: "Conclusión"
+      puntos: 2
+      descripcion: "Deducción lógica y relevante de los aspectos abordados en el trabajo."
 
 grupos:
   - numero: "531"
@@ -151,8 +200,7 @@ tolerancia_minutos: 15
 avisos:
   - "Reconstrucción del DI 2026-1 de la docente sobre el calendario 2026-2: las fechas no son las de su documento original."
   - "El PUA 38985 no está ingerido. Sin él, las unidades van sin temas y el manifiesto queda sin hash de PUA."
-  - "Su documento reparte las actividades en puntos (10 por meta) y declara 150 cuando solo hay 140. Aquí van en porcentaje y suman 30 exacto."
-  - "Los tres exámenes se modelaron como metas propias; en su documento viven dentro de la actividad de la meta de esa semana."
+  - "Las metas y actividades son un borrador redactado por el agente y la docente debe revisarlas antes de su entrega."
 
 metas:
   - id: "1.0"
@@ -170,16 +218,16 @@ metas:
         semana: 1
         actividad_tabla: "Encuadre del curso"
         pasos:
-          - "Primero. En clase, el profesor describirá los criterios de evaluación y el plan de trabajo del semestre, así como las políticas y reglas de clase."
-          - "Segundo. Se escribirá en la libreta de clase los temas vistos y se llegará a las primeras conclusiones grupales."
+          - "En clase, el profesor describirá los criterios de evaluación y el plan de trabajo del semestre, así como las políticas y reglas de clase."
+          - "Se escribirá en la libreta de clase los temas vistos y se llegará a las primeras conclusiones grupales."
       - ambiente: virtual
         semana: 1
         actividad_tabla: "Examen diagnóstico"
         pasos:
-          - "Tercero. Accede a la plataforma institucional y revisa la información contenida en la carpeta Información del curso."
-          - "Cuarto. Ingresa a la Meta 1.0 Presentar el encuadre del curso."
-          - "Quinto. Lee con cuidado y contesta las preguntas, de acuerdo con lo aprendido en tu curso de Introducción a la Contabilidad del semestre pasado."
-          - "Sexto. Presiona el botón enviar."
+          - "Accede a la plataforma institucional y revisa la información contenida en la carpeta Información del curso."
+          - "Ingresa a la Meta 1.0 Presentar el encuadre del curso."
+          - "Lee con cuidado y contesta las preguntas, de acuerdo con lo aprendido en tu curso de Introducción a la Contabilidad del semestre pasado."
+          - "Presiona el botón enviar."
     evidencias: [{nombre: "Examen diagnóstico", tipo: "Examen", recurso: "M1.0_Examen diagnóstico"}]
     criterios_evaluacion:
       - "Se registra la participación; esta meta no tiene valor porcentual."
@@ -189,7 +237,7 @@ metas:
   - id: "1.1"
     unidad: "1"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [2]
     enunciado: "Identificar las fórmulas de asignación de costos de inventarios."
     caracter: individual
@@ -200,15 +248,15 @@ metas:
         semana: 2
         actividad_tabla: "Fórmulas de asignación de costos de inventarios"
         pasos:
-          - "Primero. En clase, el docente explicará las fórmulas de asignar el costo a los inventarios de acuerdo con la normatividad vigente."
-          - "Segundo. Revisa los materiales disponibles: Noriega, A. E. O., & Castro, I. M. G. (2016). Aplicación práctica de la Norma de Información Financiera C4-Inventarios. Trascender, contabilidad y gestión, (1), 14-20. Fuertes, J. (2015). Métodos, técnicas y sistemas de valuación de inventarios. Un enfoque global. Gestión joven AJOICA, 14, 48-65."
-          - "Tercero. Descarga e imprime los ejercicios Métodos de valuación de inventarios, registra en libro diario los asientos contables y los costos de los inventarios en los formatos de tarjetas de almacén según correspondan."
+          - "En clase, el docente explicará las fórmulas de asignar el costo a los inventarios de acuerdo con la normatividad vigente."
+          - "Revisa los materiales disponibles: Noriega, A. E. O., & Castro, I. M. G. (2016). Aplicación práctica de la Norma de Información Financiera C4-Inventarios. Trascender, contabilidad y gestión, (1), 14-20. Fuertes, J. (2015). Métodos, técnicas y sistemas de valuación de inventarios. Un enfoque global. Gestión joven AJOICA, 14, 48-65."
+          - "Descarga e imprime los ejercicios Métodos de valuación de inventarios, registra en libro diario los asientos contables y los costos de los inventarios en los formatos de tarjetas de almacén según correspondan."
       - ambiente: virtual
         semana: 2
         actividad_tabla: "Libro diario y tarjetas de almacén"
         pasos:
-          - "Cuarto. Toma fotografía a tu libro diario y tarjetas de almacén elaboradas en clase presencial y las que finalizaste en forma asincrónica."
-          - "Quinto. Adjunta el archivo en el espacio de entrega M1.1_Libro diario y tarjetas de almacén."
+          - "Toma fotografía a tu libro diario y tarjetas de almacén elaboradas en clase presencial y las que finalizaste en forma asincrónica."
+          - "Adjunta el archivo en el espacio de entrega M1.1_Libro diario y tarjetas de almacén."
     evidencias: [{nombre: "Libro diario y tarjetas de almacén", tipo: "Documento", recurso: "M1.1_Libro diario y tarjetas de almacén"}]
     criterios_evaluacion:
       - "Los asientos contables corresponden al método de valuación indicado."
@@ -220,7 +268,7 @@ metas:
   - id: "1.2"
     unidad: "1"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [3]
     enunciado: "Comparar los criterios de selección para los sistemas de asignación de inventarios."
     caracter: individual
@@ -231,15 +279,15 @@ metas:
         semana: 3
         actividad_tabla: "Discusión de los métodos de valuación"
         pasos:
-          - "Primero. En clase se analizarán los resultados obtenidos en los ejercicios de métodos de valuación de inventarios."
-          - "Segundo. Se discutirá el método de valuación pertinente considerando los supuestos de tipos de empresa que el docente establezca."
+          - "En clase se analizarán los resultados obtenidos en los ejercicios de métodos de valuación de inventarios."
+          - "Se discutirá el método de valuación pertinente considerando los supuestos de tipos de empresa que el docente establezca."
       - ambiente: virtual
         semana: 3
         actividad_tabla: "Cuadro comparativo de los sistemas de asignación"
         pasos:
-          - "Tercero. Revisa el material disponible: Jara-Cordero, S., Sánchez-Partida, D., & Martínez-Flores, J. L. (2017). Análisis para la mejora en el manejo de inventarios de una comercializadora. Revista de Ingeniería Industrial."
-          - "Cuarto. Con base en lo aprendido, elabora en una hoja de cálculo un cuadro comparativo con las columnas PEPS, Costo promedio y Costo identificado, ubicando en los renglones las características de cada uno."
-          - "Quinto. Adjunta el archivo en el espacio de entrega M1.2_Cuadro comparativo."
+          - "Revisa el material disponible: Jara-Cordero, S., Sánchez-Partida, D., & Martínez-Flores, J. L. (2017). Análisis para la mejora en el manejo de inventarios de una comercializadora. Revista de Ingeniería Industrial."
+          - "Con base en lo aprendido, elabora en una hoja de cálculo un cuadro comparativo con las columnas PEPS, Costo promedio y Costo identificado, ubicando en los renglones las características de cada uno."
+          - "Adjunta el archivo en el espacio de entrega M1.2_Cuadro comparativo."
     evidencias: [{nombre: "Cuadro comparativo", tipo: "Documento", recurso: "M1.2_Cuadro comparativo"}]
     criterios_evaluacion:
       - "El cuadro contrasta los tres métodos en las características solicitadas."
@@ -251,7 +299,7 @@ metas:
   - id: "2.0"
     unidad: "2"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [4]
     enunciado: "Registrar operaciones especiales conforme a la normatividad contable."
     caracter: individual
@@ -262,13 +310,13 @@ metas:
         semana: 4
         actividad_tabla: "Operaciones especiales: planteamiento"
         pasos:
-          - "Primero. En clase, el docente presentará las operaciones especiales y su tratamiento conforme a la normatividad contable vigente."
+          - "En clase, el docente presentará las operaciones especiales y su tratamiento conforme a la normatividad contable vigente."
       - ambiente: virtual
         semana: 4
         actividad_tabla: "Investigación documental"
         pasos:
-          - "Segundo. Realiza una investigación documental sobre el tratamiento contable de las operaciones especiales, citando la normatividad aplicable."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M2.0_Investigación documental."
+          - "Realiza una investigación documental sobre el tratamiento contable de las operaciones especiales, citando la normatividad aplicable."
+          - "Adjunta el archivo en el espacio de entrega M2.0_Investigación documental."
     evidencias: [{nombre: "Investigación documental", tipo: "Documento", recurso: "M2.0_Investigación documental"}]
     criterios_evaluacion:
       - "La investigación cita la normatividad contable vigente aplicable."
@@ -279,7 +327,7 @@ metas:
   - id: "2.1"
     unidad: "2"
     rubro: actividades
-    valor: 2.5
+    valor: 10
     semanas: [5]
     enunciado: "Registrar las operaciones especiales en libro diario y auxiliares."
     caracter: individual
@@ -290,14 +338,14 @@ metas:
         semana: 5
         actividad_tabla: "Registro de operaciones especiales"
         pasos:
-          - "Primero. En clase, el docente planteará los casos y guiará el registro de las operaciones."
-          - "Segundo. Resuelve los ejercicios en libro diario y en las tarjetas auxiliares que correspondan."
+          - "En clase, el docente planteará los casos y guiará el registro de las operaciones."
+          - "Resuelve los ejercicios en libro diario y en las tarjetas auxiliares que correspondan."
       - ambiente: virtual
         semana: 5
         actividad_tabla: "Registros contables y tarjetas auxiliares"
         pasos:
-          - "Tercero. Completa los registros iniciados en clase y verifica que los auxiliares cuadren con el libro diario."
-          - "Cuarto. Adjunta el archivo en el espacio de entrega M2.1_Registros contables."
+          - "Completa los registros iniciados en clase y verifica que los auxiliares cuadren con el libro diario."
+          - "Adjunta el archivo en el espacio de entrega M2.1_Registros contables."
     evidencias: [{nombre: "Registros contables y tarjetas auxiliares", tipo: "Documento", recurso: "M2.1_Registros contables"}]
     criterios_evaluacion:
       - "Los asientos aplican el tratamiento que corresponde a cada operación especial."
@@ -308,7 +356,7 @@ metas:
   - id: "2.2"
     unidad: "2"
     rubro: actividades
-    valor: 2.5
+    valor: 10
     semanas: [6]
     enunciado: "Registrar las operaciones especiales de mercancías en tránsito y anticipos."
     caracter: individual
@@ -319,14 +367,14 @@ metas:
         semana: 6
         actividad_tabla: "Mercancías en tránsito y anticipos"
         pasos:
-          - "Primero. En clase, el docente planteará los casos y guiará el registro de las operaciones."
-          - "Segundo. Resuelve los ejercicios en libro diario y en las tarjetas auxiliares que correspondan."
+          - "En clase, el docente planteará los casos y guiará el registro de las operaciones."
+          - "Resuelve los ejercicios en libro diario y en las tarjetas auxiliares que correspondan."
       - ambiente: virtual
         semana: 6
         actividad_tabla: "Registros contables y tarjetas auxiliares"
         pasos:
-          - "Tercero. Completa los registros iniciados en clase y verifica que los auxiliares cuadren con el libro diario."
-          - "Cuarto. Adjunta el archivo en el espacio de entrega M2.2_Registros contables."
+          - "Completa los registros iniciados en clase y verifica que los auxiliares cuadren con el libro diario."
+          - "Adjunta el archivo en el espacio de entrega M2.2_Registros contables."
     evidencias: [{nombre: "Registros contables y tarjetas auxiliares", tipo: "Documento", recurso: "M2.2_Registros contables"}]
     criterios_evaluacion:
       - "El tratamiento de mercancías en tránsito y anticipos es el que marca la normatividad."
@@ -337,7 +385,7 @@ metas:
   - id: "2.3"
     unidad: "2"
     rubro: actividades
-    valor: 2.5
+    valor: 10
     semanas: [7]
     enunciado: "Registrar las operaciones especiales en moneda extranjera."
     caracter: individual
@@ -348,14 +396,14 @@ metas:
         semana: 7
         actividad_tabla: "Operaciones en moneda extranjera"
         pasos:
-          - "Primero. En clase, el docente planteará los casos de operaciones en moneda extranjera y el método de conversión aplicable."
-          - "Segundo. Resuelve los ejercicios en libro diario y en los auxiliares de moneda extranjera."
+          - "En clase, el docente planteará los casos de operaciones en moneda extranjera y el método de conversión aplicable."
+          - "Resuelve los ejercicios en libro diario y en los auxiliares de moneda extranjera."
       - ambiente: virtual
         semana: 7
         actividad_tabla: "Registros contables y auxiliares de moneda extranjera"
         pasos:
-          - "Tercero. Completa los registros y los auxiliares conforme al método empleado."
-          - "Cuarto. Adjunta el archivo en el espacio de entrega M2.3_Registros contables."
+          - "Completa los registros y los auxiliares conforme al método empleado."
+          - "Adjunta el archivo en el espacio de entrega M2.3_Registros contables."
     evidencias: [{nombre: "Registros contables y auxiliares", tipo: "Documento", recurso: "M2.3_Registros contables"}]
     criterios_evaluacion:
       - "La conversión aplica el tipo de cambio y el método que corresponden."
@@ -366,7 +414,7 @@ metas:
   - id: "2.4"
     unidad: "2"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [8]
     enunciado: "Reconocer las ventas y su tratamiento contable."
     caracter: individual
@@ -377,51 +425,31 @@ metas:
         semana: 8
         actividad_tabla: "Reconocimiento de ventas"
         pasos:
-          - "Primero. En clase, el docente expondrá el reconocimiento de ingresos por venta y sus casos particulares."
+          - "En clase, el docente expondrá el reconocimiento de ingresos por venta y sus casos particulares."
       - ambiente: virtual
         semana: 8
-        actividad_tabla: "Investigación documental"
+        actividad_tabla: "Investigación documental / Examen I"
         pasos:
-          - "Segundo. Realiza una investigación documental sobre el reconocimiento de ingresos conforme a la normatividad vigente."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M2.4_Investigación documental."
+          - "Realiza una investigación documental sobre el reconocimiento de ingresos conforme a la normatividad vigente."
+          - "Adjunta el archivo en el espacio de entrega M2.4_Investigación documental."
+          - "Presenta el Examen I correspondiente a las unidades 1 y 2."
     evidencias: [{nombre: "Investigación documental", tipo: "Documento", recurso: "M2.4_Investigación documental"}]
+    componentes:
+      - rubro: examenes
+        valor: 15
+        etiqueta: "Examen I"
+        tipo: examen_parcial
+        evidencia: {nombre: "Examen I", tipo: "Examen", recurso: "ME1_Examen I"}
     criterios_evaluacion:
       - "Identifica el momento de reconocimiento del ingreso con fundamento normativo."
       - "Las fuentes se citan conforme al esquema APA."
     reflexion:
       - "Reconocí en qué momento se registra un ingreso por venta."
 
-  - id: "E1"
-    unidad: "2"
-    tipo: examen_parcial
-    rubro: examenes
-    valor: 15
-    semanas: [8]
-    enunciado: "Examen I: fórmulas de asignación de costos y operaciones especiales."
-    caracter: individual
-    que_voy_a_aprender:
-      - "Integrar los métodos de valuación de inventarios con el registro de operaciones especiales."
-    sesiones:
-      - ambiente: presencial
-        semana: 8
-        actividad_tabla: "Examen I"
-        pasos:
-          - "Presenta el Examen I, que abarca las unidades 1 y 2: fórmulas de asignación de costos de inventarios y registro de operaciones especiales."
-      - ambiente: virtual
-        semana: 8
-        actividad_tabla: "Guía de repaso"
-        pasos:
-          - "Revisa la guía de repaso publicada en el módulo del Examen I y plantea tus dudas antes de la fecha del examen."
-    evidencias: [{nombre: "Examen I", tipo: "Examen", recurso: "ME1_Examen I"}]
-    criterios_evaluacion:
-      - "Se evalúan las unidades 1 y 2 conforme a los criterios del Art. 67 del Estatuto Escolar."
-    reflexion:
-      - "Integré los métodos de valuación con el registro de operaciones especiales."
-
   - id: "3.0"
     unidad: "3"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [9]
     enunciado: "Identificar la estimación de cuentas incobrables."
     caracter: individual
@@ -432,13 +460,13 @@ metas:
         semana: 9
         actividad_tabla: "Estimación de cuentas incobrables"
         pasos:
-          - "Primero. En clase, el docente expondrá la estimación de cuentas incobrables y se elaborarán ejercicios."
+          - "En clase, el docente expondrá la estimación de cuentas incobrables y se elaborarán ejercicios."
       - ambiente: virtual
         semana: 9
         actividad_tabla: "Investigación documental"
         pasos:
-          - "Segundo. Realiza una investigación documental sobre los métodos de estimación de cuentas incobrables."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M3.0_Investigación documental."
+          - "Realiza una investigación documental sobre los métodos de estimación de cuentas incobrables."
+          - "Adjunta el archivo en el espacio de entrega M3.0_Investigación documental."
     evidencias: [{nombre: "Investigación documental", tipo: "Documento", recurso: "M3.0_Investigación documental"}]
     criterios_evaluacion:
       - "Distingue los métodos de estimación con fundamento normativo."
@@ -449,7 +477,7 @@ metas:
   - id: "3.1"
     unidad: "3"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [10]
     enunciado: "Comparar los métodos de registro de inventario perpetuo y analítico."
     caracter: individual
@@ -460,13 +488,13 @@ metas:
         semana: 10
         actividad_tabla: "Registros contables y cédulas auxiliares"
         pasos:
-          - "Primero. En clase se elaborarán los registros contables y las cédulas auxiliares de ambos procedimientos."
+          - "En clase se elaborarán los registros contables y las cédulas auxiliares de ambos procedimientos."
       - ambiente: virtual
         semana: 10
         actividad_tabla: "Investigación documental"
         pasos:
-          - "Segundo. Realiza una investigación documental que contraste ambos procedimientos de registro."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M3.1_Investigación documental."
+          - "Realiza una investigación documental que contraste ambos procedimientos de registro."
+          - "Adjunta el archivo en el espacio de entrega M3.1_Investigación documental."
     evidencias: [{nombre: "Investigación documental", tipo: "Documento", recurso: "M3.1_Investigación documental"}]
     criterios_evaluacion:
       - "Contrasta ambos procedimientos señalando cuándo conviene cada uno."
@@ -477,7 +505,7 @@ metas:
   - id: "3.2"
     unidad: "3"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [11]
     enunciado: "Identificar los métodos de depreciación y amortización."
     caracter: individual
@@ -488,13 +516,13 @@ metas:
         semana: 11
         actividad_tabla: "Registros contables y cédulas auxiliares"
         pasos:
-          - "Primero. En clase se elaborarán los registros contables y las cédulas auxiliares de depreciación y amortización."
+          - "En clase se elaborarán los registros contables y las cédulas auxiliares de depreciación y amortización."
       - ambiente: virtual
         semana: 11
         actividad_tabla: "Investigación documental"
         pasos:
-          - "Segundo. Realiza una investigación documental sobre los métodos de depreciación y amortización."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M3.2_Investigación documental."
+          - "Realiza una investigación documental sobre los métodos de depreciación y amortización."
+          - "Adjunta el archivo en el espacio de entrega M3.2_Investigación documental."
     evidencias: [{nombre: "Investigación documental", tipo: "Documento", recurso: "M3.2_Investigación documental"}]
     criterios_evaluacion:
       - "Los cálculos de depreciación corresponden al método señalado."
@@ -505,7 +533,7 @@ metas:
   - id: "3.3"
     unidad: "3"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [12]
     enunciado: "Registrar gastos y productos acumulados y pagados por anticipado."
     caracter: individual
@@ -516,51 +544,31 @@ metas:
         semana: 12
         actividad_tabla: "Asientos de ajuste"
         pasos:
-          - "Primero. En clase, el docente presentará los ajustes por gastos y productos acumulados y pagados por anticipado, y se elaborarán los registros."
+          - "En clase, el docente presentará los ajustes por gastos y productos acumulados y pagados por anticipado, y se elaborarán los registros."
       - ambiente: virtual
         semana: 12
-        actividad_tabla: "Investigación documental"
+        actividad_tabla: "Investigación documental / Examen II"
         pasos:
-          - "Segundo. Realiza una investigación documental sobre el tratamiento de los gastos y productos acumulados."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M3.3_Investigación documental."
+          - "Realiza una investigación documental sobre el tratamiento de los gastos y productos acumulados."
+          - "Adjunta el archivo en el espacio de entrega M3.3_Investigación documental."
+          - "Presenta el Examen II correspondiente a la unidad 3."
     evidencias: [{nombre: "Investigación documental", tipo: "Documento", recurso: "M3.3_Investigación documental"}]
+    componentes:
+      - rubro: examenes
+        valor: 15
+        etiqueta: "Examen II"
+        tipo: examen_parcial
+        evidencia: {nombre: "Examen II", tipo: "Examen", recurso: "ME2_Examen II"}
     criterios_evaluacion:
       - "Los asientos de ajuste reflejan la acumulación en el periodo que corresponde."
       - "Las fuentes se citan conforme al esquema APA."
     reflexion:
       - "Registré los ajustes por acumulación y por pagos anticipados."
 
-  - id: "E2"
-    unidad: "3"
-    tipo: examen_parcial
-    rubro: examenes
-    valor: 15
-    semanas: [12]
-    enunciado: "Examen II: ajustes."
-    caracter: individual
-    que_voy_a_aprender:
-      - "Integrar los distintos asientos de ajuste sobre un mismo periodo contable."
-    sesiones:
-      - ambiente: presencial
-        semana: 12
-        actividad_tabla: "Examen II"
-        pasos:
-          - "Presenta el Examen II, que abarca la unidad 3: estimaciones, depreciaciones y ajustes por acumulación."
-      - ambiente: virtual
-        semana: 12
-        actividad_tabla: "Guía de repaso"
-        pasos:
-          - "Revisa la guía de repaso publicada en el módulo del Examen II y plantea tus dudas antes de la fecha del examen."
-    evidencias: [{nombre: "Examen II", tipo: "Examen", recurso: "ME2_Examen II"}]
-    criterios_evaluacion:
-      - "Se evalúa la unidad 3 conforme a los criterios del Art. 67 del Estatuto Escolar."
-    reflexion:
-      - "Integré los asientos de ajuste sobre un mismo periodo contable."
-
   - id: "4.0"
     unidad: "4"
     rubro: actividades
-    valor: 2.5
+    valor: 10
     semanas: [13]
     enunciado: "Elaborar saldos ajustados en la hoja de trabajo."
     caracter: individual
@@ -571,13 +579,13 @@ metas:
         semana: 13
         actividad_tabla: "Hoja de trabajo: planteamiento"
         pasos:
-          - "Primero. En clase, el docente presentará la estructura de la hoja de trabajo y el paso de la balanza de comprobación a los saldos ajustados."
+          - "En clase, el docente presentará la estructura de la hoja de trabajo y el paso de la balanza de comprobación a los saldos ajustados."
       - ambiente: virtual
         semana: 13
         actividad_tabla: "Hoja de trabajo individual"
         pasos:
-          - "Segundo. Elabora tu hoja de trabajo incorporando los ajustes trabajados en la unidad 3."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M4.0_Hoja de trabajo."
+          - "Elabora tu hoja de trabajo incorporando los ajustes trabajados en la unidad 3."
+          - "Adjunta el archivo en el espacio de entrega M4.0_Hoja de trabajo."
     evidencias: [{nombre: "Hoja de trabajo", tipo: "Documento", recurso: "M4.0_Hoja de trabajo"}]
     criterios_evaluacion:
       - "Los saldos ajustados cuadran con la balanza de comprobación y los ajustes."
@@ -588,7 +596,7 @@ metas:
   - id: "5.0"
     unidad: "5"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [14]
     enunciado: "Registrar los valores ajenos y contingentes en cuentas de orden."
     caracter: individual
@@ -599,13 +607,13 @@ metas:
         semana: 14
         actividad_tabla: "Cuentas de orden"
         pasos:
-          - "Primero. En clase, el docente expondrá las características de control de las cuentas de orden y se resolverán casos."
+          - "En clase, el docente expondrá las características de control de las cuentas de orden y se resolverán casos."
       - ambiente: virtual
         semana: 14
         actividad_tabla: "Registros contables"
         pasos:
-          - "Segundo. Elabora los registros contables de las operaciones en cuentas de orden planteadas en clase."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M5.0_Registros contables."
+          - "Elabora los registros contables de las operaciones en cuentas de orden planteadas en clase."
+          - "Adjunta el archivo en el espacio de entrega M5.0_Registros contables."
     evidencias: [{nombre: "Registros contables", tipo: "Documento", recurso: "M5.0_Registros contables"}]
     criterios_evaluacion:
       - "Distingue los valores ajenos de los contingentes."
@@ -616,7 +624,7 @@ metas:
   - id: "6.0"
     unidad: "6"
     rubro: actividades
-    valor: 2
+    valor: 10
     semanas: [15]
     enunciado: "Elaborar el estado de resultados y el balance general con sus notas."
     caracter: individual
@@ -625,48 +633,28 @@ metas:
     sesiones:
       - ambiente: presencial
         semana: 15
-        actividad_tabla: "Formulación de los estados financieros"
+        actividad_tabla: "Formulación de los estados financieros / Examen III"
         pasos:
-          - "Primero. En clase, el docente presentará la formulación del estado de resultados y del balance general a partir de la hoja de trabajo."
+          - "En clase, el docente presentará la formulación del estado de resultados y del balance general a partir de la hoja de trabajo."
+          - "Presenta el Examen III correspondiente a las unidades 4, 5 y 6."
       - ambiente: virtual
         semana: 15
         actividad_tabla: "Estado de resultados y balance general"
         pasos:
-          - "Segundo. Elabora el estado de resultados y el balance general con sus notas explicativas."
-          - "Tercero. Adjunta el archivo en el espacio de entrega M6.0_Estados financieros."
+          - "Elabora el estado de resultados y el balance general con sus notas explicativas."
+          - "Adjunta el archivo en el espacio de entrega M6.0_Estados financieros."
     evidencias: [{nombre: "Estados financieros", tipo: "Documento", recurso: "M6.0_Estados financieros"}]
+    componentes:
+      - rubro: examenes
+        valor: 20
+        etiqueta: "Examen III"
+        tipo: examen_parcial
+        evidencia: {nombre: "Examen III", tipo: "Examen", recurso: "ME3_Examen III"}
     criterios_evaluacion:
       - "Los estados financieros se derivan de la hoja de trabajo y cuadran con ella."
       - "Las notas explicativas acompañan a cada estado."
     reflexion:
       - "Formulé el estado de resultados y el balance general con sus notas."
-
-  - id: "E3"
-    unidad: "6"
-    tipo: examen_parcial
-    rubro: examenes
-    valor: 20
-    semanas: [15]
-    enunciado: "Examen III: hoja de trabajo, cuentas de orden y estados financieros."
-    caracter: individual
-    que_voy_a_aprender:
-      - "Recorrer el ciclo contable completo, de la balanza de comprobación a los estados financieros."
-    sesiones:
-      - ambiente: presencial
-        semana: 15
-        actividad_tabla: "Examen III"
-        pasos:
-          - "Presenta el Examen III, que abarca las unidades 4, 5 y 6: hoja de trabajo, cuentas de orden y estados financieros."
-      - ambiente: virtual
-        semana: 15
-        actividad_tabla: "Guía de repaso"
-        pasos:
-          - "Revisa la guía de repaso publicada en el módulo del Examen III y plantea tus dudas antes de la fecha del examen."
-    evidencias: [{nombre: "Examen III", tipo: "Examen", recurso: "ME3_Examen III"}]
-    criterios_evaluacion:
-      - "Se evalúan las unidades 4, 5 y 6 conforme a los criterios del Art. 67 del Estatuto Escolar."
-    reflexion:
-      - "Recorrí el ciclo contable completo hasta los estados financieros."
 
   - id: "6.1"
     unidad: "6"
@@ -684,14 +672,14 @@ metas:
         semana: 16
         actividad_tabla: "Retroalimentación y revisión de avances"
         pasos:
-          - "Primero. Presenta tus avances del trabajo final y recibe la retroalimentación del docente y del grupo."
+          - "Presenta tus avances del trabajo final y recibe la retroalimentación del docente y del grupo."
       - ambiente: virtual
         semana: 16
         actividad_tabla: "Entrega del trabajo final"
         pasos:
-          - "Segundo. Integra el trabajo final conforme a la rúbrica: portada, introducción, catálogo de cuentas, redacción del caso práctico, libro diario, libro mayor, hoja de trabajo, tarjetas de almacén, auxiliares de moneda extranjera, estado de resultados y balance general con sus notas, y conclusión."
-          - "Tercero. Verifica que los hipervínculos entre el libro diario, el libro mayor y la hoja de trabajo funcionen."
-          - "Cuarto. Adjunta el archivo en el espacio de entrega M6.1_Trabajo final."
+          - "Integra el trabajo final conforme a la rúbrica: portada, introducción, catálogo de cuentas, redacción del caso práctico, libro diario, libro mayor, hoja de trabajo, tarjetas de almacén, auxiliares de moneda extranjera, estado de resultados y balance general con sus notas, y conclusión."
+          - "Verifica que los hipervínculos entre el libro diario, el libro mayor y la hoja de trabajo funcionen."
+          - "Adjunta el archivo en el espacio de entrega M6.1_Trabajo final."
     evidencias: [{nombre: "Trabajo final", tipo: "Proyecto", recurso: "M6.1_Trabajo final"}]
     criterios_evaluacion:
       - "El trabajo integra los trece conceptos de la rúbrica, que suma 100 puntos."

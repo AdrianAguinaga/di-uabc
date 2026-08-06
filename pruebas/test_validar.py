@@ -615,6 +615,32 @@ class Regla2Rubrica(unittest.TestCase):
                 self.assertIn(destino, mensajes[0])
 
 
+class ContabilidadSinTraducirse(unittest.TestCase):
+    """REQ-49: R2 conserva visible el defecto de la fuente y el curso documenta su corrección."""
+
+    RUTA = RAIZ / "cursos/2026-2/38985-contabilidad-financiera/curso.yaml"
+
+    @staticmethod
+    def _datos():
+        return yaml.safe_load(ContabilidadSinTraducirse.RUTA.read_text(encoding="utf-8"))
+
+    def test_el_original_de_150_puntos_reporta_solo_el_defecto_de_r2(self):
+        datos = self._datos()
+        actividades = next(r for r in datos["evaluacion"]["rubros"] if r["id"] == "actividades")
+        actividades["total"] = 150
+
+        inf = validar.validar(modelo.desde_dict(datos))
+
+        self.assertEqual({"R2"}, reglas_con_error(inf))
+        mensajes = " ".join(h.mensaje for h in inf.errores)
+        self.assertIn("140 pts", mensajes)
+        self.assertIn("150 pts", mensajes)
+
+    def test_la_correccion_documentada_a_140_puntos_valida(self):
+        inf = validar.validar(modelo.cargar(self.RUTA))
+        self.assertTrue(inf.valido, "\n".join(str(h) for h in inf.errores))
+
+
 class Regla3Parciales(unittest.TestCase):
     def test_exige_dos_parciales_segun_el_articulo_68(self):
         metas = copy.deepcopy(CURSO_VALIDO["metas"])
