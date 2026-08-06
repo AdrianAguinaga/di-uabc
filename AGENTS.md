@@ -170,7 +170,7 @@ avisos:          []                          # arrastrados desde la ingesta del 
 | # | Qué verifica | Fundamento |
 |---|---|---|
 | R1 | Los porcentajes del esquema suman exactamente 100; la exención cae en [60, 100]. | Arts. 65 y 67 |
-| R2 | Las metas suman lo declarado **rubro por rubro**, no solo en total. | Art. 67 |
+| R2 | Todo aporte a un rubro —la meta y cada uno de sus componentes— suma lo que ese rubro declara, **en la unidad de ese rubro** y rubro por rubro, no solo en total. Un componente imputado a un rubro inexistente o con valor negativo es error. | Art. 67 |
 | R3 | Hay al menos dos exámenes parciales. | Art. 68 |
 | R4 | Toda unidad del PUA tiene meta; ninguna meta cuelga de una unidad inexistente. | — |
 | R5 | Toda semana 1..N tiene actividad; ninguna meta cae fuera del ciclo. | Calendario |
@@ -196,6 +196,14 @@ una de esas marcas, copiarla es lo correcto y decide el profesor.
 100 en total pero sus rubros no cuadran con su propio esquema declarado. Un validador que solo
 revise el total deja pasar ese error; este lo atrapa, y hay una prueba dedicada a demostrarlo
 (`test_detecta_el_defecto_del_ejemplo_961`).
+
+Desde la Fase 10, R2 lee `Curso.aportes()`: cuenta la meta **y sus componentes**, compara dentro
+de cada rubro contra `Rubro.base` —`total` si el rubro está en puntos, `porcentaje` si no— y
+nunca suma unidades distintas entre sí. El hallazgo global sí habla en porcentaje, convirtiendo
+la suma de cada rubro **una vez** con `Rubro.a_porcentaje()`; convertir aporte a aporte acumula
+error de coma flotante y denunciaría cursos correctos. El segundo defecto que la regla existe
+para atrapar es el del DI de Contabilidad (531): un rubro que declara 150 pts y cuyos aportes
+suman 140.
 
 ### Custodia de las plantillas (`src/plantillas.py`)
 

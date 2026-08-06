@@ -314,6 +314,39 @@ class Regla2Metas(unittest.TestCase):
         inf = informe_en_puntos(retoque)
         self.assertNotIn("R2", reglas_con_error(inf))
 
+    def test_un_componente_en_un_rubro_inexistente_es_error_de_r2(self):
+        def retoque(d):
+            _meta_de(d, "2.2")["componentes"] = [{
+                "rubro": "participacion", "valor": 10, "etiqueta": "Presentación",
+                "tipo": "actividad",
+            }]
+        inf = informe_en_puntos(retoque)
+        self.assertIn("R2", reglas_con_error(inf))
+        mensajes = " ".join(h.mensaje for h in inf.errores if h.regla == "R2")
+        self.assertIn("participacion", mensajes)
+        self.assertIn("Presentación", mensajes)
+
+    def test_el_curso_con_un_componente_mal_imputado_carga_igual(self):
+        """Precedente de D-17 de la Fase 9: es defecto de regla, no de esquema."""
+        def retoque(d):
+            _meta_de(d, "2.2")["componentes"] = [{
+                "rubro": "participacion", "valor": 10, "etiqueta": "Presentación",
+                "tipo": "actividad",
+            }]
+        c = curso_en_puntos(retoque)              # no lanza ErrorModelo
+        self.assertEqual(1, len(next(m for m in c.metas if m.id == "2.2").componentes))
+
+    def test_un_componente_con_valor_negativo_es_error_de_r2(self):
+        def retoque(d):
+            _meta_de(d, "2.2")["componentes"] = [{
+                "rubro": "tareas", "valor": -10, "etiqueta": "Presentación",
+                "tipo": "actividad",
+            }]
+        inf = informe_en_puntos(retoque)
+        mensajes = " ".join(h.mensaje for h in inf.errores if h.regla == "R2")
+        self.assertIn("Componentes con valor negativo", mensajes)
+        self.assertIn("Presentación", mensajes)
+
 
 class Regla3Parciales(unittest.TestCase):
     def test_exige_dos_parciales_segun_el_articulo_68(self):

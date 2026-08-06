@@ -183,6 +183,15 @@ class _Validador:
                     f"Rubros declarados: {', '.join(sorted(ids))}.",
                 )
 
+        for a in self.c.aportes():
+            if a.es_componente and a.rubro not in ids:
+                self.error(
+                    "R2",
+                    f"{a.meta.etiqueta}: el componente «{a.etiqueta}» se imputa al rubro "
+                    f"«{a.rubro}», que no existe. "
+                    f"Rubros declarados: {', '.join(sorted(ids))}.",
+                )
+
         # Lo que un rubro aporta al 100 se convierte UNA vez, sobre su suma cruda. Convertir
         # aporte a aporte acumula error de coma flotante: 21 aportes de 7 pts más uno de 3
         # sobre un rubro de 150 dan 29.99999999999999 contra los 30 % declarados, y R2
@@ -220,6 +229,12 @@ class _Validador:
 
         if negativas := [m.id for m in self.c.metas if m.valor < 0]:
             self.error("R2", f"Metas con valor negativo: {', '.join(negativas)}.")
+        if negativos := [
+            f"{a.meta.etiqueta} · {a.etiqueta}"
+            for a in self.c.aportes()
+            if a.es_componente and a.valor < 0
+        ]:
+            self.error("R2", f"Componentes con valor negativo: {', '.join(negativos)}.")
         cuenta = Counter(m.id for m in self.c.metas)
         if repetidos := [i for i, n in cuenta.items() if n > 1]:
             self.error("R2", f"Metas duplicadas: {', '.join(sorted(repetidos))}.")
