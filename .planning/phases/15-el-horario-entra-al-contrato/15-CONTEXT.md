@@ -158,6 +158,55 @@ edita), y la materia 932, que está en el horario y no tiene `curso.yaml`.
   mueve (D-10). El mensaje del commit dice que el cambio es deliberado y por qué, como pide el
   criterio 4.
 
+### Lo que la investigación destapó (decidido el 2026-08-06, después del RESEARCH)
+
+- **D-15 — El recorrido de D-07 se acota a la semana, y el silencio se vuelve ruido.** La
+  investigación midió que D-07 **no tiene solución** para 971 (semanas 13 y 15) ni para 972
+  (semana 6): esas semanas el grupo no tiene ningún día con bloque presencial, porque la suspensión
+  cae justo sobre su único día. Un recorrido sin límite aterriza una semana después —9 nov, 23 nov,
+  23 sep— y la fila «semana 13» del documento imprimiría una fecha de la semana 14.
+
+  El recorrido **se detiene al terminar la semana**. No inventa fecha fuera de ella. Y una
+  comprobación nueva de `validar.py` reporta el caso: «semana N: el grupo G no tiene ningún día con
+  bloque presencial (D suspendido)». Quien planee decide qué fecha conserva la celda —lo natural es
+  la del día suspendido—, pero **el hallazgo es obligatorio**: el generador nunca imprime en
+  silencio una fecha que el grupo no tiene.
+
+  **Por qué esta comprobación sí corre, y la del HALLAZGO 1 no.** El RESEARCH midió que
+  `generar.paquete()` valida (`generar.py:293`) *antes* de que `render_docx` resuelva fechas
+  (`render_docx.py:689`), así que ninguna regla que dependa de fechas resueltas se dispara en el
+  pipeline real. Esta no depende de ellas: «¿tiene este grupo algún día con bloque presencial en
+  una semana con suspensión?» se computa con **horario + calendario** y nada más. Quien planee debe
+  escribirla así, sin resolver sesiones.
+
+  **Se descartó recorrer al bloque virtual.** Contradice D-08 —el bloque virtual no toca el
+  `.docx`— y de todos modos no salva a 972: su martes virtual es *anterior* al miércoles suspendido.
+
+- **D-16 — El `manifiesto` de 962 se mueve, y el informe lo declara campo por campo.** La
+  investigación verificó que `MANIFIESTO.yaml` es un archivo **por curso, no por grupo**
+  (`generar.py:142`, itera `curso.grupos` completo en la 232) y que `huella.py` computa su hash una
+  vez por curso (`:147`) y lo aplica a todos sus grupos (`:171`). Meter `bloques` al manifiesto de
+  961 (D-04) mueve por acoplamiento el campo `manifiesto` de 962.
+
+  **D-10 se mantiene, con la precisión que el código permite:** el `.docx` de 962 sale byte por byte
+  igual —`texto_docx` intacto— y su `informe` tampoco se mueve. Lo que cambia es solo `manifiesto`.
+  962 sigue siendo el testigo de que la excepción de REQ-52 está acotada; el testimonio es de dos
+  campos de tres, no de tres de tres.
+
+  **Consecuencias operativas que quien planee no debe redescubrir:**
+  - `python src/huella.py verificar` reportará **cuatro** líneas con `!` después de editar los
+    `curso.yaml`, no tres. El informe de D-11 tiene que anticiparlo o alguien lo leerá como un
+    defecto de implementación.
+  - El informe de D-11 se escribe **campo por campo** —`texto_docx`, `informe`, `manifiesto`— para
+    los cuatro documentos, no documento por documento. Es la única forma de que la tabla distinga
+    los tres cambios deliberados del cuarto acoplado.
+  - El mensaje del commit de D-14 se redacta con esa precisión desde el inicio: no puede prometer
+    que una huella no se movió cuando uno de sus tres campos sí lo hizo.
+
+  **Se descartó sacar `bloques` del manifiesto** (revertiría D-04 y dejaría el horario fuera del
+  rastro) **y separar el manifiesto por grupo** (cambia un diseño de trazabilidad que las cinco
+  fases anteriores de la v2.0 dieron por estable, y movería el hash de los cuatro grupos igual).
+
 ### Discreción acotada
 
 - La redacción exacta de los mensajes de error, siguiendo el estilo de los hallazgos existentes.
