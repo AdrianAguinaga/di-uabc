@@ -262,8 +262,10 @@ son virtuales, y que los cuatro grupos del repositorio digan por fin la verdad s
    cuenta como bloque de tareas y asignaciones. Un grupo con dos bloques presenciales y uno virtual
    produce las mismas fechas de clase que el mismo grupo sin el bloque virtual.
 3. `python src/validar.py` reporta error cuando una hora de clase está mal formada, cuando el fin es
-   anterior al inicio, o cuando un día declarado con hora no está en `dias_presencial`. Hay una
-   prueba que lo hace fallar a propósito.
+   anterior al inicio, y cuando dos bloques del mismo día se solapan. Hay una prueba que lo hace
+   fallar a propósito. El tercer error se enunciaba como «un día declarado con hora no está en
+   `dias_presencial`»; **D-05 lo reemplazó por el solapamiento** porque D-01 volvió imposible el
+   primero: con bloques, `dias_presencial` se deriva de ellos y no hay dos listas que discrepen.
 4. Los cuatro grupos —39056·961, 39056·962, 39062·971, 39062·972— declaran los días y horas de
    `horarios/2026-2.md`. El cambio de fechas resultante se **mide antes de aceptarse**: se lista qué
    fechas cambian en cada documento y por qué, y `pruebas/huellas.yaml` se re-registra en un commit
@@ -273,7 +275,15 @@ son virtuales, y que los cuatro grupos del repositorio digan por fin la verdad s
    el que decide. La decisión aplica al caso general —cada semestre cambia qué grupos hay—, no solo
    al 962.
 6. `python -X utf8 -m unittest discover -s pruebas` pasa: las 283 anteriores intactas más las nuevas.
-**Planes**: TBD
+**Planes**: 7 planes en 6 olas
+
+- [ ] `15-01-PLAN.md` — El bloque entra al contrato: `Bloque`, `Horario.bloques`, `Grupo.imparte` (ola 1)
+- [ ] `15-02-PLAN.md` — La suspensión recorre al siguiente día con clase, sin salir de la semana (ola 2)
+- [ ] `15-03-PLAN.md` — El horario entra al rastro: manifiesto, grafo y el grupo no impartido (ola 2)
+- [ ] `15-04-PLAN.md` — R6 comprueba el horario y avisa de la semana sin día de clase (ola 3)
+- [ ] `15-05-PLAN.md` — Los cuatro grupos dicen la verdad, y el cambio se mide antes de aceptarse (ola 4)
+- [ ] `15-06-PLAN.md` — Re-registro de la huella en commit propio (ola 5)
+- [ ] `15-07-PLAN.md` — El contrato canónico y las skills al día; cierre de la fase (ola 6)
 
 ### Fase 16: Mis clases en Google Calendar
 **Meta**: que el profesor pueda meter sus clases del semestre en su agenda sin transcribirlas a mano.
