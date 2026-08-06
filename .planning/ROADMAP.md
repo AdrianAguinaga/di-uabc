@@ -37,7 +37,7 @@ Todo lo anterior existe para que al llegar ahí los datos ya estén completos y 
 ## Fases
 
 - [x] **Fase 9: El valor de una meta deja de ser un porcentaje** — puntos, componentes e identificadores libres en el contrato *(hecha el 2026-08-05)*
-- [ ] **Fase 10: Las reglas cuentan en la unidad declarada** — R2 en puntos, R3 con exámenes dentro de la actividad
+- [x] **Fase 10: Las reglas cuentan en la unidad declarada** — R2 en puntos, R3 con exámenes dentro de la actividad *(hecha el 2026-08-06)*
 - [ ] **Fase 11: El segundo nivel de la calificación** — promedio 60 % + ordinario 40 %, y la exención contra el promedio
 - [ ] **Fase 12: La rúbrica en el contrato** — filas, puntos y total declarados, con su regla
 - [ ] **Fase 13: El documento en la unidad real** — puntos, componentes, dos niveles y la tabla de rúbrica
@@ -95,10 +95,10 @@ renombrado del encuadre va al final.
 **Planes**: 4 planes en 4 olas. El enunciado que gobierna la fase es «toda regla lee todo aporte a
 un rubro, en la unidad que ese rubro declara»; el alcance se ensanchó respecto a estos criterios y
 está razonado en `10-CONTEXT.md`.
-- [ ] 10-01-PLAN.md — el accesor único de aportes en el modelo (`Aporte` + `Curso.aportes()`)
-- [ ] 10-02-PLAN.md — R2 cuenta todo aporte, en la unidad de su rubro, y denuncia el componente mal declarado
-- [ ] 10-03-PLAN.md — R3 cuenta los exámenes parciales se declaren donde se declaren
-- [ ] 10-04-PLAN.md — cierre: auditoría de R1, no contaminación en el ciclo rápido y huella a mano
+- [x] 10-01-PLAN.md — el accesor único de aportes en el modelo (`Aporte` + `Curso.aportes()`)
+- [x] 10-02-PLAN.md — R2 cuenta todo aporte, en la unidad de su rubro, y denuncia el componente mal declarado
+- [x] 10-03-PLAN.md — R3 cuenta los exámenes parciales se declaren donde se declaren
+- [x] 10-04-PLAN.md — cierre: auditoría de R1, no contaminación en el ciclo rápido y huella a mano
 
 ### Fase 11: El segundo nivel de la calificación
 **Meta**: que un curso pueda declarar que todo lo anterior vale el 60 % y el examen ordinario el

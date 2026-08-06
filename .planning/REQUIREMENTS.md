@@ -159,11 +159,11 @@ cuyas ocho fases cerraron (REQ-01 a REQ-37, validados).
 
 | Requisito | Fase | Estado |
 |---|---|---|
-| REQ-38 · rubro en puntos | Fase 9 — El valor de una meta deja de ser un porcentaje | Pendiente |
-| REQ-39 · meta con componentes | Fase 9 | Pendiente |
-| REQ-42 · identificador de meta libre | Fase 9 | Pendiente |
-| REQ-40 · R3 cuenta componentes `examen_parcial` | Fase 10 — Las reglas cuentan en la unidad declarada | Pendiente |
-| REQ-45 · R1 y R2 en la unidad de cada rubro | Fase 10 | Pendiente |
+| REQ-38 · rubro en puntos | Fase 9 — El valor de una meta deja de ser un porcentaje | **Validado** (2026-08-05) |
+| REQ-39 · meta con componentes | Fase 9 | **Validado** (2026-08-05) |
+| REQ-42 · identificador de meta libre | Fase 9 | **Validado** (2026-08-05) |
+| REQ-40 · R3 cuenta componentes `examen_parcial` | Fase 10 — Las reglas cuentan en la unidad declarada | **Validado** (2026-08-06) |
+| REQ-45 · R1 y R2 en la unidad de cada rubro | Fase 10 | **Validado** (2026-08-06) |
 | REQ-41 · segundo nivel promedio + ordinario | Fase 11 — El segundo nivel de la calificación | Pendiente |
 | REQ-46 · R1 con segundo nivel y exención contra el promedio | Fase 11 | Pendiente |
 | REQ-43 · rúbrica declarada en `curso.yaml` | Fase 12 — La rúbrica en el contrato | Pendiente |
