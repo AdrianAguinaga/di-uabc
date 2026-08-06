@@ -117,7 +117,16 @@ reglas nuevas.
    contra el promedio del curso, que es lo que dice su DI.
 4. Cierre (REQ-48): huella de 39056 y 39062 sin cambios; `grafo/` y `MANIFIESTO.yaml` conservan su
    forma.
-**Planes**: TBD
+**Planes**: 3 planes en 3 olas. El enunciado que gobierna la fase es «la calificación puede tener
+dos niveles, y el umbral de exención dice contra cuál se mide»; es un rasgo **aditivo** que entra
+entero —modelo y regla— y cuelga de un solo `if` (`Curso.segundo_nivel is None`), razonado en
+`11-CONTEXT.md`.
+- [ ] 11-01-PLAN.md — el contrato aprende a decir «dos niveles»: `Nivel`/`SegundoNivel`,
+      `exencion_contra` con vocabulario cerrado, el catálogo de `zra-contabilidad` y §Contrato
+- [ ] 11-02-PLAN.md — R1 comprueba la suma de los dos niveles y contra qué se mide la exención, sin
+      sacar un cálculo a un método auxiliar
+- [ ] 11-03-PLAN.md — cierre: el `MANIFIESTO.yaml` condicional, la no contaminación de R1 en el
+      ciclo rápido y la huella a mano
 
 ### Fase 12: La rúbrica en el contrato
 **Meta**: que la rúbrica del trabajo final se pueda **declarar** y verificar, sin que el generador
