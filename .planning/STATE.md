@@ -1,9 +1,9 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-06 (v2.0 cerrada · v2.1 encuadrada)
+**Última actualización**: 2026-08-06 (v2.0 cerrada · Fase 15 con contexto)
 **Milestone actual**: **v2.1 — El horario real del semestre**
-**Fase actual**: Fase 15 — El horario entra al contrato (sin contexto ni planes)
+**Fase actual**: Fase 15 — El horario entra al contrato (contexto recogido, sin planes)
 
 ## Posición actual
 
@@ -11,9 +11,10 @@
 |---|---|
 | Milestone | v2.1 El horario real del semestre |
 | Fase | 15 — El horario entra al contrato |
-| Plan | Ninguno — el siguiente paso es `/gsd-discuss-phase 15` |
+| Plan | Ninguno — el siguiente paso es `/gsd-plan-phase 15` |
+| Contexto | `.planning/phases/15-el-horario-entra-al-contrato/15-CONTEXT.md` — 14 decisiones |
 | Estado | v2.0 cerrada: 14 fases hechas, 283 pruebas en verde, 4 huellas de control intactas |
-| Última actividad | 2026-08-06 — arreglos sobre la Fase 14 (`ed78aee`) y encuadre de la v2.1 |
+| Última actividad | 2026-08-06 — contexto de la Fase 15 recogido |
 
 ## La v2.0 quedó cerrada el 6 de agosto de 2026
 
@@ -505,6 +506,29 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
   proyecto; no se ha tocado.
 
 ## Siguiente paso
+
+`/gsd-plan-phase 15` — **El horario entra al contrato** (REQ-50, REQ-51, REQ-52). El contexto está
+recogido en `15-CONTEXT.md`: 14 decisiones cerradas sobre la forma del contrato (`bloques:` como
+unidad, `dias_presencial` derivado), qué día fija la fecha (el primero, con `Sesion.dia` de escape),
+qué pasa en una suspensión (recorrer al siguiente día **con bloque presencial**), el bloque virtual
+(no toca el `.docx`), el grupo no impartido (`imparte: false`) y la medición del cambio de huella.
+
+Tres cosas que la planeación hereda ya medidas y no debe volver a deducir:
+
+- Los dos cursos declaran **una sola sesión presencial por semana**, las 16. 961 tiene cuatro
+  bloques reales de clase a la semana; el DI instruye uno.
+- Las tres suspensiones caen en **miércoles 16 sep, lunes 2 nov y lunes 16 nov** — justo sobre los
+  días nuevos de los tres grupos activos. Hasta hoy no pegaban a ninguno.
+- El **informe de validación es por curso, compartido entre sus grupos** (`huella.py:50`), así que
+  cualquier hallazgo o aviso nuevo mueve el hash `informe` de todos. Es lo que decidió D-13.
+
+El cambio de huella queda acotado a **tres** documentos: 961 (martes→lunes), 971 (martes→lunes) y
+972 (jueves→miércoles). **962 no se mueve** y es el testigo de que la excepción de REQ-52 está
+acotada.
+
+---
+
+### Registro anterior
 
 `/gsd-discuss-phase 11` — **El segundo nivel de la calificación** (REQ-41, REQ-46): que un curso
 pueda declarar que todo lo anterior vale el 60 % y el examen ordinario el 40 %, y que la exención
