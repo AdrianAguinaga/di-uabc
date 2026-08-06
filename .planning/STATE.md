@@ -1,9 +1,9 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-05 (contexto de la Fase 10)
+**Última actualización**: 2026-08-05 (planes de la Fase 10)
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: Fase 10 — Las reglas cuentan en la unidad declarada (contexto recogido, sin planear)
+**Fase actual**: Fase 10 — Las reglas cuentan en la unidad declarada (planeada, lista para ejecutar)
 
 ## Posición actual
 
@@ -11,11 +11,11 @@
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 10 — Las reglas cuentan en la unidad declarada |
-| Plan | Sin planear |
-| Estado | Fase 9 hecha y verificada; la 10 con su contexto recogido |
-| Última actividad | 2026-08-05 — contexto de la Fase 10: el alcance se generalizó a todo aporte |
+| Plan | 4 planes en 4 olas, verificados |
+| Estado | Fase 9 hecha y verificada; la 10 planeada y lista para ejecutar |
+| Última actividad | 2026-08-05 — cuatro planes para la Fase 10 (`d8b4a4c`), verificación en verde |
 
-Se sigue con `/gsd-plan-phase 10`. **El contexto de la Fase 10 ensanchó su alcance respecto al
+Se sigue con `/gsd-execute-phase 10`. **El contexto de la Fase 10 ensanchó su alcance respecto al
 roadmap, y está razonado en `10-CONTEXT.md`.** El enunciado que gobierna la fase es «toda regla lee
 todo aporte a un rubro, en la unidad que ese rubro declara», no «R2 en puntos y R3 con los exámenes
 del 531». El motivo se midió: `componentes:` está en el contrato desde la Fase 9 pero **ninguna
@@ -90,7 +90,7 @@ llamándose `M0_` con su meta ya en `1.0` (deliberado, D-14, a acordar con el do
 | Fase | Requisitos | Estado |
 |---|---|---|
 | 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | **Hecha** — 6/6 planes, verificada |
-| 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | Sin empezar |
+| 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | **Planeada** — 4 planes en 4 olas |
 | 11. El segundo nivel de la calificación | REQ-41, REQ-46 | Sin empezar |
 | 12. La rúbrica en el contrato | REQ-43, REQ-47 | Sin empezar |
 | 13. El documento en la unidad real | REQ-44 | Sin empezar |
@@ -402,20 +402,42 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
 
 ## Siguiente paso
 
-`/gsd-plan-phase 10` — Las reglas cuentan en la unidad declarada (REQ-40, REQ-45). El contexto está
-recogido en `10-CONTEXT.md`: 15 decisiones, con la sección de referencias canónicas y el registro de
-la discusión en `10-DISCUSSION-LOG.md`.
+`/gsd-execute-phase 10` — cuatro planes en cuatro olas, commit `d8b4a4c`, verificación en verde.
 
-Lo que el plan tiene que construir: un accesor `Curso.aportes()` en el modelo —generador plano, valor
-crudo en la unidad de su rubro— que R2, R3 y después la Fase 13 consumen; R2 comparando contra
-`Rubro.base` y con su hallazgo global convertido **una vez por rubro**; los componentes mal
-declarados como error de R2; y R3 contando aportes de tipo `examen_parcial` se declaren donde se
-declaren. El fixture de 150/140 va en `pruebas/test_validar.py`; **38985 no se toca** —es la Fase 14—.
+| Ola | Plan | Qué construye | Archivos |
+|---|---|---|---|
+| 1 | 10-01 | `Aporte` y `Curso.aportes()`: la única definición de «lo que cuenta para un rubro» | `modelo.py`, `test_modelo.py` |
+| 2 | 10-02 | R2 cuenta todo aporte contra `Rubro.base`; global convertido una vez por rubro; componente mal declarado | `validar.py`, `test_validar.py`, `AGENTS.md` |
+| 3 | 10-03 | R3 cuenta aportes `examen_parcial` se declaren donde se declaren; aviso de `parciales:` reformulado | íd. |
+| 4 | 10-04 | R1 fijada con pruebas, no contaminación en el ciclo rápido, criterio 1 por CLI, huella a mano | `test_validar.py` |
 
-Dos cosas que el planeador debe levantar en vez de resolver por su cuenta: si R1 tiene algo sensible
-a la unidad (la conclusión provisional es que no, y está razonada en `<code_context>`), y si
-reformula el mensaje del hallazgo global de R2, actualizar en el mismo plan
-`test_el_total_correcto_no_absuelve_al_rubro_incorrecto`, que si no queda pasando en vacío (D-07).
+**Las olas van en serie a propósito, no por falta de paralelismo.** 10-02, 10-03 y 10-04 tocan los
+mismos tres archivos; forzarlos a la misma ola produciría conflictos en `regla_2`/`regla_3` y en la
+tabla de `AGENTS.md`. Es lo contrario de la Fase 9, donde la serialización venía de D-15.
+
+**La auditoría de R1 quedó resuelta, no levantada.** El planeador leyó `validar.py:126-169` línea a
+línea: las cuatro comprobaciones son la suma de `r.porcentaje` contra `suma_exacta`, los ids de rubro
+duplicados, `exencion_ordinario` contra su intervalo y el contraste contra el catálogo de esquemas.
+Ninguna lee `Meta.valor`, `Rubro.unidad`, `Rubro.total`, `Rubro.base` ni `a_porcentaje`. Confirma la
+conclusión provisional del `<code_context>`: **R1 no necesita cambio**. Se fija con cuatro pruebas en
+10-04, una de las cuales lee la fuente de `regla_1` con `inspect.getsource` y falla si alguien mete
+ahí un término sensible a la unidad. Detalle: `regla_1` tiene una variable local `total`, así que los
+términos se buscan con punto delante.
+
+**D-07 se cumple sin tocar la prueba.** El mensaje global conserva el prefijo literal `El valor de las
+metas suma` y solo añade ` %` detrás de las cifras, ahora convertidas. Así
+`test_el_total_correcto_no_absuelve_al_rubro_incorrecto` sigue probando lo que dice en vez de quedar
+pasando en vacío. Está fijado con `grep -c` como criterio de aceptación en 10-02.
+
+**Hueco documental que dejó la Fase 9, deliberadamente fuera de estos planes:** `AGENTS.md`
+§«Contrato de `curso.yaml`» (líneas 146-163) todavía no lista `componentes:` en las metas ni
+`unidad`/`total` en los rubros, aunque la Fase 9 los añadió al modelo. El contexto de la Fase 10 solo
+obliga a actualizar §«Las ocho reglas», así que no se metió en ningún plan sin consultarlo. Candidato
+para el cierre de la fase o para la 12, que sí toca el contrato.
+
+Se saltaron a propósito la investigación y el VALIDATION.md de Nyquist: el `10-CONTEXT.md` ya traía
+los puntos de integración con número de línea, las mediciones y la línea base de la huella. La
+estrategia de validación son los cinco criterios del roadmap más las pruebas unitarias.
 
 Nota de herramienta: `gsd-sdk query init.phase-op` devuelve `phase_found: false` para las fases de
 este milestone. Su parser busca `### Phase N` en inglés y el roadmap dice `### Fase N`. Las rutas se
