@@ -243,7 +243,11 @@ class _Validador:
 
     def regla_3(self) -> None:
         minimo = self.cfg.esquemas["reglas"]["parciales_minimos"]
-        parciales = [m for m in self.c.metas if m.tipo == "examen_parcial"]
+        # Un examen parcial es un aporte de ese tipo, se declare como meta propia o dentro de
+        # la actividad de otra meta —los tres del 531 viven así—. Cada aporte cuenta uno: una
+        # meta de examen con un componente de examen son dos exámenes distintos, con etiqueta
+        # y valor propios, y el documento los imprimirá por separado.
+        parciales = [a for a in self.c.aportes() if a.tipo == "examen_parcial"]
         if len(parciales) < minimo:
             self.error(
                 "R3",
@@ -255,8 +259,9 @@ class _Validador:
         if declarados and declarados != len(parciales):
             self.aviso(
                 "R3",
-                f"El esquema declara {declarados} parciales pero hay {len(parciales)} metas "
-                f"de tipo `examen_parcial`.",
+                f"El esquema declara {declarados} parciales pero el curso declara "
+                f"{len(parciales)} examen(es) parcial(es), contando los que viven como "
+                f"componente de la actividad de otra meta.",
             )
 
     # -- Regla 4: toda unidad del PUA tiene al menos una meta ----------------
