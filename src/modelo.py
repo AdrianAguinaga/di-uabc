@@ -17,6 +17,7 @@ Tres decisiones que sostienen las reglas invariables:
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -246,6 +247,27 @@ class Grupo:
     plataforma: str = "Blackboard"
 
 
+@dataclass(frozen=True)
+class Aporte:
+    """Lo que una meta aporta a un rubro: ella misma, o uno de sus componentes.
+
+    `valor` va en la unidad **cruda** del rubro al que se imputa: `10` son 10 pts o 10 %
+    según lo que declare ese rubro, y no según el rubro de la meta. Convertir es cosa de
+    `Rubro.a_porcentaje()`, y quien compara decide cuándo. Llevar aquí los dos valores
+    sería un derivado que puede desincronizarse.
+
+    `meta` es la meta entera, no su id: la Fase 13 tiene que poder llegar desde un aporte
+    a la semana, las sesiones y las evidencias de quien lo declaró.
+    """
+
+    meta: Meta
+    rubro: str
+    valor: float
+    etiqueta: str
+    tipo: str
+    es_componente: bool
+
+
 @dataclass
 class Curso:
     """El diseño instruccional completo de una materia en un ciclo."""
@@ -294,6 +316,18 @@ class Curso:
 
     def metas_de(self, unidad: str) -> list[Meta]:
         return [m for m in self.metas if m.unidad == unidad]
+
+    def aportes(self) -> Iterator[Aporte]:
+        """Todo lo que aporta valor a un rubro, en orden: cada meta y luego sus componentes.
+
+        Es la única definición de «lo que cuenta para un rubro» del proyecto. R2 filtra por
+        `rubro`, R3 por `tipo` y la Fase 13 por `meta`; ninguna de las tres deriva la suya.
+        Se devuelve plano —no agrupado por rubro— porque agrupar solo le sirve a R2.
+        """
+        for m in self.metas:
+            yield Aporte(m, m.rubro, m.valor, m.etiqueta, m.tipo, False)
+            for c in m.componentes:
+                yield Aporte(m, c.rubro, c.valor, c.etiqueta, c.tipo, True)
 
     def nombre_archivo(self, grupo: str, ext: str) -> str:
         return f"DI-{self.ciclo}-{self.clave}-{grupo}.{ext}"
