@@ -157,6 +157,49 @@ def _meta_de(d, id_):
     return next(m for m in d["metas"] if m["id"] == id_)
 
 
+def _con_examenes_en_componentes() -> dict:
+    """`CURSO_VALIDO` con los exámenes dentro de la actividad de otras metas.
+
+    Es la forma del DI de Contabilidad (531): los tres exámenes viven en la actividad de las
+    metas 2.4, 3.3 y 6.0, y **ninguna meta es de tipo `examen_parcial`**. Hasta la Fase 10 R3
+    contaba cero aquí y el documento no validaba.
+
+    Las metas P1 y P2 desaparecen; sus semanas (5 y 10) se absorben en 1.2 y 2.2 para que R5
+    siga viendo las 16 semanas cubiertas. El rubro «Exámenes» conserva su 20 %, repartido
+    ahora entre tres componentes (7 + 7 + 6).
+    """
+    d = copy.deepcopy(CURSO_VALIDO)
+    next(r for r in d["evaluacion"]["rubros"] if r["id"] == "examenes")["parciales"] = 3
+    d["metas"] = [m for m in d["metas"] if m["id"] not in ("P1", "P2")]
+    examenes = {"1.2": ("Examen I", 7), "2.2": ("Examen II", 7), "3.1": ("Examen III", 6)}
+    for m in d["metas"]:
+        if m["id"] == "1.2":
+            m["semanas"] = [3, 4, 5]      # absorbe la semana de P1
+        if m["id"] == "2.2":
+            m["semanas"] = [8, 9, 10]     # absorbe la semana de P2
+        if m["id"] in examenes:
+            etiqueta, valor = examenes[m["id"]]
+            m["componentes"] = [{
+                "rubro": "examenes", "valor": valor, "etiqueta": etiqueta,
+                "tipo": "examen_parcial",
+            }]
+    return d
+
+
+CURSO_CON_EXAMENES_EN_COMPONENTES = _con_examenes_en_componentes()
+
+
+def curso_con_examenes(retoque=None):
+    d = copy.deepcopy(CURSO_CON_EXAMENES_EN_COMPONENTES)
+    if retoque:
+        retoque(d)
+    return modelo.desde_dict(d)
+
+
+def informe_con_examenes(retoque=None):
+    return validar.validar(curso_con_examenes(retoque))
+
+
 class PuntoDePartida(unittest.TestCase):
     """Si el curso base no valida, todas las demás pruebas mienten."""
 
@@ -362,6 +405,50 @@ class Regla3Parciales(unittest.TestCase):
         metas = copy.deepcopy(CURSO_VALIDO["metas"])
         next(m for m in metas if m["id"] == "P2")["tipo"] = "aprendizaje"
         self.assertIn("R3", reglas_con_error(informe(metas=metas)))
+
+    # -- Fase 10: un examen es un aporte, no necesariamente una meta ------
+
+    def test_tres_examenes_en_componentes_y_ninguna_meta_pasan_r3(self):
+        """Criterio 4 del roadmap: es la forma real del DI de Contabilidad (531)."""
+        c = curso_con_examenes()
+        self.assertEqual([], [m for m in c.metas if m.tipo == "examen_parcial"])
+        inf = validar.validar(c)
+        self.assertNotIn("R3", reglas_con_error(inf))
+        self.assertNotIn("R2", reglas_con_error(inf))
+
+    def test_un_solo_examen_en_componente_no_basta(self):
+        """Criterio 4, la otra mitad: con uno solo falla, y con el mensaje del Art. 68."""
+        def retoque(d):
+            for m in d["metas"]:
+                if m["id"] in ("2.2", "3.1"):
+                    m.pop("componentes", None)
+                if m["id"] == "1.2":
+                    m["componentes"][0]["valor"] = 20      # el rubro sigue cuadrando
+            next(r for r in d["evaluacion"]["rubros"] if r["id"] == "examenes")["parciales"] = 1
+        inf = informe_con_examenes(retoque)
+        self.assertIn("R3", reglas_con_error(inf))
+        self.assertIn("68", " ".join(h.mensaje for h in inf.errores if h.regla == "R3"))
+
+    def test_una_meta_de_examen_y_un_componente_de_examen_cuentan_dos(self):
+        """D-10: cada aporte cuenta uno, sin deduplicar por meta."""
+        metas = copy.deepcopy(CURSO_VALIDO["metas"])
+        next(m for m in metas if m["id"] == "P2")["tipo"] = "aprendizaje"
+        next(m for m in metas if m["id"] == "P1")["componentes"] = [{
+            "rubro": "examenes", "valor": 0, "etiqueta": "Examen I bis",
+            "tipo": "examen_parcial",
+        }]
+        inf = informe(metas=metas)                 # 1 meta + 1 componente = 2 parciales
+        self.assertNotIn("R3", reglas_con_error(inf))
+
+    def test_el_aviso_de_parciales_no_habla_solo_de_metas(self):
+        """D-11: el texto del aviso deja de mentir en cuanto un examen vive en un componente."""
+        def retoque(d):
+            next(r for r in d["evaluacion"]["rubros"] if r["id"] == "examenes")["parciales"] = 2
+        inf = informe_con_examenes(retoque)         # declara 2, hay 3
+        avisos = [h for h in inf.de(validar.AVISO) if h.regla == "R3"]
+        self.assertTrue(avisos, "no avisó de la divergencia entre `parciales:` y los exámenes")
+        self.assertNotIn("metas de tipo", avisos[0].mensaje)
+        self.assertIn("3", avisos[0].mensaje)
 
 
 class Regla4Unidades(unittest.TestCase):

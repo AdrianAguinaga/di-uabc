@@ -171,7 +171,7 @@ avisos:          []                          # arrastrados desde la ingesta del 
 |---|---|---|
 | R1 | Los porcentajes del esquema suman exactamente 100; la exención cae en [60, 100]. | Arts. 65 y 67 |
 | R2 | Todo aporte a un rubro —la meta y cada uno de sus componentes— suma lo que ese rubro declara, **en la unidad de ese rubro** y rubro por rubro, no solo en total. Un componente imputado a un rubro inexistente o con valor negativo es error. | Art. 67 |
-| R3 | Hay al menos dos exámenes parciales. | Art. 68 |
+| R3 | Hay al menos dos exámenes parciales, se declaren como meta propia o como componente de la actividad de otra meta. | Art. 68 |
 | R4 | Toda unidad del PUA tiene meta; ninguna meta cuelga de una unidad inexistente. | — |
 | R5 | Toda semana 1..N tiene actividad; ninguna meta cae fuera del ciclo. | Calendario |
 | R6 | Ninguna entrega cae en suspensión ni después del fin de cursos. | Calendario |
