@@ -216,6 +216,79 @@ class ComponentesDeMeta(unittest.TestCase):
         self.assertAlmostEqual(15.0, rubro_examenes.a_porcentaje(meta.componentes[0].valor))
 
 
+class ContratoDelSegundoNivel(unittest.TestCase):
+    """REQ-41: la calificación puede tener dos niveles, y el contrato dice contra cuál se mide
+    la exención.
+
+    Aquí solo se comprueba que **cargue**. Que los dos porcentajes sumen 100, que 100/0 sea
+    aviso y que `calificacion_final` con segundo nivel sea error son hallazgos de R1, y viven
+    en `test_validar.py`: un valor conocido y prohibido es juicio semántico, territorio de las
+    reglas, no brecha de vocabulario.
+    """
+
+    NIVEL_60_40 = {
+        "promedio": {
+            "porcentaje": 60,
+            "etiqueta": "Valor del promedio antes del Examen Ordinario",
+        },
+        "ordinario": {
+            "porcentaje": 40,
+            "etiqueta": "Valor del examen Ordinario",
+        },
+    }
+
+    def _cargar(self, **evaluacion):
+        """Copia del curso válido con las claves indicadas fundidas en `evaluacion:`."""
+        d = copy.deepcopy(CURSO_VALIDO)
+        d["evaluacion"] = {**copy.deepcopy(CURSO_VALIDO["evaluacion"]), **evaluacion}
+        return modelo.desde_dict(d)
+
+    def test_el_par_de_niveles_carga_con_sus_porcentajes_y_sus_etiquetas(self):
+        c = self._cargar(segundo_nivel=self.NIVEL_60_40, exencion_contra="promedio")
+        self.assertIsInstance(c.segundo_nivel, modelo.SegundoNivel)
+        self.assertIsInstance(c.segundo_nivel.promedio, modelo.Nivel)
+        self.assertEqual(60, c.segundo_nivel.promedio.porcentaje)
+        self.assertEqual(40, c.segundo_nivel.ordinario.porcentaje)
+        self.assertEqual(
+            "Valor del promedio antes del Examen Ordinario",
+            c.segundo_nivel.promedio.etiqueta,
+        )
+        self.assertEqual("Valor del examen Ordinario", c.segundo_nivel.ordinario.etiqueta)
+
+    def test_un_curso_que_no_lo_declara_lo_deja_en_none(self):
+        """El rasgo entero cuelga de este `None`: sin él no hay nada que activar."""
+        c = self._cargar()
+        self.assertIsNone(c.segundo_nivel)
+        self.assertEqual("", c.exencion_contra)
+        self.assertEqual("promedio", c.exencion_contra or "promedio")
+
+    def test_segundo_nivel_sin_exencion_contra_es_error_modelo(self):
+        """El dato que decide el significado no se infiere. Con dos niveles hay que decir
+        contra cuál se mide el umbral."""
+        with self.assertRaises(modelo.ErrorModelo) as ctx:
+            self._cargar(segundo_nivel=self.NIVEL_60_40)
+        self.assertIn("exencion_contra", str(ctx.exception))
+        self.assertIn("segundo_nivel", str(ctx.exception))
+
+    def test_exencion_contra_fuera_del_vocabulario_es_error_modelo(self):
+        """Un valor que el modelo no conoce revienta al cargar, no al validar."""
+        with self.assertRaises(modelo.ErrorModelo) as ctx:
+            self._cargar(exencion_contra="promedio_del_curso")
+        self.assertIn("promedio_del_curso", str(ctx.exception))
+        self.assertIn("calificacion_final", str(ctx.exception))
+
+    def test_calificacion_final_carga_aunque_r1_la_rechace(self):
+        """`calificacion_final` está en el vocabulario a propósito para que R1 explique
+        por qué el curso no es válido."""
+        c = self._cargar(segundo_nivel=self.NIVEL_60_40, exencion_contra="calificacion_final")
+        self.assertEqual("calificacion_final", c.exencion_contra)
+
+    def test_exencion_contra_sin_segundo_nivel_es_opcional(self):
+        """Sin segundo nivel la clave es opcional y declararla no rompe nada."""
+        self.assertEqual("", self._cargar().exencion_contra)
+        self.assertEqual("promedio", self._cargar(exencion_contra="promedio").exencion_contra)
+
+
 class IdentificadoresLibres(unittest.TestCase):
     """REQ-42, criterio 3: los ids libres cargan y conservan el orden declarado."""
 
@@ -364,6 +437,8 @@ class LosCursosExistentesNoCambian(unittest.TestCase):
                     self.assertIsNone(r.total)
                 for m in c.metas:
                     self.assertEqual(m.componentes, [])
+                self.assertIsNone(c.segundo_nivel)
+                self.assertEqual("", c.exencion_contra)
 
 
 if __name__ == "__main__":

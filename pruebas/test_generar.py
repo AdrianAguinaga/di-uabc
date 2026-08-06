@@ -25,7 +25,9 @@ sys.path.insert(0, str(RAIZ / "src"))
 
 import calendario  # noqa: E402
 import generar  # noqa: E402
+import modelo  # noqa: E402
 import plantillas  # noqa: E402
+import validar  # noqa: E402
 
 CURSO = RAIZ / "cursos" / "2026-2" / "39056-big-data" / "curso.yaml"
 
@@ -196,6 +198,54 @@ class Panel(unittest.TestCase):
         l = generar.linea("✓", "archivo", "x" * 200)
         self.assertEqual(self.ANCHO_TOTAL, len(l))
         self.assertTrue(l.endswith("…│"))
+
+
+class ManifiestoDelSegundoNivel(unittest.TestCase):
+    """Las dos claves nuevas entran en el manifiesto solo si el curso las declara.
+
+    Se llama a `generar.manifiesto()` directamente y no a `generar.paquete()`: la forma del
+    bloque `evaluacion:` no depende de renderizar nada, y renderizar dos documentos por prueba
+    ataría esta comprobación a las plantillas y a Word. La otra mitad —que el manifiesto de los
+    cursos de control no cambie de forma— la ve `huella verificar`, a mano.
+    """
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="di-manifiesto-nivel-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        self.cfg = modelo.Config()
+        self.cal = calendario.cargar("2026-2")
+
+    def _evaluacion(self, retoque=None) -> dict:
+        ruta = copia_del_curso(self.tmp, retoque)
+        curso = modelo.cargar(ruta)
+        inf = validar.validar(curso, self.cfg, self.cal)
+        datos = generar.manifiesto(curso, ruta, inf, [], self.cfg, self.cal)
+        return datos["evaluacion"]
+
+    def test_un_curso_sin_segundo_nivel_no_registra_ninguna_clave_nueva(self):
+        """La forma del manifiesto entra en la huella; se comprueba sin generar documentos."""
+        ev = self._evaluacion()
+        self.assertEqual(["esquema_id", "exencion_ordinario", "rubros"], list(ev))
+
+    def test_un_curso_con_segundo_nivel_lo_registra_con_sus_dos_etiquetas(self):
+        """El manifiesto deja rastro de que el curso se calificó a dos niveles."""
+
+        def declarar(d):
+            d["evaluacion"]["segundo_nivel"] = {
+                "promedio": {
+                    "porcentaje": 60,
+                    "etiqueta": "Valor del promedio antes del Examen Ordinario",
+                },
+                "ordinario": {"porcentaje": 40, "etiqueta": "Valor del examen Ordinario"},
+            }
+            d["evaluacion"]["exencion_contra"] = "promedio"
+
+        ev = self._evaluacion(declarar)
+        self.assertEqual(60, ev["segundo_nivel"]["promedio"]["porcentaje"])
+        self.assertEqual(
+            "Valor del examen Ordinario", ev["segundo_nivel"]["ordinario"]["etiqueta"]
+        )
+        self.assertEqual("promedio", ev["exencion_contra"])
 
 
 if __name__ == "__main__":

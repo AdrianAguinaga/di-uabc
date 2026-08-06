@@ -151,6 +151,54 @@ class _Validador:
                 f"No puede ser menor que la calificación mínima aprobatoria (Art. 65).",
             )
 
+        # La calificación puede tener dos niveles: el promedio del curso y el examen
+        # ordinario. Un curso que no los declara califica a uno solo —el promedio es la
+        # calificación— y no recibe ninguna de estas comprobaciones.
+        sn = self.c.segundo_nivel
+        contra = self.c.exencion_contra or "promedio"
+        if sn is not None:
+            suma = round(sn.promedio.porcentaje + sn.ordinario.porcentaje, 2)
+            if suma != exacta:
+                self.error(
+                    "R1",
+                    f"El segundo nivel suma {suma:g}, no {exacta}: "
+                    f"{sn.promedio.etiqueta} {sn.promedio.porcentaje:g} + "
+                    f"{sn.ordinario.etiqueta} {sn.ordinario.porcentaje:g}.",
+                )
+            elif sn.ordinario.porcentaje == 0:
+                self.aviso(
+                    "R1",
+                    f"El segundo nivel deja el examen ordinario en 0 y el promedio en "
+                    f"{sn.promedio.porcentaje:g}: es decir que no hay segundo nivel. Si el "
+                    f"ordinario no pesa, quita `segundo_nivel` en vez de declararlo en cero.",
+                )
+            elif sn.promedio.porcentaje == 0:
+                self.aviso(
+                    "R1",
+                    f"El segundo nivel deja el promedio del curso en 0 y el examen ordinario "
+                    f"en {sn.ordinario.porcentaje:g}: nada de lo que el alumno haga durante el "
+                    f"ciclo cuenta para su calificación. El Art. 68 pide evaluación permanente.",
+                )
+            if contra == "calificacion_final":
+                self.error(
+                    "R1",
+                    f"La exención ({ex}) está declarada contra la calificación final, pero el "
+                    f"curso califica a dos niveles: el promedio pesa "
+                    f"{sn.promedio.porcentaje:g} % y el examen ordinario "
+                    f"{sn.ordinario.porcentaje:g} %. Medido contra el promedio, el umbral se "
+                    f"alcanza antes de presentar el ordinario —que es justo de lo que exenta—; "
+                    f"medido contra la calificación final habría que presentarlo para poder "
+                    f"llegar a él. Declara `exencion_contra: promedio` (Art. 68).",
+                )
+        elif contra == "calificacion_final":
+            self.aviso(
+                "R1",
+                f"La exención ({ex}) está declarada contra la calificación final y el curso no "
+                f"declara `segundo_nivel`: hoy el promedio es la calificación final, así que da "
+                f"lo mismo. Dejará de darlo el día que el curso declare los dos niveles; "
+                f"escríbelo como `exencion_contra: promedio` (Art. 68).",
+            )
+
         # Si se declaró un esquema del catálogo, debe coincidir con lo capturado.
         if self.c.esquema_id:
             try:
@@ -166,6 +214,27 @@ class _Validador:
                     f"Los rubros del curso no coinciden con el esquema «{self.c.esquema_id}» "
                     f"del catálogo ({catalogo} contra {propio}). Si el cambio es "
                     f"intencional, quita `esquema_id` o registra un esquema nuevo.",
+                )
+            nivel_catalogo = esquema.get("segundo_nivel")
+            nivel_propio = None
+            if sn is not None:
+                nivel_propio = {
+                    "promedio": {
+                        "porcentaje": sn.promedio.porcentaje,
+                        "etiqueta": sn.promedio.etiqueta,
+                    },
+                    "ordinario": {
+                        "porcentaje": sn.ordinario.porcentaje,
+                        "etiqueta": sn.ordinario.etiqueta,
+                    },
+                }
+            if nivel_catalogo != nivel_propio:
+                self.aviso(
+                    "R1",
+                    f"El segundo nivel del curso no coincide con el esquema "
+                    f"«{self.c.esquema_id}» del catálogo ({nivel_catalogo} contra "
+                    f"{nivel_propio}). Si el cambio es intencional, quita `esquema_id` o "
+                    f"registra un esquema nuevo.",
                 )
 
     # -- Regla 2: las metas suman lo que dice el esquema, rubro por rubro ----

@@ -292,6 +292,127 @@ class Regla1EsInsensibleALaUnidad(unittest.TestCase):
             self.assertNotIn(termino, fuente, f"R1 pasó a leer «{termino}»")
 
 
+class Regla1SegundoNivel(unittest.TestCase):
+    """REQ-46: con segundo nivel, R1 comprueba que los dos porcentajes sumen 100 y que la
+    exención esté declarada contra el promedio, no contra la calificación final.
+
+    Los fixtures son variantes de `CURSO_VALIDO` por `deepcopy`. `esquema_id` se vacía por
+    omisión: el contraste contra el catálogo es otra comprobación y tiene sus dos pruebas
+    propias al final, así que no debe meter avisos en las demás.
+    """
+
+    NIVEL_60_40 = {
+        "promedio": {
+            "porcentaje": 60,
+            "etiqueta": "Valor del promedio antes del Examen Ordinario",
+        },
+        "ordinario": {
+            "porcentaje": 40,
+            "etiqueta": "Valor del examen Ordinario",
+        },
+    }
+
+    def _informe(self, nivel=None, contra=None, esquema_id=""):
+        ev = copy.deepcopy(CURSO_VALIDO["evaluacion"])
+        ev["esquema_id"] = esquema_id
+        if nivel is not None:
+            ev["segundo_nivel"] = copy.deepcopy(nivel)
+        if contra is not None:
+            ev["exencion_contra"] = contra
+        return informe(evaluacion=ev)
+
+    def _r1(self, inf, nivel=None):
+        hallazgos = inf.hallazgos if nivel is None else inf.de(nivel)
+        return [h.mensaje for h in hallazgos if h.regla == "R1"]
+
+    def test_un_segundo_nivel_de_60_40_no_produce_ningun_hallazgo_de_r1(self):
+        """Criterio 1 del roadmap, la mitad que valida."""
+        inf = self._informe(self.NIVEL_60_40, contra="promedio")
+        self.assertEqual([], self._r1(inf))
+        self.assertTrue(inf.valido, "\n".join(str(h) for h in inf.errores))
+
+    def test_un_segundo_nivel_de_60_30_es_error_de_r1(self):
+        """60 y 30 no suman 100. El ordinario no se deriva del promedio para que este
+        curso sea expresable."""
+        nivel = copy.deepcopy(self.NIVEL_60_40)
+        nivel["ordinario"]["porcentaje"] = 30
+        inf = self._informe(nivel, contra="promedio")
+        self.assertIn("R1", reglas_con_error(inf))
+        mensajes = " ".join(self._r1(inf, validar.ERROR))
+        self.assertIn("90", mensajes)
+        self.assertIn("100", mensajes)
+        self.assertFalse(inf.valido)
+
+    def test_un_segundo_nivel_de_100_0_es_aviso(self):
+        """Suma 100, así que no hay defecto aritmético: declarar 100/0 es decir «no hay
+        segundo nivel» por el camino largo, y puede ser deliberado."""
+        nivel = copy.deepcopy(self.NIVEL_60_40)
+        nivel["promedio"]["porcentaje"] = 100
+        nivel["ordinario"]["porcentaje"] = 0
+        inf = self._informe(nivel, contra="promedio")
+        self.assertEqual([], self._r1(inf, validar.ERROR))
+        avisos = self._r1(inf, validar.AVISO)
+        self.assertEqual(1, len(avisos))
+        self.assertIn("no hay segundo nivel", avisos[0])
+        self.assertTrue(inf.valido)
+
+    def test_un_segundo_nivel_de_0_100_es_aviso(self):
+        """El otro extremo: las metas del curso no cuentan para nada y la calificación es
+        el examen ordinario."""
+        nivel = copy.deepcopy(self.NIVEL_60_40)
+        nivel["promedio"]["porcentaje"] = 0
+        nivel["ordinario"]["porcentaje"] = 100
+        inf = self._informe(nivel, contra="promedio")
+        self.assertEqual([], self._r1(inf, validar.ERROR))
+        avisos = self._r1(inf, validar.AVISO)
+        self.assertEqual(1, len(avisos))
+        self.assertIn("Art. 68", avisos[0])
+        self.assertTrue(inf.valido)
+
+    def test_la_exencion_contra_la_calificacion_final_con_segundo_nivel_es_error(self):
+        """Rechazado por R1, no al cargar, con un mensaje que explica la diferencia entre
+        medir contra el promedio y medir contra la nota final."""
+        inf = self._informe(self.NIVEL_60_40, contra="calificacion_final")
+        self.assertIn("R1", reglas_con_error(inf))
+        mensaje = " ".join(self._r1(inf, validar.ERROR))
+        self.assertIn("calificación final", mensaje)
+        self.assertIn("promedio", mensaje)
+        self.assertIn("80", mensaje)
+        self.assertIn("Art. 68", mensaje)
+        self.assertFalse(inf.valido)
+
+    def test_la_exencion_contra_la_calificacion_final_sin_segundo_nivel_es_aviso(self):
+        """Aquí el promedio es la calificación final, así que aritméticamente no está mal;
+        solo está dicho de una forma que se volverá falsa."""
+        inf = self._informe(contra="calificacion_final")
+        self.assertEqual([], self._r1(inf, validar.ERROR))
+        avisos = self._r1(inf, validar.AVISO)
+        self.assertEqual(1, len(avisos))
+        self.assertIn("calificación final", avisos[0])
+        self.assertTrue(inf.valido)
+
+    def test_avisa_si_el_segundo_nivel_se_aparta_del_catalogo(self):
+        """`estandar-2026` no declara segundo nivel: declararlo en el curso es divergir."""
+        inf = self._informe(self.NIVEL_60_40, contra="promedio", esquema_id="estandar-2026")
+        avisos = self._r1(inf, validar.AVISO)
+        self.assertEqual(1, len(avisos))
+        self.assertIn("estandar-2026", avisos[0])
+        self.assertIn("segundo nivel", avisos[0])
+        self.assertTrue(inf.valido)
+
+    def test_el_segundo_nivel_del_catalogo_no_produce_ningun_aviso(self):
+        """La guarda de los rótulos literales: el segundo rótulo conserva «examen» en
+        minúscula, igual que el DI de origen."""
+        ev = copy.deepcopy(CURSO_VALIDO["evaluacion"])
+        ev["esquema_id"] = "zra-contabilidad"
+        ev["rubros"] = copy.deepcopy(modelo.Config().esquema("zra-contabilidad")["rubros"])
+        ev["exencion_ordinario"] = 90
+        ev["segundo_nivel"] = copy.deepcopy(self.NIVEL_60_40)
+        ev["exencion_contra"] = "promedio"
+        inf = informe(evaluacion=ev)
+        self.assertEqual([], [h.mensaje for h in inf.hallazgos if h.regla == "R1"])
+
+
 class Regla2Metas(unittest.TestCase):
     def test_detecta_el_defecto_del_ejemplo_961(self):
         """El total suma 100 pero los rubros no: el error real del ejemplo dorado."""
@@ -699,12 +820,15 @@ class NoContaminacion(unittest.TestCase):
 
     def test_los_cursos_de_control_no_declaran_nada_de_la_v2(self):
         """Si alguno empezara a declarar `componentes:` o `unidad:`, las dos pruebas de abajo
-        dejarían de significar lo que dicen."""
+        dejarían de significar lo que dicen. Desde la Fase 11 la lista incluye las dos claves
+        del segundo nivel: es lo que hace que el silencio de R1 signifique algo."""
         for ruta in CURSOS_DE_CONTROL:
             texto = ruta.read_text(encoding="utf-8")
             with self.subTest(curso=ruta.parent.name):
                 self.assertNotIn("\n      componentes:", texto)
                 self.assertNotIn("unidad: puntos", texto)
+                self.assertNotIn("segundo_nivel:", texto)
+                self.assertNotIn("exencion_contra:", texto)
 
     def test_los_cursos_de_control_no_emiten_un_solo_hallazgo_de_r2_ni_de_r3(self):
         """La línea base medida antes de planear la fase (D-15): cero hallazgos de esas dos
@@ -716,6 +840,21 @@ class NoContaminacion(unittest.TestCase):
                     [],
                     [str(h) for h in inf.hallazgos if h.regla in ("R2", "R3")],
                 )
+
+    def test_los_cursos_de_control_no_emiten_un_solo_hallazgo_de_r1(self):
+        """La línea base medida antes de planear la Fase 11: cero hallazgos de R1, de
+        cualquier nivel, en los dos cursos de Adrian. Lo que REQ-48 exige preservar es ese
+        silencio, y R1 es la única regla que esta fase toca.
+
+        Contabilidad queda fuera a propósito: al declarar el catálogo su segundo nivel, ese
+        curso gana un aviso de R1 y pasa de 9 a 10 hallazgos. Está medido y aceptado; se
+        comprueba a mano, porque automatizar ese 10 congelaría un número que la Fase 14 va a
+        cambiar.
+        """
+        for ruta in CURSOS_DE_CONTROL:
+            inf = validar.validar(modelo.cargar(ruta))
+            with self.subTest(curso=ruta.parent.name):
+                self.assertEqual([], [str(h) for h in inf.hallazgos if h.regla == "R1"])
 
     def test_los_cursos_de_control_siguen_siendo_validos(self):
         for ruta in CURSOS_DE_CONTROL:

@@ -31,9 +31,9 @@ informe tenga errores.**
 
 | # | Qué verifica | Fundamento |
 |---|---|---|
-| R1 | Los porcentajes del esquema suman exactamente 100; la exención cae en [60, 100]. | Arts. 65 y 67 |
-| R2 | Las metas suman lo que declara el esquema — **rubro por rubro**, no solo en total. | Art. 67 |
-| R3 | Hay al menos dos exámenes parciales. | Art. 68 |
+| R1 | Los porcentajes del esquema suman exactamente 100 y la exención cae en [60, 100]. Con segundo nivel, el promedio y el examen ordinario también suman 100 y la exención se mide contra el promedio. | Arts. 65, 67 y 68 |
+| R2 | Todo aporte a un rubro —la meta y cada uno de sus componentes— suma lo que ese rubro declara, en la unidad de ese rubro y rubro por rubro, no solo en total. | Art. 67 |
+| R3 | Hay al menos dos exámenes parciales, se declaren como meta propia o como componente de la actividad de otra meta. | Art. 68 |
 | R4 | Toda unidad del PUA tiene al menos una meta; ninguna meta cuelga de una unidad inexistente. | — |
 | R5 | Toda semana 1..N del calendario tiene actividad; ninguna meta cae fuera del ciclo. | Calendario oficial |
 | R6 | Ninguna entrega cae en día de suspensión ni después del fin de cursos. | Calendario oficial |

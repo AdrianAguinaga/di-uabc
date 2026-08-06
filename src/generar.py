@@ -178,6 +178,25 @@ def manifiesto(
             "esquema_id": curso.esquema_id,
             "exencion_ordinario": curso.exencion_ordinario,
             "rubros": [{"id": r.id, "porcentaje": r.porcentaje} for r in curso.rubros],
+            # Solo si el curso los declara: la forma del manifiesto entra en la huella, así que
+            # un curso a un solo nivel tiene que producir exactamente el mismo dict que antes.
+            **(
+                {
+                    "segundo_nivel": {
+                        "promedio": {
+                            "porcentaje": curso.segundo_nivel.promedio.porcentaje,
+                            "etiqueta": curso.segundo_nivel.promedio.etiqueta,
+                        },
+                        "ordinario": {
+                            "porcentaje": curso.segundo_nivel.ordinario.porcentaje,
+                            "etiqueta": curso.segundo_nivel.ordinario.etiqueta,
+                        },
+                    },
+                    "exencion_contra": curso.exencion_contra or "promedio",
+                }
+                if curso.segundo_nivel is not None
+                else {}
+            ),
         },
         "grupos": [
             {

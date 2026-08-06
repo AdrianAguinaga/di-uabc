@@ -34,6 +34,9 @@ AMBIENTES = ("presencial", "virtual")
 UNIDADES_RUBRO = ("puntos",)  # ausente = porcentaje
 # Vocabulario propio, distinto de TIPOS_META: un componente no es una meta.
 TIPOS_COMPONENTE = ("examen_parcial", "examen_ordinario", "actividad", "proyecto")
+# El segundo valor es válido en el contrato y R1 lo rechaza: tiene que poder escribirse para que
+# la regla pueda explicar por qué está mal.
+EXENCION_CONTRA = ("promedio", "calificacion_final")
 
 
 class ErrorModelo(Exception):
@@ -230,6 +233,33 @@ class Rubro:
 
 
 @dataclass
+class Nivel:
+    """Uno de los dos sumandos de la calificación final: el promedio, o el ordinario.
+
+    `etiqueta` es del contrato y no tiene valor por omisión: los rótulos del DI de origen
+    —«Valor del promedio antes del Examen Ordinario»— son redacción de la docente, no
+    vocabulario del proyecto. El renderizador los imprime, no los redacta.
+    """
+
+    porcentaje: float
+    etiqueta: str
+
+
+@dataclass
+class SegundoNivel:
+    """Cómo se combina el promedio del curso con el examen ordinario.
+
+    Par fijo con claves nombradas y no lista: la exención se mide contra **el promedio**, una
+    fila concreta, no contra «una del montón». Con una lista genérica R1 tendría que
+    identificar por id cuál de las filas es el promedio antes de poder comprobar nada.
+    El Estatuto no contempla un tercer sumando.
+    """
+
+    promedio: Nivel
+    ordinario: Nivel
+
+
+@dataclass
 class Horario:
     """Vive en el grupo: si dos grupos tienen días distintos, las fechas divergen."""
 
@@ -283,9 +313,11 @@ class Curso:
     unidades: list[Unidad] = field(default_factory=list)
     metas: list[Meta] = field(default_factory=list)
     rubros: list[Rubro] = field(default_factory=list)
+    segundo_nivel: SegundoNivel | None = None  # None = un solo nivel: el promedio ES la nota
     grupos: list[Grupo] = field(default_factory=list)
 
     exencion_ordinario: int = 80
+    exencion_contra: str = ""  # ausente = promedio; obligatoria si hay segundo nivel
     tolerancia_minutos: int = 15
     practica: bool = False  # activa la nota del Art. 74
     citas: list[str] = field(default_factory=list)
@@ -303,6 +335,20 @@ class Curso:
             )
         if not self.grupos:
             raise ErrorModelo("El curso debe tener al menos un grupo.")
+        if self.exencion_contra and self.exencion_contra not in EXENCION_CONTRA:
+            raise ErrorModelo(
+                f"`exencion_contra` inválido: {self.exencion_contra!r}. "
+                f"Válidos: {', '.join(EXENCION_CONTRA)}. «promedio» mide el umbral contra el "
+                f"promedio del curso; «calificacion_final» contra la calificación ya combinada "
+                f"con el examen ordinario."
+            )
+        if self.segundo_nivel is not None and not self.exencion_contra:
+            raise ErrorModelo(
+                "El curso declara `segundo_nivel` pero no `exencion_contra`. Con dos niveles "
+                "hay que decir contra cuál se mide el umbral de exención: `promedio` o "
+                "`calificacion_final`. No hay valor por omisión a propósito: suponerlo "
+                "convertiría una decisión del docente en una suposición del generador."
+            )
 
     @property
     def presencial(self) -> bool:
@@ -379,6 +425,15 @@ def _construir_grupo(g: Any) -> Grupo:
     return Grupo(numero=str(g.pop("numero")), horario=horario, **g)
 
 
+def _construir_segundo_nivel(sn: dict | None) -> SegundoNivel | None:
+    if sn is None:
+        return None
+    return SegundoNivel(
+        promedio=Nivel(**sn["promedio"]),
+        ordinario=Nivel(**sn["ordinario"]),
+    )
+
+
 def desde_dict(d: dict) -> Curso:
     d = dict(d)
     meta = d.pop("meta", {})
@@ -396,8 +451,10 @@ def desde_dict(d: dict) -> Curso:
         unidades=[Unidad(**u) for u in d.pop("unidades", [])],
         metas=[_construir_meta(dict(m)) for m in d.pop("metas", [])],
         rubros=[Rubro(**r) for r in evaluacion.get("rubros", [])],
+        segundo_nivel=_construir_segundo_nivel(evaluacion.get("segundo_nivel")),
         grupos=[_construir_grupo(g) for g in d.pop("grupos", [])],
         exencion_ordinario=evaluacion.get("exencion_ordinario", 80),
+        exencion_contra=evaluacion.get("exencion_contra", ""),
         esquema_id=evaluacion.get("esquema_id", ""),
         tolerancia_minutos=d.pop("tolerancia_minutos", 15),
         practica=ident.get("practica", False),

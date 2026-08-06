@@ -64,8 +64,10 @@ esquemas:
     # —sin entregarlo completo, la máxima es 50—, criterio que vive en politicas.yaml.
     #
     # Su documento reparte las actividades en puntos (10 por meta, 150 declarados) y añade
-    # un segundo nivel: el promedio vale 60 % y el examen ordinario 40 %. Ese segundo nivel
-    # NO existe en el modelo; ver conocimiento/ejemplos/531-contabilidad-financiera-2026-1.md.
+    # un segundo nivel: el promedio vale 60 % y el examen ordinario 40 %. Desde la Fase 11 el
+    # modelo lo declara aquí abajo, con los rótulos literales de su DI —capitalización
+    # irregular incluida, para que el contraste de R1 coincida—; ver
+    # conocimiento/ejemplos/531-contabilidad-financiera-2026-1.md.
     rubros:
       - id: actividades
         etiqueta: "Entrega de actividades en clases y tareas"
@@ -79,6 +81,13 @@ esquemas:
         etiqueta: "Trabajo final completo"
         porcentaje: 20
         detalle: "conforme a los requisitos de forma y fondo de la rúbrica"
+    segundo_nivel:
+      promedio:
+        porcentaje: 60
+        etiqueta: "Valor del promedio antes del Examen Ordinario"
+      ordinario:
+        porcentaje: 40
+        etiqueta: "Valor del examen Ordinario"
     exencion_ordinario: 90
 
   practica-laboratorio:

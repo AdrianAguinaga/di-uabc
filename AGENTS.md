@@ -153,8 +153,10 @@ unidades:        [{numero, nombre, competencia, duracion_horas, temas}]
 metas:           [{id, unidad, semanas, valor, rubro, tipo, enunciado,
                    sesiones, evidencias, criterios_evaluacion, reflexion,
                    cubre_temas, practica_pua, caracter, que_voy_a_aprender}]
-evaluacion:      {esquema_id, exencion_ordinario, rubros:[{id, etiqueta,
-                                                           porcentaje, detalle, parciales}]}
+evaluacion:      {esquema_id, exencion_ordinario, exencion_contra,
+                  segundo_nivel:{promedio:{porcentaje, etiqueta},
+                                 ordinario:{porcentaje, etiqueta}},
+                  rubros:[{id, etiqueta, porcentaje, detalle, parciales}]}
 grupos:          [{numero, horario:{dias_presencial, dia_entrega, hora_entrega, aula},
                    jefe_grupo, plataforma}]     # o la forma corta: ["961", "962"]
 citas:           [EE-65, EE-66, …]           # deben resolver en config/politicas.yaml
@@ -165,11 +167,17 @@ avisos:          []                          # arrastrados desde la ingesta del 
 `tipo` de meta: `encuadre · aprendizaje · examen_parcial · cierre`.
 `ambiente` de sesión: `presencial · virtual`. Solo `encuadre` y `cierre` pueden valer 0 %.
 
+`exencion_contra`: `promedio` · `calificacion_final`. **Obligatoria si el curso declara
+`segundo_nivel`** —con dos niveles hay que decir contra cuál se mide el umbral— y opcional sin
+él, donde ausente significa `promedio`. Un curso que no declara `segundo_nivel` califica a un
+solo nivel: el promedio *es* la calificación. Las dos `etiqueta` del segundo nivel son del
+contrato: el generador las imprime, no las redacta.
+
 ### Las ocho reglas de validación (`src/validar.py`)
 
 | # | Qué verifica | Fundamento |
 |---|---|---|
-| R1 | Los porcentajes del esquema suman exactamente 100; la exención cae en [60, 100]. | Arts. 65 y 67 |
+| R1 | Los porcentajes del esquema suman exactamente 100 y la exención cae en [60, 100]. Si el curso declara un segundo nivel, el promedio y el examen ordinario también suman 100, y el umbral de exención tiene que medirse contra el promedio: contra la calificación final es error. | Arts. 65, 67 y 68 |
 | R2 | Todo aporte a un rubro —la meta y cada uno de sus componentes— suma lo que ese rubro declara, **en la unidad de ese rubro** y rubro por rubro, no solo en total. Un componente imputado a un rubro inexistente o con valor negativo es error. | Art. 67 |
 | R3 | Hay al menos dos exámenes parciales, se declaren como meta propia o como componente de la actividad de otra meta. | Art. 68 |
 | R4 | Toda unidad del PUA tiene meta; ninguna meta cuelga de una unidad inexistente. | — |
@@ -204,6 +212,18 @@ la suma de cada rubro **una vez** con `Rubro.a_porcentaje()`; convertir aporte a
 error de coma flotante y denunciaría cursos correctos. El segundo defecto que la regla existe
 para atrapar es el del DI de Contabilidad (531): un rubro que declara 150 pts y cuyos aportes
 suman 140.
+
+Desde la Fase 11, R1 sabe que la calificación puede tener **dos niveles**. `segundo_nivel:`
+declara cuánto pesa el promedio del curso y cuánto el examen ordinario —par fijo, con la
+`etiqueta` de cada uno, que el generador imprime y no redacta— y `exencion_contra:` dice contra
+cuál de los dos se mide el umbral de exención. Un curso que no declara `segundo_nivel` califica
+a un nivel —el promedio *es* la calificación— y no recibe ninguna comprobación nueva. Con
+segundo nivel: los dos porcentajes suman 100 o es error; 100/0 y 0/100 son aviso, porque suman
+pero dicen algo raro; la exención contra la **calificación final** es **error** con un mensaje
+que explica la diferencia (Art. 68); y si el curso declara `esquema_id`, su segundo nivel se
+contrasta —porcentajes **y** etiquetas— contra el del catálogo, con aviso. Ese contraste es más
+estricto que el de los rubros a propósito: para el segundo nivel, el catálogo es también la
+redacción canónica del esquema.
 
 ### Custodia de las plantillas (`src/plantillas.py`)
 
