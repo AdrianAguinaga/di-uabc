@@ -116,6 +116,47 @@ def reglas_con_error(inf) -> set[str]:
     return {h.regla for h in inf.errores}
 
 
+def _en_puntos() -> dict:
+    """`CURSO_VALIDO` con «Tareas» en puntos: declara 150 y sus aportes suman 140.
+
+    Es el defecto real del DI de Contabilidad (531), hermano del defecto en porcentajes del
+    961. Los rubros vecinos —Exámenes y Proyecto— siguen en porcentaje **a propósito**: R2
+    nunca debe sumar unidades distintas entre sí.
+    """
+    d = copy.deepcopy(CURSO_VALIDO)
+    tareas = next(r for r in d["evaluacion"]["rubros"] if r["id"] == "tareas")
+    tareas["unidad"] = "puntos"
+    tareas["total"] = 150
+    puntos = {"0": 0, "1.1": 40, "1.2": 40, "2.1": 35, "2.2": 25}   # 140 de los 150
+    for m in d["metas"]:
+        if m["id"] in puntos:
+            m["valor"] = puntos[m["id"]]
+    return d
+
+
+CURSO_EN_PUNTOS = _en_puntos()
+
+
+def curso_en_puntos(retoque=None):
+    """Copia del curso en puntos con un retoque opcional aplicado sobre el diccionario."""
+    d = copy.deepcopy(CURSO_EN_PUNTOS)
+    if retoque:
+        retoque(d)
+    return modelo.desde_dict(d)
+
+
+def informe_en_puntos(retoque=None):
+    return validar.validar(curso_en_puntos(retoque))
+
+
+def _rubro(d, id_):
+    return next(r for r in d["evaluacion"]["rubros"] if r["id"] == id_)
+
+
+def _meta_de(d, id_):
+    return next(m for m in d["metas"] if m["id"] == id_)
+
+
 class PuntoDePartida(unittest.TestCase):
     """Si el curso base no valida, todas las demás pruebas mienten."""
 
@@ -214,6 +255,64 @@ class Regla2Metas(unittest.TestCase):
         metas[2]["id"] = metas[1]["id"]
         c = curso(metas=metas)               # no lanza ErrorModelo
         self.assertEqual(len(metas), len(c.metas))
+
+    # -- Fase 10: la unidad declarada -------------------------------------
+
+    def test_el_rubro_en_puntos_denuncia_el_faltante_en_puntos(self):
+        """Criterio 1: 150 declarados, 140 sumados, y el error se redacta en puntos."""
+        inf = informe_en_puntos()
+        self.assertIn("R2", reglas_con_error(inf))
+        mensajes = " ".join(h.mensaje for h in inf.errores if h.regla == "R2")
+        self.assertIn("140 pts", mensajes)
+        self.assertIn("150 pts", mensajes)
+
+    def test_corregido_el_total_el_curso_en_puntos_valida(self):
+        """Criterio 2: con el total en 140, R2 calla aunque los vecinos estén en porcentaje."""
+        inf = informe_en_puntos(lambda d: _rubro(d, "tareas").update({"total": 140}))
+        self.assertNotIn("R2", reglas_con_error(inf))
+
+    def test_r2_nunca_suma_unidades_distintas_entre_si(self):
+        """El rubro en puntos cuadra y el vecino en porcentaje no: solo protesta el vecino."""
+        def retoque(d):
+            _rubro(d, "tareas")["total"] = 140
+            _meta_de(d, "3.1")["valor"] = 10      # proyecto: 10+10+15 = 35 de 40
+        inf = informe_en_puntos(retoque)
+        mensajes = " ".join(h.mensaje for h in inf.errores if h.regla == "R2")
+        self.assertIn("Proyecto final", mensajes)
+        self.assertNotIn("Tareas y actividades de clase", mensajes)
+
+    def test_el_componente_cuenta_para_el_total_de_su_rubro(self):
+        """El hueco general: hasta ahora un componente no sumaba en ningún rubro, nunca."""
+        def retoque(d):
+            _meta_de(d, "2.2")["componentes"] = [{
+                "rubro": "tareas", "valor": 10, "etiqueta": "Presentación",
+                "tipo": "actividad",
+            }]
+        inf = informe_en_puntos(retoque)          # 140 + 10 = 150, los que declara
+        self.assertNotIn("R2", reglas_con_error(inf))
+
+    def test_un_componente_en_el_mismo_rubro_que_su_meta_no_genera_hallazgo(self):
+        """D-09: «Reporte 5 pts» y «Presentación 5 pts» dentro de la misma meta es legítimo."""
+        def retoque(d):
+            _rubro(d, "tareas")["total"] = 140
+            _meta_de(d, "1.1")["valor"] = 30
+            _meta_de(d, "1.1")["componentes"] = [{
+                "rubro": "tareas", "valor": 10, "etiqueta": "Presentación",
+                "tipo": "actividad",
+            }]
+        inf = informe_en_puntos(retoque)
+        self.assertEqual([], [h for h in inf.hallazgos if h.regla == "R2"])
+
+    def test_veintidos_aportes_de_puntos_exactos_no_inventan_un_faltante(self):
+        """D-06, medido: convirtiendo aporte a aporte, 21×7+3 sobre 150 dan
+        29.99999999999999 y R2 denunciaría un curso correcto. Se convierte por rubro."""
+        def retoque(d):
+            otras = [m for m in d["metas"] if m["rubro"] != "tareas"]
+            nuevas = [_meta(f"T{i}", "I", [(i % 16) + 1], 7, "tareas") for i in range(21)]
+            nuevas.append(_meta("T21", "I", [1], 3, "tareas"))   # 21×7 + 3 = 150 exactos
+            d["metas"] = otras + nuevas
+        inf = informe_en_puntos(retoque)
+        self.assertNotIn("R2", reglas_con_error(inf))
 
 
 class Regla3Parciales(unittest.TestCase):
