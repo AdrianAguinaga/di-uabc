@@ -11,6 +11,7 @@ rubros no cuadran, y ese es exactamente el error que R2 existe para atrapar.
 from __future__ import annotations
 
 import copy
+import inspect
 import sys
 import unittest
 from datetime import date
@@ -247,6 +248,43 @@ class Regla1Porcentajes(unittest.TestCase):
         ev["rubros"][2]["porcentaje"] = 50
         avisos = [h for h in informe(evaluacion=ev).de(validar.AVISO) if h.regla == "R1"]
         self.assertTrue(avisos, "no avisó de la divergencia con el catálogo")
+
+
+class Regla1EsInsensibleALaUnidad(unittest.TestCase):
+    """REQ-45 nombra a R1 además de a R2, pero R1 no necesitó cambio alguno.
+
+    Sus cuatro comprobaciones (`validar.py:126-169`) miran la suma de `r.porcentaje` contra
+    100, los ids de rubro duplicados, el umbral de exención y el catálogo de esquemas. Ninguna
+    toca un valor de meta ni ninguna clave de unidad, y `porcentaje` existe igual en un rubro
+    en puntos. Se fija en vez de implementarse, como D-12 y D-13 de la Fase 9.
+    """
+
+    def test_el_curso_en_puntos_no_produce_ningun_hallazgo_de_r1(self):
+        """El curso defectuoso de la Fase 10 —150 declarados, 140 sumados— es problema de R2."""
+        inf = informe_en_puntos()
+        self.assertEqual([], [h for h in inf.hallazgos if h.regla == "R1"])
+
+    def test_r1_calla_aunque_los_valores_de_las_metas_esten_del_todo_mal(self):
+        """Duplicar el valor de todas las metas rompe R2 y deja R1 en silencio."""
+        metas = copy.deepcopy(CURSO_VALIDO["metas"])
+        for m in metas:
+            m["valor"] = m["valor"] * 2
+        inf = informe(metas=metas)
+        self.assertIn("R2", reglas_con_error(inf))
+        self.assertNotIn("R1", reglas_con_error(inf))
+
+    def test_poner_un_rubro_en_puntos_no_altera_lo_que_r1_comprueba(self):
+        """`porcentaje` sigue siendo lo que cuenta contra el 100, también en puntos."""
+        sin = [h.mensaje for h in informe().hallazgos if h.regla == "R1"]
+        con = [h.mensaje for h in informe_en_puntos().hallazgos if h.regla == "R1"]
+        self.assertEqual(sin, con)
+
+    def test_el_codigo_de_r1_no_menciona_la_unidad_de_ningun_rubro(self):
+        """La afirmación, escrita como prueba: si alguien mete aritmética de unidades en R1,
+        esto se rompe y le obliga a decidirlo en vez de colarlo."""
+        fuente = inspect.getsource(validar._Validador.regla_1)
+        for termino in (".base", "a_porcentaje", ".unidad", ".total", ".valor"):
+            self.assertNotIn(termino, fuente, f"R1 pasó a leer «{termino}»")
 
 
 class Regla2Metas(unittest.TestCase):
