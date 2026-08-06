@@ -65,13 +65,20 @@ acreditación, pero ahora en la aritmética de la nota.
 
 **Rasgos a construir:**
 
-| # | Rasgo | Qué asume el modelo hoy |
-|---|---|---|
-| 1 | Segundo nivel de calificación: promedio de metas **60 %** + examen ordinario **40 %** | Los rubros suman 100 y ahí termina |
-| 2 | Metas en **puntos** (`10 pts`), con R1 y R2 operando en la unidad declarada | `valor` es siempre porcentaje |
-| 3 | Numeración de metas **`1.0`, `2.0`** — cada unidad abre en `.0` | `0` de encuadre y luego `1.1`, `1.2` |
-| 4 | **Varios exámenes parciales dentro de la actividad** de una meta, contables por R3 | R3 cuenta metas de tipo `examen_parcial`; así contaría cero y fallaría |
-| 5 | **Tabla de rúbrica** del trabajo final, 100 puntos, renderizada en el documento | No existe |
+| # | Rasgo | Qué asumía el modelo | Estado |
+|---|---|---|---|
+| 1 | Segundo nivel de calificación: promedio de metas **60 %** + examen ordinario **40 %** | Los rubros suman 100 y ahí termina | Fase 11, sin empezar |
+| 2 | Metas en **puntos** (`10 pts`), con R1 y R2 operando en la unidad declarada | `valor` es siempre porcentaje | **Validación hecha** (Fases 9 y 10); falta el renderizado (Fase 13) |
+| 3 | Numeración de metas **`1.0`, `2.0`** — cada unidad abre en `.0` | `0` de encuadre y luego `1.1`, `1.2` | **Hecho** (Fase 9) |
+| 4 | **Varios exámenes parciales dentro de la actividad** de una meta, contables por R3 | R3 contaba metas de tipo `examen_parcial`; así contaría cero y fallaría | **Hecho** (Fase 10) |
+| 5 | **Tabla de rúbrica** del trabajo final, 100 puntos, renderizada en el documento | No existe | Fases 12 y 13, sin empezar |
+
+**Estado al 6 de agosto de 2026:** las Fases 9 y 10 están hechas y verificadas. El contrato
+`curso.yaml` ya admite puntos, componentes e identificadores libres, y **las reglas ya los leen**:
+`Curso.aportes()` es la única definición de «lo que cuenta para un rubro», R2 compara contra
+`Rubro.base` y R3 cuenta los exámenes parciales se declaren donde se declaren. Lo que queda es
+aritmética nueva (Fase 11), la rúbrica (Fase 12), el documento (Fase 13) y la prueba de fuego
+(Fase 14).
 
 **Origen:** el DI real de Zurisaddai Rubio Arriaga
 (`ejemplos/38985-531-2026-1-Rubio Arriaga Zurisaddai.docx`, Contabilidad Financiera 38985, grupo
@@ -92,7 +99,8 @@ aplicó al registrar los criterios propios de cada docente.
   *fuera de alcance* solo como renderizado, no como generación de contenido.
 - R2 debe seguir atrapando el defecto del ejemplo 961 —`test_detecta_el_defecto_del_ejemplo_961`—
   y su análogo en puntos: el rubro de trabajos de ella declara **150 pts cuando solo suman 140**.
-- Las 179 pruebas actuales pasan. Ninguna se rompe.
+- Las pruebas actuales pasan. Ninguna se rompe; se añaden. Eran 179 al abrir el milestone y son
+  **245** tras la Fase 10.
 
 **Prueba de fuego:** reescribir el `curso.yaml` de 38985 a su **estructura real** —puntos, 60/40,
 metas `1.0`, exámenes dentro de la actividad— y que valide sin traducirlo.
