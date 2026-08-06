@@ -24,6 +24,7 @@ from pathlib import Path
 
 import docx
 from docx.oxml.ns import qn
+from docx.table import Table
 from docx.text.paragraph import Paragraph
 
 import calendario
@@ -186,11 +187,72 @@ def _escribir_tras(doc, etiqueta: str, texto: str) -> None:
 
 def _texto_evaluacion(curso: Curso) -> str:
     lineas = [
-        f"{r.etiqueta}: {r.porcentaje:g}%" + (f" ({r.detalle})" if r.detalle else "")
+        f"{r.etiqueta}: {_texto_rubro_evaluacion(r)}"
+        + (f" ({r.detalle})" if r.detalle else "")
         for r in curso.rubros
     ]
     lineas.append(f"Total: {sum(r.porcentaje for r in curso.rubros):g}%")
+    if curso.segundo_nivel is not None:
+        lineas.extend([
+            "La calificación final se integra de la siguiente manera:",
+            f"{curso.segundo_nivel.promedio.etiqueta}: "
+            f"{curso.segundo_nivel.promedio.porcentaje:g}%",
+            f"{curso.segundo_nivel.ordinario.etiqueta}: "
+            f"{curso.segundo_nivel.ordinario.porcentaje:g}%",
+            f"Total: {curso.segundo_nivel.promedio.porcentaje + curso.segundo_nivel.ordinario.porcentaje:g}%",
+        ])
     return "\n".join(lineas)
+
+
+def _rubro(curso: Curso, id_: str):
+    """El rubro de un aporte. Un curso que llegue aquí mal declarado no se disimula."""
+    if (rubro := curso.rubro(id_)) is None:
+        raise ErrorRender(f"La meta declara el rubro inexistente {id_!r}.")
+    return rubro
+
+
+def _valor_rubro(rubro, valor: float) -> str:
+    """El valor en la unidad que declaró su rubro: puntos o porcentaje."""
+    return f"{valor:g} pts" if rubro.unidad == "puntos" else f"{valor:g}%"
+
+
+def _texto_rubro_evaluacion(rubro) -> str:
+    """El porcentaje del rubro y, cuando corresponde, el total de puntos que reparte."""
+    puntos = f" ({rubro.total:g} pts)" if rubro.unidad == "puntos" else ""
+    return f"{rubro.porcentaje:g}%{puntos}"
+
+
+def _valores_de_meta(curso: Curso, meta: Meta) -> list[tuple]:
+    """Aportes de una meta en el orden del contrato, incluidos sus componentes.
+
+    `Curso.aportes()` es la única definición de aporte para todos los consumidores. Llegar
+    a los componentes desde aquí conservaría hoy el resultado, pero duplicaría una regla
+    que R2 y R3 ya comparten.
+    """
+    return [
+        (aporte, _rubro(curso, aporte.rubro))
+        for aporte in curso.aportes()
+        if aporte.meta is meta
+    ]
+
+
+def _texto_valor_meta(curso: Curso, meta: Meta) -> list[str]:
+    """La declaración visible de la meta y de cada componente que le pertenece."""
+    lineas = []
+    for aporte, rubro in _valores_de_meta(curso, meta):
+        valor = _valor_rubro(rubro, aporte.valor)
+        if aporte.es_componente:
+            lineas.append(f"{aporte.etiqueta} equivale a {valor} de {rubro.etiqueta}.")
+        elif rubro.unidad == "puntos":
+            lineas.append(
+                f"La {meta.etiqueta.lower()} equivale a {valor} de {rubro.etiqueta}."
+            )
+        else:
+            # Conserva al pie de la letra el texto de todos los DI a un solo nivel.
+            lineas.append(
+                f"La {meta.etiqueta.lower()} equivale al {valor} de tu calificación final."
+            )
+    return lineas
 
 
 def _texto_acreditacion(curso: Curso, cfg: Config) -> str:
@@ -258,7 +320,7 @@ def _seccion_2(doc, curso: Curso, grupo: Grupo, cal: calendario.Calendario, cfg:
         ancla = fila_u
 
         for meta in curso.metas_de(unidad.numero):
-            for tr in _filas_de_meta(meta, proto_par, cal, dividida):
+            for tr in _filas_de_meta(curso, meta, proto_par, cal, dividida):
                 ancla.addnext(tr)
                 ancla = tr
 
@@ -275,7 +337,7 @@ def _evidencias(meta: Meta) -> list[str]:
     ]
 
 
-def _filas_de_meta(meta: Meta, proto: list, cal, dividida: bool) -> list:
+def _filas_de_meta(curso: Curso, meta: Meta, proto: list, cal, dividida: bool) -> list:
     """Las filas de la tabla que corresponden a una meta (dos si la entrega se divide)."""
     sesiones = meta.sesiones or []
     filas = []
@@ -295,7 +357,10 @@ def _filas_de_meta(meta: Meta, proto: list, cal, dividida: bool) -> list:
         _celda(tr, 5 if dividida else 4,
                ", ".join(_evidencias(meta)) if ultima else "")
         _celda(tr, 6 if dividida else 5,
-               f"{meta.valor:g}%" if ultima else "")
+               " / ".join(
+                   _valor_rubro(rubro, aporte.valor)
+                   for aporte, rubro in _valores_de_meta(curso, meta)
+               ) if ultima else "")
         filas.append(tr)
     return filas
 
@@ -339,6 +404,61 @@ def _celda(tr, indice: int, contenido) -> None:
         estilo.reemplazar(p, linea)
 
 
+def _sin_vmerge(tr) -> None:
+    """Quita la fusión vertical de una fila reutilizada fuera de la Sección 2."""
+    for tc in tr.findall(qn("w:tc")):
+        tcpr = tc.get_or_add_tcPr()
+        if (vmerge := tcpr.find(qn("w:vMerge"))) is not None:
+            tcpr.remove(vmerge)
+
+
+def _tabla_rubrica(doc, rubrica, ancla) -> object:
+    """Inserta la rúbrica clonando la tabla y filas de la propia plantilla CIAD.
+
+    La plantilla no trae una rúbrica. Se duplica su tabla de plan de actividades para
+    heredar bordes, tipografía y anchuras registradas, y se reutiliza la fila presencial
+    como modelo de cada renglón. No se construye ningún elemento OOXML desde cero.
+    """
+    origen = doc.tables[0]
+    filas = list(origen._tbl.tr_lst)
+    if len(filas) < 4:
+        raise ErrorRender("La tabla de la plantilla no tiene filas suficientes para la rúbrica.")
+
+    nueva = deepcopy(origen._tbl)
+    ancla.addnext(nueva)
+    tabla = Table(nueva, doc._body)
+    for tr in list(tabla._tbl.tr_lst):
+        tabla._tbl.remove(tr)
+
+    def agregar(prototipo):
+        fila = deepcopy(prototipo)
+        _sin_vmerge(fila)
+        tabla._tbl.append(fila)
+        return fila
+
+    titulo = agregar(filas[2])
+    _celda(titulo, 0, [{"t": "Rúbrica de evaluación", "enfasis": "etiqueta"}])
+
+    def datos(concepto: str, puntos: float | str, descripcion: str, enfasis="normal"):
+        fila = agregar(filas[3])
+        # La rejilla de la plantilla tiene siete columnas. Se conservan sus anchos: las dos
+        # primeras dan espacio al concepto, la tercera al puntaje y las cuatro restantes a
+        # la descripción, como una tabla CIAD de tres campos.
+        renglon = tabla.rows[-1]
+        renglon.cells[0].merge(renglon.cells[1])
+        renglon.cells[3].merge(renglon.cells[-1])
+        _celda(fila, 0, [{"t": concepto, "enfasis": enfasis}])
+        _celda(fila, 1, [{"t": f"{puntos:g}" if isinstance(puntos, (int, float)) else puntos,
+                          "enfasis": enfasis}])
+        _celda(fila, 2, [{"t": descripcion, "enfasis": enfasis}])
+
+    datos("Concepto", "Puntos", "Descripción", "etiqueta")
+    for fila in rubrica.filas:
+        datos(fila.concepto, fila.puntos, fila.descripcion)
+    datos("Puntos totales", rubrica.total, "", "etiqueta")
+    return tabla._tbl
+
+
 # -- Sección 3: los bloques de meta ------------------------------------------
 
 
@@ -367,11 +487,11 @@ def _seccion_3(doc, curso: Curso, cfg: Config) -> dict:
     ancla = doc.paragraphs[_buscar(doc, M_VERSION)]._p
     ancla = ancla.getprevious() if ancla.getprevious() is not None else ancla
     for meta in curso.metas:
-        ancla = _bloque_de_meta(doc, meta, proto, encabezados, plantilla, ancla)
+        ancla = _bloque_de_meta(doc, curso, meta, proto, encabezados, plantilla, ancla)
     return proto
 
 
-def _bloque_de_meta(doc, meta: Meta, proto: dict, encabezados, plantilla, ancla):
+def _bloque_de_meta(doc, curso: Curso, meta: Meta, proto: dict, encabezados, plantilla, ancla):
     """Arma el bloque de una meta clonando prototipos. Devuelve la última ancla."""
 
     def poner(clave: str, contenido, enfasis="normal"):
@@ -417,8 +537,8 @@ def _bloque_de_meta(doc, meta: Meta, proto: dict, encabezados, plantilla, ancla)
         poner("normal", "Criterios de evaluación", "etiqueta")
         for c in meta.criterios_evaluacion:
             poner("normal", c)
-    poner("valor", f"La {meta.etiqueta.lower()} equivale al {meta.valor:g}% "
-                   f"de tu calificación final.", "valor")
+    for linea in _texto_valor_meta(curso, meta):
+        poner("valor", linea, "valor")
     poner("separador", "------------------------")
     return ancla
 
@@ -488,9 +608,21 @@ def _anexos(doc, curso: Curso, grupo: Grupo, cal, cfg: Config, proto: dict) -> N
     for r in curso.rubros:
         detalle = f" ({r.detalle})" if r.detalle else ""
         poner([{"t": f"{r.etiqueta}: ", "enfasis": "etiqueta"},
-               {"t": f"{r.porcentaje:g}%{detalle}"}])
+               {"t": f"{_texto_rubro_evaluacion(r)}{detalle}"}])
     poner([{"t": "Total: ", "enfasis": "etiqueta"},
            {"t": f"{sum(r.porcentaje for r in curso.rubros):g}%"}])
+
+    if curso.segundo_nivel is not None:
+        poner("La calificación final se integra de la siguiente manera:")
+        for nivel in (curso.segundo_nivel.promedio, curso.segundo_nivel.ordinario):
+            poner([{"t": f"{nivel.etiqueta}: ", "enfasis": "etiqueta"},
+                   {"t": f"{nivel.porcentaje:g}%"}])
+        poner([{"t": "Total: ", "enfasis": "etiqueta"}, {
+            "t": f"{curso.segundo_nivel.promedio.porcentaje + curso.segundo_nivel.ordinario.porcentaje:g}%"
+        }])
+
+    if curso.rubrica is not None:
+        ancla = _tabla_rubrica(doc, curso.rubrica, ancla)
 
     for linea in _texto_acreditacion(curso, cfg).split("\n"):
         poner(linea)

@@ -302,7 +302,7 @@ class ErroresDeEntrada(unittest.TestCase):
 
 
 class EvidenciaDeComponente(unittest.TestCase):
-    """La evidencia de un componente tiene que llegar al documento; su ausencia, no cambiarlo.
+    """La evidencia de un componente llega al documento; su valor también en la Fase 13.
 
     La segunda mitad es la que defiende REQ-48: Big Data no declara componentes y su
     documento debe salir carácter por carácter igual que antes de esta fase.
@@ -343,18 +343,112 @@ class EvidenciaDeComponente(unittest.TestCase):
         self.assertNotIn("Examen I resuelto", self.base)
         self.assertIn(f"{meta.evidencias[-1].nombre}, Examen I resuelto", salida)
 
-    def test_un_componente_sin_evidencia_no_agrega_nada(self):
-        """Un componente puede existir solo para imputar valor a otro rubro."""
+    def test_un_componente_sin_evidencia_imprime_su_valor_sin_inventar_evidencia(self):
+        """La Fase 13 visibiliza el componente aunque no tenga evidencia propia."""
         curso = modelo.cargar(CURSO)
         curso.metas[1].componentes = [
             modelo.Componente(rubro="examenes", valor=15, etiqueta="Examen I",
                               tipo="examen_parcial")
         ]
-        self.assertEqual(self.base, self.render(curso, "sin-evidencia"))
+        salida = self.render(curso, "sin-evidencia")
+        self.assertIn("Examen I equivale a 15% de Exámenes.", salida)
+        self.assertNotIn("Examen I resuelto", salida)
 
-    def test_la_columna_valor_sigue_en_porcentaje(self):
-        """Frontera con la Fase 13: imprimir el valor en puntos no es de esta fase."""
+    def test_un_curso_que_no_declara_puntos_conserva_su_columna_porcentual(self):
         self.assertIn("10%", self.base)
+
+
+class RenderizadoDeLaUnidadDeclarada(unittest.TestCase):
+    """Los rasgos de evaluación variables llegan al documento sin usar 38985.
+
+    Es un curso sintético construido sobre Big Data: la declaración literal de Contabilidad
+    Financiera permanece reservada para la Fase 14.
+    """
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="di-unidad-real-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        self.curso = modelo.cargar(CURSO)
+
+        tareas = self.curso.rubro("tareas")
+        tareas.unidad = "puntos"
+        tareas.total = 150
+
+        self.meta = next(m for m in self.curso.metas if m.id == "1.1")
+        self.meta.valor = 10
+        self.meta.componentes = [
+            modelo.Componente(
+                rubro="examenes", valor=15, etiqueta="Examen I", tipo="examen_parcial"
+            )
+        ]
+        self.curso.segundo_nivel = modelo.SegundoNivel(
+            promedio=modelo.Nivel(
+                porcentaje=60,
+                etiqueta="Valor del promedio antes del Examen Ordinario",
+            ),
+            ordinario=modelo.Nivel(
+                porcentaje=40,
+                etiqueta="Valor del examen Ordinario",
+            ),
+        )
+        self.curso.exencion_contra = "promedio"
+        self.curso.rubrica = modelo.Rubrica(
+            meta=self.meta.id,
+            total=100,
+            filas=[
+                modelo.FilaRubrica(
+                    concepto="Portada",
+                    puntos=2,
+                    descripcion="Datos de identificación completos.",
+                ),
+                modelo.FilaRubrica(
+                    concepto="Conclusión",
+                    puntos=98,
+                    descripcion="Integra los resultados del trabajo.",
+                ),
+            ],
+        )
+
+        destino = self.tmp / "unidad-real.docx"
+        render_docx.generar(self.curso, self.curso.grupos[0], destino)
+        self.doc = docx.Document(str(destino))
+        self.salida = texto(self.doc)
+
+    def test_imprime_puntos_y_componentes_en_la_meta_que_los_declara(self):
+        valores = [
+            "".join(t.text or "" for t in tc.iter(qn("w:t")))
+            for tr in self.doc.tables[0]._tbl.tr_lst
+            for tc in tr.findall(qn("w:tc"))
+        ]
+        self.assertIn("10 pts / 15%", valores)
+        self.assertIn("La meta 1.1 equivale a 10 pts de Tareas y actividades de clase.", self.salida)
+        self.assertIn("Examen I equivale a 15% de Exámenes.", self.salida)
+
+    def test_imprime_los_dos_niveles_con_las_etiquetas_declaradas(self):
+        for esperado in (
+            "Valor del promedio antes del Examen Ordinario: 60%",
+            "Valor del examen Ordinario: 40%",
+            "La calificación final se integra de la siguiente manera:",
+        ):
+            self.assertIn(esperado, self.salida)
+
+    def test_agrega_una_tabla_de_rubrica_clonada_de_la_tabla_del_documento(self):
+        self.assertEqual(2, len(self.doc.tables))
+        tabla = self.doc.tables[1]
+        celdas = lambda fila: [
+            "".join(t.text or "" for t in tc.iter(qn("w:t")))
+            for tc in fila._tr.findall(qn("w:tc"))
+        ]
+        self.assertEqual(5, len(tabla.rows))
+        self.assertEqual("Rúbrica de evaluación", celdas(tabla.rows[0])[0])
+        self.assertEqual(["Concepto", "Puntos", "Descripción"], celdas(tabla.rows[1]))
+        self.assertEqual("Portada", celdas(tabla.rows[2])[0])
+        self.assertEqual("2", celdas(tabla.rows[2])[1])
+        self.assertEqual("Datos de identificación completos.", celdas(tabla.rows[2])[2])
+        self.assertEqual("Puntos totales", celdas(tabla.rows[-1])[0])
+        self.assertEqual("100", celdas(tabla.rows[-1])[1])
+        self.assertEqual(self.doc.tables[0]._tbl.tblPr.xml, tabla._tbl.tblPr.xml)
+        self.assertEqual(self.doc.tables[0]._tbl.tblGrid.xml, tabla._tbl.tblGrid.xml)
 
 
 if __name__ == "__main__":
