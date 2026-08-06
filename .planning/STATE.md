@@ -1,9 +1,9 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-06 (Fase 10 hecha y verificada)
+**Última actualización**: 2026-08-06 (Fase 11 — contexto recogido)
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: Fase 11 — El segundo nivel de la calificación (sin empezar)
+**Fase actual**: Fase 11 — El segundo nivel de la calificación (contexto recogido, sin planear)
 
 ## Posición actual
 
@@ -11,9 +11,44 @@
 |---|---|
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 11 — El segundo nivel de la calificación |
-| Plan | Ninguno todavía |
-| Estado | Fases 9 y 10 hechas y verificadas; la 11 sin empezar |
-| Última actividad | 2026-08-06 — Fase 10 completa: 4/4 planes, verificación `passed` 5/5, 245 pruebas |
+| Plan | Ninguno todavía — el siguiente paso es `/gsd-plan-phase 11` |
+| Estado | Fases 9 y 10 hechas y verificadas; la 11 con su contexto recogido |
+| Última actividad | 2026-08-06 — `11-CONTEXT.md` escrito y comiteado (`2a5b302`), D-01 a D-21 |
+
+## La Fase 11 tiene su contexto recogido
+
+`11-CONTEXT.md` fija 21 decisiones. El rasgo entra como **dos claves nuevas** del contrato,
+`segundo_nivel:` —par fijo `promedio`/`ordinario`, cada uno con `porcentaje` y `etiqueta`
+obligatoria— y `exencion_contra:` con vocabulario cerrado `promedio | calificacion_final`,
+obligatoria cuando hay segundo nivel. Todo cuelga de `Curso.segundo_nivel is None`, así que la no
+contaminación se verifica de un vistazo. R1 es el único consumidor; R2, R3, `grafo.py` y
+`render_docx.py` no se tocan.
+
+Cuatro cosas se **midieron** durante la discusión y cambiaron o fijaron decisiones:
+
+- **R1 emite cero hallazgos hoy** en 39056, 39062 y 38985 (5, 5 y 9 hallazgos en total, los tres
+  válidos). Es la línea base de la prueba de no contaminación que D-17 añade a la clase
+  `NoContaminacion` de `test_validar.py:691-724`.
+- **`grafo.py` no abre el bloque de evaluación** — solo `m.rubro` y `m.valor` (`:299`). La parte de
+  REQ-48 sobre la forma de `grafo/` se cumple por construcción.
+- **La plantilla de exención de `politicas.yaml:98-103` ya dice «promedio»**, y como
+  `calificacion_final` es siempre error, un curso válido tiene siempre `exencion_contra: promedio`.
+  El renderizador no cambia por esta clave **nunca**, tampoco en la Fase 13.
+- **Declarar el segundo nivel en el catálogo llevará 38985 de 9 a 10 hallazgos** (un aviso de R1 por
+  diferir del catálogo), siguiendo válido. Se acepta a propósito: D-13 de la Fase 10 blindó ese
+  archivo hasta la Fase 14 y el aviso dice la verdad sobre un `curso.yaml` traducido.
+
+Dos trampas para quien planee, ambas en `11-CONTEXT.md` con su medición:
+
+- **`regla_1` tiene dos salidas tempranas** (`validar.py:130` y `:160`). Las comprobaciones nuevas
+  van **arriba**, antes del bloque de `esquema_id`, o un curso con `esquema_id` mal escrito se las
+  salta — y el curso motivador declara `esquema_id`.
+- **`test_el_codigo_de_r1_no_menciona_la_unidad_de_ningun_rubro` solo lee el fuente de `regla_1`.**
+  Sacar la aritmética nueva a un método auxiliar no rompe nada: deja la guarda sin cobertura en
+  silencio. Por eso D-11 no refactoriza.
+
+La única idea nueva apartada es **registrar `unidad:` y `total:` del rubro en el `MANIFIESTO.yaml`**
+—omisión real de la Fase 9, ofrecida y no adoptada—. Candidata natural para la Fase 13.
 
 ## La Fase 10 quedó hecha el 6 de agosto de 2026
 
