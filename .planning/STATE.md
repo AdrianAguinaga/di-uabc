@@ -1,9 +1,9 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-05 (ola 4, plan 09-05)
+**Última actualización**: 2026-08-05 (contexto de la Fase 10)
 **Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: Fase 10 — Las reglas cuentan en la unidad declarada (sin empezar)
+**Fase actual**: Fase 10 — Las reglas cuentan en la unidad declarada (contexto recogido, sin planear)
 
 ## Posición actual
 
@@ -12,17 +12,31 @@
 | Milestone | v2.0 Estructura de calificación variable |
 | Fase | 10 — Las reglas cuentan en la unidad declarada |
 | Plan | Sin planear |
-| Estado | Fase 9 hecha y verificada; la 10 sin empezar |
-| Última actividad | 2026-08-05 — Fase 9 completa: 5/5 criterios y 24/24 must-haves verificados |
+| Estado | Fase 9 hecha y verificada; la 10 con su contexto recogido |
+| Última actividad | 2026-08-05 — contexto de la Fase 10: el alcance se generalizó a todo aporte |
 
-Se sigue con `/gsd-discuss-phase 10`. Tres decisiones se apartaron de cómo el roadmap describió la
+Se sigue con `/gsd-plan-phase 10`. **El contexto de la Fase 10 ensanchó su alcance respecto al
+roadmap, y está razonado en `10-CONTEXT.md`.** El enunciado que gobierna la fase es «toda regla lee
+todo aporte a un rubro, en la unidad que ese rubro declara», no «R2 en puntos y R3 con los exámenes
+del 531». El motivo se midió: `componentes:` está en el contrato desde la Fase 9 pero **ninguna
+regla lo lee** —fuera del modelo solo aparece en `render_docx.py:274`—, así que R2 está mal en
+general, no solo para el 531, y los criterios del roadmap solo mencionan componentes para R3.
+
+Tres decisiones de la Fase 10 salieron de medir, no de suponer: convertir aporte a aporte da
+`29.99999999999999` sobre 150 pts exactos con 22 metas (se convierte una vez por rubro, D-06); los
+cuatro documentos de control validan limpios y **no emiten ni un hallazgo de R2 o R3**, así que la
+redacción de sus mensajes es libre y lo que REQ-48 exige es su silencio (D-15); y
+`test_el_total_correcto_no_absuelve_al_rubro_incorrecto` se vuelve tautológica si el mensaje global
+se reformula (D-07, restricción para el planeador).
+
+En la Fase 9, tres decisiones se apartaron de cómo el roadmap describió la
 fase y están razonadas en `09-CONTEXT.md`: la evidencia de un componente toca `render_docx.py`
 (D-11); el encuadre de Big Data se renombra de verdad, gastando la primera excepción a REQ-48
 (D-14) —con el orden de pasos fijado en D-15/D-24 para que el instrumento demuestre algo antes de
 que se le pida esa excepción—; y la forma del `MANIFIESTO.yaml` acabó entrando en la huella (D-27),
 que D-19 había dejado fuera.
 
-Las cinco olas no son fruto de optimizar paralelismo: las fija D-15. `src/huella.py` y su línea
+Las cinco olas no son fruto de optimizar paralelismo: las fija D-15 de la Fase 9. `src/huella.py` y su línea
 base van primero, antes de que nada toque el modelo; el renombrado de Big Data es lo último.
 
 **09-01 (paso 1 de D-15) quedó hecho el 5 de agosto de 2026.** `src/huella.py` compara tres hashes
@@ -388,9 +402,24 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
 
 ## Siguiente paso
 
-`/gsd-discuss-phase 10` — Las reglas cuentan en la unidad declarada (REQ-40, REQ-45). El contrato
-ya sabe decir «10 pts de 150»; falta que R2 lo cuente en esa unidad y que R3 sepa ver un examen que
-vive dentro de la actividad de una meta, que es el defecto real del 531.
+`/gsd-plan-phase 10` — Las reglas cuentan en la unidad declarada (REQ-40, REQ-45). El contexto está
+recogido en `10-CONTEXT.md`: 15 decisiones, con la sección de referencias canónicas y el registro de
+la discusión en `10-DISCUSSION-LOG.md`.
+
+Lo que el plan tiene que construir: un accesor `Curso.aportes()` en el modelo —generador plano, valor
+crudo en la unidad de su rubro— que R2, R3 y después la Fase 13 consumen; R2 comparando contra
+`Rubro.base` y con su hallazgo global convertido **una vez por rubro**; los componentes mal
+declarados como error de R2; y R3 contando aportes de tipo `examen_parcial` se declaren donde se
+declaren. El fixture de 150/140 va en `pruebas/test_validar.py`; **38985 no se toca** —es la Fase 14—.
+
+Dos cosas que el planeador debe levantar en vez de resolver por su cuenta: si R1 tiene algo sensible
+a la unidad (la conclusión provisional es que no, y está razonada en `<code_context>`), y si
+reformula el mensaje del hallazgo global de R2, actualizar en el mismo plan
+`test_el_total_correcto_no_absuelve_al_rubro_incorrecto`, que si no queda pasando en vacío (D-07).
+
+Nota de herramienta: `gsd-sdk query init.phase-op` devuelve `phase_found: false` para las fases de
+este milestone. Su parser busca `### Phase N` en inglés y el roadmap dice `### Fase N`. Las rutas se
+resuelven a mano; volverá a pasar en las Fases 11 a 14.
 
 Dos pendientes que dejó la Fase 9, ninguno bloqueante:
 
