@@ -183,24 +183,39 @@ class _Validador:
                     f"Rubros declarados: {', '.join(sorted(ids))}.",
                 )
 
-        total_metas = round(sum(m.valor for m in self.c.metas), 2)
+        # Lo que un rubro aporta al 100 se convierte UNA vez, sobre su suma cruda. Convertir
+        # aporte a aporte acumula error de coma flotante: 21 aportes de 7 pts más uno de 3
+        # sobre un rubro de 150 dan 29.99999999999999 contra los 30 % declarados, y R2
+        # denunciaría un curso correcto. Los aportes a rubros que no existen quedan fuera de
+        # esta suma; ya se denunciaron arriba y abajo.
+        total_metas = round(
+            sum(
+                r.a_porcentaje(sum(a.valor for a in self.c.aportes() if a.rubro == r.id))
+                for r in self.c.rubros
+            ),
+            2,
+        )
         total_rubros = round(sum(r.porcentaje for r in self.c.rubros), 2)
         if total_metas != total_rubros:
             self.error(
                 "R2",
-                f"El valor de las metas suma {total_metas:g}, pero el esquema declara "
-                f"{total_rubros:g}.",
+                f"El valor de las metas suma {total_metas:g} %, pero el esquema declara "
+                f"{total_rubros:g} %.",
             )
 
-        # El defecto del ejemplo 961: el total cuadra, los rubros no.
+        # El defecto del ejemplo 961: el total cuadra, los rubros no. Y el del 531: el rubro
+        # declara 150 pts y sus aportes suman 140. Se compara dentro de cada rubro, contra su
+        # `base` y en su propia unidad, así que nunca se suman unidades distintas entre sí.
         for r in self.c.rubros:
-            suma = round(sum(m.valor for m in self.c.metas if m.rubro == r.id), 2)
-            if suma != r.porcentaje:
-                metas = ", ".join(m.id for m in self.c.metas if m.rubro == r.id) or "ninguna"
+            aportes = [a for a in self.c.aportes() if a.rubro == r.id]
+            suma = round(sum(a.valor for a in aportes), 2)
+            if suma != r.base:
+                unidad = "pts" if r.unidad == "puntos" else "%"
+                imputados = ", ".join(a.etiqueta for a in aportes) or "ninguno"
                 self.error(
                     "R2",
-                    f"Rubro «{r.etiqueta}»: las metas suman {suma:g} % pero el esquema "
-                    f"declara {r.porcentaje:g} %. Metas imputadas: {metas}.",
+                    f"Rubro «{r.etiqueta}»: sus aportes suman {suma:g} {unidad} pero el rubro "
+                    f"declara {r.base:g} {unidad}. Aportes imputados: {imputados}.",
                 )
 
         if negativas := [m.id for m in self.c.metas if m.valor < 0]:
