@@ -248,5 +248,53 @@ class ManifiestoDelSegundoNivel(unittest.TestCase):
         self.assertEqual("promedio", ev["exencion_contra"])
 
 
+class ManifiestoDeRubrica(unittest.TestCase):
+    """La rúbrica declarada se registra sin alterar manifiestos que no la declaran."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="di-manifiesto-rubrica-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        self.cfg = modelo.Config()
+        self.cal = calendario.cargar("2026-2")
+
+    def _evaluacion(self, retoque=None) -> dict:
+        ruta = copia_del_curso(self.tmp, retoque)
+        curso = modelo.cargar(ruta)
+        inf = validar.validar(curso, self.cfg, self.cal)
+        datos = generar.manifiesto(curso, ruta, inf, [], self.cfg, self.cal)
+        return datos["evaluacion"]
+
+    def test_un_curso_sin_rubrica_no_cambia_la_forma_del_manifiesto(self):
+        ev = self._evaluacion()
+        self.assertEqual(["esquema_id", "exencion_ordinario", "rubros"], list(ev))
+
+    def test_copia_la_rubrica_declarada_sin_reescribir_sus_filas(self):
+        def declarar(d):
+            d["rubrica"] = {
+                "meta": "1.1",
+                "total": 100,
+                "filas": [{
+                    "concepto": "Introducción",
+                    "puntos": 100,
+                    "descripcion": "Resumen de lo que será desarrollado en el cuerpo del trabajo.",
+                }],
+            }
+
+        ev = self._evaluacion(declarar)
+        self.assertEqual(["esquema_id", "exencion_ordinario", "rubros", "rubrica"], list(ev))
+        self.assertEqual(
+            {
+                "meta": "1.1",
+                "total": 100,
+                "filas": [{
+                    "concepto": "Introducción",
+                    "puntos": 100,
+                    "descripcion": "Resumen de lo que será desarrollado en el cuerpo del trabajo.",
+                }],
+            },
+            ev["rubrica"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

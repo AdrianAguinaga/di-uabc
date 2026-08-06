@@ -157,6 +157,7 @@ evaluacion:      {esquema_id, exencion_ordinario, exencion_contra,
                   segundo_nivel:{promedio:{porcentaje, etiqueta},
                                  ordinario:{porcentaje, etiqueta}},
                   rubros:[{id, etiqueta, porcentaje, detalle, parciales}]}
+rubrica:         {meta|rubro, total, filas:[{concepto, puntos, descripcion}]}
 grupos:          [{numero, horario:{dias_presencial, dia_entrega, hora_entrega, aula},
                    jefe_grupo, plataforma}]     # o la forma corta: ["961", "962"]
 citas:           [EE-65, EE-66, …]           # deben resolver en config/politicas.yaml
@@ -173,12 +174,17 @@ avisos:          []                          # arrastrados desde la ingesta del 
 solo nivel: el promedio *es* la calificación. Las dos `etiqueta` del segundo nivel son del
 contrato: el generador las imprime, no las redacta.
 
+rubrica es opcional y declara exactamente una asociación: meta o rubro. Su total y los puntos de
+cada fila pertenecen a la rúbrica, no son porcentajes de la calificación final. Concepto y
+descripción son texto del docente: el generador los conserva literalmente y nunca los completa ni
+los parafrasea.
+
 ### Las ocho reglas de validación (`src/validar.py`)
 
 | # | Qué verifica | Fundamento |
 |---|---|---|
 | R1 | Los porcentajes del esquema suman exactamente 100 y la exención cae en [60, 100]. Si el curso declara un segundo nivel, el promedio y el examen ordinario también suman 100, y el umbral de exención tiene que medirse contra el promedio: contra la calificación final es error. | Arts. 65, 67 y 68 |
-| R2 | Todo aporte a un rubro —la meta y cada uno de sus componentes— suma lo que ese rubro declara, **en la unidad de ese rubro** y rubro por rubro, no solo en total. Un componente imputado a un rubro inexistente o con valor negativo es error. | Art. 67 |
+| R2 | Todo aporte a un rubro —la meta y cada uno de sus componentes— suma lo que ese rubro declara, **en la unidad de ese rubro** y rubro por rubro, no solo en total. Un componente imputado a un rubro inexistente o con valor negativo es error. Si se declara una rúbrica, sus filas suman su total en puntos y su destino (meta o rubro) debe existir. | Art. 67 |
 | R3 | Hay al menos dos exámenes parciales, se declaren como meta propia o como componente de la actividad de otra meta. | Art. 68 |
 | R4 | Toda unidad del PUA tiene meta; ninguna meta cuelga de una unidad inexistente. | — |
 | R5 | Toda semana 1..N tiene actividad; ninguna meta cae fuera del ciclo. | Calendario |

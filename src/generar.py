@@ -197,6 +197,28 @@ def manifiesto(
                 if curso.segundo_nivel is not None
                 else {}
             ),
+            **(
+                {
+                    "rubrica": {
+                        **(
+                            {"meta": curso.rubrica.meta}
+                            if curso.rubrica.meta
+                            else {"rubro": curso.rubrica.rubro}
+                        ),
+                        "total": curso.rubrica.total,
+                        "filas": [
+                            {
+                                "concepto": f.concepto,
+                                "puntos": f.puntos,
+                                "descripcion": f.descripcion,
+                            }
+                            for f in curso.rubrica.filas
+                        ],
+                    }
+                }
+                if curso.rubrica is not None
+                else {}
+            ),
         },
         "grupos": [
             {

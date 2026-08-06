@@ -555,6 +555,66 @@ class Regla2Metas(unittest.TestCase):
         self.assertIn("Presentación", mensajes)
 
 
+class Regla2Rubrica(unittest.TestCase):
+    """REQ-43 y REQ-47: la rúbrica suma puntos propios y referencia algo del curso."""
+
+    RUBRICA_VALIDA = {
+        "meta": "1.1",
+        "total": 100,
+        "filas": [
+            {"concepto": "Avance", "puntos": 40, "descripcion": "Presenta el avance solicitado."},
+            {"concepto": "Entrega", "puntos": 60, "descripcion": "Entrega el trabajo completo."},
+        ],
+    }
+
+    def _r2(self, rubrica):
+        return [h.mensaje for h in informe(rubrica=rubrica).errores if h.regla == "R2"]
+
+    def test_acepta_cien_puntos_aunque_la_meta_no_valga_cien_por_ciento(self):
+        """Los puntos de la rúbrica no son el porcentaje de su meta ni de su rubro."""
+        self.assertEqual([], self._r2(self.RUBRICA_VALIDA))
+
+    def test_denuncia_noventa_y_ocho_puntos_contra_cien(self):
+        r = copy.deepcopy(self.RUBRICA_VALIDA)
+        r["filas"][1]["puntos"] = 58
+        mensajes = self._r2(r)
+        self.assertEqual(1, len(mensajes), mensajes)
+        self.assertIn("98 puntos", mensajes[0])
+        self.assertIn("100 puntos", mensajes[0])
+
+    def test_denuncia_ciento_dos_puntos_contra_cien(self):
+        r = copy.deepcopy(self.RUBRICA_VALIDA)
+        r["filas"][1]["puntos"] = 62
+        mensajes = self._r2(r)
+        self.assertEqual(1, len(mensajes), mensajes)
+        self.assertIn("102 puntos", mensajes[0])
+        self.assertIn("100 puntos", mensajes[0])
+
+    def test_acepta_una_suma_decimal_exacta(self):
+        r = {
+            "rubro": "proyecto",
+            "total": 1,
+            "filas": [
+                {"concepto": "A", "puntos": 0.1, "descripcion": "Primera parte."},
+                {"concepto": "B", "puntos": 0.2, "descripcion": "Segunda parte."},
+                {"concepto": "C", "puntos": 0.7, "descripcion": "Tercera parte."},
+            ],
+        }
+        self.assertEqual([], self._r2(r))
+
+    def test_rechaza_meta_o_rubro_que_no_existe(self):
+        for rubrica, destino in (
+            ({**self.RUBRICA_VALIDA, "meta": "M9.9"}, "M9.9"),
+            ({**self.RUBRICA_VALIDA, "rubro": "trabajo_final"}, "trabajo_final"),
+        ):
+            if "rubro" in rubrica:
+                del rubrica["meta"]
+            with self.subTest(destino=destino):
+                mensajes = self._r2(rubrica)
+                self.assertEqual(1, len(mensajes), mensajes)
+                self.assertIn(destino, mensajes[0])
+
+
 class Regla3Parciales(unittest.TestCase):
     def test_exige_dos_parciales_segun_el_articulo_68(self):
         metas = copy.deepcopy(CURSO_VALIDO["metas"])
@@ -795,6 +855,20 @@ class GuardiaDeEstilo(unittest.TestCase):
         self.assertTrue(inf.valido)
         self.assertNotIn("ESTILO", reglas_con_error(inf))
 
+    def test_denuncia_la_jerga_en_la_descripcion_de_una_rubrica(self):
+        rubrica = {
+            "meta": "1.1",
+            "total": 100,
+            "filas": [{
+                "concepto": "Entrega",
+                "puntos": 100,
+                "descripcion": "Presenta el trabajo conforme a la §VIII del PUA.",
+            }],
+        }
+        avisos = self._avisos_de_estilo(informe(rubrica=rubrica))
+        self.assertEqual(1, len(avisos), avisos)
+        self.assertIn("§VIII", avisos[0])
+
 
 class ArrastreDeAvisos(unittest.TestCase):
     def test_los_avisos_del_pua_llegan_al_informe(self):
@@ -818,10 +892,9 @@ class NoContaminacion(unittest.TestCase):
     su reescritura es la Fase 14 (D-13).
     """
 
-    def test_los_cursos_de_control_no_declaran_nada_de_la_v2(self):
-        """Si alguno empezara a declarar `componentes:` o `unidad:`, las dos pruebas de abajo
-        dejarían de significar lo que dicen. Desde la Fase 11 la lista incluye las dos claves
-        del segundo nivel: es lo que hace que el silencio de R1 signifique algo."""
+    def test_los_cursos_de_control_no_declaran_nada_de_lo_nuevo(self):
+        """Si alguno empezara a declarar un rasgo nuevo, las pruebas de silencio dejarían de
+        significar lo que dicen."""
         for ruta in CURSOS_DE_CONTROL:
             texto = ruta.read_text(encoding="utf-8")
             with self.subTest(curso=ruta.parent.name):
@@ -829,6 +902,8 @@ class NoContaminacion(unittest.TestCase):
                 self.assertNotIn("unidad: puntos", texto)
                 self.assertNotIn("segundo_nivel:", texto)
                 self.assertNotIn("exencion_contra:", texto)
+                self.assertNotIn("rubrica:", texto)
+                self.assertIsNone(modelo.cargar(ruta).rubrica)
 
     def test_los_cursos_de_control_no_emiten_un_solo_hallazgo_de_r2_ni_de_r3(self):
         """La línea base medida antes de planear la fase (D-15): cero hallazgos de esas dos

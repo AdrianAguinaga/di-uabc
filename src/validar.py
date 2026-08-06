@@ -240,6 +240,26 @@ class _Validador:
     # -- Regla 2: las metas suman lo que dice el esquema, rubro por rubro ----
 
     def regla_2(self) -> None:
+        if rubrica := self.c.rubrica:
+            suma_rubrica = round(sum(f.puntos for f in rubrica.filas), 2)
+            total_rubrica = round(rubrica.total, 2)
+            if suma_rubrica != total_rubrica:
+                self.error(
+                    "R2",
+                    f"La rúbrica suma {suma_rubrica:g} puntos, pero declara "
+                    f"{total_rubrica:g} puntos.",
+                )
+            if rubrica.meta and rubrica.meta not in {m.id for m in self.c.metas}:
+                self.error(
+                    "R2",
+                    f"La rúbrica se asocia a la meta «{rubrica.meta}», que no existe.",
+                )
+            if rubrica.rubro and rubrica.rubro not in {r.id for r in self.c.rubros}:
+                self.error(
+                    "R2",
+                    f"La rúbrica se asocia al rubro «{rubrica.rubro}», que no existe.",
+                )
+
         if not self.c.rubros:
             return  # ya reportado en R1
 
@@ -577,6 +597,10 @@ class _Validador:
         """Cada cadena que acaba impresa en el documento, con su procedencia."""
         for r in self.c.rubros:
             yield r.detalle, f"El detalle del rubro «{r.etiqueta}»"
+        if self.c.rubrica is not None:
+            for f in self.c.rubrica.filas:
+                yield f.concepto, "El concepto de una fila de la rúbrica"
+                yield f.descripcion, f"La descripción del concepto «{f.concepto}»"
         for campo, valor in self.c.contenido.items():
             yield str(valor), f"El campo «{campo}»"
         for m in self.c.metas:

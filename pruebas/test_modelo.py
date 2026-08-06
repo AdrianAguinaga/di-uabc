@@ -289,6 +289,71 @@ class ContratoDelSegundoNivel(unittest.TestCase):
         self.assertEqual("promedio", self._cargar(exencion_contra="promedio").exencion_contra)
 
 
+class ContratoDeRubrica(unittest.TestCase):
+    """REQ-43 y REQ-26: la rúbrica es declarativa y conserva el texto de la docente."""
+
+    RUBRICA_VALIDA = {
+        "meta": "1.1",
+        "total": 100,
+        "filas": [{
+            "concepto": "Criterio único",
+            "puntos": 100,
+            "descripcion": "Resumen de lo que será desarrollado en el cuerpo del trabajo.",
+        }],
+    }
+
+    def _cargar(self, rubrica=None):
+        d = copy.deepcopy(CURSO_VALIDO)
+        if rubrica is not None:
+            d["rubrica"] = rubrica
+        return modelo.desde_dict(d)
+
+    def test_carga_y_conserva_la_rubrica_literal(self):
+        c = self._cargar(self.RUBRICA_VALIDA)
+        self.assertIsInstance(c.rubrica, modelo.Rubrica)
+        self.assertEqual(100, c.rubrica.total)
+        self.assertEqual("1.1", c.rubrica.meta)
+        self.assertEqual("", c.rubrica.rubro)
+        self.assertEqual("Criterio único", c.rubrica.filas[0].concepto)
+        self.assertEqual(100, c.rubrica.filas[0].puntos)
+        self.assertEqual(
+            "Resumen de lo que será desarrollado en el cuerpo del trabajo.",
+            c.rubrica.filas[0].descripcion,
+        )
+
+    def test_sin_declararla_el_curso_la_deja_en_none(self):
+        self.assertIsNone(self._cargar().rubrica)
+
+    def test_rechaza_total_no_positivo_filas_vacias_y_puntos_negativos(self):
+        casos = (
+            ({"meta": "1.1", "total": 0, "filas": self.RUBRICA_VALIDA["filas"]}, "total"),
+            ({"meta": "1.1", "total": 100, "filas": []}, "al menos una fila"),
+            ({
+                "meta": "1.1", "total": 100,
+                "filas": [{"concepto": "Mal", "puntos": -1, "descripcion": "No aplica."}],
+            }, "puntos negativos"),
+        )
+        for rubrica, texto in casos:
+            with self.subTest(rubrica=rubrica):
+                with self.assertRaises(modelo.ErrorModelo) as ctx:
+                    self._cargar(rubrica)
+                self.assertIn(texto, str(ctx.exception))
+
+    def test_rechaza_una_rubrica_sin_destino(self):
+        r = copy.deepcopy(self.RUBRICA_VALIDA)
+        del r["meta"]
+        with self.assertRaises(modelo.ErrorModelo) as ctx:
+            self._cargar(r)
+        self.assertIn("exactamente uno", str(ctx.exception))
+
+    def test_rechaza_una_rubrica_con_dos_destinos(self):
+        r = copy.deepcopy(self.RUBRICA_VALIDA)
+        r["rubro"] = "proyecto"
+        with self.assertRaises(modelo.ErrorModelo) as ctx:
+            self._cargar(r)
+        self.assertIn("exactamente uno", str(ctx.exception))
+
+
 class IdentificadoresLibres(unittest.TestCase):
     """REQ-42, criterio 3: los ids libres cargan y conservan el orden declarado."""
 

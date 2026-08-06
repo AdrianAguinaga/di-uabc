@@ -260,6 +260,44 @@ class SegundoNivel:
 
 
 @dataclass
+class FilaRubrica:
+    """Un criterio literal del trabajo que evalúa la rúbrica."""
+
+    concepto: str
+    puntos: float
+    descripcion: str
+
+
+@dataclass
+class Rubrica:
+    """La rúbrica declarada por la docente para una meta o un rubro del curso.
+
+    Los puntos de sus filas pertenecen a la propia rúbrica; no son porcentajes de la
+    calificación final. Concepto y descripción llegan listos para imprimirse: el modelo
+    los conserva, no los completa ni los normaliza.
+    """
+
+    total: float
+    filas: list[FilaRubrica]
+    meta: str = ""
+    rubro: str = ""
+
+    def __post_init__(self) -> None:
+        if self.total <= 0:
+            raise ErrorModelo(f"Rúbrica: total debe ser mayor que 0, no {self.total:g}.")
+        if not self.filas:
+            raise ErrorModelo("Rúbrica: debe declarar al menos una fila.")
+        if negativas := [f.concepto for f in self.filas if f.puntos < 0]:
+            raise ErrorModelo(
+                f"Rúbrica: filas con puntos negativos: {', '.join(negativas)}."
+            )
+        if bool(self.meta) == bool(self.rubro):
+            raise ErrorModelo(
+                "Rúbrica: declara exactamente uno de meta o rubro para indicar qué evalúa."
+            )
+
+
+@dataclass
 class Horario:
     """Vive en el grupo: si dos grupos tienen días distintos, las fechas divergen."""
 
@@ -314,6 +352,7 @@ class Curso:
     metas: list[Meta] = field(default_factory=list)
     rubros: list[Rubro] = field(default_factory=list)
     segundo_nivel: SegundoNivel | None = None  # None = un solo nivel: el promedio ES la nota
+    rubrica: Rubrica | None = None
     grupos: list[Grupo] = field(default_factory=list)
 
     exencion_ordinario: int = 80
@@ -434,6 +473,14 @@ def _construir_segundo_nivel(sn: dict | None) -> SegundoNivel | None:
     )
 
 
+def _construir_rubrica(rubrica: dict | None) -> Rubrica | None:
+    if rubrica is None:
+        return None
+    r = dict(rubrica)
+    filas = [FilaRubrica(**f) for f in r.pop("filas", [])]
+    return Rubrica(filas=filas, **r)
+
+
 def desde_dict(d: dict) -> Curso:
     d = dict(d)
     meta = d.pop("meta", {})
@@ -452,6 +499,7 @@ def desde_dict(d: dict) -> Curso:
         metas=[_construir_meta(dict(m)) for m in d.pop("metas", [])],
         rubros=[Rubro(**r) for r in evaluacion.get("rubros", [])],
         segundo_nivel=_construir_segundo_nivel(evaluacion.get("segundo_nivel")),
+        rubrica=_construir_rubrica(d.pop("rubrica", None)),
         grupos=[_construir_grupo(g) for g in d.pop("grupos", [])],
         exencion_ordinario=evaluacion.get("exencion_ordinario", 80),
         exencion_contra=evaluacion.get("exencion_contra", ""),
