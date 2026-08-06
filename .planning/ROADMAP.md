@@ -38,10 +38,17 @@ Todo lo anterior existe para que al llegar ahí los datos ya estén completos y 
 
 - [x] **Fase 9: El valor de una meta deja de ser un porcentaje** — puntos, componentes e identificadores libres en el contrato *(hecha el 2026-08-05)*
 - [x] **Fase 10: Las reglas cuentan en la unidad declarada** — R2 en puntos, R3 con exámenes dentro de la actividad *(hecha el 2026-08-06)*
-- [ ] **Fase 11: El segundo nivel de la calificación** — promedio 60 % + ordinario 40 %, y la exención contra el promedio
-- [ ] **Fase 12: La rúbrica en el contrato** — filas, puntos y total declarados, con su regla
-- [ ] **Fase 13: El documento en la unidad real** — puntos, componentes, dos niveles y la tabla de rúbrica
-- [ ] **Fase 14: 38985 sin traducirse** — la prueba de fuego del milestone
+- [x] **Fase 11: El segundo nivel de la calificación** — promedio 60 % + ordinario 40 %, y la exención contra el promedio *(hecha el 2026-08-06)*
+- [x] **Fase 12: La rúbrica en el contrato** — filas, puntos y total declarados, con su regla *(hecha el 2026-08-06)*
+- [x] **Fase 13: El documento en la unidad real** — puntos, componentes, dos niveles y la tabla de rúbrica *(hecha el 2026-08-06)*
+- [x] **Fase 14: 38985 sin traducirse** — la prueba de fuego del milestone *(hecha el 2026-08-06)*
+
+**Deuda de proceso de las fases 11 a 14.** Se ejecutaron en una sesión con otro agente y su registro
+quedó incompleto: un commit aplastado por fase en vez de commits atómicos por tarea, sin
+`VERIFICATION.md` en ninguna de las cuatro, sin `SUMMARY.md` de `11-01` ni `11-02`, y la Fase 13 sin
+un solo artefacto de planeación. El **código está verificado** —283 pruebas en verde, las cuatro
+huellas de control intactas, plantillas íntegras— pero el rastro documental no cumple el estándar de
+las fases 9 y 10. Se anota aquí porque no se puede reconstruir a posteriori sin inventar.
 
 ## Detalle
 
@@ -121,11 +128,12 @@ reglas nuevas.
 dos niveles, y el umbral de exención dice contra cuál se mide»; es un rasgo **aditivo** que entra
 entero —modelo y regla— y cuelga de un solo `if` (`Curso.segundo_nivel is None`), razonado en
 `11-CONTEXT.md`.
-- [ ] 11-01-PLAN.md — el contrato aprende a decir «dos niveles»: `Nivel`/`SegundoNivel`,
+- [x] 11-01-PLAN.md — el contrato aprende a decir «dos niveles»: `Nivel`/`SegundoNivel`,
       `exencion_contra` con vocabulario cerrado, el catálogo de `zra-contabilidad` y §Contrato
-- [ ] 11-02-PLAN.md — R1 comprueba la suma de los dos niveles y contra qué se mide la exención, sin
-      sacar un cálculo a un método auxiliar
-- [ ] 11-03-PLAN.md — cierre: el `MANIFIESTO.yaml` condicional, la no contaminación de R1 en el
+      *(sin `SUMMARY.md` — ver la deuda de proceso arriba)*
+- [x] 11-02-PLAN.md — R1 comprueba la suma de los dos niveles y contra qué se mide la exención, sin
+      sacar un cálculo a un método auxiliar *(sin `SUMMARY.md`)*
+- [x] 11-03-PLAN.md — cierre: el `MANIFIESTO.yaml` condicional, la no contaminación de R1 en el
       ciclo rápido y la huella a mano
 
 ### Fase 12: La rúbrica en el contrato
@@ -142,7 +150,10 @@ cambiaron antes.
 3. Los textos de la rúbrica salen tal cual del `curso.yaml`: no hay ninguna ruta del código que
    componga, complete o reformule una descripción (sigue vigente REQ-26).
 4. Cierre (REQ-48): un curso sin `rubrica:` no cambia en nada; 39056 y 39062 conservan su huella.
-**Planes**: TBD
+**Planes**: 3 planes en 3 olas.
+- [x] 12-01-PLAN.md — `Rubrica`/`FilaRubrica` en el modelo y su carga
+- [x] 12-02-PLAN.md — la regla: las filas suman el total declarado
+- [x] 12-03-PLAN.md — cierre: manifiesto, no contaminación y huella
 
 ### Fase 13: El documento en la unidad real
 **Meta**: que lo que el alumno lee diga lo que el `curso.yaml` declara — puntos donde hay puntos,
@@ -161,7 +172,10 @@ los dos niveles de la nota, y la rúbrica como tabla.
    desde cero. Word la abre sin pedir reparar el archivo.
 5. `python src/plantillas.py verificar` pasa después de generar, y cierre (REQ-48): la huella de
    39056 y 39062 no cambia ni un carácter.
-**Planes**: TBD
+**Planes**: ninguno — la fase se ejecutó **sin artefactos de planeación**. No hay `13-CONTEXT.md`,
+ni plan, ni resumen; solo el commit `f5068f2`. El criterio 4 —el más riesgoso del milestone— sí se
+cumplió como se pedía: `_tabla_rubrica()` clona la tabla de la propia plantilla CIAD con `deepcopy`
+y le vacía las filas, en vez de construirla desde cero.
 
 ### Fase 14: 38985 sin traducirse
 **Meta**: la prueba de fuego. El curso de Zurisaddai, con su estructura real, validado y generado
@@ -182,7 +196,101 @@ sin haber tenido que reescribir su forma de calificar.
    2026-2 —porque su calendario 2026-1 ya pasó— y las metas redactadas por el agente, pendientes de
    revisión de la docente.
 5. Cierre (REQ-48): 39056 y 39062 regenerados conservan su huella de texto, y la suite completa
-   —179 anteriores más las del milestone— pasa.
+   —283 pruebas al cerrar el milestone— pasa.
+**Planes**: ninguno — la fase se ejecutó sin artefactos de planeación, igual que la 13.
+
+**Desviación documentada del criterio 4.** Ese criterio enumera **dos** avisos, y el `curso.yaml`
+conserva **tres**: se mantiene «El PUA 38985 no está ingerido». No es un aviso de traducción —la
+categoría que el criterio quería eliminar— sino un hecho vigente y comprobable: `pua_ref` está
+vacío, 38985 no figura en `puas/INDICE.md` y no hay PDF en `puas/fuente/`. Se quitó durante la
+ejecución y se **restauró** después: un DI que no dice que le faltan los temas de sus unidades
+oculta una limitación real al lector. El criterio se lee cumplido en su intención, no en su
+enumeración literal.
+
+**Corrección posterior a la ejecución.** El renderizador había ganado una función `_sin_ordinal()`
+que le quitaba el prefijo «Primero. » al texto de los pasos, porque los 59 pasos del `curso.yaml`
+traían el ordinal dentro de la cadena y el renderizador lo prepende por posición. Se arregló en los
+**datos** y se retiró la función: REQ-26 dice que el renderizador imprime, no redacta, y esa función
+habría borrado en silencio un ordinal legítimo de cualquier curso futuro. Los 59 prefijos coincidían
+exactamente con la posición que el renderizador calcula, así que el documento no cambió de texto.
+
+---
+
+## Panorama — v2.1 El horario real del semestre
+
+La v2.0 dejó un generador que expresa **cómo se califica** cualquiera de las dos docentes. Este
+milestone atiende algo que ha estado falso desde el principio y que nadie había mirado: **los días y
+las horas de clase**. Los cuatro grupos del repositorio declaran `dias_presencial` de relleno —dos
+dicen martes, dos dicen jueves— y ninguno coincide con la carga académica real. Las fechas de todos
+los documentos generados hasta hoy están calculadas sobre ese relleno.
+
+El enunciado que gobierna el milestone:
+
+> **El horario del semestre es un dato del semestre, no del curso.** Qué materias se imparten, en
+> qué grupos, en qué días y cuáles de esas sesiones son virtuales cambia cada ciclo, y el documento
+> y la agenda tienen que salir de ahí.
+
+Dos consecuencias que ordenan el trabajo. La primera: `Horario` **no guarda horas de clase**, solo
+`hora_entrega`. Sin horas no hay agenda posible, así que el contrato se abre antes de exportar nada
+—el mismo orden que la v2.0: modelo → validación → salida—. La segunda: **corregir los días cambia
+las fechas de 39056 y 39062, y con ellas su huella registrada.** REQ-48 sigue vigente para todo lo
+demás, pero aquí el cambio de huella es el objetivo, no el defecto: la Fase 15 lo mide, lo acepta y
+lo re-registra explícitamente, como la Fase 9 hizo con el renombrado del encuadre. Es la única
+excepción del milestone y está acotada a esos dos cursos.
+
+La transcripción del horario 2026-2 ya existe en `horarios/2026-2.md`, con los salones marcados como
+pendientes de confirmar. Es documentación, no una fuente que el código cargue: `curso.yaml` sigue
+siendo el contrato.
+
+## Fases
+
+- [ ] **Fase 15: El horario entra al contrato** — días y horas de clase por grupo, sesiones virtuales distinguidas, y la huella de control re-registrada a propósito
+- [ ] **Fase 16: Mis clases en Google Calendar** — un `.ics` con las clases del semestre, sobre el calendario escolar
+
+## Detalle
+
+### Fase 15: El horario entra al contrato
+**Meta**: que un grupo pueda declarar **a qué hora** tiene clase cada día y cuáles de esas sesiones
+son virtuales, y que los cuatro grupos del repositorio digan por fin la verdad sobre sus días.
+**Depende de**: nada nuevo — parte del modelo de la v2.0.
+**Requisitos**: REQ-50, REQ-51, REQ-52
+**Criterios de éxito**:
+1. `Horario` acepta **horas de clase por día** —no solo `dias_presencial`— y distingue las sesiones
+   **presenciales** de las **virtuales**. Un grupo que solo declare `dias_presencial`, como los hay
+   hoy, sigue cargando sin `ErrorModelo`: el rasgo es aditivo.
+2. Una sesión declarada virtual **no cuenta como sesión de clase** para las fechas del documento;
+   cuenta como bloque de tareas y asignaciones. Un grupo con dos bloques presenciales y uno virtual
+   produce las mismas fechas de clase que el mismo grupo sin el bloque virtual.
+3. `python src/validar.py` reporta error cuando una hora de clase está mal formada, cuando el fin es
+   anterior al inicio, o cuando un día declarado con hora no está en `dias_presencial`. Hay una
+   prueba que lo hace fallar a propósito.
+4. Los cuatro grupos —39056·961, 39056·962, 39062·971, 39062·972— declaran los días y horas de
+   `horarios/2026-2.md`. El cambio de fechas resultante se **mide antes de aceptarse**: se lista qué
+   fechas cambian en cada documento y por qué, y `pruebas/huellas.yaml` se re-registra en un commit
+   propio cuyo mensaje dice que el cambio es deliberado.
+5. Queda resuelto y escrito qué significa **un grupo declarado que este semestre no se imparte**
+   (39056·962): si se retira del `curso.yaml`, si se marca inactivo, o si el horario del semestre es
+   el que decide. La decisión aplica al caso general —cada semestre cambia qué grupos hay—, no solo
+   al 962.
+6. `python -X utf8 -m unittest discover -s pruebas` pasa: las 283 anteriores intactas más las nuevas.
+**Planes**: TBD
+
+### Fase 16: Mis clases en Google Calendar
+**Meta**: que el profesor pueda meter sus clases del semestre en su agenda sin transcribirlas a mano.
+**Depende de**: Fase 15 (sin horas de clase no hay evento posible).
+**Requisitos**: REQ-53
+**Criterios de éxito**:
+1. Existe un comando que produce un archivo **`.ics`** con las clases del semestre y que Google
+   Calendar importa sin error.
+2. Cada clase presencial aparece con su materia, su grupo, su hora de inicio y fin, y su salón como
+   ubicación. Las sesiones **virtuales** aparecen marcadas como tales y sin ubicación física.
+3. El `.ics` respeta el calendario escolar: los eventos van del inicio al fin de clases de
+   `calendarios/2026-2.yaml` y **no se genera ninguno en las tres suspensiones** (16 sep, 2 nov,
+   16 nov). Hay una prueba que cuenta los eventos de una semana con suspensión y de una sin ella.
+4. El `.ics` lleva **solo clases**. No hay eventos de tareas, entregas, exámenes, horas de
+   investigación, coordinación ni tutorías. Hay una prueba que lo afirma sobre el archivo generado.
+5. Una materia sin `curso.yaml` no bloquea la exportación de las demás.
+6. Cierre: la suite completa pasa y `python src/plantillas.py verificar` sigue en verde.
 **Planes**: TBD
 
 ---

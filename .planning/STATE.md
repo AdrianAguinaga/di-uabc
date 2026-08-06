@@ -1,54 +1,73 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-06 (Fase 11 — contexto recogido)
-**Milestone actual**: **v2.0 — Estructura de calificación variable**
-**Fase actual**: Fase 11 — El segundo nivel de la calificación (contexto recogido, sin planear)
+**Última actualización**: 2026-08-06 (v2.0 cerrada · v2.1 encuadrada)
+**Milestone actual**: **v2.1 — El horario real del semestre**
+**Fase actual**: Fase 15 — El horario entra al contrato (sin contexto ni planes)
 
 ## Posición actual
 
 | | |
 |---|---|
-| Milestone | v2.0 Estructura de calificación variable |
-| Fase | 11 — El segundo nivel de la calificación |
-| Plan | Ninguno todavía — el siguiente paso es `/gsd-plan-phase 11` |
-| Estado | Fases 9 y 10 hechas y verificadas; la 11 con su contexto recogido |
-| Última actividad | 2026-08-06 — `11-CONTEXT.md` escrito y comiteado (`2a5b302`), D-01 a D-21 |
+| Milestone | v2.1 El horario real del semestre |
+| Fase | 15 — El horario entra al contrato |
+| Plan | Ninguno — el siguiente paso es `/gsd-discuss-phase 15` |
+| Estado | v2.0 cerrada: 14 fases hechas, 283 pruebas en verde, 4 huellas de control intactas |
+| Última actividad | 2026-08-06 — arreglos sobre la Fase 14 (`ed78aee`) y encuadre de la v2.1 |
 
-## La Fase 11 tiene su contexto recogido
+## La v2.0 quedó cerrada el 6 de agosto de 2026
 
-`11-CONTEXT.md` fija 21 decisiones. El rasgo entra como **dos claves nuevas** del contrato,
-`segundo_nivel:` —par fijo `promedio`/`ordinario`, cada uno con `porcentaje` y `etiqueta`
-obligatoria— y `exencion_contra:` con vocabulario cerrado `promedio | calificacion_final`,
-obligatoria cuando hay segundo nivel. Todo cuelga de `Curso.segundo_nivel is None`, así que la no
-contaminación se verifica de un vistazo. R1 es el único consumidor; R2, R3, `grafo.py` y
-`render_docx.py` no se tocan.
+Las seis fases del milestone están hechas y REQ-38 a REQ-49 validados. El generador ya expresa la
+aritmética de las dos docentes: metas en puntos, exámenes como componentes de otra meta, segundo
+nivel 60/40, exención medida contra el promedio y rúbrica declarada. El curso de Zurisaddai (38985)
+valida y se genera **sin traducir su forma de calificar**, que era la prueba de fuego.
 
-Cuatro cosas se **midieron** durante la discusión y cambiaron o fijaron decisiones:
+Verificado el 2026-08-06: **283 pruebas en verde**, las **4 huellas de control intactas**, plantillas
+íntegras y el `.docx` de 38985 sin ordinales duplicados.
 
-- **R1 emite cero hallazgos hoy** en 39056, 39062 y 38985 (5, 5 y 9 hallazgos en total, los tres
-  válidos). Es la línea base de la prueba de no contaminación que D-17 añade a la clase
-  `NoContaminacion` de `test_validar.py:691-724`.
-- **`grafo.py` no abre el bloque de evaluación** — solo `m.rubro` y `m.valor` (`:299`). La parte de
-  REQ-48 sobre la forma de `grafo/` se cumple por construcción.
-- **La plantilla de exención de `politicas.yaml:98-103` ya dice «promedio»**, y como
-  `calificacion_final` es siempre error, un curso válido tiene siempre `exencion_contra: promedio`.
-  El renderizador no cambia por esta clave **nunca**, tampoco en la Fase 13.
-- **Declarar el segundo nivel en el catálogo llevará 38985 de 9 a 10 hallazgos** (un aviso de R1 por
-  diferir del catálogo), siguiendo válido. Se acepta a propósito: D-13 de la Fase 10 blindó ese
-  archivo hasta la Fase 14 y el aviso dice la verdad sobre un `curso.yaml` traducido.
+**Deuda de proceso de las fases 11 a 14.** Se ejecutaron en una sesión con otro agente y su registro
+quedó incompleto: un commit aplastado por fase en vez de commits atómicos, sin `VERIFICATION.md` en
+ninguna de las cuatro, sin `SUMMARY.md` de `11-01` ni `11-02`, y la Fase 13 sin un solo artefacto de
+planeación. El código está verificado; el rastro documental no cumple el estándar de las fases 9 y
+10 y no se puede reconstruir a posteriori sin inventar. Queda anotado, no maquillado.
 
-Dos trampas para quien planee, ambas en `11-CONTEXT.md` con su medición:
+**Tres correcciones sobre el borrador de la Fase 14** (`ed78aee`):
 
-- **`regla_1` tiene dos salidas tempranas** (`validar.py:130` y `:160`). Las comprobaciones nuevas
-  van **arriba**, antes del bloque de `esquema_id`, o un curso con `esquema_id` mal escrito se las
-  salta — y el curso motivador declara `esquema_id`.
-- **`test_el_codigo_de_r1_no_menciona_la_unidad_de_ningun_rubro` solo lee el fuente de `regla_1`.**
-  Sacar la aritmética nueva a un método auxiliar no rompe nada: deja la guarda sin cobertura en
-  silencio. Por eso D-11 no refactoriza.
+- Se retiró `_sin_ordinal()` de `render_docx.py`. Existía porque los 59 pasos de 38985 traían el
+  ordinal dentro de la cadena y el renderizador lo prepende por posición, así que el documento decía
+  «Primero. Primero.». El arreglo va en los **datos**: REQ-26 dice que el renderizador imprime, no
+  redacta, y esa función habría borrado en silencio un ordinal legítimo de cualquier curso futuro.
+  Los 59 prefijos coincidían exactamente con la posición calculada, así que el texto no cambió.
+- Se **restauró** el aviso «El PUA 38985 no está ingerido». Sigue siendo cierto —`pua_ref` vacío,
+  ausente de `puas/INDICE.md`— y un DI que no dice que le faltan los temas de sus unidades oculta
+  una limitación real. Es una desviación deliberada de la enumeración literal del criterio 4 de la
+  Fase 14, razonada en el ROADMAP.
+- Se restauró un espacio doble en una descripción de la rúbrica: es texto literal de la docente.
 
-La única idea nueva apartada es **registrar `unidad:` y `total:` del rubro en el `MANIFIESTO.yaml`**
-—omisión real de la Fase 9, ofrecida y no adoptada—. Candidata natural para la Fase 13.
+## La v2.1 arranca por algo que estaba falso desde el principio
+
+**Los cuatro grupos declaran días de clase de relleno.** 39056·961 y 39062·971 dicen martes (`[1]`),
+39056·962 y 39062·972 dicen jueves (`[3]`), y **ninguno coincide** con la carga académica real del
+profesor. Todas las fechas de todos los documentos generados hasta hoy salen de ese relleno.
+
+El horario 2026-2 está transcrito en `horarios/2026-2.md`, con los **salones marcados como pendientes
+de confirmar** (la transcripción los lee con el mismo número que el grupo, lo cual es sospechoso).
+Ese archivo es documentación y referencia; **no** es una fuente que el código cargue. `curso.yaml`
+sigue siendo el único contrato.
+
+Tres cosas que la Fase 15 tiene que resolver y que ya están medidas:
+
+- **`Horario` no guarda horas de clase**, solo `dia_entrega` y `hora_entrega`. Sin horas no hay
+  agenda posible, así que el contrato se abre antes de exportar nada.
+- **Corregir los días cambia la huella de 39056 y 39062.** Es el objetivo, no el defecto: REQ-52 es
+  la única excepción a REQ-48 del proyecto y está acotada a esos dos cursos. Se mide, se justifica
+  por documento y se re-registra en un commit propio, como la Fase 9 hizo con el encuadre.
+- **39056·962 no se imparte este semestre, pero sí en otros.** Qué significa «un grupo declarado que
+  este semestre no se imparte» es una decisión de la Fase 15, y tiene que servir al caso general
+  —cada ciclo cambia qué grupos hay—, no solo al 962. Ojo: 962 es documento de control.
+
+Fuera del horario queda **Análisis de Procesos y Datos de Negocios (932)**: está en el horario, no
+tiene `curso.yaml`, y le falta PUA y esquema de evaluación.
 
 ## La Fase 10 quedó hecha el 6 de agosto de 2026
 
@@ -163,10 +182,23 @@ llamándose `M0_` con su meta ya en `1.0` (deliberado, D-14, a acordar con el do
 |---|---|---|
 | 9. El valor de una meta deja de ser un porcentaje | REQ-38, REQ-39, REQ-42 | **Hecha** — 6/6 planes, verificada |
 | 10. Las reglas cuentan en la unidad declarada | REQ-40, REQ-45 | **Hecha** — 4/4 planes, verificada |
-| 11. El segundo nivel de la calificación | REQ-41, REQ-46 | Sin empezar |
-| 12. La rúbrica en el contrato | REQ-43, REQ-47 | Sin empezar |
-| 13. El documento en la unidad real | REQ-44 | Sin empezar |
-| 14. 38985 sin traducirse | REQ-49 | Sin empezar |
+| 11. El segundo nivel de la calificación | REQ-41, REQ-46 | **Hecha** — 3/3 planes, sin `VERIFICATION.md` |
+| 12. La rúbrica en el contrato | REQ-43, REQ-47 | **Hecha** — 3/3 planes, sin `VERIFICATION.md` |
+| 13. El documento en la unidad real | REQ-44 | **Hecha** — sin artefactos de planeación |
+| 14. 38985 sin traducirse | REQ-49 | **Hecha** — sin artefactos de planeación |
+
+**v2.0 cerrada.** REQ-38 a REQ-49 validados, REQ-48 verificado con las 4 huellas intactas. Las
+fases 11 a 14 tienen deuda de proceso documentada arriba: el código está verificado, el rastro no.
+
+## Progreso de la v2.1
+
+| Fase | Requisitos | Estado |
+|---|---|---|
+| 15. El horario entra al contrato | REQ-50, REQ-51, REQ-52 | Sin empezar — sin contexto |
+| 16. Mis clases en Google Calendar | REQ-53 | Sin empezar |
+
+El orden es el mismo de siempre: **modelo → validación → salida**. Sin horas de clase en `Horario`
+no hay `.ics` posible, así que el contrato se abre en la 15 y la exportación va en la 16.
 
 El orden es el de la v1.0 y por la misma razón: **modelo → validación → renderizado → ejercicio
 real**. `curso.yaml` es el contrato; si el renderizador tuviera que decidir algo, faltaría un campo

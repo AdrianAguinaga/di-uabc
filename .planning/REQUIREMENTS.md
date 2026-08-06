@@ -152,6 +152,32 @@ hubo que **traducir** su estructura para que validara. Estos requisitos cierran 
   de 100 puntos— y **valida sin traducirse**, con el defecto de los 150/140 puntos reportado como
   error y no reproducido en silencio.
 
+## v2.1 — El horario real del semestre
+
+- **REQ-50** — Un grupo puede declarar **a qué hora** tiene clase cada día, no solo qué días. La hora
+  de clase es distinta de `hora_entrega`, que es cuándo vence una tarea. Un grupo que solo declare
+  `dias_presencial` —como los cuatro que existen hoy— sigue cargando sin `ErrorModelo`.
+
+- **REQ-51** — El horario distingue las sesiones **presenciales** de las **virtuales**. Solo las
+  presenciales cuentan como sesión de clase para las fechas del documento; las virtuales son bloques
+  de tareas y asignaciones. Las entregas siguen venciendo el **sábado al final del día**.
+
+- **REQ-52** — Los grupos del repositorio declaran los días y horas **reales** de la carga académica
+  del semestre, transcrita en `horarios/AAAA-N.md`. Este requisito es la **única excepción a REQ-48**
+  del proyecto: corregir los días mueve las fechas de 39056 y 39062 y cambia su huella. El cambio se
+  mide, se justifica por documento y se re-registra en un commit propio. Fuera de esos dos cursos,
+  REQ-48 sigue vigente sin excepción.
+
+- **REQ-53** — Existe un archivo **`.ics`** importable en Google Calendar con **solo las clases** del
+  semestre: sin tareas, entregas, exámenes, horas de investigación, coordinación ni tutorías. Respeta
+  el inicio y fin de clases del calendario escolar y **no genera eventos en las suspensiones**. Las
+  sesiones virtuales van marcadas y sin ubicación física.
+
+**El horario es un dato del semestre.** `horarios/AAAA-N.md` es la transcripción legible y la
+referencia desde la que se llenan los `horario:` de cada grupo; **no** es una fuente que el código
+cargue. `curso.yaml` sigue siendo el único contrato y nada se infiere en tiempo de render. Cada
+ciclo trae su propio archivo: qué materias, qué grupos y qué sesiones son virtuales cambia siempre.
+
 ## Trazabilidad
 
 Cada requisito de la v2.0 se entrega en **una sola** fase. La numeración continúa la de la v1.0,
@@ -164,13 +190,17 @@ cuyas ocho fases cerraron (REQ-01 a REQ-37, validados).
 | REQ-42 · identificador de meta libre | Fase 9 | **Validado** (2026-08-05) |
 | REQ-40 · R3 cuenta componentes `examen_parcial` | Fase 10 — Las reglas cuentan en la unidad declarada | **Validado** (2026-08-06) |
 | REQ-45 · R1 y R2 en la unidad de cada rubro | Fase 10 | **Validado** (2026-08-06) |
-| REQ-41 · segundo nivel promedio + ordinario | Fase 11 — El segundo nivel de la calificación | Pendiente |
-| REQ-46 · R1 con segundo nivel y exención contra el promedio | Fase 11 | Pendiente |
-| REQ-43 · rúbrica declarada en `curso.yaml` | Fase 12 — La rúbrica en el contrato | Pendiente |
-| REQ-47 · los puntos de la rúbrica suman su total | Fase 12 | Pendiente |
-| REQ-44 · la rúbrica se renderiza como tabla | Fase 13 — El documento en la unidad real | Pendiente |
-| REQ-49 · 38985 valida sin traducirse | Fase 14 — 38985 sin traducirse | Pendiente |
-| **REQ-48 · no contaminación** | **Criterio de cierre de las seis fases** | Pendiente |
+| REQ-41 · segundo nivel promedio + ordinario | Fase 11 — El segundo nivel de la calificación | **Validado** (2026-08-06) |
+| REQ-46 · R1 con segundo nivel y exención contra el promedio | Fase 11 | **Validado** (2026-08-06) |
+| REQ-43 · rúbrica declarada en `curso.yaml` | Fase 12 — La rúbrica en el contrato | **Validado** (2026-08-06) |
+| REQ-47 · los puntos de la rúbrica suman su total | Fase 12 | **Validado** (2026-08-06) |
+| REQ-44 · la rúbrica se renderiza como tabla | Fase 13 — El documento en la unidad real | **Validado** (2026-08-06) |
+| REQ-49 · 38985 valida sin traducirse | Fase 14 — 38985 sin traducirse | **Validado** (2026-08-06) |
+| **REQ-48 · no contaminación** | **Criterio de cierre de las seis fases** | **Validado** (2026-08-06) — 4 huellas intactas |
+| REQ-50 · hora de clase por día | Fase 15 — El horario entra al contrato | Pendiente |
+| REQ-51 · sesiones virtuales distinguidas | Fase 15 | Pendiente |
+| REQ-52 · los grupos declaran sus días reales | Fase 15 | Pendiente |
+| REQ-53 · `.ics` con solo las clases | Fase 16 — Mis clases en Google Calendar | Pendiente |
 
 **REQ-48 no es una fase.** Es la condición de cierre de cada una: al terminar la 9, la 10, la 11,
 la 12, la 13 y la 14 se regeneran 39056 y 39062 y se comprueba que su huella de texto no cambió.
@@ -182,3 +212,9 @@ es exclusivamente de renderizado. Ninguno de los tres se da por cerrado hasta qu
 correctamente en el documento.
 
 **Cobertura: 12/12 requisitos de la v2.0 mapeados. Ningún huérfano, ningún duplicado.**
+
+**REQ-52 es la única excepción a REQ-48 del proyecto**, y está acotada a 39056 y 39062: sus fechas
+de clase estaban calculadas sobre un `dias_presencial` de relleno, así que corregirlas cambia su
+huella a propósito. Fuera de esos dos cursos y de esa fase, REQ-48 sigue vigente sin excepción.
+
+**Cobertura v2.1: 4/4 requisitos mapeados en 2 fases.**
