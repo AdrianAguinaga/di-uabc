@@ -10,12 +10,17 @@ rubros no cuadran, y ese es exactamente el error que R2 existe para atrapar.
 
 from __future__ import annotations
 
+import contextlib
 import copy
 import inspect
+import io
 import sys
+import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+
+import yaml
 
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "src"))
@@ -675,6 +680,75 @@ class ArrastreDeAvisos(unittest.TestCase):
         inf = informe(avisos=["La práctica 3 no trae duración en el PUA oficial."])
         mensajes = [h.mensaje for h in inf.de(validar.AVISO) if h.regla == "PUA"]
         self.assertEqual(1, len(mensajes))
+
+
+CURSOS_DE_CONTROL = (
+    RAIZ / "cursos" / "2026-2" / "39056-big-data" / "curso.yaml",
+    RAIZ / "cursos" / "2026-2" / "39062-patrones-de-comportamiento" / "curso.yaml",
+)
+
+
+class NoContaminacion(unittest.TestCase):
+    """REQ-48 en el ciclo rápido. La otra mitad —el texto del `.docx`— se comprueba a mano en
+    la Tarea 3 de este plan, que no entra aquí para no atar la suite a las plantillas (D-18 de
+    la Fase 9, conservada por D-14 de la Fase 10).
+
+    El DI de Contabilidad (531) queda fuera a propósito: declara sus valores en porcentaje y
+    su reescritura es la Fase 14 (D-13).
+    """
+
+    def test_los_cursos_de_control_no_declaran_nada_de_la_v2(self):
+        """Si alguno empezara a declarar `componentes:` o `unidad:`, las dos pruebas de abajo
+        dejarían de significar lo que dicen."""
+        for ruta in CURSOS_DE_CONTROL:
+            texto = ruta.read_text(encoding="utf-8")
+            with self.subTest(curso=ruta.parent.name):
+                self.assertNotIn("\n      componentes:", texto)
+                self.assertNotIn("unidad: puntos", texto)
+
+    def test_los_cursos_de_control_no_emiten_un_solo_hallazgo_de_r2_ni_de_r3(self):
+        """La línea base medida antes de planear la fase (D-15): cero hallazgos de esas dos
+        reglas, de cualquier nivel. Lo que REQ-48 exige preservar es ese silencio."""
+        for ruta in CURSOS_DE_CONTROL:
+            inf = validar.validar(modelo.cargar(ruta))
+            with self.subTest(curso=ruta.parent.name):
+                self.assertEqual(
+                    [],
+                    [str(h) for h in inf.hallazgos if h.regla in ("R2", "R3")],
+                )
+
+    def test_los_cursos_de_control_siguen_siendo_validos(self):
+        for ruta in CURSOS_DE_CONTROL:
+            inf = validar.validar(modelo.cargar(ruta))
+            with self.subTest(curso=ruta.parent.name):
+                self.assertTrue(inf.valido, "\n".join(str(h) for h in inf.errores))
+
+
+class CriterioUnoPorLaLinea(unittest.TestCase):
+    """Criterio 1 del roadmap, ejercido tal como está escrito: `python src/validar.py` sobre un
+    curso cuyo rubro en puntos declara 150 y cuyas metas suman 140.
+
+    El curso se vuelca a un directorio temporal con el patrón de `test_generar.py:38-39`: en
+    `cursos/` solo viven materias reales, y el grafo recogería como materia cualquier cosa que
+    se dejara ahí (D-12).
+    """
+
+    def test_la_cli_reporta_el_faltante_en_puntos_y_sale_con_uno(self):
+        tmp = Path(tempfile.mkdtemp(prefix="di-r2-puntos-"))
+        ruta = tmp / "curso.yaml"
+        ruta.write_text(
+            yaml.safe_dump(CURSO_EN_PUNTOS, allow_unicode=True, sort_keys=False),
+            encoding="utf-8",
+        )
+        salida = io.StringIO()
+        with contextlib.redirect_stdout(salida):
+            codigo = validar.main(["validar.py", str(ruta)])
+        texto = salida.getvalue()
+        self.assertEqual(1, codigo)
+        self.assertIn("R2", texto)
+        self.assertIn("140 pts", texto)
+        self.assertIn("150 pts", texto)
+        self.assertNotIn("NO VÁLIDO — 0", texto)
 
 
 if __name__ == "__main__":
