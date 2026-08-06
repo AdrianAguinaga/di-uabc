@@ -262,6 +262,88 @@ class IdentificadoresLibres(unittest.TestCase):
         self.assertEqual(m_0.tipo, "aprendizaje")
 
 
+class Aportes(unittest.TestCase):
+    """El accesor plano que R2, R3 y la Fase 13 consumen (Fase 10, D-01 a D-03)."""
+
+    def test_un_curso_sin_componentes_da_un_aporte_por_meta(self):
+        """La mitad de la no contaminación: sin `componentes:` nada cambia de forma."""
+        c = modelo.desde_dict(copy.deepcopy(CURSO_VALIDO))
+        aportes = list(c.aportes())
+        self.assertEqual(len(c.metas), len(aportes))
+        self.assertEqual([m.id for m in c.metas], [a.meta.id for a in aportes])
+        self.assertFalse(any(a.es_componente for a in aportes))
+
+    def test_el_aporte_de_una_meta_copia_su_rubro_su_valor_y_su_tipo(self):
+        c = modelo.desde_dict(copy.deepcopy(CURSO_VALIDO))
+        a = next(a for a in c.aportes() if a.meta.id == "P1")
+        self.assertEqual("examenes", a.rubro)
+        self.assertEqual(10, a.valor)
+        self.assertEqual("examen_parcial", a.tipo)
+        self.assertEqual("Meta P1", a.etiqueta)
+        self.assertFalse(a.es_componente)
+
+    def test_el_componente_emite_su_propio_aporte_con_su_rubro(self):
+        """El caso de la meta 2.4 del 531: 10 pts en actividades y el Examen I en exámenes."""
+        d = copy.deepcopy(CURSO_VALIDO)
+        for m in d["metas"]:
+            if m["id"] == "2.1":
+                m["componentes"] = [{
+                    "rubro": "examenes", "valor": 15, "etiqueta": "Examen I",
+                    "tipo": "examen_parcial",
+                }]
+        c = modelo.desde_dict(d)
+        aportes = list(c.aportes())
+        self.assertEqual(len(c.metas) + 1, len(aportes))
+        comp = next(a for a in aportes if a.es_componente)
+        self.assertEqual("examenes", comp.rubro)
+        self.assertEqual(15, comp.valor)
+        self.assertEqual("Examen I", comp.etiqueta)
+        self.assertEqual("examen_parcial", comp.tipo)
+
+    def test_el_componente_va_justo_detras_del_aporte_de_su_meta(self):
+        """El orden importa: los mensajes de R2 enumeran aportes y deben leerse en orden."""
+        d = copy.deepcopy(CURSO_VALIDO)
+        for m in d["metas"]:
+            if m["id"] == "2.1":
+                m["componentes"] = [{
+                    "rubro": "examenes", "valor": 15, "etiqueta": "Examen I",
+                    "tipo": "examen_parcial",
+                }]
+        etiquetas = [a.etiqueta for a in modelo.desde_dict(d).aportes()]
+        self.assertEqual(etiquetas.index("Meta 2.1") + 1, etiquetas.index("Examen I"))
+
+    def test_desde_el_aporte_se_llega_a_la_meta_que_lo_declaro(self):
+        """Condición de la Fase 13: el documento imprime cada aporte en la fila de su meta."""
+        d = copy.deepcopy(CURSO_VALIDO)
+        for m in d["metas"]:
+            if m["id"] == "2.1":
+                m["componentes"] = [{
+                    "rubro": "examenes", "valor": 15, "etiqueta": "Examen I",
+                    "tipo": "examen_parcial",
+                }]
+        c = modelo.desde_dict(d)
+        comp = next(a for a in c.aportes() if a.es_componente)
+        self.assertEqual("2.1", comp.meta.id)
+        self.assertEqual([6, 7], comp.meta.semanas)
+
+    def test_el_valor_del_aporte_sale_crudo_sin_convertir(self):
+        """D-02: `10` en un rubro de 150 pts son 10 pts, no 2 %. Convertir es de quien compara."""
+        rubros = [
+            {"id": "actividades", "etiqueta": "Actividades", "porcentaje": 30,
+             "unidad": "puntos", "total": 150},
+            {"id": "examenes", "etiqueta": "Exámenes", "porcentaje": 50},
+            {"id": "proyecto", "etiqueta": "Proyecto final", "porcentaje": 20},
+        ]
+        metas = [
+            _meta("0", "I", [1], 0, "actividades", tipo="encuadre"),
+            _meta("2.4", "II", [7], 10, "actividades"),
+        ]
+        c = curso_con(rubros, metas)
+        a = next(a for a in c.aportes() if a.meta.id == "2.4")
+        self.assertEqual(10, a.valor)
+        self.assertAlmostEqual(2.0, c.rubro("actividades").a_porcentaje(a.valor))
+
+
 class LosCursosExistentesNoCambian(unittest.TestCase):
     """REQ-48 por construcción: cargar los tres cursos reales sin declarar nada nuevo."""
 
