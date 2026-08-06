@@ -92,7 +92,13 @@ renombrado del encuadre va al final.
    mensaje del Art. 68. Hay una prueba que lo hace fallar a propósito.
 5. Cierre (REQ-48): 39056 y 39062 conservan su huella de texto y sus informes de validación no
    cambian ni un hallazgo.
-**Planes**: TBD
+**Planes**: 4 planes en 4 olas. El enunciado que gobierna la fase es «toda regla lee todo aporte a
+un rubro, en la unidad que ese rubro declara»; el alcance se ensanchó respecto a estos criterios y
+está razonado en `10-CONTEXT.md`.
+- [ ] 10-01-PLAN.md — el accesor único de aportes en el modelo (`Aporte` + `Curso.aportes()`)
+- [ ] 10-02-PLAN.md — R2 cuenta todo aporte, en la unidad de su rubro, y denuncia el componente mal declarado
+- [ ] 10-03-PLAN.md — R3 cuenta los exámenes parciales se declaren donde se declaren
+- [ ] 10-04-PLAN.md — cierre: auditoría de R1, no contaminación en el ciclo rápido y huella a mano
 
 ### Fase 11: El segundo nivel de la calificación
 **Meta**: que un curso pueda declarar que todo lo anterior vale el 60 % y el examen ordinario el
