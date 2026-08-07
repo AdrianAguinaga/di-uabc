@@ -36,7 +36,7 @@ informe tenga errores.**
 | R3 | Hay al menos dos exámenes parciales, se declaren como meta propia o como componente de la actividad de otra meta. | Art. 68 |
 | R4 | Toda unidad del PUA tiene al menos una meta; ninguna meta cuelga de una unidad inexistente. | — |
 | R5 | Toda semana 1..N del calendario tiene actividad; ninguna meta cae fuera del ciclo. | Calendario oficial |
-| R6 | Ninguna entrega cae en día de suspensión ni después del fin de cursos. | Calendario oficial |
+| R6 | Ninguna entrega cae en día de suspensión ni después del fin de cursos. Y si el grupo declara horario: sus horas están bien escritas, ningún bloque acaba antes de empezar, dos bloques del mismo día no se solapan, y una semana cuya suspensión deja al grupo sin ningún día de clase se avisa en vez de imprimirse en silencio. | Calendario oficial |
 | R7 | Están las citas legales obligatorias, cada regla de convivencia trae sanción, y cada grupo tiene su bloque de firma. | Art. 66 |
 | R8 | Los indicadores indispensables del IEDI v2023-1 comprobables sobre el documento. | CIAD |
 

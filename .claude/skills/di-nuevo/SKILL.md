@@ -77,9 +77,15 @@ Detalles que cambian el resultado:
 3. **Profesor.** Si el correo está en `null`, pídelo o déjalo vacío con aviso; no lo inventes.
 4. **Modalidad.** Preselecciona la del PUA pero **confírmala**: decide la plantilla, si la columna
    *Entrega* se divide en Presencial/Virtual y si la Sección 3 lleva pasos `Primero…Quinto`.
-5. **Grupos y horario.** Uno o varios. Por cada grupo: días de sesión, día y hora de entrega, aula,
-   jefe de grupo y plataforma. **El horario vive en el grupo**: si dos grupos difieren en días,
-   difieren todas sus fechas. Un documento por grupo.
+5. **Grupos y horario.** Uno o varios. Por cada grupo: sus **bloques de clase** —día, hora de
+   inicio, hora de fin y si es en salón (`presencial`) o `virtual`—, día y hora de entrega, aula,
+   jefe de grupo y plataforma. Los días y las horas se **teclean**, no se ofrecen en opción
+   múltiple: salen de la carga académica del semestre (`horarios/<ciclo>.md` si existe).
+   **El horario vive en el grupo**: si dos grupos difieren en días, difieren todas sus fechas. La
+   fecha de clase la fija el **primer** día presencial de la semana; un bloque virtual no cuenta
+   como día de clase y las entregas siguen venciendo el sábado. Si un grupo está declarado pero
+   este ciclo no se imparte, se marca `imparte: false` en vez de borrarlo: conserva sus datos
+   para cuando vuelva. Un documento por grupo que se imparte.
 6. **Esquema.** Muestra los rubros con sus porcentajes y el umbral de exención. Si el usuario
    captura uno a mano, verifica que sume 100 y traiga ≥ 2 parciales antes de aceptarlo (Arts. 67
    y 68) — no esperes a la validación.
@@ -114,12 +120,15 @@ Escrito el `curso.yaml`, **un solo comando** encadena todo: valida, renderiza un
 grupo, exporta a PDF y firma el manifiesto.
 
 ```bash
-python src/generar.py cursos/<ciclo>/<clave>-<slug>/curso.yaml     # --sin-pdf si no hay Word
+python src/generar.py cursos/<ciclo>/<clave>-<slug>/curso.yaml     # --sin-pdf si no hay Word; --incluir-no-impartidos si aplica
 ```
 
 Para rehacer el documento de **un solo grupo**, `--grupo 961` (repetible). El `curso.yaml` no se
 toca: los demás grupos siguen declarados, el panel marca la corrida como `! parcial` y el
 manifiesto cubre solo lo generado.
+
+Un grupo con `imparte: false` no se genera en una corrida normal. `--incluir-no-impartidos` lo
+incluye, y pedirlo por su número con `--grupo` también.
 
 El panel de avance **lo imprime el comando**. Relaya su salida tal cual; no la redibujes:
 

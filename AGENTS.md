@@ -84,8 +84,9 @@ en `src/modelo.py`. Todo lo que aparece en el documento sale de ahí.
 Cuatro decisiones de diseño que sostienen las reglas invariables:
 
 1. **El horario vive en el grupo, no en el curso.** Si dos grupos tienen días de clase distintos,
-   *todas* las fechas divergen. Cada entrada de `grupos:` lleva su `horario` (días de sesión, día
-   y hora de entrega, aula) y su jefe de grupo; el motor de semanas corre una vez por grupo. Si
+   *todas* las fechas divergen. Cada entrada de `grupos:` lleva su `horario` (los bloques de clase
+   con su día, sus horas y su ambiente; día y hora de entrega; aula) y su jefe de grupo; el motor
+   de semanas corre una vez por grupo. Si
    los horarios coinciden, los documentos difieren en tres cadenas; si no, difieren en todas las
    fechas — y el sistema lo maneja igual.
 
@@ -151,15 +152,17 @@ contenido:       {competencia_general, proposito_general, estrategia_general,
                   evidencias_desempeno, criterios_evaluacion}
 unidades:        [{numero, nombre, competencia, duracion_horas, temas}]
 metas:           [{id, unidad, semanas, valor, rubro, tipo, enunciado,
-                   sesiones, evidencias, criterios_evaluacion, reflexion,
+                   sesiones, componentes, evidencias, criterios_evaluacion, reflexion,
                    cubre_temas, practica_pua, caracter, que_voy_a_aprender}]
 evaluacion:      {esquema_id, exencion_ordinario, exencion_contra,
                   segundo_nivel:{promedio:{porcentaje, etiqueta},
                                  ordinario:{porcentaje, etiqueta}},
-                  rubros:[{id, etiqueta, porcentaje, detalle, parciales}]}
+                  rubros:[{id, etiqueta, porcentaje, unidad, total, detalle, parciales}]}
 rubrica:         {meta|rubro, total, filas:[{concepto, puntos, descripcion}]}
-grupos:          [{numero, horario:{dias_presencial, dia_entrega, hora_entrega, aula},
-                   jefe_grupo, plataforma}]     # o la forma corta: ["961", "962"]
+grupos:          [{numero, imparte, jefe_grupo, plataforma,
+                   horario:{bloques:[{dia, inicio, fin, ambiente}],
+                            dias_presencial, dia_entrega, hora_entrega, aula}}]
+                                             # o la forma corta: ["961", "962"]
 citas:           [EE-65, EE-66, …]           # deben resolver en config/politicas.yaml
 tolerancia_minutos: 15
 avisos:          []                          # arrastrados desde la ingesta del PUA
@@ -174,10 +177,31 @@ avisos:          []                          # arrastrados desde la ingesta del 
 solo nivel: el promedio *es* la calificación. Las dos `etiqueta` del segundo nivel son del
 contrato: el generador las imprime, no las redacta.
 
+`componentes` son los aportes que viven dentro de la actividad de una meta —un examen parcial,
+un proyecto— cada uno con su tipo y su evidencia; cuentan para el rubro igual que la meta.
+`unidad: puntos` y `total` en un rubro dicen que ese rubro se califica en puntos y cuántos vale;
+ausentes, el rubro va en porcentaje.
+
 rubrica es opcional y declara exactamente una asociación: meta o rubro. Su total y los puntos de
 cada fila pertenecen a la rúbrica, no son porcentajes de la calificación final. Concepto y
 descripción son texto del docente: el generador los conserva literalmente y nunca los completa ni
 los parafrasea.
+
+**El horario del grupo se declara por bloques.** Cada `bloque` es una franja de clase con `dia`
+(0=lunes … 5=sábado), `inicio` y `fin` en `"HH:MM"`, y `ambiente` `presencial` o `virtual`. Un
+bloque no es una `Sesion`: la sesión es un tramo de la actividad de una meta y el bloque es una
+franja del horario del grupo; comparten vocabulario de ambiente y nada más. Con bloques,
+`dias_presencial` **se deriva** de los presenciales, ordenado y sin repetir, y declarar los dos a
+la vez es error de esquema: el contrato no admite dos verdades sobre el mismo hecho. Un grupo que
+solo declara `dias_presencial` sigue cargando igual y con el comportamiento de siempre. La fecha
+de la sesión presencial la fija el **primer** día presencial de la semana; `Sesion.dia` es el
+escape declarado para la sesión que deba caer en otro. El bloque virtual entra al contrato, al
+manifiesto y al grafo, y **no toca el `.docx`**: la entrega sigue venciendo en `dia_entrega`.
+
+**`imparte: false`** dice que el grupo está declarado y este ciclo no se imparte: conserva su
+aula, su plataforma y su número para cuando vuelva, y `generar.py` lo salta salvo que se le pida
+por su número o con `--incluir-no-impartidos`. El horario del semestre decide quién va; el
+`curso.yaml` lo declara en vez de que el código lo adivine.
 
 ### Las ocho reglas de validación (`src/validar.py`)
 
@@ -188,7 +212,7 @@ los parafrasea.
 | R3 | Hay al menos dos exámenes parciales, se declaren como meta propia o como componente de la actividad de otra meta. | Art. 68 |
 | R4 | Toda unidad del PUA tiene meta; ninguna meta cuelga de una unidad inexistente. | — |
 | R5 | Toda semana 1..N tiene actividad; ninguna meta cae fuera del ciclo. | Calendario |
-| R6 | Ninguna entrega cae en suspensión ni después del fin de cursos. | Calendario |
+| R6 | Ninguna entrega cae en suspensión ni después del fin de cursos. Y si el grupo declara horario: sus horas están bien escritas, ningún bloque acaba antes de empezar, dos bloques del mismo día no se solapan, y una semana cuya suspensión deja al grupo sin ningún día de clase se avisa en vez de imprimirse en silencio. | Calendario |
 | R7 | Citas obligatorias presentes, cada regla de convivencia con sanción, firma por grupo. | Art. 66 |
 | R8 | Indicadores indispensables del IEDI v2023-1 comprobables sobre el documento. | CIAD |
 
@@ -311,6 +335,7 @@ python src/export_pdf.py <archivo>.docx                # requiere Word (Windows)
 python src/generar.py cursos/2026-2/<clave>/curso.yaml # la cadena completa, con panel
                                                        #   [--sin-pdf]     si no hay Word
                                                        #   [--grupo 961]   rehace un solo grupo
+                                                       #   [--incluir-no-impartidos]
 
 python src/grafo.py                                    # grafo/ + auditoría de cobertura
 
