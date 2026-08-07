@@ -156,7 +156,7 @@ hubo que **traducir** su estructura para que validara. Estos requisitos cierran 
 
 - **REQ-50** — Un grupo puede declarar **a qué hora** tiene clase cada día, no solo qué días. La hora
   de clase es distinta de `hora_entrega`, que es cuándo vence una tarea. Un grupo que solo declare
-  `dias_presencial` —como los cuatro que existen hoy— sigue cargando sin `ErrorModelo`.
+  `dias_presencial` sigue cargando sin `ErrorModelo`.
 
 - **REQ-51** — El horario distingue las sesiones **presenciales** de las **virtuales**. Solo las
   presenciales cuentan como sesión de clase para las fechas del documento; las virtuales son bloques
@@ -197,9 +197,9 @@ cuyas ocho fases cerraron (REQ-01 a REQ-37, validados).
 | REQ-44 · la rúbrica se renderiza como tabla | Fase 13 — El documento en la unidad real | **Validado** (2026-08-06) |
 | REQ-49 · 38985 valida sin traducirse | Fase 14 — 38985 sin traducirse | **Validado** (2026-08-06) |
 | **REQ-48 · no contaminación** | **Criterio de cierre de las seis fases** | **Validado** (2026-08-06) — 4 huellas intactas |
-| REQ-50 · hora de clase por día | Fase 15 — El horario entra al contrato | Pendiente |
-| REQ-51 · sesiones virtuales distinguidas | Fase 15 | Pendiente |
-| REQ-52 · los grupos declaran sus días reales | Fase 15 | Pendiente |
+| REQ-50 · hora de clase por día | Fase 15 — El horario entra al contrato | **Validado** (2026-08-06) |
+| REQ-51 · sesiones virtuales distinguidas | Fase 15 | **Validado** (2026-08-06) |
+| REQ-52 · los grupos declaran sus días reales | Fase 15 | **Validado** (2026-08-06) |
 | REQ-53 · `.ics` con solo las clases | Fase 16 — Mis clases en Google Calendar | Pendiente |
 
 **REQ-48 no es una fase.** Es la condición de cierre de cada una: al terminar la 9, la 10, la 11,
