@@ -203,13 +203,15 @@ aula, su plataforma y su número para cuando vuelva, y `generar.py` lo salta sal
 por su número o con `--incluir-no-impartidos`. El horario del semestre decide quién va; el
 `curso.yaml` lo declara en vez de que el código lo adivine.
 
-**La agenda `.ics` solo exporta clases.** `src/exportar_ics.py` recorre los `bloques` de los grupos
-que se imparten y el calendario oficial: un bloque por fecha no suspendida. No lee metas, sesiones,
-entregas, exámenes, investigación, coordinación ni tutorías. Escribe UTC desde `America/Tijuana`;
-lo presencial lleva `LOCATION` con el aula y lo virtual se marca sin ubicación física. Un grupo sin
-bloques se omite con aviso; una materia sin `curso.yaml` queda fuera sin inventar una hora. La salida
-regenerable vive en `horarios/salida/`; importarla a Google Calendar es una acción manual del
-profesor y no sincroniza cambios posteriores.
+**La agenda `.ics` solo exporta clases de un profesor.** `src/exportar_ics.py` exige el id que vive
+en `config/profesores.yaml`, recorre sus `bloques` de grupos impartidos y el calendario oficial: un
+bloque por fecha no suspendida. No lee metas, sesiones, entregas, exámenes, investigación,
+coordinación ni tutorías. Escribe UTC desde `America/Tijuana`; lo presencial lleva `LOCATION` con el
+aula y lo virtual se marca sin ubicación física. El nombre de archivo, `X-WR-CALNAME`, descripción y
+UID incluyen al docente: una agenda de Adrian (`ara`) no puede mezclar las clases de Zuri (`zra`).
+Un grupo sin bloques se omite con aviso; una materia sin `curso.yaml` queda fuera sin inventar una
+hora. La salida regenerable vive en `horarios/salida/`; importarla a Google Calendar es una acción
+manual del profesor y no sincroniza cambios posteriores.
 
 ### Las ocho reglas de validación (`src/validar.py`)
 
@@ -346,7 +348,7 @@ python src/generar.py cursos/2026-2/<clave>/curso.yaml # la cadena completa, con
                                                        #   [--grupo 961]   rehace un solo grupo
                                                        #   [--incluir-no-impartidos]
 
-python src/exportar_ics.py 2026-2                      # horarios/salida/Clases-2026-2.ics
+python src/exportar_ics.py 2026-2 ara                  # horarios/salida/Clases-2026-2-ara.ics
                                                        #   [--salida <archivo.ics>]
 python src/grafo.py                                    # grafo/ + auditoría de cobertura
 

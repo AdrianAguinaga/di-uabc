@@ -12,9 +12,9 @@
 | Milestone | v2.1 El horario real del semestre |
 | Fase | 16 — Mis clases en Google Calendar |
 | Plan | Local terminado — falta importar el `.ics` en una cuenta autorizada de Google Calendar |
-| Contexto | La Fase 16 está en `.planning/phases/16-mis-clases-en-google-calendar/` (2/3 planes cerrados y verificación local) |
-| Estado | v2.1: Fase 15 hecha; Fase 16 genera 122 eventos, 332 pruebas en verde y 4 huellas intactas |
-| Última actividad | 2026-08-06 — `horarios/salida/Clases-2026-2.ics` generado y validado localmente |
+| Contexto | La Fase 16 está en `.planning/phases/16-mis-clases-en-google-calendar/` (3/4 planes cerrados y verificación local) |
+| Estado | v2.1: Fase 15 hecha; Fase 16 genera 122 eventos de Adrian sin mezclar profesores, 334 pruebas en verde y 4 huellas intactas |
+| Última actividad | 2026-08-06 — `horarios/salida/Clases-2026-2-ara.ics` generado y validado localmente |
 
 ## La v2.0 quedó cerrada el 6 de agosto de 2026
 
@@ -508,7 +508,7 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
 
 ## Siguiente paso
 
-Importar `horarios/salida/Clases-2026-2.ics` en una cuenta autorizada de Google Calendar y confirmar
+Importar `horarios/salida/Clases-2026-2-ara.ics` en una cuenta autorizada de Google Calendar y confirmar
 que no hubo error y aparecen 122 eventos. Entonces se cierra REQ-53 y la Fase 16.
 
 Tres cosas que la planeación hereda ya medidas y no debe volver a deducir:

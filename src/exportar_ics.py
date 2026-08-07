@@ -1,8 +1,8 @@
 """Exporta las clases de un ciclo a iCalendar (``.ics``).
 
 Uso:
-    python src/exportar_ics.py 2026-2
-    python src/exportar_ics.py 2026-2 --salida C:\\ruta\\Clases-2026-2.ics
+    python src/exportar_ics.py 2026-2 ara
+    python src/exportar_ics.py 2026-2 ara --salida C:\\ruta\\Clases-2026-2-ara.ics
 
 El contrato son los bloques de ``curso.yaml`` y el calendario escolar oficial; no se interpreta el
 Markdown de ``horarios/`` ni las sesiones, metas o entregas del diseño instruccional. Importar el
@@ -48,6 +48,8 @@ class Resultado:
     grupos_no_impartidos: list[str] = field(default_factory=list)
     grupos_sin_bloques: list[str] = field(default_factory=list)
     cursos_omitidos: list[str] = field(default_factory=list)
+    profesor_id: str = ""
+    profesor_nombre: str = ""
 
 
 def rutas_curso(ciclo: str, raiz: Path = RAIZ) -> list[Path]:
@@ -91,7 +93,7 @@ def _uid(curso: modelo.Curso, grupo: modelo.Grupo, bloque: modelo.Bloque, fecha:
     inicio = bloque.inicio.replace(":", "")
     fin = bloque.fin.replace(":", "")
     return (
-        f"{curso.ciclo}-{curso.clave}-{grupo.numero}-{fecha:%Y%m%d}-"
+        f"{curso.ciclo}-{curso.profesor_id}-{curso.clave}-{grupo.numero}-{fecha:%Y%m%d}-"
         f"{inicio}-{fin}-{bloque.ambiente}@di-uabc"
     )
 
@@ -163,7 +165,12 @@ def _instante(valor: datetime) -> str:
     return valor.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
 
-def serializar(eventos: list[Evento], sello: datetime | None = None) -> str:
+def serializar(
+    eventos: list[Evento],
+    sello: datetime | None = None,
+    nombre_calendario: str = "",
+    descripcion_calendario: str = "",
+) -> str:
     """Serializa un `VCALENDAR` mínimo, importable y sin contenido ajeno a clases."""
     sello = sello or datetime.now(timezone.utc)
     lineas = [
@@ -172,6 +179,10 @@ def serializar(eventos: list[Evento], sello: datetime | None = None) -> str:
         f"PRODID:{PRODID}",
         "CALSCALE:GREGORIAN",
     ]
+    if nombre_calendario:
+        lineas.append(f"X-WR-CALNAME:{escapar(nombre_calendario)}")
+    if descripcion_calendario:
+        lineas.append(f"X-WR-CALDESC:{escapar(descripcion_calendario)}")
     for evento in eventos:
         lineas.extend([
             "BEGIN:VEVENT",
@@ -190,45 +201,72 @@ def serializar(eventos: list[Evento], sello: datetime | None = None) -> str:
 
 def exportar(
     ciclo: str,
+    profesor_id: str,
     salida: Path | str | None = None,
     ahora: datetime | None = None,
 ) -> tuple[Path, Resultado]:
-    """Carga cursos existentes, escribe el `.ics` y devuelve el rastro de omisiones."""
+    """Exporta una agenda por profesor, sin mezclar sus bloques con los de otra persona."""
     cal = calendario.cargar(ciclo)
+    profesor = modelo.Config().profesor(profesor_id)
     cursos, omitidos = cargar_cursos(rutas_curso(ciclo))
-    resultado = eventos_de(cursos, cal)
+    cursos_del_profesor = [c for c in cursos if c.profesor_id == profesor_id]
+    resultado = eventos_de(cursos_del_profesor, cal)
     resultado.cursos_omitidos.extend(omitidos)
+    resultado.profesor_id = profesor_id
+    resultado.profesor_nombre = profesor["nombre"]
 
-    destino = Path(salida) if salida else RAIZ / "horarios" / "salida" / f"Clases-{ciclo}.ics"
+    if not resultado.eventos:
+        raise ErrorIcs(
+            f"{profesor['nombre']} ({profesor_id}) no tiene bloques de clase impartidos "
+            f"declarados para {ciclo}. No se genera una agenda vacía."
+        )
+
+    destino = (
+        Path(salida)
+        if salida
+        else RAIZ / "horarios" / "salida" / f"Clases-{ciclo}-{profesor_id}.ics"
+    )
     destino.parent.mkdir(parents=True, exist_ok=True)
     with destino.open("w", encoding="utf-8", newline="") as archivo:
-        archivo.write(serializar(resultado.eventos, ahora))
+        archivo.write(serializar(
+            resultado.eventos,
+            ahora,
+            nombre_calendario=f"Clases {ciclo} · {profesor['nombre']}",
+            descripcion_calendario=(
+                f"Calendario de clases de {profesor['nombre']} ({profesor_id}) · "
+                "generado desde DI-UABC."
+            ),
+        ))
     return destino, resultado
 
 
 def _uso() -> str:
-    return "Uso: python src/exportar_ics.py <ciclo> [--salida <archivo.ics>]"
+    return "Uso: python src/exportar_ics.py <ciclo> <id-profesor> [--salida <archivo.ics>]"
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) < 2:
+    if len(argv) < 3:
         print(_uso(), file=sys.stderr)
         return 2
     ciclo = argv[1]
+    profesor_id = argv[2]
     salida: Path | None = None
-    resto = argv[2:]
+    resto = argv[3:]
     if resto:
         if len(resto) != 2 or resto[0] != "--salida":
             print(_uso(), file=sys.stderr)
             return 2
         salida = Path(resto[1])
     try:
-        destino, resultado = exportar(ciclo, salida)
+        destino, resultado = exportar(ciclo, profesor_id, salida)
     except (ErrorIcs, calendario.ErrorCalendario, modelo.ErrorModelo) as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
 
-    print(f"Calendario de clases {ciclo}: {len(resultado.eventos)} eventos.")
+    print(
+        f"Calendario de clases {ciclo} · {resultado.profesor_nombre} "
+        f"({resultado.profesor_id}): {len(resultado.eventos)} eventos."
+    )
     print(f"Archivo: {destino.resolve()}")
     for etiqueta in resultado.grupos_no_impartidos:
         print(f"· Omitido: {etiqueta} no se imparte este ciclo.")

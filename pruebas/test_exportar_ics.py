@@ -25,7 +25,9 @@ class CalendarioReal20262(unittest.TestCase):
         cursos, omitidos = exportar_ics.cargar_cursos(exportar_ics.rutas_curso("2026-2"))
         if omitidos:
             raise AssertionError(f"Cursos de control que no cargaron: {omitidos}")
-        cls.resultado = exportar_ics.eventos_de(cursos, cls.cal)
+        cls.resultado = exportar_ics.eventos_de(
+            [c for c in cursos if c.profesor_id == "ara"], cls.cal
+        )
 
     def test_cuenta_las_122_clases_reales(self):
         self.assertEqual(122, len(self.resultado.eventos))
@@ -53,7 +55,7 @@ class CalendarioReal20262(unittest.TestCase):
         self.assertTrue(all("-962-" not in e.uid for e in self.resultado.eventos))
         self.assertTrue(all("-531-" not in e.uid for e in self.resultado.eventos))
         self.assertIn("39056 · grupo 962", self.resultado.grupos_no_impartidos)
-        self.assertIn("38985 · grupo 531", self.resultado.grupos_sin_bloques)
+        self.assertEqual([], self.resultado.grupos_sin_bloques)
 
     def test_presencial_tiene_aula_y_virtual_no_tiene_ubicacion(self):
         for evento in self.resultado.eventos:
@@ -77,7 +79,12 @@ class SerializacionIcalendar(unittest.TestCase):
     def setUpClass(cls):
         cal = calendario.cargar("2026-2")
         cursos, _ = exportar_ics.cargar_cursos(exportar_ics.rutas_curso("2026-2"))
-        cls.texto = exportar_ics.serializar(exportar_ics.eventos_de(cursos, cal).eventos, cls.SELLO)
+        eventos = exportar_ics.eventos_de(
+            [c for c in cursos if c.profesor_id == "ara"], cal
+        ).eventos
+        cls.texto = exportar_ics.serializar(
+            eventos, cls.SELLO, "Clases 2026-2 · Adrian Rodriguez Aguiñaga", "Agenda de ara"
+        )
 
     def test_lleva_la_estructura_y_campos_requeridos(self):
         self.assertTrue(self.texto.startswith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n"))
@@ -88,6 +95,8 @@ class SerializacionIcalendar(unittest.TestCase):
         self.assertEqual(122, self.texto.count("DTSTAMP:20260806T000000Z"))
         self.assertEqual(122, self.texto.count("DTSTART:"))
         self.assertEqual(122, self.texto.count("DTEND:"))
+        self.assertIn("X-WR-CALNAME:Clases 2026-2 · Adrian Rodriguez Aguiñaga", self.texto)
+        self.assertIn("X-WR-CALDESC:Agenda de ara", self.texto)
 
     def test_solo_serializa_clases(self):
         for prohibido in ("VTODO", "VALARM", "Entrega", "Examen", "Tutoría", "Investigación"):
@@ -114,6 +123,13 @@ class SerializacionIcalendar(unittest.TestCase):
 
 
 class ComandoDeExportacion(unittest.TestCase):
+    def test_el_id_del_profesor_es_obligatorio(self):
+        salida = io.StringIO()
+        with redirect_stderr(salida):
+            codigo = exportar_ics.main(["exportar_ics.py", "2026-2"])
+        self.assertEqual(2, codigo)
+        self.assertIn("<id-profesor>", salida.getvalue())
+
     def test_el_comando_escribe_el_archivo_y_el_curso_ausente_no_bloquea(self):
         cursos, omitidos = exportar_ics.cargar_cursos([
             RAIZ / "cursos" / "2026-2" / "39056-big-data" / "curso.yaml",
@@ -125,23 +141,34 @@ class ComandoDeExportacion(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporal:
             salida = Path(temporal) / "Clases-2026-2.ics"
             fuera, resultado = exportar_ics.exportar(
-                "2026-2", salida, SerializacionIcalendar.SELLO
+                "2026-2", "ara", salida, SerializacionIcalendar.SELLO
             )
             self.assertEqual(salida, fuera)
             self.assertTrue(fuera.exists())
             self.assertEqual(122, len(resultado.eventos))
+            self.assertEqual("ara", resultado.profesor_id)
+            self.assertEqual("Adrian Rodriguez Aguiñaga", resultado.profesor_nombre)
             self.assertEqual(122, fuera.read_text(encoding="utf-8").count("BEGIN:VEVENT"))
+
+    def test_no_mezcla_profesores_y_no_escribe_una_agenda_vacia(self):
+        with tempfile.TemporaryDirectory() as temporal:
+            salida = Path(temporal) / "Clases-2026-2-zra.ics"
+            with self.assertRaises(exportar_ics.ErrorIcs) as ctx:
+                exportar_ics.exportar("2026-2", "zra", salida)
+        self.assertIn("Zurisaddai", str(ctx.exception))
+        self.assertFalse(salida.exists())
 
     def test_la_cli_informa_el_archivo_y_las_omisiones(self):
         with tempfile.TemporaryDirectory() as temporal:
             salida = Path(temporal) / "Clases-2026-2.ics"
             out, err = io.StringIO(), io.StringIO()
             with redirect_stdout(out), redirect_stderr(err):
-                codigo = exportar_ics.main(["exportar_ics.py", "2026-2", "--salida", str(salida)])
+                codigo = exportar_ics.main(
+                    ["exportar_ics.py", "2026-2", "ara", "--salida", str(salida)]
+                )
         self.assertEqual(0, codigo, err.getvalue())
-        self.assertIn("122 eventos", out.getvalue())
+        self.assertIn("Adrian Rodriguez Aguiñaga (ara): 122 eventos", out.getvalue())
         self.assertIn("39056 · grupo 962", out.getvalue())
-        self.assertIn("38985 · grupo 531", out.getvalue())
 
 
 if __name__ == "__main__":

@@ -22,8 +22,10 @@ es el único paso que cambia un servicio externo.
 
 ## Resultado local (2026-08-06)
 
-- [x] Los doce controles nuevos de `.ics` pasan dentro de la suite completa (332 pruebas).
+- [x] Los catorce controles de `.ics` pasan dentro de la suite completa (334 pruebas).
 - [x] El archivo real de 2026-2 tiene 122 `VEVENT`, sin eventos en las tres suspensiones.
 - [x] La estructura, campos obligatorios, CRLF, escape y plegado se comprueban sin dependencia externa.
 - [x] Las plantillas y las cuatro huellas de control permanecen íntegras.
-- [ ] Un usuario autorizado importa `Clases-2026-2.ics` en Google Calendar y confirma que no aparece error.
+- [x] El comando requiere profesor, etiqueta el calendario con su id y nombre, y rechaza crear una
+      agenda vacía para Zuri mientras no haya bloques declarados.
+- [ ] Un usuario autorizado importa `Clases-2026-2-ara.ics` en Google Calendar y confirma que no aparece error.

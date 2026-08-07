@@ -64,15 +64,18 @@ comparten competencias**. No infiere relaciones: cada arista sale de un campo de
 ### Agenda de clases
 
 ```powershell
-python src/exportar_ics.py 2026-2
-# → horarios/salida/Clases-2026-2.ics
+python src/exportar_ics.py 2026-2 ara
+# → horarios/salida/Clases-2026-2-ara.ics
 ```
 
-Exporta solo los **bloques de clase** de grupos que se imparten: no agrega entregas, exámenes,
-tutorías ni actividades del DI. Respeta el inicio, fin y suspensiones del calendario oficial; cada
-clase presencial lleva el aula y cada clase virtual queda marcada sin ubicación física. Una materia
-sin `curso.yaml` queda fuera y un grupo sin bloques se omite con aviso, sin inventar horarios ni
-impedir las otras clases.
+El segundo argumento es el id del profesor de `config/profesores.yaml`: `ara` es Adrian y `zra` es
+Zurisaddai. Cada archivo es de una sola persona: su nombre está en el nombre de archivo y en los
+metadatos del calendario. Exporta solo los **bloques de clase** de sus grupos que se imparten; no
+agrega entregas, exámenes, tutorías ni actividades del DI. Respeta el inicio, fin y suspensiones del
+calendario oficial; cada clase presencial lleva el aula y cada clase virtual queda marcada sin
+ubicación física. Una materia sin `curso.yaml` queda fuera y un grupo sin bloques se omite con aviso,
+sin inventar horarios ni impedir las otras clases. Si ese profesor aún no tiene bloques activos,
+el comando avisa y no crea una agenda vacía.
 
 Para importarlo, en Google Calendar abre **Configuración → Importar y exportar**, elige el archivo
 `.ics`, selecciona el calendario de destino y pulsa **Importar**. Es una copia inicial: los cambios
