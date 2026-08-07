@@ -17,31 +17,31 @@ documentos:
     ciclo: 2026-2
     clave: '39056'
     grupo: '961'
-    texto_docx: 473992818f37800e55bd5288c9a8d040d26081398b2ebcc2e6f61247f7e5da5a
+    texto_docx: 6fa48eab8d8e86656c2a121f88c0d260128eef4ec89169354334da5e79482d72
     informe: 8d48c4b9c168fb6dbb41647b6f13db68f11979b84be3e891fbb302a6c6858bee
-    manifiesto: 10d8afbc557006bc6dd11bc8c5f9f3023691b8715a3f9eb70218dcbfd1de540a
-    registrado: '2026-08-05'
+    manifiesto: 462e28469c6a95fd4f13a905819ea140d3c8d52493bc8a90fb811eab48b8fcdf
+    registrado: '2026-08-06'
   2026-2:39056:962:
     ciclo: 2026-2
     clave: '39056'
     grupo: '962'
     texto_docx: 12f3ce36eca4f2f9273274e485b3899c1c97023ff4cf79f233a30703bf27faa8
     informe: 8d48c4b9c168fb6dbb41647b6f13db68f11979b84be3e891fbb302a6c6858bee
-    manifiesto: 10d8afbc557006bc6dd11bc8c5f9f3023691b8715a3f9eb70218dcbfd1de540a
-    registrado: '2026-08-05'
+    manifiesto: 462e28469c6a95fd4f13a905819ea140d3c8d52493bc8a90fb811eab48b8fcdf
+    registrado: '2026-08-06'
   2026-2:39062:971:
     ciclo: 2026-2
     clave: '39062'
     grupo: '971'
-    texto_docx: c4255d53778030c85643025f5261e4982a1f5b48cbd9b9134cd49bacd9708187
-    informe: 7874fb9ed4ddabd1cf1c46dda0a112203da6cdfa6e5bb339efdbd688ffa35cfa
-    manifiesto: 2932d5b2fc0d53ac422f2b00fbe2b22446f827697f88befd0130e5a70eb943e7
-    registrado: '2026-08-05'
+    texto_docx: 6c4f524c50916531820409957eae0807ca99249bba41e62c2da2d199b41ad5c5
+    informe: 802397be345c6f1b3150799d3558bb214b04134fe21d875bb5d613ea6cefe5fe
+    manifiesto: e3a6152898d93a64968e8b716bac60083b0492eecec560f2b20b4bc9a52e412c
+    registrado: '2026-08-06'
   2026-2:39062:972:
     ciclo: 2026-2
     clave: '39062'
     grupo: '972'
-    texto_docx: 60265f66576b74f0d20d9ec602b9f724907e64eb6c780b352b59f8434482b3be
-    informe: 7874fb9ed4ddabd1cf1c46dda0a112203da6cdfa6e5bb339efdbd688ffa35cfa
-    manifiesto: 2932d5b2fc0d53ac422f2b00fbe2b22446f827697f88befd0130e5a70eb943e7
-    registrado: '2026-08-05'
+    texto_docx: c0402f07964f3ce73d56faee23c816b23160406bed25064b5a10d1a850b51c6c
+    informe: 802397be345c6f1b3150799d3558bb214b04134fe21d875bb5d613ea6cefe5fe
+    manifiesto: e3a6152898d93a64968e8b716bac60083b0492eecec560f2b20b4bc9a52e412c
+    registrado: '2026-08-06'

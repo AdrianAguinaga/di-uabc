@@ -6,11 +6,11 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-05T14:44:08'
-commit: 90bca69-sucio
+generado: '2026-08-06T17:17:57'
+commit: 9d4a635-sucio
 curso:
   archivo: cursos/2026-2/39062-patrones-de-comportamiento/curso.yaml
-  sha256: 733aaa219cda9c86c3db0f48e51600fcdd47e78cd1e0cda63370eebe91b0ce26
+  sha256: 93c5edf4f0fec4ed1c6bae1ac453154b0d2b010cafacbd1f587afb7a5f6f3019
   ciclo: 2026-2
   clave: '39062'
   nombre: Patrones de Comportamiento de Datos
@@ -54,27 +54,54 @@ grupos:
 - numero: '971'
   aula: Laboratorio de cómputo
   dias_presencial:
-  - 1
+  - 0
   dia_entrega: 5
   hora_entrega: '23:59'
   jefe_grupo: null
+  bloques:
+  - dia: 0
+    inicio: '10:00'
+    fin: '12:00'
+    ambiente: presencial
+  - dia: 1
+    inicio: '17:00'
+    fin: '19:00'
+    ambiente: virtual
 - numero: '972'
   aula: Laboratorio de cómputo
   dias_presencial:
-  - 3
+  - 2
   dia_entrega: 5
   hora_entrega: '23:59'
   jefe_grupo: null
+  bloques:
+  - dia: 1
+    inicio: '10:00'
+    fin: '12:00'
+    ambiente: virtual
+  - dia: 2
+    inicio: '18:00'
+    fin: '19:00'
+    ambiente: presencial
 validacion:
   errores: 0
-  avisos: []
+  avisos:
+  - 'Semana 13: el grupo 971 no tiene ningún día con bloque presencial (2 de noviembre
+    es suspensión). La fecha de esa semana se queda en el día suspendido; reprograma
+    esa clase si debe darse.'
+  - 'Semana 15: el grupo 971 no tiene ningún día con bloque presencial (16 de noviembre
+    es suspensión). La fecha de esa semana se queda en el día suspendido; reprograma
+    esa clase si debe darse.'
+  - 'Semana 6: el grupo 972 no tiene ningún día con bloque presencial (16 de septiembre
+    es suspensión). La fecha de esa semana se queda en el día suspendido; reprograma
+    esa clase si debe darse.'
   recordatorios: 5
 archivos:
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-971.docx
   grupo: '971'
-  sha256: 60616d77504b634d5c12c3dc67c3625a566e4d5d301094cd4588e88a56dd0637
-  bytes: 233000
+  sha256: 29e55b4c42573beca19a43676b5704dcf3928d276e72ce9abc5db9caaac7b42a
+  bytes: 232980
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-972.docx
   grupo: '972'
-  sha256: eeac4fb4e32d5959dbace565cbcc7249fe36fb9f6039629156db2afe279ece16
-  bytes: 232981
+  sha256: 6ac7286a126c7170fc4c74da1a6cf240c7b6168e8dcad245079ca9909c7a1f3e
+  bytes: 233008

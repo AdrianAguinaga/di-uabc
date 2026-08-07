@@ -6,11 +6,11 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-05T14:44:07'
-commit: 90bca69-sucio
+generado: '2026-08-06T17:17:56'
+commit: 9d4a635
 curso:
   archivo: cursos/2026-2/39056-big-data/curso.yaml
-  sha256: d4f9c90b24609bc024ad53f71ac03f067da7278bb676a16159cbeabc8d38b168
+  sha256: 518543c83997f2b564f2721206692f9f1d6d80a4a111b66a42f1ff3ee070e856
   ciclo: 2026-2
   clave: '39056'
   nombre: Big Data
@@ -52,10 +52,29 @@ grupos:
 - numero: '961'
   aula: Laboratorio de cómputo
   dias_presencial:
+  - 0
   - 1
+  - 2
   dia_entrega: 5
   hora_entrega: '23:59'
   jefe_grupo: null
+  bloques:
+  - dia: 0
+    inicio: '12:00'
+    fin: '13:00'
+    ambiente: presencial
+  - dia: 1
+    inicio: '12:00'
+    fin: '13:00'
+    ambiente: presencial
+  - dia: 1
+    inicio: '16:00'
+    fin: '17:00'
+    ambiente: presencial
+  - dia: 2
+    inicio: '11:00'
+    fin: '13:00'
+    ambiente: presencial
 - numero: '962'
   aula: Laboratorio de cómputo
   dias_presencial:
@@ -63,6 +82,7 @@ grupos:
   dia_entrega: 5
   hora_entrega: '23:59'
   jefe_grupo: null
+  imparte: false
 validacion:
   errores: 0
   avisos: []
@@ -70,9 +90,9 @@ validacion:
 archivos:
 - ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-961.docx
   grupo: '961'
-  sha256: 724a8680d0889770f1d78e5698954748350181962b9d863a7fa305be9a642b38
-  bytes: 233053
+  sha256: 6a250df771536b1435c90da13280273d18f247e483bd5323dc0ea2ac01ca4ea0
+  bytes: 233045
 - ruta: cursos/2026-2/39056-big-data/salida/DI-2026-2-39056-962.docx
   grupo: '962'
-  sha256: 7f9b5d241f4fcba08813d2937a4aacfbad6adb542b201e2c2bc844ea77c1ea0b
+  sha256: 4fc9024fb44dbdd7e63f5f58a5d048956254b4b205ca459ff5888962d4b938f0
   bytes: 233037
