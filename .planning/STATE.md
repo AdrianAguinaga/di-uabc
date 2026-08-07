@@ -1,20 +1,20 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-06 (v2.0 cerrada · Fase 15 con contexto)
+**Última actualización**: 2026-08-06 (Fase 15 cerrada y verificada)
 **Milestone actual**: **v2.1 — El horario real del semestre**
-**Fase actual**: Fase 15 — El horario entra al contrato (contexto recogido, sin planes)
+**Fase actual**: Fase 16 — Mis clases en Google Calendar (pendiente de planeación)
 
 ## Posición actual
 
 | | |
 |---|---|
 | Milestone | v2.1 El horario real del semestre |
-| Fase | 15 — El horario entra al contrato |
-| Plan | Ninguno — el siguiente paso es `/gsd-plan-phase 15` |
-| Contexto | `.planning/phases/15-el-horario-entra-al-contrato/15-CONTEXT.md` — 14 decisiones |
-| Estado | v2.0 cerrada: 14 fases hechas, 283 pruebas en verde, 4 huellas de control intactas |
-| Última actividad | 2026-08-06 — contexto de la Fase 15 recogido |
+| Fase | 16 — Mis clases en Google Calendar |
+| Plan | Pendiente — el siguiente paso es discutir, investigar y planear la Fase 16 |
+| Contexto | La Fase 15 quedó en `.planning/phases/15-el-horario-entra-al-contrato/` (7/7 planes, resumen y verificación) |
+| Estado | v2.1: Fase 15 hecha, 320 pruebas en verde, 4 huellas de control re-registradas e íntegras |
+| Última actividad | 2026-08-06 — cierre de la Fase 15: bloques, validación R6 y huella aprobada |
 
 ## La v2.0 quedó cerrada el 6 de agosto de 2026
 
@@ -45,11 +45,12 @@ planeación. El código está verificado; el rastro documental no cumple el est�
   Fase 14, razonada en el ROADMAP.
 - Se restauró un espacio doble en una descripción de la rúbrica: es texto literal de la docente.
 
-## La v2.1 arranca por algo que estaba falso desde el principio
+## Punto de partida de la v2.1 (resuelto en la Fase 15)
 
-**Los cuatro grupos declaran días de clase de relleno.** 39056·961 y 39062·971 dicen martes (`[1]`),
-39056·962 y 39062·972 dicen jueves (`[3]`), y **ninguno coincide** con la carga académica real del
-profesor. Todas las fechas de todos los documentos generados hasta hoy salen de ese relleno.
+**Los cuatro grupos declaraban días de clase de relleno.** La Fase 15 los sustituyó por los bloques
+reales de 2026-2 y marcó 39056·962 como `imparte: false`; conserva el grupo declarado sin generar
+un documento por defecto. La medición y el re-registro deliberado constan en
+`15-MEDICION-HUELLA.md` y `15-VERIFICATION.md`.
 
 El horario 2026-2 está transcrito en `horarios/2026-2.md`, con los **salones marcados como pendientes
 de confirmar** (la transcripción los lee con el mismo número que el grupo, lo cual es sospechoso).
@@ -195,8 +196,8 @@ fases 11 a 14 tienen deuda de proceso documentada arriba: el código está verif
 
 | Fase | Requisitos | Estado |
 |---|---|---|
-| 15. El horario entra al contrato | REQ-50, REQ-51, REQ-52 | Sin empezar — sin contexto |
-| 16. Mis clases en Google Calendar | REQ-53 | Sin empezar |
+| 15. El horario entra al contrato | REQ-50, REQ-51, REQ-52 | **Hecha** — 7/7 planes, 6/6 criterios verificados, 320 pruebas |
+| 16. Mis clases en Google Calendar | REQ-53 | Pendiente de planeación |
 
 El orden es el mismo de siempre: **modelo → validación → salida**. Sin horas de clase en `Horario`
 no hay `.ics` posible, así que el contrato se abre en la 15 y la exportación va en la 16.
@@ -507,11 +508,9 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
 
 ## Siguiente paso
 
-`/gsd-plan-phase 15` — **El horario entra al contrato** (REQ-50, REQ-51, REQ-52). El contexto está
-recogido en `15-CONTEXT.md`: 14 decisiones cerradas sobre la forma del contrato (`bloques:` como
-unidad, `dias_presencial` derivado), qué día fija la fecha (el primero, con `Sesion.dia` de escape),
-qué pasa en una suspensión (recorrer al siguiente día **con bloque presencial**), el bloque virtual
-(no toca el `.docx`), el grupo no impartido (`imparte: false`) y la medición del cambio de huella.
+`/gsd-discuss-phase 16` — **Mis clases en Google Calendar** (REQ-53). La Fase 15 ya dejó el contrato
+necesario: bloques con día, inicio, fin y ambiente; `dias_presencial` derivado; y el filtrado de
+grupos `imparte: false`.
 
 Tres cosas que la planeación hereda ya medidas y no debe volver a deducir:
 

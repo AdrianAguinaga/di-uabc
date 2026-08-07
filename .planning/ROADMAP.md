@@ -244,7 +244,7 @@ siendo el contrato.
 
 ## Fases
 
-- [ ] **Fase 15: El horario entra al contrato** — días y horas de clase por grupo, sesiones virtuales distinguidas, y la huella de control re-registrada a propósito
+- [x] **Fase 15: El horario entra al contrato** — días y horas de clase por grupo, sesiones virtuales distinguidas, y la huella de control re-registrada a propósito
 - [ ] **Fase 16: Mis clases en Google Calendar** — un `.ics` con las clases del semestre, sobre el calendario escolar
 
 ## Detalle
@@ -277,13 +277,13 @@ son virtuales, y que los cuatro grupos del repositorio digan por fin la verdad s
 6. `python -X utf8 -m unittest discover -s pruebas` pasa: las 283 anteriores intactas más las nuevas.
 **Planes**: 7 planes en 6 olas
 
-- [ ] `15-01-PLAN.md` — El bloque entra al contrato: `Bloque`, `Horario.bloques`, `Grupo.imparte` (ola 1)
-- [ ] `15-02-PLAN.md` — La suspensión recorre al siguiente día con clase, sin salir de la semana (ola 2)
-- [ ] `15-03-PLAN.md` — El horario entra al rastro: manifiesto, grafo y el grupo no impartido (ola 2)
-- [ ] `15-04-PLAN.md` — R6 comprueba el horario y avisa de la semana sin día de clase (ola 3)
-- [ ] `15-05-PLAN.md` — Los cuatro grupos dicen la verdad, y el cambio se mide antes de aceptarse (ola 4)
-- [ ] `15-06-PLAN.md` — Re-registro de la huella en commit propio (ola 5)
-- [ ] `15-07-PLAN.md` — El contrato canónico y las skills al día; cierre de la fase (ola 6)
+- [x] `15-01-PLAN.md` — El bloque entra al contrato: `Bloque`, `Horario.bloques`, `Grupo.imparte` (ola 1)
+- [x] `15-02-PLAN.md` — La suspensión recorre al siguiente día con clase, sin salir de la semana (ola 2)
+- [x] `15-03-PLAN.md` — El horario entra al rastro: manifiesto, grafo y el grupo no impartido (ola 2)
+- [x] `15-04-PLAN.md` — R6 comprueba el horario y avisa de la semana sin día de clase (ola 3)
+- [x] `15-05-PLAN.md` — Los cuatro grupos dicen la verdad, y el cambio se mide antes de aceptarse (ola 4)
+- [x] `15-06-PLAN.md` — Re-registro de la huella en commit propio (ola 5)
+- [x] `15-07-PLAN.md` — El contrato canónico y las skills al día; cierre de la fase (ola 6)
 
 ### Fase 16: Mis clases en Google Calendar
 **Meta**: que el profesor pueda meter sus clases del semestre en su agenda sin transcribirlas a mano.

@@ -1,9 +1,9 @@
 ---
 phase: 15
 slug: el-horario-entra-al-contrato
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: complete
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-08-06
 ---
 
@@ -130,12 +130,12 @@ El orden importa: es lo que hace defendible el cambio. Precedente en la Fase 9 (
 
 ## Firma de validación
 
-- [ ] Toda tarea tiene verificación `<automated>` o dependencia declarada de la ola 0
-- [ ] Continuidad de muestreo: no hay 3 tareas seguidas sin verificación automatizada
-- [ ] Ninguna prueba de D-07/D-15 depende de la salida de `validar.py` para una fecha resuelta (trampa 1)
-- [ ] Ninguna prueba de equivalencia comparte objetos `Sesion` entre las dos ramas (trampa 2)
-- [ ] Sin flags de watch-mode
-- [ ] Latencia de retroalimentación < 15 s
-- [ ] `nyquist_compliant: true` en el frontmatter
+- [x] Toda tarea tiene verificación `<automated>` o dependencia declarada de la ola 0
+- [x] Continuidad de muestreo: no hay 3 tareas seguidas sin verificación automatizada
+- [x] Ninguna prueba de D-07/D-15 depende de la salida de `validar.py` para una fecha resuelta (trampa 1)
+- [x] Ninguna prueba de equivalencia comparte objetos `Sesion` entre las dos ramas (trampa 2)
+- [x] Sin flags de watch-mode
+- [x] Latencia de retroalimentación < 15 s
+- [x] `nyquist_compliant: true` en el frontmatter
 
-**Aprobación:** pendiente
+**Aprobación:** completada el 2026-08-06; el re-registro de huella se ejecutó tras la aprobación explícita del usuario.
