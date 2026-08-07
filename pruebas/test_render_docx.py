@@ -215,11 +215,11 @@ class RenderizadoDeBigData(unittest.TestCase):
         self.assertNotIn("Grupo 961", t962)
 
     def test_las_fechas_presenciales_divergen_porque_el_horario_difiere(self):
-        """961 va los martes y 962 los jueves: todas las fechas de clase cambian."""
+        """961 va lunes; 962 conserva jueves porque no se imparte este ciclo (D-09)."""
         t962 = texto(docx.Document(str(self.rutas["962"])))
-        self.assertIn("martes 11 de agosto", self.texto)
+        self.assertIn("lunes 10 de agosto", self.texto)
         self.assertIn("jueves 13 de agosto", t962)
-        self.assertNotIn("martes 11 de agosto", t962)
+        self.assertNotIn("lunes 10 de agosto", t962)
 
     def test_las_entregas_coinciden_porque_ambos_entregan_en_sabado(self):
         t962 = texto(docx.Document(str(self.rutas["962"])))

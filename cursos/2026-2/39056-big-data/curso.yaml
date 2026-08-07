@@ -196,9 +196,23 @@ evaluacion:
 
 grupos:
   - numero: "961"
-    horario: {dias_presencial: [1], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
+    horario:
+      bloques:
+        - {dia: 0, inicio: "12:00", fin: "13:00", ambiente: presencial}
+        - {dia: 1, inicio: "12:00", fin: "13:00", ambiente: presencial}
+        - {dia: 1, inicio: "16:00", fin: "17:00", ambiente: presencial}
+        - {dia: 2, inicio: "11:00", fin: "13:00", ambiente: presencial}
+      dia_entrega: 5
+      hora_entrega: "23:59"
+      aula: "Laboratorio de cómputo"
     plataforma: Blackboard
+  # 962 no se imparte en 2026-2: no aparece en la carga académica del semestre. Se conserva su
+  # horario heredado —jueves— porque no hay día real con qué sustituirlo, y porque 962 es uno de
+  # los cuatro documentos de control de pruebas/huellas.yaml: es el testigo de que la corrección
+  # de días está acotada a los grupos que sí van. El porqué va aquí y no en avisos: un aviso
+  # entra al informe de validación, que es por curso, y movería el hash del informe de 961.
   - numero: "962"
+    imparte: false
     horario: {dias_presencial: [3], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
     plataforma: Blackboard
 

@@ -181,10 +181,22 @@ evaluacion:
 
 grupos:
   - numero: "971"
-    horario: {dias_presencial: [1], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
+    horario:
+      bloques:
+        - {dia: 0, inicio: "10:00", fin: "12:00", ambiente: presencial}
+        - {dia: 1, inicio: "17:00", fin: "19:00", ambiente: virtual}
+      dia_entrega: 5
+      hora_entrega: "23:59"
+      aula: "Laboratorio de cómputo"
     plataforma: Blackboard
   - numero: "972"
-    horario: {dias_presencial: [3], dia_entrega: 5, hora_entrega: "23:59", aula: "Laboratorio de cómputo"}
+    horario:
+      bloques:
+        - {dia: 1, inicio: "10:00", fin: "12:00", ambiente: virtual}
+        - {dia: 2, inicio: "18:00", fin: "19:00", ambiente: presencial}
+      dia_entrega: 5
+      hora_entrega: "23:59"
+      aula: "Laboratorio de cómputo"
     plataforma: Blackboard
 
 citas: [EE-65, EE-66, EE-67, EE-68, EE-70, EE-71, EE-74, EE-75, RPIDA-59]

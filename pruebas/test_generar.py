@@ -61,11 +61,11 @@ class PaqueteDeBigData(unittest.TestCase):
 
     # -- lo que produce -----------------------------------------------------
 
-    def test_un_documento_por_grupo(self):
+    def test_un_documento_por_grupo_que_se_imparte(self):
+        """962 está declarado y no se imparte este ciclo (D-09): el manifiesto lo lista,
+        la corrida no lo genera. ``ElGrupoQueNoSeImparteNoSeGenera`` cubre las dos ramas."""
         nombres = sorted(p.name for p in (self.tmp / "salida").glob("*.docx"))
-        self.assertEqual(
-            ["DI-2026-2-39056-961.docx", "DI-2026-2-39056-962.docx"], nombres
-        )
+        self.assertEqual(["DI-2026-2-39056-961.docx"], nombres)
 
     def test_el_manifiesto_queda_junto_al_curso(self):
         # `resolve()` porque en Windows el temporal llega con el nombre corto 8.3.
@@ -79,9 +79,10 @@ class PaqueteDeBigData(unittest.TestCase):
     def test_la_traza_reporta_cada_paso(self):
         etiquetas = [p[1] for p in self.pasos]
         self.assertEqual(
-            ["validación", "grupo 961", "grupo 962", "MANIFIESTO"], etiquetas
+            ["validación", "parcial", "grupo 961", "MANIFIESTO"], etiquetas
         )
-        self.assertTrue(all(p[0] == "✓" for p in self.pasos))
+        self.assertEqual("!", self.pasos[1][0])
+        self.assertTrue(all(p[0] == "✓" for i, p in enumerate(self.pasos) if i != 1))
 
     # -- trazabilidad (regla invariable 7) ----------------------------------
 
@@ -293,6 +294,97 @@ class ManifiestoDeRubrica(unittest.TestCase):
                 }],
             },
             ev["rubrica"],
+        )
+
+
+class ManifiestoDelHorario(unittest.TestCase):
+    """D-04: el horario es parte del contrato, así que es parte del rastro."""
+
+    CLAVES_DE_HOY = [
+        "numero", "aula", "dias_presencial", "dia_entrega", "hora_entrega", "jefe_grupo",
+    ]
+    BLOQUES_961 = [
+        {"dia": 0, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+        {"dia": 1, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+        {"dia": 1, "inicio": "16:00", "fin": "17:00", "ambiente": "presencial"},
+        {"dia": 2, "inicio": "11:00", "fin": "13:00", "ambiente": "presencial"},
+    ]
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="di-manifiesto-horario-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+        self.cfg = modelo.Config()
+        self.cal = calendario.cargar("2026-2")
+
+    def _grupos(self, retoque=None) -> dict:
+        ruta = copia_del_curso(self.tmp, retoque)
+        curso = modelo.cargar(ruta)
+        inf = validar.validar(curso, self.cfg, self.cal)
+        datos = generar.manifiesto(curso, ruta, inf, [], self.cfg, self.cal)
+        return {g["numero"]: g for g in datos["grupos"]}
+
+    def test_un_grupo_sin_bloques_emite_las_claves_de_siempre(self):
+        """La forma del manifiesto entra en la huella: sin el rasgo, ni una clave nueva."""
+        def no_declarar(d):
+            d["grupos"][0]["horario"] = {
+                "dias_presencial": [1], "dia_entrega": 5,
+                "hora_entrega": "23:59", "aula": "Laboratorio de cómputo",
+            }
+
+        self.assertEqual(self.CLAVES_DE_HOY, list(self._grupos(no_declarar)["961"]))
+
+    def test_un_grupo_con_bloques_los_registra(self):
+        def declarar(d):
+            d["grupos"][0]["horario"] = {
+                "bloques": self.BLOQUES_961, "dia_entrega": 5,
+                "hora_entrega": "23:59", "aula": "Laboratorio de cómputo",
+            }
+
+        g = self._grupos(declarar)["961"]
+        self.assertEqual(self.CLAVES_DE_HOY + ["bloques"], list(g))
+        self.assertEqual(4, len(g["bloques"]))
+        self.assertEqual(
+            {"dia": 0, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+            g["bloques"][0],
+        )
+        self.assertEqual([0, 1, 2], g["dias_presencial"])
+
+    def test_el_manifiesto_declara_que_un_grupo_no_se_imparte(self):
+        def declarar(d):
+            d["grupos"][1]["imparte"] = False
+
+        grupos = self._grupos(declarar)
+        self.assertEqual(False, grupos["962"]["imparte"])
+        self.assertNotIn("imparte", grupos["961"])
+
+
+class ElGrupoQueNoSeImparteNoSeGenera(unittest.TestCase):
+    """REQ-52, criterio 5: el horario del semestre decide quién va (D-09/D-12)."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="di-no-impartido-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+
+        def sin_962(d):
+            d["grupos"][1]["imparte"] = False
+
+        self.ruta = copia_del_curso(self.tmp, sin_962)
+
+    def _generados(self, **kwargs) -> list[str]:
+        generar.paquete(self.ruta, pdf=False, **kwargs)
+        return sorted(p.name for p in (self.tmp / "salida").glob("*.docx"))
+
+    def test_por_defecto_solo_se_genera_el_grupo_que_va(self):
+        self.assertEqual(["DI-2026-2-39056-961.docx"], self._generados())
+
+    def test_pedirlo_explicitamente_lo_genera_igual(self):
+        """Es como huella.py genera el 962: siempre con ``grupos=`` explícito."""
+        self.assertEqual(["DI-2026-2-39056-962.docx"], self._generados(grupos=["962"]))
+
+    def test_la_bandera_incluye_a_todos(self):
+        self.assertEqual(
+            ["DI-2026-2-39056-961.docx", "DI-2026-2-39056-962.docx"],
+            self._generados(incluir_no_impartidos=True),
         )
 
 
