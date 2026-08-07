@@ -228,6 +228,24 @@ def manifiesto(
                 "dia_entrega": g.horario.dia_entrega,
                 "hora_entrega": g.horario.hora_entrega,
                 "jefe_grupo": g.jefe_grupo,
+                # La forma del manifiesto entra en la huella; solo se añaden estas claves
+                # cuando el grupo las declara, como segundo_nivel y rubrica.
+                **(
+                    {
+                        "bloques": [
+                            {
+                                "dia": b.dia,
+                                "inicio": b.inicio,
+                                "fin": b.fin,
+                                "ambiente": b.ambiente,
+                            }
+                            for b in g.horario.bloques
+                        ]
+                    }
+                    if g.horario.bloques
+                    else {}
+                ),
+                **({"imparte": False} if not g.imparte else {}),
             }
             for g in curso.grupos
         ],
@@ -264,6 +282,7 @@ def paquete(
     pdf: bool = True,
     traza=None,
     grupos: list[str] | None = None,
+    incluir_no_impartidos: bool = False,
 ) -> Paquete:
     """Valida, renderiza un documento por grupo, exporta a PDF y escribe el manifiesto.
 
@@ -273,6 +292,10 @@ def paquete(
     `grupos` limita la generación a esos números — para rehacer el documento de un grupo
     sin volver a pasar por Word con los demás. El curso **no se toca**: los otros grupos
     siguen declarados, y el manifiesto dice cuáles se generaron esta vez.
+
+    Un grupo con `imparte: false` queda fuera de la corrida por defecto —el horario del semestre
+    decide quién va—, pero sigue declarado en el `curso.yaml` y en el manifiesto.
+    `incluir_no_impartidos=True` los devuelve.
     """
     traza = traza or (lambda *_: None)
     ruta_curso = Path(ruta_curso).resolve()
@@ -281,7 +304,9 @@ def paquete(
     cfg = Config()
     cal = calendario.cargar(curso.ciclo)
 
-    pedidos = curso.grupos
+    # Pedir un grupo por su número lo genera aunque este ciclo no se imparta: así huella.py
+    # puede mantenerlo como documento de control.
+    pedidos = [g for g in curso.grupos if g.imparte or incluir_no_impartidos]
     if grupos:
         pedidos = [g for g in curso.grupos if g.numero in grupos]
         if faltan := set(grupos) - {g.numero for g in pedidos}:
@@ -347,7 +372,8 @@ def paquete(
 def main(argv: list[str]) -> int:
     if len(argv) < 2:
         print(
-            "Uso: python src/generar.py <ruta a curso.yaml> [--sin-pdf] [--grupo <n>]…",
+            "Uso: python src/generar.py <ruta a curso.yaml> [--sin-pdf] [--grupo <n>]… "
+            "[--incluir-no-impartidos]",
             file=sys.stderr,
         )
         return 2
@@ -364,6 +390,7 @@ def main(argv: list[str]) -> int:
             pdf="--sin-pdf" not in argv,
             traza=lambda *a: print(linea(*a), flush=True),
             grupos=grupos or None,
+            incluir_no_impartidos="--incluir-no-impartidos" in argv,
         )
     except (ErrorGenerar, modelo.ErrorModelo, calendario.ErrorCalendario) as e:
         print(PIE)

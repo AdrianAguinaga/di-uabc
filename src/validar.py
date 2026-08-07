@@ -17,6 +17,7 @@ from __future__ import annotations
 import sys
 from collections import Counter
 from dataclasses import dataclass
+from datetime import time
 from pathlib import Path
 
 import calendario
@@ -412,7 +413,93 @@ class _Validador:
 
     # -- Regla 6: ninguna entrega en suspensión ni fuera del periodo ---------
 
+    def _horario(self) -> None:
+        """Forma del horario: horas legibles, coherentes y sin cruzarse (D-05).
+
+        Vive en R6 —el dominio de calendario y fechas— en vez de abrir una regla nueva. La hora
+        ilegible es un hallazgo, no un error de carga: así llega al mismo informe que el resto de
+        los defectos de un DI y bloquea la generación con una explicación concreta.
+        """
+        for g in self.c.grupos:
+            tramos: dict[int, list[tuple[time, time]]] = {}
+            for b in g.horario.bloques:
+                dia = calendario.DIAS[b.dia]
+                horas: dict[str, time] = {}
+                for campo, valor in (("inicio", b.inicio), ("fin", b.fin)):
+                    try:
+                        horas[campo] = time.fromisoformat(str(valor))
+                    except ValueError:
+                        self.error(
+                            "R6",
+                            f"Grupo {g.numero}, bloque del {dia}: la hora de {campo} "
+                            f"«{valor}» no está escrita como HH:MM.",
+                        )
+                if len(horas) < 2:
+                    continue
+                if horas["fin"] <= horas["inicio"]:
+                    self.error(
+                        "R6",
+                        f"Grupo {g.numero}, bloque del {dia}: la hora de fin ({b.fin}) no es "
+                        f"posterior a la de inicio ({b.inicio}).",
+                    )
+                    continue
+                tramos.setdefault(b.dia, []).append((horas["inicio"], horas["fin"]))
+
+            for dia, lista in tramos.items():
+                lista.sort()
+                for (ini, fin), (sig_ini, sig_fin) in zip(lista, lista[1:]):
+                    if sig_ini < fin:
+                        self.error(
+                            "R6",
+                            f"Grupo {g.numero}: dos bloques del {calendario.DIAS[dia]} se "
+                            f"solapan ({ini:%H:%M}–{fin:%H:%M} y "
+                            f"{sig_ini:%H:%M}–{sig_fin:%H:%M}); un grupo no puede estar en dos "
+                            f"clases a la vez.",
+                        )
+
+    def _semanas_sin_dia_de_clase(self) -> None:
+        """Avisos de suspensión que dejan al grupo sin bloque presencial esa semana (D-15).
+
+        Se calcula con el horario y el calendario, antes de cualquier fecha resuelta: el pipeline
+        valida antes de renderizar. Pregunta a ``dia_de_clase``, el mismo primitivo que resuelve
+        la fecha, para que el aviso y el documento no puedan discrepar.
+        """
+        for g in self.c.grupos:
+            if not g.imparte or not g.horario.bloques or not g.horario.dias_presencial:
+                continue
+            dias = set(g.horario.dias_presencial)
+            primero = g.horario.dias_presencial[0]
+
+            for n in range(1, self.cal.total_semanas + 1):
+                if self.cal.dia_de_clase(n, primero, dias) is not None:
+                    continue
+                suspendidas = ", ".join(
+                    calendario.texto_fecha(suspension.fecha)
+                    for suspension in self.cal.semana(n).suspensiones
+                )
+                self.aviso(
+                    "R6",
+                    f"Semana {n}: el grupo {g.numero} no tiene ningún día con bloque "
+                    f"presencial ({suspendidas} es suspensión). La fecha de esa semana se "
+                    f"queda en el día suspendido; reprograma esa clase si debe darse.",
+                )
+
+            for m in self.c.metas:
+                for sesion in m.sesiones:
+                    if (
+                        sesion.dia is not None
+                        and sesion.ambiente == "presencial"
+                        and sesion.dia not in dias
+                    ):
+                        self.aviso(
+                            "R6",
+                            f"La {m.etiqueta} fija su sesión presencial en "
+                            f"{calendario.DIAS[sesion.dia]} y el grupo {g.numero} no tiene "
+                            "bloque presencial ese día.",
+                        )
+
     def regla_6(self) -> None:
+        self._horario()
         if self.cal is None:
             self.error(
                 "R6",
@@ -439,6 +526,8 @@ class _Validador:
                     f"La semana {sem} contiene la suspensión del "
                     f"{calendario.texto_fecha(susp.fecha)} ({susp.motivo}) y no tiene metas.",
                 )
+
+        self._semanas_sin_dia_de_clase()
 
     # -- Regla 7: citas legales obligatorias y firma por grupo ---------------
 

@@ -98,6 +98,48 @@ class TestReglasDeFecha(unittest.TestCase):
         self.assertIsNone(self.c.semana_de(date(2026, 12, 1)))
 
 
+class ElRecorridoMiraElHorarioDelGrupo(unittest.TestCase):
+    """D-07/D-15: la suspensión recorre días con clase y no sale de la semana."""
+
+    LUN_MAR_MIE = {0, 1, 2}  # 39056·961
+    SOLO_LUNES = {0}  # 39062·971
+    SOLO_MIERCOLES = {2}  # 39062·972
+
+    @classmethod
+    def setUpClass(cls):
+        cls.c = cal.cargar("2026-2")
+
+    def test_961_recorre_del_lunes_suspendido_al_martes_de_la_misma_semana(self):
+        self.assertEqual(date(2026, 11, 3), self.c.fecha_de(13, 0, self.LUN_MAR_MIE))
+        self.assertEqual(date(2026, 11, 17), self.c.fecha_de(15, 0, self.LUN_MAR_MIE))
+
+    def test_971_no_tiene_a_donde_recorrer_y_no_cruza_de_semana(self):
+        """Sin este límite la semana 13 imprimiría el 9 nov, que es de la semana 14."""
+        self.assertEqual(date(2026, 11, 2), self.c.fecha_de(13, 0, self.SOLO_LUNES))
+        self.assertEqual(date(2026, 11, 16), self.c.fecha_de(15, 0, self.SOLO_LUNES))
+
+    def test_972_tampoco_y_se_queda_en_el_miercoles_suspendido(self):
+        self.assertEqual(date(2026, 9, 16), self.c.fecha_de(6, 2, self.SOLO_MIERCOLES))
+
+    def test_dia_de_clase_dice_que_no_hay_dia_solo_en_esos_tres_casos(self):
+        self.assertIsNone(self.c.dia_de_clase(13, 0, self.SOLO_LUNES))
+        self.assertIsNone(self.c.dia_de_clase(15, 0, self.SOLO_LUNES))
+        self.assertIsNone(self.c.dia_de_clase(6, 2, self.SOLO_MIERCOLES))
+        self.assertIsNotNone(self.c.dia_de_clase(13, 0, self.LUN_MAR_MIE))
+        for n in range(1, 17):
+            if n not in (13, 15):
+                with self.subTest(semana=n):
+                    self.assertIsNotNone(self.c.dia_de_clase(n, 0, self.SOLO_LUNES))
+
+    def test_una_semana_sin_suspension_no_se_mueve(self):
+        self.assertEqual(date(2026, 8, 17), self.c.fecha_de(2, 0, self.SOLO_LUNES))
+
+    def test_sin_horario_el_recorrido_es_el_de_siempre(self):
+        """Protege al 531 y a cualquier curso futuro que no declare bloques (D-07)."""
+        self.assertEqual(date(2026, 11, 17), self.c.fecha_de(15, 0))
+        self.assertEqual(date(2026, 9, 17), self.c.fecha_de(6, 2))
+
+
 class TestUtilidades(unittest.TestCase):
     def test_ciclo_actual(self):
         self.assertEqual(cal.ciclo_actual(date(2026, 8, 3)), "2026-2")

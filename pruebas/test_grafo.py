@@ -79,7 +79,7 @@ def escribir_pua(destino: Path, clave: str, nombre: str, competencia: str = COMP
     return ruta
 
 
-def escribir_curso(destino: Path, clave: str, cubre: list[str]) -> Path:
+def escribir_curso(destino: Path, clave: str, cubre: list[str], grupos=None) -> Path:
     datos = {
         "meta": {"ciclo": "2026-2", "clave": clave, "pua_ref": f"puas/md/{clave}-prueba.md"},
         "profesor": "ara",
@@ -105,7 +105,7 @@ def escribir_curso(destino: Path, clave: str, cubre: list[str]) -> Path:
             }
         ],
         "evaluacion": {"esquema_id": "estandar-2026", "rubros": []},
-        "grupos": ["001"],
+        "grupos": grupos or ["001"],
         "citas": [],
     }
     ruta = destino / "curso.yaml"
@@ -211,6 +211,38 @@ class LasDosPreguntas(unittest.TestCase):
         curso = escribir_curso(self.tmp, "99009", cubre=[])
         informe = grafo.auditar(grafo.construir([], [curso]))
         self.assertEqual(1, len(informe["Cursos cuyo PUA no está ingerido"]))
+
+
+class ElGrafoRegistraElHorario(unittest.TestCase):
+    """D-04: el nodo del grupo lleva el horario declarado, legible en index.html."""
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="di-grafo-horario-"))
+        self.addCleanup(shutil.rmtree, self.tmp, True)
+
+    def test_el_nodo_del_grupo_lleva_sus_bloques(self):
+        curso = escribir_curso(
+            self.tmp, "99001", cubre=[],
+            grupos=[{
+                "numero": "961",
+                "horario": {"bloques": [
+                    {"dia": 0, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+                    {"dia": 1, "inicio": "17:00", "fin": "19:00", "ambiente": "virtual"},
+                ]},
+            }],
+        )
+        g = grafo.construir([], [curso])
+        datos = g.nodos["grupo:2026-2:99001:961"].datos
+        self.assertEqual([0], datos["dias_presencial"])
+        self.assertEqual(
+            ["lunes 12:00–13:00 presencial", "martes 17:00–19:00 virtual"],
+            datos["bloques"],
+        )
+
+    def test_un_grupo_sin_bloques_no_gana_la_clave(self):
+        curso = escribir_curso(self.tmp, "99002", cubre=[])
+        g = grafo.construir([], [curso])
+        self.assertNotIn("bloques", g.nodos["grupo:2026-2:99002:001"].datos)
 
 
 class Archivos(unittest.TestCase):

@@ -158,16 +158,38 @@ class Calendario:
     def en_periodo_de_clases(self, f: date) -> bool:
         return self.inicio <= f <= self.fin
 
-    def fecha_de(self, semana: int, dia: int = 0) -> date:
-        """Fecha del día `dia` (0=lunes … 5=sábado) de la semana indicada.
+    def dia_de_clase(self, semana: int, dia: int, dias_con_clase: set[int]) -> date | None:
+        """Primer día de esa semana, desde ``dia``, sin suspensión y con clase para el grupo.
 
-        Si cae en suspensión, se recorre al siguiente día hábil dentro del
-        periodo de clases.
+        ``dias_con_clase`` son días de bloques presenciales. El recorrido no sale de la semana:
+        si la suspensión deja al grupo sin ninguno, devuelve ``None``. Así una fecha impresa en
+        la fila de una semana nunca se desplaza inadvertidamente a la siguiente.
         """
         s = self.semana(semana)
         objetivo = s.inicio + timedelta(days=dia)
-        while self.es_suspension(objetivo):
+        while objetivo <= s.fin:
+            if objetivo.weekday() in dias_con_clase and not self.es_suspension(objetivo):
+                return objetivo
             objetivo += timedelta(days=1)
+        return None
+
+    def fecha_de(
+        self, semana: int, dia: int = 0, dias_con_clase: set[int] | None = None
+    ) -> date:
+        """Fecha del día `dia` (0=lunes … 5=sábado) de la semana indicada.
+
+        Sin ``dias_con_clase``, una suspensión se recorre al siguiente día hábil, como siempre.
+        Con él, solo acepta días en que el grupo tiene bloque presencial y no sale de la semana.
+        Si no encuentra ninguno, devuelve el día original —aunque sea suspensión— para que la
+        validación lo reporte. Un grupo sin bloques no entra en esta rama.
+        """
+        s = self.semana(semana)
+        objetivo = s.inicio + timedelta(days=dia)
+        if dias_con_clase is not None:
+            objetivo = self.dia_de_clase(semana, dia, dias_con_clase) or objetivo
+        else:
+            while self.es_suspension(objetivo):
+                objetivo += timedelta(days=1)
         if objetivo > self.fin:
             raise ErrorCalendario(
                 f"La fecha calculada ({objetivo}) queda después del fin de cursos "

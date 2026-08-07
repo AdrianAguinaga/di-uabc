@@ -19,6 +19,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "src"))
 
+import calendario  # noqa: E402
 import modelo  # noqa: E402
 
 try:
@@ -526,6 +527,153 @@ class ContabilidadSinTraducirse(unittest.TestCase):
         self.assertEqual(("6.1", 100, 100), (
             c.rubrica.meta, c.rubrica.total, sum(f.puntos for f in c.rubrica.filas),
         ))
+
+
+class HorarioConBloques(unittest.TestCase):
+    """REQ-50, criterio 1: el bloque es la unidad y deriva ``dias_presencial``."""
+
+    # Los cuatro bloques reales de 39056·961 (horarios/2026-2.md).
+    BLOQUES_961 = [
+        {"dia": 0, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+        {"dia": 1, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+        {"dia": 1, "inicio": "16:00", "fin": "17:00", "ambiente": "presencial"},
+        {"dia": 2, "inicio": "11:00", "fin": "13:00", "ambiente": "presencial"},
+    ]
+    # Los dos bloques reales de 39062·971: el martes es virtual y no es día de clase.
+    BLOQUES_971 = [
+        {"dia": 0, "inicio": "10:00", "fin": "12:00", "ambiente": "presencial"},
+        {"dia": 1, "inicio": "17:00", "fin": "19:00", "ambiente": "virtual"},
+    ]
+
+    def test_los_dos_martes_de_961_no_duplican_el_dia(self):
+        h = modelo.Horario(bloques=self.BLOQUES_961)
+        self.assertEqual([0, 1, 2], h.dias_presencial)
+
+    def test_el_bloque_virtual_no_cuenta_como_dia_de_clase(self):
+        h = modelo.Horario(bloques=self.BLOQUES_971)
+        self.assertEqual([0], h.dias_presencial)
+
+    def test_los_bloques_del_yaml_llegan_como_objetos(self):
+        b = modelo.Horario(bloques=self.BLOQUES_961).bloques[0]
+        self.assertIsInstance(b, modelo.Bloque)
+        self.assertEqual(("12:00", "13:00", "presencial"), (b.inicio, b.fin, b.ambiente))
+
+    def test_declarar_bloques_y_dias_presencial_es_error(self):
+        """D-02: el contrato no admite dos verdades sobre el mismo hecho."""
+        with self.assertRaises(modelo.ErrorModelo) as ctx:
+            modelo.Horario(bloques=self.BLOQUES_961, dias_presencial=[1])
+        self.assertIn("dias_presencial", str(ctx.exception))
+
+    def test_un_ambiente_inventado_no_carga(self):
+        with self.assertRaises(modelo.ErrorModelo) as ctx:
+            modelo.Horario(bloques=[{
+                "dia": 0, "inicio": "12:00", "fin": "13:00", "ambiente": "hibrido",
+            }])
+        self.assertIn("presencial, virtual", str(ctx.exception))
+
+    def test_un_dia_fuera_de_la_semana_de_clases_no_carga(self):
+        with self.assertRaises(modelo.ErrorModelo):
+            modelo.Horario(bloques=[{
+                "dia": 6, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial",
+            }])
+
+    def test_el_grupo_carga_sus_bloques_desde_el_curso(self):
+        d = copy.deepcopy(CURSO_VALIDO)
+        d["grupos"] = [{"numero": "961", "horario": {
+            "bloques": self.BLOQUES_961, "dia_entrega": 5,
+        }}]
+        c = modelo.desde_dict(d)
+        self.assertEqual([0, 1, 2], c.grupos[0].horario.dias_presencial)
+        self.assertEqual(4, len(c.grupos[0].horario.bloques))
+
+
+class GrupoQueEsteCicloNoSeImparte(unittest.TestCase):
+    """REQ-52, criterio 5: el horario del semestre decide quién va (D-09)."""
+
+    def test_por_omision_un_grupo_se_imparte(self):
+        self.assertTrue(modelo.Grupo(numero="961").imparte)
+
+    def test_el_curso_puede_declarar_que_un_grupo_no_va(self):
+        d = copy.deepcopy(CURSO_VALIDO)
+        d["grupos"] = [
+            {"numero": "961", "horario": {"dias_presencial": [1]}},
+            {"numero": "962", "imparte": False, "horario": {"dias_presencial": [3]}},
+        ]
+        c = modelo.desde_dict(d)
+        self.assertTrue(c.grupos[0].imparte)
+        self.assertFalse(c.grupos[1].imparte)
+
+
+class UnCursoSinBloquesSigueCargandoIgual(unittest.TestCase):
+    """REQ-50: el rasgo es aditivo. 531 nunca declara bloques y es el testigo permanente."""
+
+    RUTA = RAIZ / "cursos/2026-2/38985-contabilidad-financiera/curso.yaml"
+
+    def test_el_531_carga_sin_bloques_y_conserva_sus_dias(self):
+        c = modelo.cargar(self.RUTA)
+        g = c.grupos[0]
+        self.assertEqual([], g.horario.bloques)
+        self.assertEqual([1], g.horario.dias_presencial)
+        self.assertTrue(g.imparte)
+
+
+class ElBloqueVirtualNoMueveNingunaFecha(unittest.TestCase):
+    """REQ-51, criterio 2: el bloque virtual entra al contrato y no toca el documento."""
+
+    PRESENCIALES = [
+        {"dia": 0, "inicio": "10:00", "fin": "12:00", "ambiente": "presencial"},
+        {"dia": 2, "inicio": "18:00", "fin": "19:00", "ambiente": "presencial"},
+    ]
+    VIRTUAL = {"dia": 1, "inicio": "17:00", "fin": "19:00", "ambiente": "virtual"}
+
+    @classmethod
+    def setUpClass(cls):
+        cls.cal = calendario.cargar("2026-2")
+
+    def _fechas(self, bloques):
+        d = copy.deepcopy(CURSO_VALIDO)
+        d["grupos"] = [{"numero": "961", "horario": {
+            "bloques": bloques, "dia_entrega": 5,
+        }}]
+        c = modelo.desde_dict(d)
+        modelo.resolver_fechas(c, c.grupos[0], self.cal)
+        return {
+            "presencial": [s.fecha for m in c.metas for s in m.sesiones
+                           if s.ambiente == "presencial"],
+            "virtual": [s.fecha for m in c.metas for s in m.sesiones
+                        if s.ambiente == "virtual"],
+        }
+
+    def test_con_y_sin_el_bloque_virtual_salen_las_mismas_fechas(self):
+        con = self._fechas(self.PRESENCIALES + [self.VIRTUAL])
+        sin = self._fechas(self.PRESENCIALES)
+        self.assertEqual(sin["presencial"], con["presencial"])
+        self.assertEqual(sin["virtual"], con["virtual"])
+
+    def test_la_entrega_sigue_cayendo_en_sabado(self):
+        fechas = self._fechas(self.PRESENCIALES + [self.VIRTUAL])["virtual"]
+        self.assertTrue(all(f.weekday() == 5 for f in fechas), fechas)
+
+
+class SinBloquesLasFechasSonLasDeSiempre(unittest.TestCase):
+    """El rasgo es aditivo también en la resolución de fechas (D-07)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.cal = calendario.cargar("2026-2")
+
+    def test_un_grupo_con_dias_presencial_resuelve_como_antes(self):
+        d = copy.deepcopy(CURSO_VALIDO)
+        d["grupos"] = [{"numero": "962", "horario": {
+            "dias_presencial": [3], "dia_entrega": 5,
+        }}]
+        c = modelo.desde_dict(d)
+        modelo.resolver_fechas(c, c.grupos[0], self.cal)
+        for m in c.metas:
+            for s in m.sesiones:
+                esperada = self.cal.fecha_de(s.semana, 3 if s.ambiente == "presencial" else 5)
+                with self.subTest(meta=m.id, ambiente=s.ambiente, semana=s.semana):
+                    self.assertEqual(esperada, s.fecha)
 
 
 if __name__ == "__main__":

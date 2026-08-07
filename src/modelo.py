@@ -298,6 +298,32 @@ class Rubrica:
 
 
 @dataclass
+class Bloque:
+    """Una franja de clase del grupo en la semana: día, horas y ambiente.
+
+    No es una ``Sesion``: la sesión es un tramo de la actividad de una meta; el bloque es una
+    franja del horario del grupo. Comparten el vocabulario de ``AMBIENTES`` y nada más.
+    """
+
+    dia: int  # 0=lunes … 5=sábado
+    inicio: str  # "HH:MM", como hora_entrega
+    fin: str  # "HH:MM"
+    ambiente: str  # presencial | virtual
+
+    def __post_init__(self) -> None:
+        if not 0 <= self.dia <= 5:
+            raise ErrorModelo(
+                f"Bloque de horario: el día {self.dia} está fuera de la semana de clases "
+                f"(0=lunes … 5=sábado)."
+            )
+        if self.ambiente not in AMBIENTES:
+            raise ErrorModelo(
+                f"Bloque del día {self.dia}: ambiente inválido {self.ambiente!r}. "
+                f"Válidos: {', '.join(AMBIENTES)}."
+            )
+
+
+@dataclass
 class Horario:
     """Vive en el grupo: si dos grupos tienen días distintos, las fechas divergen."""
 
@@ -305,6 +331,21 @@ class Horario:
     dia_entrega: int = 5  # sábado
     hora_entrega: str = "23:59"
     aula: str = ""
+    bloques: list[Bloque] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        # Llegan como dicts desde el YAML o ya construidos desde una prueba: los dos casos entran
+        # por aquí, para que el contrato tenga una única normalización.
+        self.bloques = [b if isinstance(b, Bloque) else Bloque(**b) for b in self.bloques]
+        if self.bloques and self.dias_presencial:
+            raise ErrorModelo(
+                "Horario: declara bloques o dias_presencial, no ambos. Con bloques, "
+                "dias_presencial se deriva de los presenciales — quita dias_presencial."
+            )
+        if self.bloques:
+            self.dias_presencial = sorted(
+                {b.dia for b in self.bloques if b.ambiente == "presencial"}
+            )
 
 
 @dataclass
@@ -313,6 +354,7 @@ class Grupo:
     horario: Horario = field(default_factory=Horario)
     jefe_grupo: str | None = None  # se firma a mano
     plataforma: str = "Blackboard"
+    imparte: bool = True  # declarado pero fuera del ciclo → false
 
 
 @dataclass(frozen=True)
@@ -523,15 +565,24 @@ def resolver_fechas(curso: Curso, grupo: Grupo, cal) -> Curso:
     Ojo: las sesiones son compartidas por todos los grupos del curso, así que esto
     **sobrescribe** la resolución anterior. Llámalo justo antes de renderizar cada
     grupo, no una vez para todos.
+
+    Un grupo con bloques filtra el recorrido de suspensiones por sus días presenciales. Una
+    sesión con ``dia`` conserva su escape declarado y una virtual sigue en el día de entrega.
     """
     h = grupo.horario
     presencial = h.dias_presencial[0] if h.dias_presencial else 0
+    # Solo un grupo que declara bloques filtra el recorrido de una suspensión. Sin bloques, el
+    # comportamiento de cursos existentes y futuros permanece intacto.
+    dias_clase = set(h.dias_presencial) if h.bloques else None
     for m in curso.metas:
         for s in m.sesiones:
-            dia = s.dia if s.dia is not None else (
-                presencial if s.ambiente == "presencial" else h.dia_entrega
-            )
-            s.fecha = cal.fecha_de(s.semana, dia)
+            if s.dia is not None:  # escape declarado: se respeta literal
+                dia, filtro = s.dia, None
+            elif s.ambiente == "presencial":
+                dia, filtro = presencial, dias_clase
+            else:  # la entrega no se mueve con el horario de clase
+                dia, filtro = h.dia_entrega, None
+            s.fecha = cal.fecha_de(s.semana, dia, filtro)
     return curso
 
 

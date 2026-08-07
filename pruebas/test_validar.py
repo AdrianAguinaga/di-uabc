@@ -118,6 +118,10 @@ def informe(**cambios):
     return validar.validar(curso(**cambios))
 
 
+def _con_bloques(numero, bloques):
+    return {"numero": numero, "horario": {"bloques": bloques, "dia_entrega": 5}}
+
+
 def reglas_con_error(inf) -> set[str]:
     return {h.regla for h in inf.errores}
 
@@ -746,6 +750,92 @@ class Regla5Semanas(unittest.TestCase):
         inf = informe(metas=metas)
         self.assertIn("R5", reglas_con_error(inf))
         self.assertIn("17", " ".join(h.mensaje for h in inf.errores))
+
+
+class Regla6HorarioMalDeclarado(unittest.TestCase):
+    """Criterio 3: el tercer error es el solapamiento de bloques (D-05)."""
+
+    BLOQUES_961 = [
+        {"dia": 0, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+        {"dia": 1, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+        {"dia": 1, "inicio": "16:00", "fin": "17:00", "ambiente": "presencial"},
+        {"dia": 2, "inicio": "11:00", "fin": "13:00", "ambiente": "presencial"},
+    ]
+
+    def _errores(self, bloques):
+        inf = informe(grupos=[_con_bloques("961", bloques)])
+        return [h.mensaje for h in inf.errores if h.regla == "R6"]
+
+    def test_una_hora_ilegible_es_error(self):
+        errores = self._errores([{
+            "dia": 0, "inicio": "25:99", "fin": "13:00", "ambiente": "presencial",
+        }])
+        self.assertTrue(errores)
+        self.assertIn("25:99", errores[0])
+
+    def test_un_fin_anterior_al_inicio_es_error(self):
+        errores = self._errores([{
+            "dia": 0, "inicio": "13:00", "fin": "12:00", "ambiente": "presencial",
+        }])
+        self.assertTrue(errores)
+
+    def test_dos_bloques_del_mismo_dia_que_se_cruzan_son_error(self):
+        errores = self._errores([
+            {"dia": 1, "inicio": "12:00", "fin": "13:00", "ambiente": "presencial"},
+            {"dia": 1, "inicio": "12:30", "fin": "13:30", "ambiente": "presencial"},
+        ])
+        self.assertTrue(errores)
+        self.assertIn("solapan", errores[0])
+
+    def test_los_dos_martes_reales_de_961_no_se_solapan(self):
+        self.assertEqual([], self._errores(self.BLOQUES_961))
+
+    def test_un_curso_sin_bloques_no_recibe_ninguna_comprobacion_nueva(self):
+        self.assertNotIn("R6", reglas_con_error(informe()))
+
+
+class Regla6SemanaSinDiaDeClase(unittest.TestCase):
+    """D-15: no se imprime en silencio una fecha que el grupo no tiene."""
+
+    SOLO_LUNES = [
+        {"dia": 0, "inicio": "10:00", "fin": "12:00", "ambiente": "presencial"},
+        {"dia": 1, "inicio": "17:00", "fin": "19:00", "ambiente": "virtual"},
+    ]
+    SOLO_MIERCOLES = [
+        {"dia": 1, "inicio": "10:00", "fin": "12:00", "ambiente": "virtual"},
+        {"dia": 2, "inicio": "18:00", "fin": "19:00", "ambiente": "presencial"},
+    ]
+
+    def _avisos(self, bloques, numero="971"):
+        inf = informe(grupos=[_con_bloques(numero, bloques)])
+        return [
+            h.mensaje for h in inf.de(validar.AVISO)
+            if h.regla == "R6" and "bloque presencial" in h.mensaje
+        ]
+
+    def test_971_pierde_las_semanas_13_y_15(self):
+        avisos = self._avisos(self.SOLO_LUNES)
+        self.assertEqual(2, len(avisos), avisos)
+        self.assertTrue(any("Semana 13" in a for a in avisos), avisos)
+        self.assertTrue(any("Semana 15" in a for a in avisos), avisos)
+        self.assertTrue(all("971" in a for a in avisos), avisos)
+
+    def test_972_pierde_la_semana_6(self):
+        avisos = self._avisos(self.SOLO_MIERCOLES, numero="972")
+        self.assertEqual(1, len(avisos), avisos)
+        self.assertIn("Semana 6", avisos[0])
+
+    def test_961_tiene_a_donde_recorrer_y_no_pierde_ninguna(self):
+        self.assertEqual([], self._avisos(Regla6HorarioMalDeclarado.BLOQUES_961, numero="961"))
+
+    def test_no_bloquea_la_generacion(self):
+        inf = informe(grupos=[_con_bloques("971", self.SOLO_LUNES)])
+        self.assertTrue(inf.valido)
+
+    def test_un_curso_sin_bloques_no_recibe_ningun_aviso_de_este_tipo(self):
+        self.assertEqual([], [
+            h for h in informe().de(validar.AVISO) if "bloque presencial" in h.mensaje
+        ])
 
 
 class Regla6Fechas(unittest.TestCase):

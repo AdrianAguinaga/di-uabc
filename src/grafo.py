@@ -271,7 +271,22 @@ def construir(puas: list[Path], cursos: list[Path], cfg: Config | None = None) -
                 g.nodo(
                     f"grupo:{curso.ciclo}:{curso.clave}:{gr.numero}", "grupo",
                     f"Grupo {gr.numero}",
-                    {"aula": gr.horario.aula, "dias_presencial": gr.horario.dias_presencial},
+                    {
+                        "aula": gr.horario.aula,
+                        "dias_presencial": gr.horario.dias_presencial,
+                        # Cadenas y no diccionarios: index.html imprime «clave: valor» y un
+                        # dict saldría como [object Object].
+                        **(
+                            {
+                                "bloques": [
+                                    f"{calendario.DIAS[b.dia]} {b.inicio}–{b.fin} {b.ambiente}"
+                                    for b in gr.horario.bloques
+                                ]
+                            }
+                            if gr.horario.bloques
+                            else {}
+                        ),
+                    },
                 ),
                 "tiene_grupo",
             )
