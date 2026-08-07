@@ -203,6 +203,14 @@ aula, su plataforma y su número para cuando vuelva, y `generar.py` lo salta sal
 por su número o con `--incluir-no-impartidos`. El horario del semestre decide quién va; el
 `curso.yaml` lo declara en vez de que el código lo adivine.
 
+**La agenda `.ics` solo exporta clases.** `src/exportar_ics.py` recorre los `bloques` de los grupos
+que se imparten y el calendario oficial: un bloque por fecha no suspendida. No lee metas, sesiones,
+entregas, exámenes, investigación, coordinación ni tutorías. Escribe UTC desde `America/Tijuana`;
+lo presencial lleva `LOCATION` con el aula y lo virtual se marca sin ubicación física. Un grupo sin
+bloques se omite con aviso; una materia sin `curso.yaml` queda fuera sin inventar una hora. La salida
+regenerable vive en `horarios/salida/`; importarla a Google Calendar es una acción manual del
+profesor y no sincroniza cambios posteriores.
+
 ### Las ocho reglas de validación (`src/validar.py`)
 
 | # | Qué verifica | Fundamento |
@@ -317,6 +325,7 @@ puntuación), nunca por parecido semántico. Una coincidencia significa que algu
 | `puas/md/` | PUAs normalizados | Generado |
 | `puas/INDICE.md` | Registro de PUAs disponibles | Generado |
 | `calendarios/` | Calendarios por ciclo + PDFs oficiales | Al abrir un ciclo nuevo |
+| `horarios/` | Referencia del horario y agendas `.ics` regenerables por ciclo | El Markdown al capturar la carga; la salida la genera `exportar_ics.py` |
 | `config/` | Profesores, esquemas, políticas, plantillas | Sí |
 | `src/` | Código del generador | Sí |
 | `cursos/` | Salida por ciclo y materia | Generado |
@@ -337,6 +346,8 @@ python src/generar.py cursos/2026-2/<clave>/curso.yaml # la cadena completa, con
                                                        #   [--grupo 961]   rehace un solo grupo
                                                        #   [--incluir-no-impartidos]
 
+python src/exportar_ics.py 2026-2                      # horarios/salida/Clases-2026-2.ics
+                                                       #   [--salida <archivo.ics>]
 python src/grafo.py                                    # grafo/ + auditoría de cobertura
 
 python src/plantillas.py verificar                     # ¿siguen intactas? (sha256)

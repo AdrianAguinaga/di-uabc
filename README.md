@@ -61,6 +61,24 @@ Contesta lo que ningún archivo por separado puede contestar: **qué temas del P
 meta**, qué prácticas no las realiza ninguna meta, qué semanas están vacías y **qué materias
 comparten competencias**. No infiere relaciones: cada arista sale de un campo declarado.
 
+### Agenda de clases
+
+```powershell
+python src/exportar_ics.py 2026-2
+# → horarios/salida/Clases-2026-2.ics
+```
+
+Exporta solo los **bloques de clase** de grupos que se imparten: no agrega entregas, exámenes,
+tutorías ni actividades del DI. Respeta el inicio, fin y suspensiones del calendario oficial; cada
+clase presencial lleva el aula y cada clase virtual queda marcada sin ubicación física. Una materia
+sin `curso.yaml` queda fuera y un grupo sin bloques se omite con aviso, sin inventar horarios ni
+impedir las otras clases.
+
+Para importarlo, en Google Calendar abre **Configuración → Importar y exportar**, elige el archivo
+`.ics`, selecciona el calendario de destino y pulsa **Importar**. Es una copia inicial: los cambios
+posteriores en el repositorio no se sincronizan solos. Consulta la
+[guía oficial de Google Calendar](https://support.google.com/calendar/answer/37118?hl=es).
+
 ### Esquemas de evaluación
 
 Viven en `config/esquemas-evaluacion.yaml`. El orquestador ofrece el predeterminado y admite uno
@@ -98,6 +116,7 @@ de los demás y compara el texto**: si cambia algo ajeno, falta el filtro.
 | `conocimiento/` | Banco de conocimientos: todo lo anterior convertido a Markdown para consulta |
 | `puas/` | `fuente/` los PDF oficiales · `md/` normalizados · `INDICE.md` el registro |
 | `calendarios/` | Calendarios escolares por ciclo + los PDF oficiales de origen |
+| `horarios/` | Referencia del horario por ciclo + agenda `.ics` regenerable en `salida/` |
 | `config/` | Profesores, esquemas de evaluación, políticas y mapa de plantillas |
 | `src/` | Código Python del generador |
 | `pruebas/` | Suite de pruebas — `python -X utf8 -m unittest discover -s pruebas` |
