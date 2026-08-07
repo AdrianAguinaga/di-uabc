@@ -1,9 +1,9 @@
 # Estado del proyecto
 
 **Proyecto**: Generador de Diseño Instruccional UABC (`DI-UABC`)
-**Última actualización**: 2026-08-06 (Fase 15 cerrada y verificada)
+**Última actualización**: 2026-08-06 (Fase 16 implementada; falta comprobación humana de importación)
 **Milestone actual**: **v2.1 — El horario real del semestre**
-**Fase actual**: Fase 16 — Mis clases en Google Calendar (pendiente de planeación)
+**Fase actual**: Fase 16 — Mis clases en Google Calendar (pendiente de importación manual)
 
 ## Posición actual
 
@@ -11,10 +11,10 @@
 |---|---|
 | Milestone | v2.1 El horario real del semestre |
 | Fase | 16 — Mis clases en Google Calendar |
-| Plan | Pendiente — el siguiente paso es discutir, investigar y planear la Fase 16 |
-| Contexto | La Fase 15 quedó en `.planning/phases/15-el-horario-entra-al-contrato/` (7/7 planes, resumen y verificación) |
-| Estado | v2.1: Fase 15 hecha, 320 pruebas en verde, 4 huellas de control re-registradas e íntegras |
-| Última actividad | 2026-08-06 — cierre de la Fase 15: bloques, validación R6 y huella aprobada |
+| Plan | Local terminado — falta importar el `.ics` en una cuenta autorizada de Google Calendar |
+| Contexto | La Fase 16 está en `.planning/phases/16-mis-clases-en-google-calendar/` (2/3 planes cerrados y verificación local) |
+| Estado | v2.1: Fase 15 hecha; Fase 16 genera 122 eventos, 332 pruebas en verde y 4 huellas intactas |
+| Última actividad | 2026-08-06 — `horarios/salida/Clases-2026-2.ics` generado y validado localmente |
 
 ## La v2.0 quedó cerrada el 6 de agosto de 2026
 
@@ -197,7 +197,7 @@ fases 11 a 14 tienen deuda de proceso documentada arriba: el código está verif
 | Fase | Requisitos | Estado |
 |---|---|---|
 | 15. El horario entra al contrato | REQ-50, REQ-51, REQ-52 | **Hecha** — 7/7 planes, 6/6 criterios verificados, 320 pruebas |
-| 16. Mis clases en Google Calendar | REQ-53 | Pendiente de planeación |
+| 16. Mis clases en Google Calendar | REQ-53 | Implementada localmente — pendiente importación manual |
 
 El orden es el mismo de siempre: **modelo → validación → salida**. Sin horas de clase en `Horario`
 no hay `.ics` posible, así que el contrato se abre en la 15 y la exportación va en la 16.
@@ -508,9 +508,8 @@ Remoto: **https://github.com/AdrianAguinaga/di-uabc**, rama `master`, **público
 
 ## Siguiente paso
 
-`/gsd-discuss-phase 16` — **Mis clases en Google Calendar** (REQ-53). La Fase 15 ya dejó el contrato
-necesario: bloques con día, inicio, fin y ambiente; `dias_presencial` derivado; y el filtrado de
-grupos `imparte: false`.
+Importar `horarios/salida/Clases-2026-2.ics` en una cuenta autorizada de Google Calendar y confirmar
+que no hubo error y aparecen 122 eventos. Entonces se cierra REQ-53 y la Fase 16.
 
 Tres cosas que la planeación hereda ya medidas y no debe volver a deducir:
 

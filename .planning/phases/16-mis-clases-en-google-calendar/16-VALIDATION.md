@@ -1,8 +1,8 @@
 ---
 phase: 16
 slug: mis-clases-en-google-calendar
-status: draft
-nyquist_compliant: false
+status: pending_human
+nyquist_compliant: true
 created: 2026-08-06
 ---
 
@@ -19,3 +19,11 @@ created: 2026-08-06
 
 La importación en una cuenta real de Google Calendar se registra como comprobación humana posterior:
 es el único paso que cambia un servicio externo.
+
+## Resultado local (2026-08-06)
+
+- [x] Los doce controles nuevos de `.ics` pasan dentro de la suite completa (332 pruebas).
+- [x] El archivo real de 2026-2 tiene 122 `VEVENT`, sin eventos en las tres suspensiones.
+- [x] La estructura, campos obligatorios, CRLF, escape y plegado se comprueban sin dependencia externa.
+- [x] Las plantillas y las cuatro huellas de control permanecen íntegras.
+- [ ] Un usuario autorizado importa `Clases-2026-2.ics` en Google Calendar y confirma que no aparece error.

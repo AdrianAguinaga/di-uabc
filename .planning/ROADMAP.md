@@ -301,7 +301,11 @@ son virtuales, y que los cuatro grupos del repositorio digan por fin la verdad s
    investigación, coordinación ni tutorías. Hay una prueba que lo afirma sobre el archivo generado.
 5. Una materia sin `curso.yaml` no bloquea la exportación de las demás.
 6. Cierre: la suite completa pasa y `python src/plantillas.py verificar` sigue en verde.
-**Planes**: TBD
+**Planes**: 3 planes en 3 olas (verificación externa pendiente)
+
+- [x] `16-01-PLAN.md` — Núcleo iCalendar: bloques + calendario oficial → `VEVENT`, con pruebas RFC y de calendario
+- [x] `16-02-PLAN.md` — CLI, salida regenerable y documentación de importación manual
+- [ ] `16-03-PLAN.md` — Verificación local cerrada; pendiente confirmar la importación en Google Calendar
 
 ---
 

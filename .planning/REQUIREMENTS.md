@@ -200,7 +200,7 @@ cuyas ocho fases cerraron (REQ-01 a REQ-37, validados).
 | REQ-50 · hora de clase por día | Fase 15 — El horario entra al contrato | **Validado** (2026-08-06) |
 | REQ-51 · sesiones virtuales distinguidas | Fase 15 | **Validado** (2026-08-06) |
 | REQ-52 · los grupos declaran sus días reales | Fase 15 | **Validado** (2026-08-06) |
-| REQ-53 · `.ics` con solo las clases | Fase 16 — Mis clases en Google Calendar | Pendiente |
+| REQ-53 · `.ics` con solo las clases | Fase 16 — Mis clases en Google Calendar | Validación local completa; pendiente importación manual en Google Calendar |
 
 **REQ-48 no es una fase.** Es la condición de cierre de cada una: al terminar la 9, la 10, la 11,
 la 12, la 13 y la 14 se regeneran 39056 y 39062 y se comprueba que su huella de texto no cambió.
