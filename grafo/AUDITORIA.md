@@ -1,6 +1,6 @@
 # Auditoría del grafo
 
-Generado: 2026-08-05T10:10:38 · 377 nodos · 669 aristas
+Generado: 2026-08-06T17:14:08 · 368 nodos · 654 aristas
 
 Lo escribe `src/grafo.py`. Cada sección vacía es una buena noticia; una entrada es
 un hueco del diseño que alguien tiene que decidir si cierra o acepta.
@@ -15,9 +15,9 @@ un hueco del diseño que alguien tiene que decidir si cierra o acepta.
 | competencia | 12 |
 | practica | 19 |
 | curso | 3 |
-| meta | 51 |
-| evidencia | 54 |
-| criterio | 98 |
+| meta | 48 |
+| evidencia | 51 |
+| criterio | 95 |
 | semana | 16 |
 | articulo | 9 |
 | plantilla | 1 |
