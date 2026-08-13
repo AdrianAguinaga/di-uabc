@@ -13,6 +13,8 @@ venv/
 # Salidas regenerables — el .docx y .pdf se reconstruyen desde curso.yaml
 # (curso.yaml y MANIFIESTO.yaml SÍ se versionan: son la fuente de verdad)
 cursos/**/salida/
+# Expedientes con matrícula y otros datos personales para documentos administrativos.
+cursos/**/privado/
 horarios/salida/
 
 # Sistema

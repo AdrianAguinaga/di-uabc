@@ -36,11 +36,17 @@ class EnDirectorioTemporal(unittest.TestCase):
 
 
 class Registro(EnDirectorioTemporal):
-    def test_registra_las_tres_modalidades(self):
+    def test_registra_las_modalidades_y_el_formato_complementario(self):
         plantillas.registrar()
         entradas = plantillas.cargar()
         self.assertEqual(
-            {"semipresencial", "escolarizada", "a_distancia"}, set(entradas)
+            {
+                "semipresencial",
+                "escolarizada",
+                "a_distancia",
+                "registro_modalidades_acreditacion_diversas",
+            },
+            set(entradas),
         )
         for e in entradas.values():
             self.assertTrue(e.ruta.exists(), f"no se copió {e.archivo}")

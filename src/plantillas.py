@@ -80,7 +80,12 @@ class Entrada:
 
 
 def _config() -> dict:
-    return yaml.safe_load(CONFIG.read_text(encoding="utf-8"))["modalidades"]
+    """Plantillas CIAD y formatos institucionales que se custodian igual."""
+    datos = yaml.safe_load(CONFIG.read_text(encoding="utf-8"))
+    return {
+        **datos.get("modalidades", {}),
+        **datos.get("formatos", {}),
+    }
 
 
 def cargar() -> dict[str, Entrada]:

@@ -65,6 +65,14 @@ modalidades:
       Blackboard Ultra no acepta contenido en tablas: la Sección 2 debe publicarse como
       archivo descargable en Word o PDF.
 
+# Formatos institucionales complementarios. No son modalidades instruccionales y no
+# deben aceptarse como valor de `identificacion.modalidad` en un curso.
+formatos:
+  registro_modalidades_acreditacion_diversas:
+    etiqueta: "Registro de Modalidades de Acreditación Diversas"
+    origen: "referencias/Registro de Modalidades de Acreditación Diversas - Nuevo Formato.docx"
+    version: "2026-1"
+
 # Marcadores por los que el renderizador localiza el contenido. Se busca por TEXTO,
 # nunca por índice: los índices se mueven entre versiones.
 marcadores:

@@ -26,6 +26,13 @@ no se edita el Markdown a mano.
 | [Deltas entre modalidades](plantillas/deltas-entre-modalidades.md) | Qué cambia exactamente de una plantilla a otra. Lo que el renderizador debe parametrizar. | Las tres |
 | [Instrucciones de llenado](plantillas/instrucciones-llenado.md) | Cómo espera el CIAD que se llene cada campo, con su ejemplo de referencia. | `CIAD_DI_Plantilla_*_Instrucciones-2025.docx` |
 
+## Modalidades de acreditación diversas
+
+| Documento | Qué aporta | Original |
+|---|---|---|
+| [Índice y pertinencia de fuentes](modalidades_acreditacion/INDICE.md) | Mapa de las seis fuentes nuevas, con qué regula cada una y cuáles aplican directamente al Registro de Modalidades de Acreditación Diversas. | `referencias/modalidades_acreditacion/` |
+| [Modalidades de aprendizaje y obtención de créditos](modalidades_acreditacion/Modalidades_de_Aprendizaje_2021.md) | Fuente principal: modalidades del Art. 155, requisitos y flujos de registro de OMA y PVVC. | `Modalidades_de_Aprendizaje_2021.pdf` |
+
 ## Estilo y rúbrica
 
 | Documento | Qué aporta | Original |

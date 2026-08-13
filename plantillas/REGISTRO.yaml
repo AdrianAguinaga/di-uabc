@@ -20,6 +20,13 @@ plantillas:
     sha256: 59f468707657ee6a43904b5406eb34ff2acfc5fa4e1418d379000b2f9d0ee487
     bytes: 42739
     registrado: '2026-08-03'
+  registro_modalidades_acreditacion_diversas:
+    archivo: registro_modalidades_acreditacion_diversas.docx
+    origen: referencias/Registro de Modalidades de Acreditación Diversas - Nuevo Formato.docx
+    version: 2026-1
+    sha256: 99da8d90f4278f5c78c17ab163a3a59e7815c7ba78733027e86ece3453148a2b
+    bytes: 226232
+    registrado: '2026-08-12'
   semipresencial:
     archivo: semipresencial.docx
     origen: referencias/CIAD_DI_Plantilla_Semipresencial-2025.docx

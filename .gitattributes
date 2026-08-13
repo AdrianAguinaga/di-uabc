@@ -1,0 +1,2 @@
+# Los documentos fuente se conservan byte por byte; Git no debe tratarlos como texto.
+*.pdf binary
