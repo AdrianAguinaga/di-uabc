@@ -139,6 +139,27 @@ class ElRecorridoMiraElHorarioDelGrupo(unittest.TestCase):
         self.assertEqual(date(2026, 11, 17), self.c.fecha_de(15, 0))
         self.assertEqual(date(2026, 9, 17), self.c.fecha_de(6, 2))
 
+    def test_la_siguiente_sesion_virtual_es_posterior_a_la_suspension(self):
+        martes = {1}
+        self.assertEqual(
+            date(2026, 11, 3),
+            self.c.siguiente_dia_de_bloque(date(2026, 11, 2), martes),
+        )
+        self.assertEqual(
+            date(2026, 11, 17),
+            self.c.siguiente_dia_de_bloque(date(2026, 11, 16), martes),
+        )
+        # El martes 15 ya pasó cuando se suspende el miércoles 16: corresponde el 22.
+        self.assertEqual(
+            date(2026, 9, 22),
+            self.c.siguiente_dia_de_bloque(date(2026, 9, 16), martes),
+        )
+
+    def test_no_inventa_un_bloque_despues_del_fin_de_cursos(self):
+        self.assertIsNone(
+            self.c.siguiente_dia_de_bloque(date(2026, 11, 28), {0, 1, 2, 3, 4, 5})
+        )
+
 
 class TestUtilidades(unittest.TestCase):
     def test_ciclo_actual(self):

@@ -173,6 +173,23 @@ class Calendario:
             objetivo += timedelta(days=1)
         return None
 
+    def siguiente_dia_de_bloque(
+        self, fecha: date, dias_con_bloque: set[int]
+    ) -> date | None:
+        """Primer bloque posterior a ``fecha``, vigente y sin suspensión.
+
+        El recorrido es estrictamente posterior: una sesión presencial suspendida se
+        reprograma en la siguiente sesión virtual declarada, nunca en una anterior.
+        Solo devuelve fechas del periodo oficial de clases; si no queda bloque en el
+        ciclo, quien programa debe decidir una alternativa explícita.
+        """
+        objetivo = fecha + timedelta(days=1)
+        while objetivo <= self.fin:
+            if objetivo.weekday() in dias_con_bloque and not self.es_suspension(objetivo):
+                return objetivo
+            objetivo += timedelta(days=1)
+        return None
+
     def fecha_de(
         self, semana: int, dia: int = 0, dias_con_clase: set[int] | None = None
     ) -> date:

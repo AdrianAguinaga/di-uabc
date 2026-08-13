@@ -17,7 +17,7 @@ from __future__ import annotations
 import sys
 from collections import Counter
 from dataclasses import dataclass
-from datetime import time
+from datetime import time, timedelta
 from pathlib import Path
 
 import calendario
@@ -457,46 +457,47 @@ class _Validador:
                             f"clases a la vez.",
                         )
 
-    def _semanas_sin_dia_de_clase(self) -> None:
-        """Avisos de suspensión que dejan al grupo sin bloque presencial esa semana (D-15).
+    def _sesiones_suspendidas_sin_reprogramacion(self) -> None:
+        """Bloquea una sesión suspendida que no tiene alternativa declarada.
 
-        Se calcula con el horario y el calendario, antes de cualquier fecha resuelta: el pipeline
-        valida antes de renderizar. Pregunta a ``dia_de_clase``, el mismo primitivo que resuelve
-        la fecha, para que el aviso y el documento no puedan discrepar.
+        Una sesión presencial suspendida usa el siguiente bloque virtual del grupo. Si ese bloque
+        no existe dentro del ciclo, todavía puede usar otro bloque presencial de la misma semana;
+        sin ninguna de las dos alternativas no se puede escribir una fecha válida en el DI.
         """
         for g in self.c.grupos:
             if not g.imparte or not g.horario.bloques or not g.horario.dias_presencial:
                 continue
             dias = set(g.horario.dias_presencial)
+            virtuales = set(g.horario.dias_virtual)
             primero = g.horario.dias_presencial[0]
-
-            for n in range(1, self.cal.total_semanas + 1):
-                if self.cal.dia_de_clase(n, primero, dias) is not None:
-                    continue
-                suspendidas = ", ".join(
-                    calendario.texto_fecha(suspension.fecha)
-                    for suspension in self.cal.semana(n).suspensiones
-                )
-                self.aviso(
-                    "R6",
-                    f"Semana {n}: el grupo {g.numero} no tiene ningún día con bloque "
-                    f"presencial ({suspendidas} es suspensión). La fecha de esa semana se "
-                    f"queda en el día suspendido; reprograma esa clase si debe darse.",
-                )
 
             for m in self.c.metas:
                 for sesion in m.sesiones:
-                    if (
-                        sesion.dia is not None
-                        and sesion.ambiente == "presencial"
-                        and sesion.dia not in dias
-                    ):
+                    if sesion.ambiente != "presencial":
+                        continue
+                    if not 1 <= sesion.semana <= self.cal.total_semanas:
+                        continue  # R5 ya informa la semana inexistente.
+                    dia = sesion.dia if sesion.dia is not None else primero
+                    if sesion.dia is not None and sesion.dia not in dias:
                         self.aviso(
                             "R6",
                             f"La {m.etiqueta} fija su sesión presencial en "
                             f"{calendario.DIAS[sesion.dia]} y el grupo {g.numero} no tiene "
                             "bloque presencial ese día.",
                         )
+                    fecha = self.cal.semana(sesion.semana).inicio + timedelta(days=dia)
+                    if not self.cal.es_suspension(fecha):
+                        continue
+                    if self.cal.siguiente_dia_de_bloque(fecha, virtuales) is not None:
+                        continue
+                    if self.cal.dia_de_clase(sesion.semana, dia, dias) is not None:
+                        continue
+                    self.error(
+                        "R6",
+                        f"{m.etiqueta}: el grupo {g.numero} tiene suspensión el "
+                        f"{calendario.texto_fecha(fecha)} y no declara un bloque virtual "
+                        "posterior ni otro bloque presencial esa semana para reprogramarla.",
+                    )
 
     def regla_6(self) -> None:
         self._horario()
@@ -527,7 +528,7 @@ class _Validador:
                     f"{calendario.texto_fecha(susp.fecha)} ({susp.motivo}) y no tiene metas.",
                 )
 
-        self._semanas_sin_dia_de_clase()
+        self._sesiones_suspendidas_sin_reprogramacion()
 
     # -- Regla 7: citas legales obligatorias y firma por grupo ---------------
 

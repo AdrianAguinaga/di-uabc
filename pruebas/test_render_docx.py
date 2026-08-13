@@ -29,6 +29,7 @@ import render_docx  # noqa: E402
 
 CURSO = RAIZ / "cursos" / "2026-2" / "39056-big-data" / "curso.yaml"
 CONTABILIDAD = RAIZ / "cursos" / "2026-2" / "38985-contabilidad-financiera" / "curso.yaml"
+PATRONES = RAIZ / "cursos" / "2026-2" / "39062-patrones-de-comportamiento" / "curso.yaml"
 
 
 def texto(doc) -> str:
@@ -450,6 +451,35 @@ class RenderizadoDeLaUnidadDeclarada(unittest.TestCase):
         self.assertEqual("100", celdas(tabla.rows[-1])[1])
         self.assertEqual(self.doc.tables[0]._tbl.tblPr.xml, tabla._tbl.tblPr.xml)
         self.assertEqual(self.doc.tables[0]._tbl.tblGrid.xml, tabla._tbl.tblGrid.xml)
+
+
+class RenderizadoDeSuspensionReprogramada(unittest.TestCase):
+    """La fecha y el rótulo del DI reflejan el bloque virtual que la sustituye."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = Path(tempfile.mkdtemp(prefix="di-suspension-"))
+        cls.addClassCleanup(shutil.rmtree, cls.tmp, True)
+        cls.curso = modelo.cargar(PATRONES)
+        cls.textos = {}
+        for numero in ("971", "972"):
+            grupo = next(g for g in cls.curso.grupos if g.numero == numero)
+            destino = cls.tmp / cls.curso.nombre_archivo(numero, "docx")
+            render_docx.generar(cls.curso, grupo, destino)
+            cls.textos[numero] = texto(docx.Document(str(destino)))
+
+    def test_971_indica_las_dos_sesiones_sincronicas_virtuales(self):
+        salida = self.textos["971"]
+        self.assertIn("Virtual / Sincrónico", salida)
+        self.assertIn("En línea / sesión síncrona (martes 3 de noviembre)", salida)
+        self.assertIn("En línea / sesión síncrona (martes 17 de noviembre)", salida)
+        self.assertNotIn("En clase / sesión síncrona (lunes 2 de noviembre)", salida)
+
+    def test_972_usa_el_martes_virtual_posterior(self):
+        salida = self.textos["972"]
+        self.assertIn("Virtual / Sincrónico", salida)
+        self.assertIn("En línea / sesión síncrona (martes 22 de septiembre)", salida)
+        self.assertNotIn("En clase / sesión síncrona (miércoles 16 de septiembre)", salida)
 
 
 class RenderizadoDeContabilidadSinTraducirse(unittest.TestCase):

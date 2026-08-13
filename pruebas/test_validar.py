@@ -794,8 +794,8 @@ class Regla6HorarioMalDeclarado(unittest.TestCase):
         self.assertNotIn("R6", reglas_con_error(informe()))
 
 
-class Regla6SemanaSinDiaDeClase(unittest.TestCase):
-    """D-15: no se imprime en silencio una fecha que el grupo no tiene."""
+class Regla6SuspensionReprogramada(unittest.TestCase):
+    """Una suspensión requiere bloque virtual posterior o presencial alterno."""
 
     SOLO_LUNES = [
         {"dia": 0, "inicio": "10:00", "fin": "12:00", "ambiente": "presencial"},
@@ -806,36 +806,34 @@ class Regla6SemanaSinDiaDeClase(unittest.TestCase):
         {"dia": 2, "inicio": "18:00", "fin": "19:00", "ambiente": "presencial"},
     ]
 
-    def _avisos(self, bloques, numero="971"):
-        inf = informe(grupos=[_con_bloques(numero, bloques)])
-        return [
-            h.mensaje for h in inf.de(validar.AVISO)
-            if h.regla == "R6" and "bloque presencial" in h.mensaje
-        ]
+    def _informe_suspendido(self, bloques, semana, numero="971"):
+        metas = copy.deepcopy(CURSO_VALIDO["metas"])
+        metas[1]["sesiones"][0]["semana"] = semana
+        return informe(metas=metas, grupos=[_con_bloques(numero, bloques)])
 
-    def test_971_pierde_las_semanas_13_y_15(self):
-        avisos = self._avisos(self.SOLO_LUNES)
-        self.assertEqual(2, len(avisos), avisos)
-        self.assertTrue(any("Semana 13" in a for a in avisos), avisos)
-        self.assertTrue(any("Semana 15" in a for a in avisos), avisos)
-        self.assertTrue(all("971" in a for a in avisos), avisos)
+    def test_971_se_reprograma_en_sus_martes_virtuales(self):
+        for semana in (13, 15):
+            with self.subTest(semana=semana):
+                inf = self._informe_suspendido(self.SOLO_LUNES, semana)
+                self.assertNotIn("R6", reglas_con_error(inf))
 
-    def test_972_pierde_la_semana_6(self):
-        avisos = self._avisos(self.SOLO_MIERCOLES, numero="972")
-        self.assertEqual(1, len(avisos), avisos)
-        self.assertIn("Semana 6", avisos[0])
+    def test_972_se_reprograma_en_el_martes_virtual_posterior(self):
+        inf = self._informe_suspendido(self.SOLO_MIERCOLES, 6, numero="972")
+        self.assertNotIn("R6", reglas_con_error(inf))
 
-    def test_961_tiene_a_donde_recorrer_y_no_pierde_ninguna(self):
-        self.assertEqual([], self._avisos(Regla6HorarioMalDeclarado.BLOQUES_961, numero="961"))
+    def test_si_no_hay_virtual_ni_presencial_alterno_bloquea(self):
+        inf = self._informe_suspendido(self.SOLO_LUNES[:1], 13)
+        self.assertIn("R6", reglas_con_error(inf))
+        self.assertIn("bloque virtual posterior", " ".join(
+            h.mensaje for h in inf.errores if h.regla == "R6"
+        ))
 
-    def test_no_bloquea_la_generacion(self):
-        inf = informe(grupos=[_con_bloques("971", self.SOLO_LUNES)])
-        self.assertTrue(inf.valido)
+    def test_otro_bloque_presencial_en_la_semana_sigue_siendo_alternativa(self):
+        inf = self._informe_suspendido(Regla6HorarioMalDeclarado.BLOQUES_961, 13, numero="961")
+        self.assertNotIn("R6", reglas_con_error(inf))
 
-    def test_un_curso_sin_bloques_no_recibe_ningun_aviso_de_este_tipo(self):
-        self.assertEqual([], [
-            h for h in informe().de(validar.AVISO) if "bloque presencial" in h.mensaje
-        ])
+    def test_un_curso_sin_bloques_no_recibe_ningun_hallazgo_nuevo(self):
+        self.assertEqual([], [h for h in informe().hallazgos if h.regla == "R6"])
 
 
 class Regla6Fechas(unittest.TestCase):

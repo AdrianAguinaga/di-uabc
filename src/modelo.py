@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -137,12 +137,18 @@ class Sesion:
     actividad_tabla: str = ""  # texto corto para la columna Actividad
     dia: int | None = None  # 0=lunes … 5=sábado; None = usa el horario del grupo
     fecha: date | None = None  # la resuelve calendario.py; nunca se escribe a mano
+    ambiente_resuelto: str | None = field(default=None, init=False)
 
     def __post_init__(self) -> None:
         if self.ambiente not in AMBIENTES:
             raise ErrorModelo(
                 f"Ambiente inválido: {self.ambiente!r}. Válidos: {', '.join(AMBIENTES)}"
             )
+
+    @property
+    def ambiente_efectivo(self) -> str:
+        """Ambiente que se imprime para un grupo después de resolver su horario."""
+        return self.ambiente_resuelto or self.ambiente
 
 
 @dataclass
@@ -346,6 +352,11 @@ class Horario:
             self.dias_presencial = sorted(
                 {b.dia for b in self.bloques if b.ambiente == "presencial"}
             )
+
+    @property
+    def dias_virtual(self) -> list[int]:
+        """Días con bloque virtual, ordenados y sin repeticiones."""
+        return sorted({b.dia for b in self.bloques if b.ambiente == "virtual"})
 
 
 @dataclass
@@ -566,8 +577,10 @@ def resolver_fechas(curso: Curso, grupo: Grupo, cal) -> Curso:
     **sobrescribe** la resolución anterior. Llámalo justo antes de renderizar cada
     grupo, no una vez para todos.
 
-    Un grupo con bloques filtra el recorrido de suspensiones por sus días presenciales. Una
-    sesión con ``dia`` conserva su escape declarado y una virtual sigue en el día de entrega.
+    Una sesión presencial que cae en suspensión pasa al siguiente bloque virtual declarado del
+    grupo. Si no hay uno antes del fin de cursos, conserva el recorrido presencial de esa semana;
+    la validación bloquea el documento cuando tampoco existe esa alternativa. Una sesión con
+    ``dia`` conserva su escape declarado y una virtual sigue en el día de entrega.
     """
     h = grupo.horario
     presencial = h.dias_presencial[0] if h.dias_presencial else 0
@@ -576,12 +589,26 @@ def resolver_fechas(curso: Curso, grupo: Grupo, cal) -> Curso:
     dias_clase = set(h.dias_presencial) if h.bloques else None
     for m in curso.metas:
         for s in m.sesiones:
+            s.ambiente_resuelto = None
             if s.dia is not None:  # escape declarado: se respeta literal
                 dia, filtro = s.dia, None
             elif s.ambiente == "presencial":
                 dia, filtro = presencial, dias_clase
             else:  # la entrega no se mueve con el horario de clase
                 dia, filtro = h.dia_entrega, None
+
+            fecha_planeada = cal.semana(s.semana).inicio + timedelta(days=dia)
+            if (
+                s.ambiente == "presencial"
+                and h.bloques
+                and cal.es_suspension(fecha_planeada)
+                and (virtual := cal.siguiente_dia_de_bloque(
+                    fecha_planeada, set(h.dias_virtual)
+                )) is not None
+            ):
+                s.fecha = virtual
+                s.ambiente_resuelto = "virtual"
+                continue
             s.fecha = cal.fecha_de(s.semana, dia, filtro)
     return curso
 

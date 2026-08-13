@@ -6,8 +6,8 @@
 #
 # El documento generado es un BORRADOR: requiere la revisión del profesor antes de
 # entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
-generado: '2026-08-06T17:17:57'
-commit: 9d4a635-sucio
+generado: '2026-08-06T18:26:46'
+commit: 8c06c45-sucio
 curso:
   archivo: cursos/2026-2/39062-patrones-de-comportamiento/curso.yaml
   sha256: 93c5edf4f0fec4ed1c6bae1ac453154b0d2b010cafacbd1f587afb7a5f6f3019
@@ -85,23 +85,22 @@ grupos:
     ambiente: presencial
 validacion:
   errores: 0
-  avisos:
-  - 'Semana 13: el grupo 971 no tiene ningún día con bloque presencial (2 de noviembre
-    es suspensión). La fecha de esa semana se queda en el día suspendido; reprograma
-    esa clase si debe darse.'
-  - 'Semana 15: el grupo 971 no tiene ningún día con bloque presencial (16 de noviembre
-    es suspensión). La fecha de esa semana se queda en el día suspendido; reprograma
-    esa clase si debe darse.'
-  - 'Semana 6: el grupo 972 no tiene ningún día con bloque presencial (16 de septiembre
-    es suspensión). La fecha de esa semana se queda en el día suspendido; reprograma
-    esa clase si debe darse.'
+  avisos: []
   recordatorios: 5
 archivos:
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-971.docx
   grupo: '971'
-  sha256: 29e55b4c42573beca19a43676b5704dcf3928d276e72ce9abc5db9caaac7b42a
-  bytes: 232980
+  sha256: 08a3975ab82419401764761c4c78bc9e1f8d5e9e36f8d729ce46be7f8a1f9055
+  bytes: 232998
+- ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-971.pdf
+  grupo: '971'
+  sha256: 08236cb296f6b8e3e525feb1736542f6403c22092d2bad6a65807c549d67fc2f
+  bytes: 399278
 - ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-972.docx
   grupo: '972'
-  sha256: 6ac7286a126c7170fc4c74da1a6cf240c7b6168e8dcad245079ca9909c7a1f3e
-  bytes: 233008
+  sha256: 023f5127be93e8e30ef4e10a240c577db01fb278c5172ed1b5852e50064356a3
+  bytes: 233015
+- ruta: cursos/2026-2/39062-patrones-de-comportamiento/salida/DI-2026-2-39062-972.pdf
+  grupo: '972'
+  sha256: ad395451c4acaa31713c8eeb86456af3981333cf8ee9c6f20293dd2ef081774e
+  bytes: 399290

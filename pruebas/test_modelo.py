@@ -618,7 +618,7 @@ class UnCursoSinBloquesSigueCargandoIgual(unittest.TestCase):
 
 
 class ElBloqueVirtualNoMueveNingunaFecha(unittest.TestCase):
-    """REQ-51, criterio 2: el bloque virtual entra al contrato y no toca el documento."""
+    """Un bloque virtual no altera sesiones normales; sí rescata una suspendida."""
 
     PRESENCIALES = [
         {"dia": 0, "inicio": "10:00", "fin": "12:00", "ambiente": "presencial"},
@@ -653,6 +653,37 @@ class ElBloqueVirtualNoMueveNingunaFecha(unittest.TestCase):
     def test_la_entrega_sigue_cayendo_en_sabado(self):
         fechas = self._fechas(self.PRESENCIALES + [self.VIRTUAL])["virtual"]
         self.assertTrue(all(f.weekday() == 5 for f in fechas), fechas)
+
+
+class SesionSuspendidaPasaAlSiguienteVirtual(unittest.TestCase):
+    """La reprogramación sale exclusivamente del horario declarado del grupo."""
+
+    RUTA = RAIZ / "cursos/2026-2/39062-patrones-de-comportamiento/curso.yaml"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.cal = calendario.cargar("2026-2")
+
+    def _sesion(self, grupo, semana):
+        curso = modelo.cargar(self.RUTA)
+        g = next(g for g in curso.grupos if g.numero == grupo)
+        modelo.resolver_fechas(curso, g, self.cal)
+        return next(
+            s for m in curso.metas for s in m.sesiones
+            if s.ambiente == "presencial" and s.semana == semana
+        )
+
+    def test_971_pasa_las_suspensiones_del_lunes_al_martes_virtual(self):
+        for semana, esperada in ((13, "2026-11-03"), (15, "2026-11-17")):
+            with self.subTest(semana=semana):
+                sesion = self._sesion("971", semana)
+                self.assertEqual(esperada, sesion.fecha.isoformat())
+                self.assertEqual("virtual", sesion.ambiente_efectivo)
+
+    def test_972_no_retrocede_al_martes_anterior_y_pasa_al_siguiente(self):
+        sesion = self._sesion("972", 6)
+        self.assertEqual("2026-09-22", sesion.fecha.isoformat())
+        self.assertEqual("virtual", sesion.ambiente_efectivo)
 
 
 class SinBloquesLasFechasSonLasDeSiempre(unittest.TestCase):

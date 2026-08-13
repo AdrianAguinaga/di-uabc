@@ -350,7 +350,15 @@ def _filas_de_meta(curso: Curso, meta: Meta, proto: list, cal, dividida: bool) -
                        {"t": f" {meta.enunciado}"}] if n == 0 else "")
         _celda(tr, 1, str(min(meta.semanas)) if n == 0 else "")
         if dividida:
-            _celda(tr, 2, "Presencial / Sincrónico" if n == 0 else "Virtual / Asincrónico")
+            if s and s.ambiente == "presencial":
+                modo = (
+                    "Virtual / Sincrónico"
+                    if s.ambiente_efectivo == "virtual"
+                    else "Presencial / Sincrónico"
+                )
+            else:
+                modo = "Virtual / Asincrónico"
+            _celda(tr, 2, modo)
         _celda(tr, 3 if dividida else 2,
                calendario.texto_fecha_corta(s.fecha) if s and s.fecha else "")
         _celda(tr, 4 if dividida else 3, s.actividad_tabla if s else "")
@@ -546,6 +554,8 @@ def _bloque_de_meta(doc, curso: Curso, meta: Meta, proto: dict, encabezados, pla
 def _rotulo_sesion(s, plantilla) -> str:
     fecha = _fecha_larga(s.fecha) if s.fecha else "(fecha por resolver)"
     if s.ambiente == "presencial":
+        if s.ambiente_efectivo == "virtual":
+            return f"En línea / sesión síncrona ({fecha})"
         return f"En clase / sesión síncrona ({fecha})"
     if plantilla["entrega_dividida"]:
         return f"Fuera de clase / actividad asincrónica (antes del {fecha})"
