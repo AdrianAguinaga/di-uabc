@@ -91,6 +91,15 @@
       }
     },
     {
+      "id": "competencia:501f9952c9b9",
+      "tipo": "competencia",
+      "etiqueta": "Determinar los requerimientos de información, mediante el análisis de los proces…",
+      "datos": {
+        "texto": "Determinar los requerimientos de información, mediante el análisis de los procesos, problemas y áreas de oportunidad organizacionales, para proponer alternativas de solución que resuelvan y anticipen problemáticas de procesos, con responsabilidad, honestidad y actitud organizada.",
+        "alcance": "general"
+      }
+    },
+    {
       "id": "competencia:59bfda964d4c",
       "tipo": "competencia",
       "etiqueta": "Representar el comportamiento de los datos masivos, mediante la comparación de d…",
@@ -109,11 +118,29 @@
       }
     },
     {
+      "id": "competencia:6ac253e0de02",
+      "tipo": "competencia",
+      "etiqueta": "Analizar la información de un sistema, mediante técnicas de extracción, transfor…",
+      "datos": {
+        "texto": "Analizar la información de un sistema, mediante técnicas de extracción, transformación y carga (ETL) de las estructura de datos, para desarrollar el modelo de datos que cumplen con los requerimientos especificados, con actitud crítica, objetiva y responsable.",
+        "alcance": "unidad"
+      }
+    },
+    {
       "id": "competencia:7bd690d3826b",
       "tipo": "competencia",
       "etiqueta": "Distinguir los patrones de comportamiento basados en redes complejas, a través d…",
       "datos": {
         "texto": "Distinguir los patrones de comportamiento basados en redes complejas, a través del análisis de sus tipos y métricas, para identificar su proceso de aplicación, con una actitud analítica, crítica y organizada.",
+        "alcance": "unidad"
+      }
+    },
+    {
+      "id": "competencia:aa9bcb8d22b6",
+      "tipo": "competencia",
+      "etiqueta": "Distinguir la problemática, áreas de oportunidad y procesos de la organización, …",
+      "datos": {
+        "texto": "Distinguir la problemática, áreas de oportunidad y procesos de la organización, mediante el análisis del entorno, para especificar los requerimientos de datos e información, con compromiso, responsabilidad y honestidad.",
         "alcance": "unidad"
       }
     },
@@ -124,6 +151,15 @@
       "datos": {
         "texto": "Gestionar datos masivos mediante la aplicación de herramientas y estrategias de Big Data, para agilizar y optimizar el proceso de toma de decisiones en organizaciones, con honestidad, confidencialidad y pensamiento crítico.",
         "alcance": "general"
+      }
+    },
+    {
+      "id": "competencia:bd61854b5552",
+      "tipo": "competencia",
+      "etiqueta": "Analizar los componentes de los procesos, mediante el uso de herramientas y el l…",
+      "datos": {
+        "texto": "Analizar los componentes de los procesos, mediante el uso de herramientas y el lenguaje de modelado, para desarrollar la especificación de los modelos que cumplen con los requerimientos, con creatividad, actitud crítica y responsabilidad.",
+        "alcance": "unidad"
       }
     },
     {
@@ -150,6 +186,15 @@
       "etiqueta": "Identificar los fundamentos del Big Data, mediante la revisión de sus modelos y …",
       "datos": {
         "texto": "Identificar los fundamentos del Big Data, mediante la revisión de sus modelos y estructura, para comprender su aplicación en el manejo de datos de las organizaciones, con pensamiento analítico y reflexivo",
+        "alcance": "unidad"
+      }
+    },
+    {
+      "id": "competencia:fe2941ee9bf8",
+      "tipo": "competencia",
+      "etiqueta": "Examinar el proceso de operación, mediante las etapas y técnicas del análisis de…",
+      "datos": {
+        "texto": "Examinar el proceso de operación, mediante las etapas y técnicas del análisis de decisiones, para determinar las acciones a seguir ante una serie de alternativas, actitud crítica, asertiva, profesional.",
         "alcance": "unidad"
       }
     },
@@ -317,6 +362,166 @@
       "id": "criterio:2026-2:38985:6.1:3",
       "tipo": "criterio",
       "etiqueta": "Entregarlo completo es requisito para acreditar la unidad de aprendizaje."
+    },
+    {
+      "id": "criterio:2026-2:39038:0:0",
+      "tipo": "criterio",
+      "etiqueta": "Se registra la participación; esta meta no tiene valor porcentual."
+    },
+    {
+      "id": "criterio:2026-2:39038:1.1:0",
+      "tipo": "criterio",
+      "etiqueta": "Describe la naturaleza y las áreas funcionales de la organización con información pertinente."
+    },
+    {
+      "id": "criterio:2026-2:39038:1.1:1",
+      "tipo": "criterio",
+      "etiqueta": "Identifica una problemática o área de oportunidad vinculada con una necesidad de información."
+    },
+    {
+      "id": "criterio:2026-2:39038:1.2:0",
+      "tipo": "criterio",
+      "etiqueta": "Relaciona cada requerimiento con una necesidad o regla del negocio identificada."
+    },
+    {
+      "id": "criterio:2026-2:39038:1.3:0",
+      "tipo": "criterio",
+      "etiqueta": "Justifica la prioridad, fuente y forma de integración de los datos propuestos."
+    },
+    {
+      "id": "criterio:2026-2:39038:1.3:1",
+      "tipo": "criterio",
+      "etiqueta": "La especificación consolida los requerimientos de información del caso sin contradicciones."
+    },
+    {
+      "id": "criterio:2026-2:39038:2.1:0",
+      "tipo": "criterio",
+      "etiqueta": "Clasifica los procesos con una justificación coherente con su contribución al negocio."
+    },
+    {
+      "id": "criterio:2026-2:39038:2.1:1",
+      "tipo": "criterio",
+      "etiqueta": "Relaciona el mapa con la necesidad de información definida por el equipo."
+    },
+    {
+      "id": "criterio:2026-2:39038:2.2:0",
+      "tipo": "criterio",
+      "etiqueta": "Utiliza la notación y los objetos de flujo de forma coherente con el proceso analizado."
+    },
+    {
+      "id": "criterio:2026-2:39038:2.2:1",
+      "tipo": "criterio",
+      "etiqueta": "La documentación permite comprender los participantes, actividades, decisiones y relaciones del proceso."
+    },
+    {
+      "id": "criterio:2026-2:39038:2.2:2",
+      "tipo": "criterio",
+      "etiqueta": "El diagrama de comportamiento representa las funcionalidades o la interacción de los participantes."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.1:0",
+      "tipo": "criterio",
+      "etiqueta": "Describe las etapas del flujo de datos y las relaciona con las fuentes del caso."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.1:1",
+      "tipo": "criterio",
+      "etiqueta": "Justifica las transformaciones aplicadas para atender los requerimientos identificados."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.2:0",
+      "tipo": "criterio",
+      "etiqueta": "Diferencia las estructuras de datos por su organización, uso y limitaciones."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.2:1",
+      "tipo": "criterio",
+      "etiqueta": "Justifica la selección de una fuente con base en los requerimientos de información."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.3:0",
+      "tipo": "criterio",
+      "etiqueta": "El modelo representa entidades y relaciones necesarias para los requerimientos identificados."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.3:1",
+      "tipo": "criterio",
+      "etiqueta": "Distingue los niveles conceptual, lógico y físico de la propuesta."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.4:0",
+      "tipo": "criterio",
+      "etiqueta": "Describe los flujos de datos con origen, destino y propósito identificables."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.4:1",
+      "tipo": "criterio",
+      "etiqueta": "Documenta los elementos del modelo con nombres, definiciones y reglas comprensibles."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.5:0",
+      "tipo": "criterio",
+      "etiqueta": "Integra los análisis realizados sin contradicciones entre requerimientos, proceso y datos."
+    },
+    {
+      "id": "criterio:2026-2:39038:3.5:1",
+      "tipo": "criterio",
+      "etiqueta": "Explica cómo la propuesta atiende la problemática identificada."
+    },
+    {
+      "id": "criterio:2026-2:39038:4.1:0",
+      "tipo": "criterio",
+      "etiqueta": "Define alternativas y criterios de decisión congruentes con la problemática del caso."
+    },
+    {
+      "id": "criterio:2026-2:39038:4.1:1",
+      "tipo": "criterio",
+      "etiqueta": "Justifica la técnica de análisis empleada y la recomendación preliminar."
+    },
+    {
+      "id": "criterio:2026-2:39038:4.2:0",
+      "tipo": "criterio",
+      "etiqueta": "Representa correctamente las decisiones e iteraciones del proceso seleccionado."
+    },
+    {
+      "id": "criterio:2026-2:39038:4.2:1",
+      "tipo": "criterio",
+      "etiqueta": "La lógica propuesta es comprensible y congruente con el modelo de procesos."
+    },
+    {
+      "id": "criterio:2026-2:39038:4.3:0",
+      "tipo": "criterio",
+      "etiqueta": "La propuesta responde a la problemática y a los requerimientos de información identificados."
+    },
+    {
+      "id": "criterio:2026-2:39038:4.3:1",
+      "tipo": "criterio",
+      "etiqueta": "Justifica la alternativa seleccionada con los modelos y criterios de decisión desarrollados."
+    },
+    {
+      "id": "criterio:2026-2:39038:C:0",
+      "tipo": "criterio",
+      "etiqueta": "Integra los análisis del entorno, procesos y datos en una propuesta coherente."
+    },
+    {
+      "id": "criterio:2026-2:39038:C:1",
+      "tipo": "criterio",
+      "etiqueta": "Especifica los requerimientos de información y justifica la alternativa de solución."
+    },
+    {
+      "id": "criterio:2026-2:39038:C:2",
+      "tipo": "criterio",
+      "etiqueta": "Comunica la propuesta con claridad y sustento en las evidencias desarrolladas."
+    },
+    {
+      "id": "criterio:2026-2:39038:P1:0",
+      "tipo": "criterio",
+      "etiqueta": "Integra los conceptos y procedimientos de las unidades I y II para analizar una situación organizacional."
+    },
+    {
+      "id": "criterio:2026-2:39038:P2:0",
+      "tipo": "criterio",
+      "etiqueta": "Relaciona las técnicas de preparación y modelado de datos con los requerimientos de información del caso."
     },
     {
       "id": "criterio:2026-2:39056:1.0:0",
@@ -638,6 +843,15 @@
       }
     },
     {
+      "id": "curso:2026-2:39038",
+      "tipo": "curso",
+      "etiqueta": "Análisis de Procesos y Datos de Negocios · 2026-2",
+      "datos": {
+        "modalidad": "semipresencial",
+        "ruta": "cursos/2026-2/39038-analisis-de-procesos-y-datos-de-negocios/curso.yaml"
+      }
+    },
+    {
       "id": "curso:2026-2:39056",
       "tipo": "curso",
       "etiqueta": "Big Data · 2026-2",
@@ -797,6 +1011,168 @@
       "datos": {
         "clase": "Proyecto",
         "recurso": "M6.1_Trabajo final"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:0:0",
+      "tipo": "evidencia",
+      "etiqueta": "Participación en el foro de presentación",
+      "datos": {
+        "clase": "Foro",
+        "recurso": "M0_Foro de presentación"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:1.1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Diagnóstico del entorno organizacional",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M1.1_Diagnóstico del entorno"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:1.2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Matriz inicial de requerimientos",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M1.2_Matriz de requerimientos"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:1.3:0",
+      "tipo": "evidencia",
+      "etiqueta": "Especificación de requerimientos de información",
+      "datos": {
+        "clase": "Documento",
+        "recurso": "M1.3_Especificación de requerimientos"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:2.1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Mapa de procesos",
+      "datos": {
+        "clase": "Diagrama",
+        "recurso": "M2.1_Mapa de procesos"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:2.2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Modelo BPMN documentado",
+      "datos": {
+        "clase": "Reporte de práctica",
+        "recurso": "M2.2_Modelo BPMN"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:2.2:1",
+      "tipo": "evidencia",
+      "etiqueta": "Diagrama de comportamiento",
+      "datos": {
+        "clase": "Diagrama",
+        "recurso": "M2.2_Modelo BPMN"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:3.1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Reporte de flujo ETL",
+      "datos": {
+        "clase": "Reporte de práctica",
+        "recurso": "M3.1_Reporte ETL"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:3.2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Comparativo de estructuras de datos",
+      "datos": {
+        "clase": "Reporte de práctica",
+        "recurso": "M3.2_Comparativo de fuentes"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:3.3:0",
+      "tipo": "evidencia",
+      "etiqueta": "Modelo de datos",
+      "datos": {
+        "clase": "Reporte de práctica",
+        "recurso": "M3.3_Modelo de datos"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:3.4:0",
+      "tipo": "evidencia",
+      "etiqueta": "Diccionario de datos",
+      "datos": {
+        "clase": "Reporte de práctica",
+        "recurso": "M3.4_Diccionario de datos"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:3.5:0",
+      "tipo": "evidencia",
+      "etiqueta": "Avance de propuesta de solución",
+      "datos": {
+        "clase": "Avance de proyecto",
+        "recurso": "M3.5_Avance de propuesta"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:4.1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Matriz de decisión",
+      "datos": {
+        "clase": "Avance de proyecto",
+        "recurso": "M4.1_Matriz de decisión"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:4.2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Pseudocódigo de la solución",
+      "datos": {
+        "clase": "Avance de proyecto",
+        "recurso": "M4.2_Pseudocódigo de la solución"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:4.3:0",
+      "tipo": "evidencia",
+      "etiqueta": "Propuesta de solución ajustada",
+      "datos": {
+        "clase": "Avance de proyecto",
+        "recurso": "M4.3_Propuesta ajustada"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:C:0",
+      "tipo": "evidencia",
+      "etiqueta": "Propuesta de solución estandarizada",
+      "datos": {
+        "clase": "Proyecto",
+        "recurso": "M4.4_Propuesta de solución estandarizada"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:P1:0",
+      "tipo": "evidencia",
+      "etiqueta": "Primera evaluación parcial",
+      "datos": {
+        "clase": "Examen",
+        "recurso": "M P1_Primera evaluación parcial"
+      }
+    },
+    {
+      "id": "evidencia:2026-2:39038:P2:0",
+      "tipo": "evidencia",
+      "etiqueta": "Segunda evaluación parcial",
+      "datos": {
+        "clase": "Examen",
+        "recurso": "M P2_Segunda evaluación parcial"
       }
     },
     {
@@ -1126,6 +1502,21 @@
       }
     },
     {
+      "id": "grupo:2026-2:39038:932",
+      "tipo": "grupo",
+      "etiqueta": "Grupo 932",
+      "datos": {
+        "aula": "Laboratorio de cómputo",
+        "dias_presencial": [
+          4
+        ],
+        "bloques": [
+          "viernes 10:00–11:30 virtual",
+          "viernes 19:00–21:00 presencial"
+        ]
+      }
+    },
+    {
       "id": "grupo:2026-2:39056:961",
       "tipo": "grupo",
       "etiqueta": "Grupo 961",
@@ -1390,6 +1781,227 @@
         "valor": 20,
         "semanas": [
           16
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:0",
+      "tipo": "meta",
+      "etiqueta": "Meta 0. Conocer la organización del curso, sus criterios de evaluación y las reglas de convivencia.",
+      "datos": {
+        "clase": "encuadre",
+        "rubro": "tareas",
+        "valor": 0,
+        "semanas": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:1.1",
+      "tipo": "meta",
+      "etiqueta": "Meta 1.1. Analizar el entorno de una organización para identificar problemáticas y áreas de oportunidad.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "tareas",
+        "valor": 5,
+        "semanas": [
+          2
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:1.2",
+      "tipo": "meta",
+      "etiqueta": "Meta 1.2. Identificar requerimientos de información a partir del estudio preliminar de una organización.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "tareas",
+        "valor": 2.5,
+        "semanas": [
+          3
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:1.3",
+      "tipo": "meta",
+      "etiqueta": "Meta 1.3. Priorizar y consolidar datos para especificar los requerimientos de información del caso de estudio.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "tareas",
+        "valor": 2.5,
+        "semanas": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:2.1",
+      "tipo": "meta",
+      "etiqueta": "Meta 2.1. Clasificar los procesos de una organización de acuerdo con su función y contribución al negocio.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "tareas",
+        "valor": 5,
+        "semanas": [
+          5
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:2.2",
+      "tipo": "meta",
+      "etiqueta": "Meta 2.2. Modelar un proceso organizacional mediante notación BPMN y diagramas de comportamiento para documentar sus componentes.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "practicas",
+        "valor": 5,
+        "semanas": [
+          6
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:3.1",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.1. Aplicar un flujo ETL para preparar datos del caso de estudio.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "practicas",
+        "valor": 5,
+        "semanas": [
+          8
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:3.2",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.2. Comparar estructuras de datos para seleccionar la fuente adecuada al requerimiento de información.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "practicas",
+        "valor": 5,
+        "semanas": [
+          9
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:3.3",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.3. Construir un modelo de datos que represente los requerimientos de información del caso de estudio.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "practicas",
+        "valor": 5,
+        "semanas": [
+          10
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:3.4",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.4. Documentar un diccionario de datos que describa los flujos y elementos del modelo propuesto.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "practicas",
+        "valor": 5,
+        "semanas": [
+          11
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:3.5",
+      "tipo": "meta",
+      "etiqueta": "Meta 3.5. Integrar un avance de la propuesta de solución con los análisis de entorno, procesos y datos realizados.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "proyecto",
+        "valor": 10,
+        "semanas": [
+          12
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:4.1",
+      "tipo": "meta",
+      "etiqueta": "Meta 4.1. Aplicar técnicas de análisis de decisiones para evaluar alternativas de solución.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "proyecto",
+        "valor": 5,
+        "semanas": [
+          13
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:4.2",
+      "tipo": "meta",
+      "etiqueta": "Meta 4.2. Representar iteraciones de un proceso mediante pseudocódigo para comunicar la lógica de la solución.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "proyecto",
+        "valor": 5,
+        "semanas": [
+          14
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:4.3",
+      "tipo": "meta",
+      "etiqueta": "Meta 4.3. Evaluar y ajustar la propuesta de solución estandarizada con base en los requerimientos y alternativas analizadas.",
+      "datos": {
+        "clase": "aprendizaje",
+        "rubro": "proyecto",
+        "valor": 15,
+        "semanas": [
+          15
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:C",
+      "tipo": "meta",
+      "etiqueta": "Meta C. Presentar una propuesta de solución estandarizada que integre los análisis del entorno, procesos y datos de una organización.",
+      "datos": {
+        "clase": "cierre",
+        "rubro": "proyecto",
+        "valor": 15,
+        "semanas": [
+          16
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:P1",
+      "tipo": "meta",
+      "etiqueta": "Meta P1. Integrar el análisis organizacional y el modelado de procesos en la primera evaluación parcial.",
+      "datos": {
+        "clase": "examen_parcial",
+        "rubro": "examenes",
+        "valor": 5,
+        "semanas": [
+          7
+        ]
+      }
+    },
+    {
+      "id": "meta:2026-2:39038:P2",
+      "tipo": "meta",
+      "etiqueta": "Meta P2. Integrar el análisis y modelado de datos en la segunda evaluación parcial.",
+      "datos": {
+        "clase": "examen_parcial",
+        "rubro": "examenes",
+        "valor": 5,
+        "semanas": [
+          12
         ]
       }
     },
@@ -1985,6 +2597,16 @@
       }
     },
     {
+      "id": "pua:39038",
+      "tipo": "pua",
+      "etiqueta": "39038 Análisis de Procesos y Datos de Negocios",
+      "datos": {
+        "nombre": "Análisis de Procesos y Datos de Negocios",
+        "programa": "Licenciado en Inteligencia de Negocios",
+        "ruta": "puas/md/39038-analisis-de-procesos-y-datos-de-negocios.md"
+      }
+    },
+    {
       "id": "pua:39056",
       "tipo": "pua",
       "etiqueta": "39056 Big Data",
@@ -2083,6 +2705,542 @@
       "id": "semana:2026-2:9",
       "tipo": "semana",
       "etiqueta": "Semana 9"
+    },
+    {
+      "id": "tema:39038:044b064747b2",
+      "tipo": "tema",
+      "etiqueta": "3.6. Diccionario de datos",
+      "datos": {
+        "texto": "3.6. Diccionario de datos"
+      }
+    },
+    {
+      "id": "tema:39038:0673331982ee",
+      "tipo": "tema",
+      "etiqueta": "3.4.1. Tipos de modelado de datos",
+      "datos": {
+        "texto": "3.4.1. Tipos de modelado de datos"
+      }
+    },
+    {
+      "id": "tema:39038:0b23276b6749",
+      "tipo": "tema",
+      "etiqueta": "4.1.1. Etapas del análisis de decisiones",
+      "datos": {
+        "texto": "4.1.1. Etapas del análisis de decisiones"
+      }
+    },
+    {
+      "id": "tema:39038:11f2f879fbb0",
+      "tipo": "tema",
+      "etiqueta": "2.2.1. Notación de modelado de procesos (BPMN)",
+      "datos": {
+        "texto": "2.2.1. Notación de modelado de procesos (BPMN)"
+      }
+    },
+    {
+      "id": "tema:39038:1511b1306d0f",
+      "tipo": "tema",
+      "etiqueta": "2.1.1.2. Estratégicos",
+      "datos": {
+        "texto": "2.1.1.2. Estratégicos"
+      }
+    },
+    {
+      "id": "tema:39038:1551116ef2f0",
+      "tipo": "tema",
+      "etiqueta": "2.3.3. Diagrama de secuencia",
+      "datos": {
+        "texto": "2.3.3. Diagrama de secuencia"
+      }
+    },
+    {
+      "id": "tema:39038:16adc6344e10",
+      "tipo": "tema",
+      "etiqueta": "1.2.6. Oportunidad y jerarquización de los datos",
+      "datos": {
+        "texto": "1.2.6. Oportunidad y jerarquización de los datos"
+      }
+    },
+    {
+      "id": "tema:39038:1b738efea096",
+      "tipo": "tema",
+      "etiqueta": "3.1.1. Fundamentos al Data Warehouse",
+      "datos": {
+        "texto": "3.1.1. Fundamentos al Data Warehouse"
+      }
+    },
+    {
+      "id": "tema:39038:1e3ffbd3a039",
+      "tipo": "tema",
+      "etiqueta": "3.6.4. Documentación de diccionarios de datos",
+      "datos": {
+        "texto": "3.6.4. Documentación de diccionarios de datos"
+      }
+    },
+    {
+      "id": "tema:39038:1f29dad154f3",
+      "tipo": "tema",
+      "etiqueta": "2.2.4.1. Eventos",
+      "datos": {
+        "texto": "2.2.4.1. Eventos"
+      }
+    },
+    {
+      "id": "tema:39038:25009950f2ea",
+      "tipo": "tema",
+      "etiqueta": "3.4.1.1. Modelo conceptual.",
+      "datos": {
+        "texto": "3.4.1.1. Modelo conceptual."
+      }
+    },
+    {
+      "id": "tema:39038:251e23329e6e",
+      "tipo": "tema",
+      "etiqueta": "3.3.4. Metadatos",
+      "datos": {
+        "texto": "3.3.4. Metadatos"
+      }
+    },
+    {
+      "id": "tema:39038:2762842d74d1",
+      "tipo": "tema",
+      "etiqueta": "4.2. Análisis de iteraciones o ciclos",
+      "datos": {
+        "texto": "4.2. Análisis de iteraciones o ciclos"
+      }
+    },
+    {
+      "id": "tema:39038:2e8a7db9011e",
+      "tipo": "tema",
+      "etiqueta": "3.3.2. Repositorio de archivos XML",
+      "datos": {
+        "texto": "3.3.2. Repositorio de archivos XML"
+      }
+    },
+    {
+      "id": "tema:39038:3543d21fd387",
+      "tipo": "tema",
+      "etiqueta": "3.3.1. Archivos planos (Flat Files)",
+      "datos": {
+        "texto": "3.3.1. Archivos planos (Flat Files)"
+      }
+    },
+    {
+      "id": "tema:39038:366fc60d4ca4",
+      "tipo": "tema",
+      "etiqueta": "3.5. Diagramación de modelado de datos",
+      "datos": {
+        "texto": "3.5. Diagramación de modelado de datos"
+      }
+    },
+    {
+      "id": "tema:39038:3b530d0d8b3b",
+      "tipo": "tema",
+      "etiqueta": "4.2.1. Pseudocódigo o español estructurado",
+      "datos": {
+        "texto": "4.2.1. Pseudocódigo o español estructurado"
+      }
+    },
+    {
+      "id": "tema:39038:3c1fa89f909d",
+      "tipo": "tema",
+      "etiqueta": "4.1.3. Árboles de decisiones",
+      "datos": {
+        "texto": "4.1.3. Árboles de decisiones"
+      }
+    },
+    {
+      "id": "tema:39038:3c72e7c1e533",
+      "tipo": "tema",
+      "etiqueta": "3.6.1. Definición de los flujos de datos",
+      "datos": {
+        "texto": "3.6.1. Definición de los flujos de datos"
+      }
+    },
+    {
+      "id": "tema:39038:4441b60a40fe",
+      "tipo": "tema",
+      "etiqueta": "3.3.4. Carga",
+      "datos": {
+        "texto": "3.3.4. Carga"
+      }
+    },
+    {
+      "id": "tema:39038:4d41e124c1a9",
+      "tipo": "tema",
+      "etiqueta": "2.2.4. Objetos de flujo",
+      "datos": {
+        "texto": "2.2.4. Objetos de flujo"
+      }
+    },
+    {
+      "id": "tema:39038:4e3524b33ace",
+      "tipo": "tema",
+      "etiqueta": "3.6.3. Creación de diccionario de diccionario de datos",
+      "datos": {
+        "texto": "3.6.3. Creación de diccionario de diccionario de datos"
+      }
+    },
+    {
+      "id": "tema:39038:51f4f71cf50e",
+      "tipo": "tema",
+      "etiqueta": "3.1.1.1. Extracción",
+      "datos": {
+        "texto": "3.1.1.1. Extracción"
+      }
+    },
+    {
+      "id": "tema:39038:593dcbc8ee3b",
+      "tipo": "tema",
+      "etiqueta": "2.1.1.3. De apoyo",
+      "datos": {
+        "texto": "2.1.1.3. De apoyo"
+      }
+    },
+    {
+      "id": "tema:39038:5d4ccc30b9c9",
+      "tipo": "tema",
+      "etiqueta": "1.2.2. Identificación inicial de requerimientos",
+      "datos": {
+        "texto": "1.2.2. Identificación inicial de requerimientos"
+      }
+    },
+    {
+      "id": "tema:39038:5e7a8f45e268",
+      "tipo": "tema",
+      "etiqueta": "1.1.2. Áreas funcionales",
+      "datos": {
+        "texto": "1.1.2. Áreas funcionales"
+      }
+    },
+    {
+      "id": "tema:39038:5f2395b3fb39",
+      "tipo": "tema",
+      "etiqueta": "3.3.3. Bases de datos relacionales",
+      "datos": {
+        "texto": "3.3.3. Bases de datos relacionales"
+      }
+    },
+    {
+      "id": "tema:39038:673aa5018465",
+      "tipo": "tema",
+      "etiqueta": "1.2.4. Perfilado de datos (Data profiling) Fuentes internas, externas",
+      "datos": {
+        "texto": "1.2.4. Perfilado de datos (Data profiling) Fuentes internas, externas"
+      }
+    },
+    {
+      "id": "tema:39038:689a57b32056",
+      "tipo": "tema",
+      "etiqueta": "2.3.2. Diagramas de interacción",
+      "datos": {
+        "texto": "2.3.2. Diagramas de interacción"
+      }
+    },
+    {
+      "id": "tema:39038:692e1ee7e6b2",
+      "tipo": "tema",
+      "etiqueta": "3.4. Modelado de datos",
+      "datos": {
+        "texto": "3.4. Modelado de datos"
+      }
+    },
+    {
+      "id": "tema:39038:693230a8f442",
+      "tipo": "tema",
+      "etiqueta": "2.2.2. Características",
+      "datos": {
+        "texto": "2.2.2. Características"
+      }
+    },
+    {
+      "id": "tema:39038:707440f3b514",
+      "tipo": "tema",
+      "etiqueta": "1.1.1. Naturaleza de la organización",
+      "datos": {
+        "texto": "1.1.1. Naturaleza de la organización"
+      }
+    },
+    {
+      "id": "tema:39038:7a51d7fb05ca",
+      "tipo": "tema",
+      "etiqueta": "4.1.4. Tablas de decisión",
+      "datos": {
+        "texto": "4.1.4. Tablas de decisión"
+      }
+    },
+    {
+      "id": "tema:39038:7b20a95b3337",
+      "tipo": "tema",
+      "etiqueta": "1.1 . Análisis del entorno",
+      "datos": {
+        "texto": "1.1 . Análisis del entorno"
+      }
+    },
+    {
+      "id": "tema:39038:7ea030d4e743",
+      "tipo": "tema",
+      "etiqueta": "3.1.1.3. Conformación",
+      "datos": {
+        "texto": "3.1.1.3. Conformación"
+      }
+    },
+    {
+      "id": "tema:39038:8581f33d8917",
+      "tipo": "tema",
+      "etiqueta": "2.1. Análisis de procesos",
+      "datos": {
+        "texto": "2.1. Análisis de procesos"
+      }
+    },
+    {
+      "id": "tema:39038:8e5d75c3f125",
+      "tipo": "tema",
+      "etiqueta": "2.2.4.3. Gateway",
+      "datos": {
+        "texto": "2.2.4.3. Gateway"
+      }
+    },
+    {
+      "id": "tema:39038:96e5809d1c67",
+      "tipo": "tema",
+      "etiqueta": "1.2.3. Técnicas para la identificación de requerimientos",
+      "datos": {
+        "texto": "1.2.3. Técnicas para la identificación de requerimientos"
+      }
+    },
+    {
+      "id": "tema:39038:99588256a5bc",
+      "tipo": "tema",
+      "etiqueta": "3.2. Técnicas ETL",
+      "datos": {
+        "texto": "3.2. Técnicas ETL"
+      }
+    },
+    {
+      "id": "tema:39038:9cb2d0bfb079",
+      "tipo": "tema",
+      "etiqueta": "2.1.1.1. Claves",
+      "datos": {
+        "texto": "2.1.1.1. Claves"
+      }
+    },
+    {
+      "id": "tema:39038:9cfa2618b7af",
+      "tipo": "tema",
+      "etiqueta": "1.1.5. Legislación de los datos",
+      "datos": {
+        "texto": "1.1.5. Legislación de los datos"
+      }
+    },
+    {
+      "id": "tema:39038:9e4ef940457a",
+      "tipo": "tema",
+      "etiqueta": "1.2.7. Consolidación de datos",
+      "datos": {
+        "texto": "1.2.7. Consolidación de datos"
+      }
+    },
+    {
+      "id": "tema:39038:a57b59b6a24f",
+      "tipo": "tema",
+      "etiqueta": "2.2. Modelado de procesos",
+      "datos": {
+        "texto": "2.2. Modelado de procesos"
+      }
+    },
+    {
+      "id": "tema:39038:a81ed9ddab29",
+      "tipo": "tema",
+      "etiqueta": "3.2.2. Extracción (Análisis de datos extraídos)",
+      "datos": {
+        "texto": "3.2.2. Extracción (Análisis de datos extraídos)"
+      }
+    },
+    {
+      "id": "tema:39038:a971e7afc097",
+      "tipo": "tema",
+      "etiqueta": "2.2.4.4. Relaciones (objetos conector)",
+      "datos": {
+        "texto": "2.2.4.4. Relaciones (objetos conector)"
+      }
+    },
+    {
+      "id": "tema:39038:aac603d1d320",
+      "tipo": "tema",
+      "etiqueta": "2.2.4.2. Actividad (procesos, subprocesos)",
+      "datos": {
+        "texto": "2.2.4.2. Actividad (procesos, subprocesos)"
+      }
+    },
+    {
+      "id": "tema:39038:ad6bfe1fdea8",
+      "tipo": "tema",
+      "etiqueta": "3.3. Estructuras de datos en un sistema",
+      "datos": {
+        "texto": "3.3. Estructuras de datos en un sistema"
+      }
+    },
+    {
+      "id": "tema:39038:afeff7dd5b6d",
+      "tipo": "tema",
+      "etiqueta": "3.2.1. Identificación de procesos en sistemas",
+      "datos": {
+        "texto": "3.2.1. Identificación de procesos en sistemas"
+      }
+    },
+    {
+      "id": "tema:39038:b1a6fdc58883",
+      "tipo": "tema",
+      "etiqueta": "3.4.1.3. Modelo físico.",
+      "datos": {
+        "texto": "3.4.1.3. Modelo físico."
+      }
+    },
+    {
+      "id": "tema:39038:b38e79de4b02",
+      "tipo": "tema",
+      "etiqueta": "3.6.2. Descripción de los flujos de datos",
+      "datos": {
+        "texto": "3.6.2. Descripción de los flujos de datos"
+      }
+    },
+    {
+      "id": "tema:39038:b50890679c30",
+      "tipo": "tema",
+      "etiqueta": "2.2.3. Elementos de los diagramas",
+      "datos": {
+        "texto": "2.2.3. Elementos de los diagramas"
+      }
+    },
+    {
+      "id": "tema:39038:b8662dd0a1ff",
+      "tipo": "tema",
+      "etiqueta": "2.1.1. Tipos de procesos",
+      "datos": {
+        "texto": "2.1.1. Tipos de procesos"
+      }
+    },
+    {
+      "id": "tema:39038:c19be1280233",
+      "tipo": "tema",
+      "etiqueta": "3.1.1.4. Entrega",
+      "datos": {
+        "texto": "3.1.1.4. Entrega"
+      }
+    },
+    {
+      "id": "tema:39038:c1cec4f1249b",
+      "tipo": "tema",
+      "etiqueta": "2.3.1. Diagrama de casos de uso",
+      "datos": {
+        "texto": "2.3.1. Diagrama de casos de uso"
+      }
+    },
+    {
+      "id": "tema:39038:cc9a72b4eb32",
+      "tipo": "tema",
+      "etiqueta": "1.1.3. Identificación de las necesidades y requerimientos información",
+      "datos": {
+        "texto": "1.1.3. Identificación de las necesidades y requerimientos información"
+      }
+    },
+    {
+      "id": "tema:39038:d0b7313552e7",
+      "tipo": "tema",
+      "etiqueta": "1.2. Estudio preliminar",
+      "datos": {
+        "texto": "1.2. Estudio preliminar"
+      }
+    },
+    {
+      "id": "tema:39038:d239117cbbcd",
+      "tipo": "tema",
+      "etiqueta": "2.2.5. Documentación de procesos",
+      "datos": {
+        "texto": "2.2.5. Documentación de procesos"
+      }
+    },
+    {
+      "id": "tema:39038:d7e245b23082",
+      "tipo": "tema",
+      "etiqueta": "3.1. Análisis de datos",
+      "datos": {
+        "texto": "3.1. Análisis de datos"
+      }
+    },
+    {
+      "id": "tema:39038:de6e4f707487",
+      "tipo": "tema",
+      "etiqueta": "2.3. Diagrama de comportamiento (funcionalidades)",
+      "datos": {
+        "texto": "2.3. Diagrama de comportamiento (funcionalidades)"
+      }
+    },
+    {
+      "id": "tema:39038:e4a263bdf36c",
+      "tipo": "tema",
+      "etiqueta": "1.2.1. Identificación de las reglas y necesidades del negocio",
+      "datos": {
+        "texto": "1.2.1. Identificación de las reglas y necesidades del negocio"
+      }
+    },
+    {
+      "id": "tema:39038:eac7f89f2e87",
+      "tipo": "tema",
+      "etiqueta": "3.1.1.2. Limpieza",
+      "datos": {
+        "texto": "3.1.1.2. Limpieza"
+      }
+    },
+    {
+      "id": "tema:39038:eb607449e6d0",
+      "tipo": "tema",
+      "etiqueta": "1.2.5. Identificación de necesidades de integración de datos (sincronización de datos)",
+      "datos": {
+        "texto": "1.2.5. Identificación de necesidades de integración de datos (sincronización de datos)"
+      }
+    },
+    {
+      "id": "tema:39038:ebdfaa121d0e",
+      "tipo": "tema",
+      "etiqueta": "4.1. Análisis de decisiones.",
+      "datos": {
+        "texto": "4.1. Análisis de decisiones."
+      }
+    },
+    {
+      "id": "tema:39038:eca20c17e5b4",
+      "tipo": "tema",
+      "etiqueta": "1.1.4. Análisis de políticas y estrategias",
+      "datos": {
+        "texto": "1.1.4. Análisis de políticas y estrategias"
+      }
+    },
+    {
+      "id": "tema:39038:ee326c82c771",
+      "tipo": "tema",
+      "etiqueta": "3.4.1.2. Modelo lógico.",
+      "datos": {
+        "texto": "3.4.1.2. Modelo lógico."
+      }
+    },
+    {
+      "id": "tema:39038:f3361bdd21a4",
+      "tipo": "tema",
+      "etiqueta": "3.2.3. Transformación",
+      "datos": {
+        "texto": "3.2.3. Transformación"
+      }
+    },
+    {
+      "id": "tema:39038:ff18ba0d4f7c",
+      "tipo": "tema",
+      "etiqueta": "4.1.2. Técnicas de análisis de decisiones",
+      "datos": {
+        "texto": "4.1.2. Técnicas de análisis de decisiones"
+      }
     },
     {
       "id": "tema:39056:033bcc52596a",
@@ -2837,6 +3995,38 @@
       }
     },
     {
+      "id": "unidad:39038:I",
+      "tipo": "unidad",
+      "etiqueta": "Unidad I. Análisis organizacional",
+      "datos": {
+        "nombre": "Análisis organizacional"
+      }
+    },
+    {
+      "id": "unidad:39038:II",
+      "tipo": "unidad",
+      "etiqueta": "Unidad II. Análisis de procesos",
+      "datos": {
+        "nombre": "Análisis de procesos"
+      }
+    },
+    {
+      "id": "unidad:39038:III",
+      "tipo": "unidad",
+      "etiqueta": "Unidad III. Análisis y modelado de datos",
+      "datos": {
+        "nombre": "Análisis y modelado de datos"
+      }
+    },
+    {
+      "id": "unidad:39038:IV",
+      "tipo": "unidad",
+      "etiqueta": "Unidad IV. Análisis de decisiones",
+      "datos": {
+        "nombre": "Análisis de decisiones"
+      }
+    },
+    {
       "id": "unidad:39056:I",
       "tipo": "unidad",
       "etiqueta": "Unidad I. Fundamentos de Big Data",
@@ -3055,6 +4245,151 @@
     },
     {
       "origen": "curso:2026-2:38985",
+      "destino": "plantilla:semipresencial",
+      "tipo": "usa_plantilla"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "articulo:EE-65",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "articulo:EE-66",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "articulo:EE-67",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "articulo:EE-68",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "articulo:EE-70",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "articulo:EE-71",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "articulo:EE-75",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "articulo:RPIDA-59",
+      "tipo": "cita"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "profesor:ara",
+      "tipo": "impartido_por"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "pua:39038",
+      "tipo": "se_basa_en"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "grupo:2026-2:39038:932",
+      "tipo": "tiene_grupo"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:0",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:1.1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:1.2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:1.3",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:2.1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:2.2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:3.1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:3.2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:3.3",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:3.4",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:3.5",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:4.1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:4.2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:4.3",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:C",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:P1",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
+      "destino": "meta:2026-2:39038:P2",
+      "tipo": "tiene_meta"
+    },
+    {
+      "origen": "curso:2026-2:39038",
       "destino": "plantilla:semipresencial",
       "tipo": "usa_plantilla"
     },
@@ -3761,6 +5096,761 @@
     {
       "origen": "meta:2026-2:38985:6.1",
       "destino": "criterio:2026-2:38985:6.1:3",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:0",
+      "destino": "unidad:39038:I",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:0",
+      "destino": "semana:2026-2:1",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:0",
+      "destino": "evidencia:2026-2:39038:0:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:0",
+      "destino": "criterio:2026-2:39038:0:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "tema:39038:5e7a8f45e268",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "tema:39038:707440f3b514",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "tema:39038:7b20a95b3337",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "tema:39038:9cfa2618b7af",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "tema:39038:cc9a72b4eb32",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "tema:39038:eca20c17e5b4",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "unidad:39038:I",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "semana:2026-2:2",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "evidencia:2026-2:39038:1.1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "criterio:2026-2:39038:1.1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.1",
+      "destino": "criterio:2026-2:39038:1.1:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.2",
+      "destino": "tema:39038:5d4ccc30b9c9",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.2",
+      "destino": "tema:39038:96e5809d1c67",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.2",
+      "destino": "tema:39038:d0b7313552e7",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.2",
+      "destino": "tema:39038:e4a263bdf36c",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.2",
+      "destino": "unidad:39038:I",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.2",
+      "destino": "semana:2026-2:3",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.2",
+      "destino": "evidencia:2026-2:39038:1.2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.2",
+      "destino": "criterio:2026-2:39038:1.2:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "tema:39038:16adc6344e10",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "tema:39038:673aa5018465",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "tema:39038:9e4ef940457a",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "tema:39038:eb607449e6d0",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "unidad:39038:I",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "semana:2026-2:4",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "evidencia:2026-2:39038:1.3:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "criterio:2026-2:39038:1.3:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:1.3",
+      "destino": "criterio:2026-2:39038:1.3:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "tema:39038:1511b1306d0f",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "tema:39038:593dcbc8ee3b",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "tema:39038:8581f33d8917",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "tema:39038:9cb2d0bfb079",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "tema:39038:b8662dd0a1ff",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "unidad:39038:II",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "semana:2026-2:5",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "evidencia:2026-2:39038:2.1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "criterio:2026-2:39038:2.1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.1",
+      "destino": "criterio:2026-2:39038:2.1:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:11f2f879fbb0",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:1551116ef2f0",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:1f29dad154f3",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:4d41e124c1a9",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:689a57b32056",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:693230a8f442",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:8e5d75c3f125",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:a57b59b6a24f",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:a971e7afc097",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:aac603d1d320",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:b50890679c30",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:c1cec4f1249b",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:d239117cbbcd",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "tema:39038:de6e4f707487",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "unidad:39038:II",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "semana:2026-2:6",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "evidencia:2026-2:39038:2.2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "evidencia:2026-2:39038:2.2:1",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "criterio:2026-2:39038:2.2:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "criterio:2026-2:39038:2.2:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:2.2",
+      "destino": "criterio:2026-2:39038:2.2:2",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:1b738efea096",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:4441b60a40fe",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:51f4f71cf50e",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:7ea030d4e743",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:99588256a5bc",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:a81ed9ddab29",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:afeff7dd5b6d",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:c19be1280233",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:d7e245b23082",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:eac7f89f2e87",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "tema:39038:f3361bdd21a4",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "unidad:39038:III",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "semana:2026-2:8",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "evidencia:2026-2:39038:3.1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "criterio:2026-2:39038:3.1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.1",
+      "destino": "criterio:2026-2:39038:3.1:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "tema:39038:251e23329e6e",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "tema:39038:2e8a7db9011e",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "tema:39038:3543d21fd387",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "tema:39038:5f2395b3fb39",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "tema:39038:ad6bfe1fdea8",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "unidad:39038:III",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "semana:2026-2:9",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "evidencia:2026-2:39038:3.2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "criterio:2026-2:39038:3.2:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.2",
+      "destino": "criterio:2026-2:39038:3.2:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "tema:39038:0673331982ee",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "tema:39038:25009950f2ea",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "tema:39038:366fc60d4ca4",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "tema:39038:692e1ee7e6b2",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "tema:39038:b1a6fdc58883",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "tema:39038:ee326c82c771",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "unidad:39038:III",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "semana:2026-2:10",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "evidencia:2026-2:39038:3.3:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "criterio:2026-2:39038:3.3:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.3",
+      "destino": "criterio:2026-2:39038:3.3:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "tema:39038:044b064747b2",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "tema:39038:1e3ffbd3a039",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "tema:39038:3c72e7c1e533",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "tema:39038:4e3524b33ace",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "tema:39038:b38e79de4b02",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "unidad:39038:III",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "semana:2026-2:11",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "evidencia:2026-2:39038:3.4:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "criterio:2026-2:39038:3.4:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.4",
+      "destino": "criterio:2026-2:39038:3.4:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.5",
+      "destino": "unidad:39038:III",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.5",
+      "destino": "semana:2026-2:12",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.5",
+      "destino": "evidencia:2026-2:39038:3.5:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.5",
+      "destino": "criterio:2026-2:39038:3.5:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:3.5",
+      "destino": "criterio:2026-2:39038:3.5:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "tema:39038:0b23276b6749",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "tema:39038:3c1fa89f909d",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "tema:39038:7a51d7fb05ca",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "tema:39038:ebdfaa121d0e",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "tema:39038:ff18ba0d4f7c",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "unidad:39038:IV",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "semana:2026-2:13",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "evidencia:2026-2:39038:4.1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "criterio:2026-2:39038:4.1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.1",
+      "destino": "criterio:2026-2:39038:4.1:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.2",
+      "destino": "tema:39038:2762842d74d1",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.2",
+      "destino": "tema:39038:3b530d0d8b3b",
+      "tipo": "cubre"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.2",
+      "destino": "unidad:39038:IV",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.2",
+      "destino": "semana:2026-2:14",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.2",
+      "destino": "evidencia:2026-2:39038:4.2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.2",
+      "destino": "criterio:2026-2:39038:4.2:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.2",
+      "destino": "criterio:2026-2:39038:4.2:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.3",
+      "destino": "unidad:39038:IV",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.3",
+      "destino": "semana:2026-2:15",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.3",
+      "destino": "evidencia:2026-2:39038:4.3:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.3",
+      "destino": "criterio:2026-2:39038:4.3:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:4.3",
+      "destino": "criterio:2026-2:39038:4.3:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:C",
+      "destino": "unidad:39038:IV",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:C",
+      "destino": "semana:2026-2:16",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:C",
+      "destino": "evidencia:2026-2:39038:C:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:C",
+      "destino": "criterio:2026-2:39038:C:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:C",
+      "destino": "criterio:2026-2:39038:C:1",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:C",
+      "destino": "criterio:2026-2:39038:C:2",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:P1",
+      "destino": "unidad:39038:II",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:P1",
+      "destino": "semana:2026-2:7",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:P1",
+      "destino": "evidencia:2026-2:39038:P1:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:P1",
+      "destino": "criterio:2026-2:39038:P1:0",
+      "tipo": "se_evalua_con"
+    },
+    {
+      "origen": "meta:2026-2:39038:P2",
+      "destino": "unidad:39038:III",
+      "tipo": "desarrolla"
+    },
+    {
+      "origen": "meta:2026-2:39038:P2",
+      "destino": "semana:2026-2:12",
+      "tipo": "ocurre_en"
+    },
+    {
+      "origen": "meta:2026-2:39038:P2",
+      "destino": "evidencia:2026-2:39038:P2:0",
+      "tipo": "produce"
+    },
+    {
+      "origen": "meta:2026-2:39038:P2",
+      "destino": "criterio:2026-2:39038:P2:0",
       "tipo": "se_evalua_con"
     },
     {
@@ -5104,6 +7194,31 @@
       "tipo": "se_evalua_con"
     },
     {
+      "origen": "pua:39038",
+      "destino": "competencia:501f9952c9b9",
+      "tipo": "declara"
+    },
+    {
+      "origen": "pua:39038",
+      "destino": "unidad:39038:I",
+      "tipo": "tiene_unidad"
+    },
+    {
+      "origen": "pua:39038",
+      "destino": "unidad:39038:II",
+      "tipo": "tiene_unidad"
+    },
+    {
+      "origen": "pua:39038",
+      "destino": "unidad:39038:III",
+      "tipo": "tiene_unidad"
+    },
+    {
+      "origen": "pua:39038",
+      "destino": "unidad:39038:IV",
+      "tipo": "tiene_unidad"
+    },
+    {
       "origen": "pua:39056",
       "destino": "competencia:abb7f3f0c96a",
       "tipo": "declara"
@@ -5257,6 +7372,696 @@
       "origen": "pua:39062",
       "destino": "unidad:39062:V",
       "tipo": "tiene_unidad"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "competencia:aa9bcb8d22b6",
+      "tipo": "declara"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:16adc6344e10",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:16adc6344e10",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:5d4ccc30b9c9",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:5d4ccc30b9c9",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:5e7a8f45e268",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:5e7a8f45e268",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:673aa5018465",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:673aa5018465",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:707440f3b514",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:707440f3b514",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:7b20a95b3337",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:7b20a95b3337",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:96e5809d1c67",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:96e5809d1c67",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:9cfa2618b7af",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:9cfa2618b7af",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:9e4ef940457a",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:9e4ef940457a",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:cc9a72b4eb32",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:cc9a72b4eb32",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:d0b7313552e7",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:d0b7313552e7",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:e4a263bdf36c",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:e4a263bdf36c",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:eb607449e6d0",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:eb607449e6d0",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:eca20c17e5b4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:I",
+      "destino": "tema:39038:eca20c17e5b4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "competencia:bd61854b5552",
+      "tipo": "declara"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:11f2f879fbb0",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:11f2f879fbb0",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:1511b1306d0f",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:1511b1306d0f",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:1551116ef2f0",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:1551116ef2f0",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:1f29dad154f3",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:1f29dad154f3",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:4d41e124c1a9",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:4d41e124c1a9",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:593dcbc8ee3b",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:593dcbc8ee3b",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:689a57b32056",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:689a57b32056",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:693230a8f442",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:693230a8f442",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:8581f33d8917",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:8581f33d8917",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:8e5d75c3f125",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:8e5d75c3f125",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:9cb2d0bfb079",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:9cb2d0bfb079",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:a57b59b6a24f",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:a57b59b6a24f",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:a971e7afc097",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:a971e7afc097",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:aac603d1d320",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:aac603d1d320",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:b50890679c30",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:b50890679c30",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:b8662dd0a1ff",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:b8662dd0a1ff",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:c1cec4f1249b",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:c1cec4f1249b",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:d239117cbbcd",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:d239117cbbcd",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:de6e4f707487",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:II",
+      "destino": "tema:39038:de6e4f707487",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "competencia:6ac253e0de02",
+      "tipo": "declara"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:044b064747b2",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:044b064747b2",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:0673331982ee",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:0673331982ee",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:1b738efea096",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:1b738efea096",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:1e3ffbd3a039",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:1e3ffbd3a039",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:25009950f2ea",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:25009950f2ea",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:251e23329e6e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:251e23329e6e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:2e8a7db9011e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:2e8a7db9011e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:3543d21fd387",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:3543d21fd387",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:366fc60d4ca4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:366fc60d4ca4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:3c72e7c1e533",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:3c72e7c1e533",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:4441b60a40fe",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:4441b60a40fe",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:4e3524b33ace",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:4e3524b33ace",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:51f4f71cf50e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:51f4f71cf50e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:5f2395b3fb39",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:5f2395b3fb39",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:692e1ee7e6b2",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:692e1ee7e6b2",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:7ea030d4e743",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:7ea030d4e743",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:99588256a5bc",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:99588256a5bc",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:a81ed9ddab29",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:a81ed9ddab29",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:ad6bfe1fdea8",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:ad6bfe1fdea8",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:afeff7dd5b6d",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:afeff7dd5b6d",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:b1a6fdc58883",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:b1a6fdc58883",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:b38e79de4b02",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:b38e79de4b02",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:c19be1280233",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:c19be1280233",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:d7e245b23082",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:d7e245b23082",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:eac7f89f2e87",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:eac7f89f2e87",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:ee326c82c771",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:ee326c82c771",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:f3361bdd21a4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:III",
+      "destino": "tema:39038:f3361bdd21a4",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "competencia:fe2941ee9bf8",
+      "tipo": "declara"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:0b23276b6749",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:0b23276b6749",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:2762842d74d1",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:2762842d74d1",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:3b530d0d8b3b",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:3b530d0d8b3b",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:3c1fa89f909d",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:3c1fa89f909d",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:7a51d7fb05ca",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:7a51d7fb05ca",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:ebdfaa121d0e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:ebdfaa121d0e",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:ff18ba0d4f7c",
+      "tipo": "tiene_tema"
+    },
+    {
+      "origen": "unidad:39038:IV",
+      "destino": "tema:39038:ff18ba0d4f7c",
+      "tipo": "tiene_tema"
     },
     {
       "origen": "unidad:39056:I",
