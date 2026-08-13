@@ -56,6 +56,28 @@ esquemas:
         detalle: "caso de estudio, reporte técnico y exposición"
     exencion_ordinario: 80
 
+  pua-39038:
+    nombre: "Análisis de Procesos y Datos de Negocios (criterios del programa)"
+    descripcion: "Tareas y actividades 15 · Evaluaciones parciales 10 · Prácticas de taller 25 · Propuesta de solución estandarizada 50"
+    # Los porcentajes los fija el programa oficial de la unidad; se conservan en el
+    # catálogo para que el DI y su validación usen la misma fuente de evaluación.
+    rubros:
+      - id: tareas
+        etiqueta: "Tareas y actividades"
+        porcentaje: 15
+      - id: examenes
+        etiqueta: "Evaluaciones parciales"
+        porcentaje: 10
+        detalle: "Dos evaluaciones parciales de 5 % cada una"
+        parciales: 2
+      - id: practicas
+        etiqueta: "Prácticas de taller"
+        porcentaje: 25
+      - id: proyecto
+        etiqueta: "Propuesta de solución estandarizada"
+        porcentaje: 50
+    exencion_ordinario: 80
+
   zra-contabilidad:
     nombre: "Contabilidad Financiera (esquema de Zurisaddai Rubio)"
     descripcion: "Actividades 30 · Exámenes parciales 50 · Trabajo final 20"

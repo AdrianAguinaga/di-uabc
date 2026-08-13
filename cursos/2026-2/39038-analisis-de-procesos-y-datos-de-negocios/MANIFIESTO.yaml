@@ -1,0 +1,85 @@
+# Manifiesto de generación. Lo escribe src/generar.py: no lo edites a mano.
+#
+# Regla invariable 7 — todo dato es trazable. De aquí se reconstruye con qué PUA, qué
+# calendario, qué plantilla y qué versión del código salió cada archivo. Si alguien pone
+# en duda una fecha o un porcentaje del documento, se empieza por este archivo.
+#
+# El documento generado es un BORRADOR: requiere la revisión del profesor antes de
+# entregarse a la facultad o publicarse a los alumnos (Art. 66 del Estatuto Escolar).
+generado: '2026-08-07T12:04:54'
+commit: 8c06c45-sucio
+curso:
+  archivo: cursos/2026-2/39038-analisis-de-procesos-y-datos-de-negocios/curso.yaml
+  sha256: 1ed95be25413ed9a91c91a1165411582a62cbd36b9fc434e5ee0217954ce43ca
+  ciclo: 2026-2
+  clave: '39038'
+  nombre: Análisis de Procesos y Datos de Negocios
+  modalidad: semipresencial
+pua:
+  md: puas/md/39038-analisis-de-procesos-y-datos-de-negocios.md
+  sha256_declarado: 4b49ec51031b7918a157fa8a1390f2fd247abfef5d4c4d6c3ba4392f6d3ecc6e
+  md_sha256: 9e043c60ad4f8a987d6ca203b9c892067f50515bcf918e9d8b437d0787a8fc16
+  fuente: C:/Users/LAB9204-1/Downloads/17.-39038-Analisis-de-Procesos-y-Datos-de-Negocios.pdf
+  fuente_sha256: 4b49ec51031b7918a157fa8a1390f2fd247abfef5d4c4d6c3ba4392f6d3ecc6e
+  coincide: true
+calendario:
+  archivo: calendarios/2026-2.yaml
+  sha256: 537e09b8db7782be4b14ef3508cb4742462e2e1cb3725df0613531517910aa37
+  semanas: 16
+  inicio: 2026-08-10
+  fin: 2026-11-28
+plantilla:
+  modalidad: semipresencial
+  archivo: semipresencial.docx
+  version: 2025-1
+  sha256: ae3c1a67c1df2328fa95ed07887a0994281c4896346fd7fc31819ef03ae44332
+  origen: referencias/CIAD_DI_Plantilla_Semipresencial-2025.docx
+profesor:
+  id: ara
+  nombre: Adrian Rodriguez Aguiñaga
+  correo: adrian.aguinaga@uabc.edu.mx
+evaluacion:
+  esquema_id: pua-39038
+  exencion_ordinario: 80
+  rubros:
+  - id: tareas
+    porcentaje: 15
+  - id: examenes
+    porcentaje: 10
+  - id: practicas
+    porcentaje: 25
+  - id: proyecto
+    porcentaje: 50
+grupos:
+- numero: '932'
+  aula: Laboratorio de cómputo
+  dias_presencial:
+  - 4
+  dia_entrega: 5
+  hora_entrega: '23:59'
+  jefe_grupo: null
+  bloques:
+  - dia: 4
+    inicio: '10:00'
+    fin: '11:30'
+    ambiente: virtual
+  - dia: 4
+    inicio: '19:00'
+    fin: '21:00'
+    ambiente: presencial
+validacion:
+  errores: 0
+  avisos:
+  - Sección VI. ESTRUCTURA DE LAS PRÁCTICAS DE LABORATORIO no encontrada en el PDF.
+  - La unidad III repite la numeración de temas (3.3.4) en el programa oficial. Se
+    conserva literal.
+  recordatorios: 5
+archivos:
+- ruta: cursos/2026-2/39038-analisis-de-procesos-y-datos-de-negocios/salida/DI-2026-2-39038-932.docx
+  grupo: '932'
+  sha256: 65061af58a33bc4d78a71e9c36cdf700897a2882222001627758da183de3e784
+  bytes: 233224
+- ruta: cursos/2026-2/39038-analisis-de-procesos-y-datos-de-negocios/salida/DI-2026-2-39038-932.pdf
+  grupo: '932'
+  sha256: fab1e76214ebe79c606081b7b5081d7d641b47444f5391a780630be25a152a5d
+  bytes: 401041

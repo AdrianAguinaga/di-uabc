@@ -29,8 +29,8 @@ class CalendarioReal20262(unittest.TestCase):
             [c for c in cursos if c.profesor_id == "ara"], cls.cal
         )
 
-    def test_cuenta_las_122_clases_reales(self):
-        self.assertEqual(122, len(self.resultado.eventos))
+    def test_cuenta_las_154_clases_reales(self):
+        self.assertEqual(154, len(self.resultado.eventos))
 
     def test_cada_evento_esta_dentro_de_clases_y_fuera_de_suspension(self):
         for evento in self.resultado.eventos:
@@ -43,15 +43,16 @@ class CalendarioReal20262(unittest.TestCase):
             self.cal.semana_de(e.inicio.astimezone(exportar_ics.ZONA).date())
             for e in self.resultado.eventos
         )
-        self.assertEqual(8, por_semana[1])
-        self.assertEqual(6, por_semana[6])
-        self.assertEqual(6, por_semana[13])
-        self.assertEqual(6, por_semana[15])
+        self.assertEqual(10, por_semana[1])
+        self.assertEqual(8, por_semana[6])
+        self.assertEqual(8, por_semana[13])
+        self.assertEqual(8, por_semana[15])
 
     def test_cuenta_los_bloques_y_omite_los_grupos_sin_horario_real(self):
         conteo = Counter(e.uid.split("@")[0].rsplit("-", 1)[-1] for e in self.resultado.eventos)
-        self.assertEqual(90, conteo["presencial"])
-        self.assertEqual(32, conteo["virtual"])
+        self.assertEqual(106, conteo["presencial"])
+        self.assertEqual(48, conteo["virtual"])
+        self.assertTrue(any("-932-" in e.uid for e in self.resultado.eventos))
         self.assertTrue(all("-962-" not in e.uid for e in self.resultado.eventos))
         self.assertTrue(all("-531-" not in e.uid for e in self.resultado.eventos))
         self.assertIn("39056 · grupo 962", self.resultado.grupos_no_impartidos)
@@ -90,11 +91,11 @@ class SerializacionIcalendar(unittest.TestCase):
         self.assertTrue(self.texto.startswith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n"))
         self.assertTrue(self.texto.endswith("END:VCALENDAR\r\n"))
         self.assertNotIn("\n", self.texto.replace("\r\n", ""))
-        self.assertEqual(122, self.texto.count("BEGIN:VEVENT\r\n"))
-        self.assertEqual(122, self.texto.count("UID:"))
-        self.assertEqual(122, self.texto.count("DTSTAMP:20260806T000000Z"))
-        self.assertEqual(122, self.texto.count("DTSTART:"))
-        self.assertEqual(122, self.texto.count("DTEND:"))
+        self.assertEqual(154, self.texto.count("BEGIN:VEVENT\r\n"))
+        self.assertEqual(154, self.texto.count("UID:"))
+        self.assertEqual(154, self.texto.count("DTSTAMP:20260806T000000Z"))
+        self.assertEqual(154, self.texto.count("DTSTART:"))
+        self.assertEqual(154, self.texto.count("DTEND:"))
         self.assertIn("X-WR-CALNAME:Clases 2026-2 · Adrian Rodriguez Aguiñaga", self.texto)
         self.assertIn("X-WR-CALDESC:Agenda de ara", self.texto)
 
@@ -145,10 +146,10 @@ class ComandoDeExportacion(unittest.TestCase):
             )
             self.assertEqual(salida, fuera)
             self.assertTrue(fuera.exists())
-            self.assertEqual(122, len(resultado.eventos))
+            self.assertEqual(154, len(resultado.eventos))
             self.assertEqual("ara", resultado.profesor_id)
             self.assertEqual("Adrian Rodriguez Aguiñaga", resultado.profesor_nombre)
-            self.assertEqual(122, fuera.read_text(encoding="utf-8").count("BEGIN:VEVENT"))
+            self.assertEqual(154, fuera.read_text(encoding="utf-8").count("BEGIN:VEVENT"))
 
     def test_no_mezcla_profesores_y_no_escribe_una_agenda_vacia(self):
         with tempfile.TemporaryDirectory() as temporal:
@@ -167,7 +168,7 @@ class ComandoDeExportacion(unittest.TestCase):
                     ["exportar_ics.py", "2026-2", "ara", "--salida", str(salida)]
                 )
         self.assertEqual(0, codigo, err.getvalue())
-        self.assertIn("Adrian Rodriguez Aguiñaga (ara): 122 eventos", out.getvalue())
+        self.assertIn("Adrian Rodriguez Aguiñaga (ara): 154 eventos", out.getvalue())
         self.assertIn("39056 · grupo 962", out.getvalue())
 
 

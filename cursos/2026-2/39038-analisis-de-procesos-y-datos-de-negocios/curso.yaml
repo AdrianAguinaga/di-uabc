@@ -1,0 +1,797 @@
+# Diseño Instruccional — Análisis de Procesos y Datos de Negocios, ciclo 2026-2.
+#
+# Este archivo es la fuente única de verdad del documento. Las sesiones se asignan por semana;
+# el calendario oficial resuelve cada fecha conforme al horario del grupo 932.
+
+meta:
+  ciclo: "2026-2"
+  clave: "39038"
+  pua_ref: "puas/md/39038-analisis-de-procesos-y-datos-de-negocios.md"
+  pua_sha256: "4b49ec51031b7918a157fa8a1390f2fd247abfef5d4c4d6c3ba4392f6d3ecc6e"
+
+profesor: ara
+
+# Los datos de identificación se conservan literales del programa oficial.
+identificacion:
+  nombre: "Análisis de Procesos y Datos de Negocios"
+  modalidad: semipresencial
+  nivel_academico: "Licenciatura."
+  unidad_academica: "Facultad de Ciencias Administrativas y Sociales, Ensenada; Facultad de Ciencias Administrativas, Mexicali; Facultad de Ciencias de la Ingeniería, Administrativas y Sociales, Tecate; y Facultad de Contaduría y Administración, Tijuana."
+  programa_educativo: "Licenciado en Inteligencia de Negocios"
+  plan_estudios: "2021-2"
+  creditos_texto: "HC: 02 HT: 02 HL: 00 HPC: 00 HCL: 00 HE: 02 CR: 06"
+  etapa_formativa: "Básica"
+  caracter: "Obligatoria"
+  requisitos: "Ninguno"
+  practica: false
+
+contenido:
+  competencia_general: >-
+    Determinar los requerimientos de información, mediante el análisis de los procesos, problemas y áreas de oportunidad
+    organizacionales, para proponer alternativas de solución que resuelvan y anticipen problemáticas de procesos, con responsabilidad,
+    honestidad y actitud organizada.
+
+  proposito_general: >-
+    La unidad de aprendizaje aborda el análisis del entorno, procesos y datos de la organización, lo que permite identificar
+    problemáticas existentes y así proponer alternativas de solución con base al modelado de datos.
+
+    Se ubica en la etapa básica, es de carácter obligatoria, y forma parte del área de Ciencia de Datos del programa educativo de
+    Inteligencia de Negocios. La modalidad semipresencial articula las sesiones de análisis con actividades de modelado,
+    documentación y retroalimentación en Blackboard.
+
+  estrategia_general: >-
+    Se utiliza el aprendizaje basado en casos, ejercicios prácticos de modelado y un proyecto integrador. El docente presentará
+    conceptos, demostrará herramientas y retroalimentará las prácticas. El estudiante investigará, analizará casos, elaborará
+    modelos y reportes, y desarrollará colaborativamente una propuesta de solución; las actividades virtuales se organizarán en
+    Blackboard.
+
+  evidencias_desempeno: >-
+    Propuesta de solución estandarizada que integre los análisis del entorno, procesos y datos de la organización, especificando los
+    requerimientos de información identificados.
+
+  criterios_evaluacion: >-
+    Cada meta contiene los criterios específicos con los que se revisará la evidencia correspondiente. La evaluación considera la
+    claridad del análisis, la congruencia del modelo con los requerimientos identificados, la documentación de los datos y la
+    pertinencia de la alternativa de solución.
+
+  autores_pua: >-
+    Claudia Viviana Álvarez Vega, Emma Sofia Castillejos Caballero, María del Consuelo Salgado Soto y Eva Olivia Martínez Lucero.
+    12 de noviembre de 2020.
+
+unidades:
+  - numero: "I"
+    nombre: "Análisis organizacional"
+    duracion_horas: 8
+    competencia: >-
+      Distinguir la problemática, áreas de oportunidad y procesos de la organización, mediante el análisis del entorno, para
+      especificar los requerimientos de datos e información, con compromiso, responsabilidad y honestidad.
+    temas:
+      - "1.1 . Análisis del entorno"
+      - "1.1.1. Naturaleza de la organización"
+      - "1.1.2. Áreas funcionales"
+      - "1.1.3. Identificación de las necesidades y requerimientos información"
+      - "1.1.4. Análisis de políticas y estrategias"
+      - "1.1.5. Legislación de los datos"
+      - "1.2. Estudio preliminar"
+      - "1.2.1. Identificación de las reglas y necesidades del negocio"
+      - "1.2.2. Identificación inicial de requerimientos"
+      - "1.2.3. Técnicas para la identificación de requerimientos"
+      - "1.2.4. Perfilado de datos (Data profiling) Fuentes internas, externas"
+      - "1.2.5. Identificación de necesidades de integración de datos (sincronización de datos)"
+      - "1.2.6. Oportunidad y jerarquización de los datos"
+      - "1.2.7. Consolidación de datos"
+
+  - numero: "II"
+    nombre: "Análisis de procesos"
+    duracion_horas: 8
+    competencia: >-
+      Analizar los componentes de los procesos, mediante el uso de herramientas y el lenguaje de modelado, para desarrollar la
+      especificación de los modelos que cumplen con los requerimientos, con creatividad, actitud crítica y responsabilidad.
+    temas:
+      - "2.1. Análisis de procesos"
+      - "2.1.1. Tipos de procesos"
+      - "2.1.1.1. Claves"
+      - "2.1.1.2. Estratégicos"
+      - "2.1.1.3. De apoyo"
+      - "2.2. Modelado de procesos"
+      - "2.2.1. Notación de modelado de procesos (BPMN)"
+      - "2.2.2. Características"
+      - "2.2.3. Elementos de los diagramas"
+      - "2.2.4. Objetos de flujo"
+      - "2.2.4.1. Eventos"
+      - "2.2.4.2. Actividad (procesos, subprocesos)"
+      - "2.2.4.3. Gateway"
+      - "2.2.4.4. Relaciones (objetos conector)"
+      - "2.2.5. Documentación de procesos"
+      - "2.3. Diagrama de comportamiento (funcionalidades)"
+      - "2.3.1. Diagrama de casos de uso"
+      - "2.3.2. Diagramas de interacción"
+      - "2.3.3. Diagrama de secuencia"
+
+  - numero: "III"
+    nombre: "Análisis y modelado de datos"
+    duracion_horas: 12
+    competencia: >-
+      Analizar la información de un sistema, mediante técnicas de extracción, transformación y carga (ETL) de las estructura de
+      datos, para desarrollar el modelo de datos que cumplen con los requerimientos especificados, con actitud crítica, objetiva y
+      responsable.
+    temas:
+      - "3.1. Análisis de datos"
+      - "3.1.1. Fundamentos al Data Warehouse"
+      - "3.1.1.1. Extracción"
+      - "3.1.1.2. Limpieza"
+      - "3.1.1.3. Conformación"
+      - "3.1.1.4. Entrega"
+      - "3.2. Técnicas ETL"
+      - "3.2.1. Identificación de procesos en sistemas"
+      - "3.2.2. Extracción (Análisis de datos extraídos)"
+      - "3.2.3. Transformación"
+      - "3.3.4. Carga"
+      - "3.3. Estructuras de datos en un sistema"
+      - "3.3.1. Archivos planos (Flat Files)"
+      - "3.3.2. Repositorio de archivos XML"
+      - "3.3.3. Bases de datos relacionales"
+      - "3.3.4. Metadatos"
+      - "3.4. Modelado de datos"
+      - "3.4.1. Tipos de modelado de datos"
+      - "3.4.1.1. Modelo conceptual."
+      - "3.4.1.2. Modelo lógico."
+      - "3.4.1.3. Modelo físico."
+      - "3.5. Diagramación de modelado de datos"
+      - "3.6. Diccionario de datos"
+      - "3.6.1. Definición de los flujos de datos"
+      - "3.6.2. Descripción de los flujos de datos"
+      - "3.6.3. Creación de diccionario de diccionario de datos"
+      - "3.6.4. Documentación de diccionarios de datos"
+
+  - numero: "IV"
+    nombre: "Análisis de decisiones"
+    duracion_horas: 4
+    competencia: >-
+      Examinar el proceso de operación, mediante las etapas y técnicas del análisis de decisiones, para determinar las acciones a
+      seguir ante una serie de alternativas, actitud crítica, asertiva, profesional.
+    temas:
+      - "4.1. Análisis de decisiones."
+      - "4.1.1. Etapas del análisis de decisiones"
+      - "4.1.2. Técnicas de análisis de decisiones"
+      - "4.1.3. Árboles de decisiones"
+      - "4.1.4. Tablas de decisión"
+      - "4.2. Análisis de iteraciones o ciclos"
+      - "4.2.1. Pseudocódigo o español estructurado"
+
+evaluacion:
+  esquema_id: pua-39038
+  exencion_ordinario: 80
+  rubros:
+    - id: tareas
+      etiqueta: "Tareas y actividades"
+      porcentaje: 15
+    - id: examenes
+      etiqueta: "Evaluaciones parciales"
+      porcentaje: 10
+      detalle: "Dos evaluaciones parciales de 5 % cada una"
+      parciales: 2
+    - id: practicas
+      etiqueta: "Prácticas de taller"
+      porcentaje: 25
+    - id: proyecto
+      etiqueta: "Propuesta de solución estandarizada"
+      porcentaje: 50
+
+grupos:
+  - numero: "932"
+    horario:
+      bloques:
+        - {dia: 4, inicio: "10:00", fin: "11:30", ambiente: virtual}
+        - {dia: 4, inicio: "19:00", fin: "21:00", ambiente: presencial}
+      dia_entrega: 5
+      hora_entrega: "23:59"
+      aula: "Laboratorio de cómputo"
+    plataforma: Blackboard
+
+citas: [EE-65, EE-66, EE-67, EE-68, EE-70, EE-71, EE-75, RPIDA-59]
+tolerancia_minutos: 15
+avisos:
+  - "Sección VI. ESTRUCTURA DE LAS PRÁCTICAS DE LABORATORIO no encontrada en el PDF."
+  - "La unidad III repite la numeración de temas (3.3.4) en el programa oficial. Se conserva literal."
+
+metas:
+  - id: "0"
+    unidad: "I"
+    tipo: encuadre
+    rubro: tareas
+    valor: 0
+    semanas: [1]
+    enunciado: "Conocer la organización del curso, sus criterios de evaluación y las reglas de convivencia."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Reconocer la competencia, las unidades y las evidencias del curso."
+      - "Identificar los criterios de evaluación, los medios de entrega y las reglas de convivencia."
+    sesiones:
+      - ambiente: presencial
+        semana: 1
+        actividad_tabla: "Encuadre y presentación del curso"
+        pasos:
+          - "El docente presentará la competencia, las unidades, los criterios de evaluación, las reglas de convivencia y la organización del curso."
+          - "Revisa con el grupo el calendario de actividades y resuelve las dudas iniciales."
+      - ambiente: virtual
+        semana: 1
+        actividad_tabla: "Revisión del espacio virtual"
+        pasos:
+          - "Revisa los materiales de bienvenida y la estructura de los módulos en Blackboard."
+          - "Preséntate en el foro M0_Foro de presentación e indica qué experiencia tienes al analizar procesos y datos."
+    evidencias: [{nombre: "Participación en el foro de presentación", tipo: "Foro", recurso: "M0_Foro de presentación"}]
+    criterios_evaluacion: ["Se registra la participación; esta meta no tiene valor porcentual."]
+    reflexion:
+      - "Conocí la organización, los criterios de evaluación y los medios de entrega del curso."
+      - "Identifiqué las reglas de convivencia y los canales de comunicación."
+    cubre_temas: []
+
+  - id: "1.1"
+    unidad: "I"
+    rubro: tareas
+    valor: 5
+    semanas: [2]
+    enunciado: "Analizar el entorno de una organización para identificar problemáticas y áreas de oportunidad."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Reconocer la naturaleza, las áreas funcionales y los procesos principales de una organización."
+      - "Relacionar las políticas, estrategias y legislación aplicable con las necesidades de información."
+    sesiones:
+      - ambiente: presencial
+        semana: 2
+        actividad_tabla: "Análisis del entorno organizacional"
+        pasos:
+          - "El docente presentará un caso organizacional y explicará cómo reconocer su naturaleza, áreas funcionales, políticas y estrategias."
+          - "Analiza en equipo las problemáticas, procesos y áreas de oportunidad del caso."
+      - ambiente: virtual
+        semana: 2
+        actividad_tabla: "Diagnóstico del entorno"
+        pasos:
+          - "Elabora un diagnóstico breve del entorno de la organización seleccionada, identificando sus áreas funcionales, procesos y una necesidad de información."
+          - "Adjunta el archivo en el espacio de entrega M1.1_Diagnóstico del entorno."
+    evidencias: [{nombre: "Diagnóstico del entorno organizacional", tipo: "Documento", recurso: "M1.1_Diagnóstico del entorno"}]
+    criterios_evaluacion:
+      - "Describe la naturaleza y las áreas funcionales de la organización con información pertinente."
+      - "Identifica una problemática o área de oportunidad vinculada con una necesidad de información."
+    reflexion:
+      - "Analicé el entorno de una organización y reconocí sus áreas funcionales."
+      - "Identifiqué una problemática y una oportunidad de mejora relacionada con información."
+    cubre_temas:
+      - "1.1 . Análisis del entorno"
+      - "1.1.1. Naturaleza de la organización"
+      - "1.1.2. Áreas funcionales"
+      - "1.1.3. Identificación de las necesidades y requerimientos información"
+      - "1.1.4. Análisis de políticas y estrategias"
+      - "1.1.5. Legislación de los datos"
+
+  - id: "1.2"
+    unidad: "I"
+    rubro: tareas
+    valor: 2.5
+    semanas: [3]
+    enunciado: "Identificar requerimientos de información a partir del estudio preliminar de una organización."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Aplicar técnicas para identificar reglas, necesidades y requerimientos del negocio."
+    sesiones:
+      - ambiente: presencial
+        semana: 3
+        actividad_tabla: "Estudio preliminar y requerimientos"
+        pasos:
+          - "El docente explicará técnicas de identificación de requerimientos y ejemplos de reglas de negocio."
+          - "Delimita con tu equipo la necesidad de información del caso y formula preguntas para el estudio preliminar."
+      - ambiente: virtual
+        semana: 3
+        actividad_tabla: "Matriz de requerimientos"
+        pasos:
+          - "Elabora la primera versión de una matriz que relacione necesidades del negocio, requerimientos de información y fuentes posibles."
+          - "Publica la matriz en M1.2_Matriz de requerimientos para recibir retroalimentación."
+    evidencias: [{nombre: "Matriz inicial de requerimientos", tipo: "Documento", recurso: "M1.2_Matriz de requerimientos"}]
+    criterios_evaluacion:
+      - "Relaciona cada requerimiento con una necesidad o regla del negocio identificada."
+    reflexion:
+      - "Identifiqué las reglas y necesidades de información del caso seleccionado."
+    cubre_temas:
+      - "1.2. Estudio preliminar"
+      - "1.2.1. Identificación de las reglas y necesidades del negocio"
+      - "1.2.2. Identificación inicial de requerimientos"
+      - "1.2.3. Técnicas para la identificación de requerimientos"
+
+  - id: "1.3"
+    unidad: "I"
+    rubro: tareas
+    valor: 2.5
+    semanas: [4]
+    enunciado: "Priorizar y consolidar datos para especificar los requerimientos de información del caso de estudio."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Perfilar fuentes internas y externas para valorar su pertinencia y calidad."
+      - "Definir la prioridad, integración y consolidación de los datos requeridos."
+    sesiones:
+      - ambiente: presencial
+        semana: 4
+        actividad_tabla: "Perfilado e integración de datos"
+        pasos:
+          - "El docente demostrará cómo perfilar fuentes de datos y reconocer necesidades de integración, oportunidad y jerarquización."
+          - "Revisa la matriz del equipo y ajusta los requerimientos con base en la disponibilidad y pertinencia de los datos."
+      - ambiente: virtual
+        semana: 4
+        actividad_tabla: "Especificación de requerimientos"
+        pasos:
+          - "Integra la matriz corregida con las reglas de negocio, fuentes de datos, prioridad y forma de consolidación propuesta."
+          - "Adjunta el archivo final en el espacio de entrega M1.3_Especificación de requerimientos."
+    evidencias: [{nombre: "Especificación de requerimientos de información", tipo: "Documento", recurso: "M1.3_Especificación de requerimientos"}]
+    criterios_evaluacion:
+      - "Justifica la prioridad, fuente y forma de integración de los datos propuestos."
+      - "La especificación consolida los requerimientos de información del caso sin contradicciones."
+    reflexion:
+      - "Perfilé las fuentes de datos y prioricé los requerimientos de información."
+      - "Consolidé los datos necesarios para atender la necesidad del caso."
+    cubre_temas:
+      - "1.2.4. Perfilado de datos (Data profiling) Fuentes internas, externas"
+      - "1.2.5. Identificación de necesidades de integración de datos (sincronización de datos)"
+      - "1.2.6. Oportunidad y jerarquización de los datos"
+      - "1.2.7. Consolidación de datos"
+
+  - id: "2.1"
+    unidad: "II"
+    rubro: tareas
+    valor: 5
+    semanas: [5]
+    enunciado: "Clasificar los procesos de una organización de acuerdo con su función y contribución al negocio."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Distinguir procesos clave, estratégicos y de apoyo."
+      - "Relacionar los procesos con la problemática y los requerimientos de información identificados."
+    sesiones:
+      - ambiente: presencial
+        semana: 5
+        actividad_tabla: "Análisis y clasificación de procesos"
+        pasos:
+          - "El docente presentará los tipos de procesos y guiará la clasificación de ejemplos organizacionales."
+          - "Clasifica los procesos del caso como clave, estratégicos o de apoyo y justifica cada decisión."
+      - ambiente: virtual
+        semana: 5
+        actividad_tabla: "Mapa de procesos"
+        pasos:
+          - "Elabora un mapa de procesos que muestre la relación entre los procesos clave, estratégicos y de apoyo del caso."
+          - "Adjunta el archivo en el espacio de entrega M2.1_Mapa de procesos."
+    evidencias: [{nombre: "Mapa de procesos", tipo: "Diagrama", recurso: "M2.1_Mapa de procesos"}]
+    criterios_evaluacion:
+      - "Clasifica los procesos con una justificación coherente con su contribución al negocio."
+      - "Relaciona el mapa con la necesidad de información definida por el equipo."
+    reflexion:
+      - "Clasifiqué los procesos de la organización según su función."
+      - "Relacioné los procesos con los requerimientos de información del caso."
+    cubre_temas:
+      - "2.1. Análisis de procesos"
+      - "2.1.1. Tipos de procesos"
+      - "2.1.1.1. Claves"
+      - "2.1.1.2. Estratégicos"
+      - "2.1.1.3. De apoyo"
+
+  - id: "2.2"
+    unidad: "II"
+    rubro: practicas
+    valor: 5
+    semanas: [6]
+    enunciado: "Modelar un proceso organizacional mediante notación BPMN y diagramas de comportamiento para documentar sus componentes."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Representar eventos, actividades, subprocesos, decisiones y relaciones de un proceso."
+      - "Documentar un proceso de manera que sus componentes y flujo sean comprensibles."
+      - "Representar las funcionalidades y la interacción de los participantes del proceso."
+    sesiones:
+      - ambiente: presencial
+        semana: 6
+        actividad_tabla: "Práctica de modelado BPMN"
+        pasos:
+          - "El docente demostrará el uso de la notación BPMN y los elementos de los diagramas de procesos."
+          - "Modela con tu equipo un proceso del caso incluyendo eventos, actividades, subprocesos, decisiones y conectores."
+      - ambiente: virtual
+        semana: 6
+        actividad_tabla: "Reporte de práctica BPMN"
+        pasos:
+          - "Documenta el proceso modelado, sus participantes, reglas y decisiones principales; complétalo con un diagrama de casos de uso o de secuencia."
+          - "Adjunta los diagramas y el reporte en M2.2_Modelo BPMN."
+    evidencias:
+      - {nombre: "Modelo BPMN documentado", tipo: "Reporte de práctica", recurso: "M2.2_Modelo BPMN"}
+      - {nombre: "Diagrama de comportamiento", tipo: "Diagrama", recurso: "M2.2_Modelo BPMN"}
+    criterios_evaluacion:
+      - "Utiliza la notación y los objetos de flujo de forma coherente con el proceso analizado."
+      - "La documentación permite comprender los participantes, actividades, decisiones y relaciones del proceso."
+      - "El diagrama de comportamiento representa las funcionalidades o la interacción de los participantes."
+    reflexion:
+      - "Modelé un proceso mediante elementos de BPMN."
+      - "Documenté los componentes y decisiones del proceso para explicar su funcionamiento."
+      - "Representé las funcionalidades o la interacción de los participantes del proceso."
+    cubre_temas:
+      - "2.2. Modelado de procesos"
+      - "2.2.1. Notación de modelado de procesos (BPMN)"
+      - "2.2.2. Características"
+      - "2.2.3. Elementos de los diagramas"
+      - "2.2.4. Objetos de flujo"
+      - "2.2.4.1. Eventos"
+      - "2.2.4.2. Actividad (procesos, subprocesos)"
+      - "2.2.4.3. Gateway"
+      - "2.2.4.4. Relaciones (objetos conector)"
+      - "2.2.5. Documentación de procesos"
+      - "2.3. Diagrama de comportamiento (funcionalidades)"
+      - "2.3.1. Diagrama de casos de uso"
+      - "2.3.2. Diagramas de interacción"
+      - "2.3.3. Diagrama de secuencia"
+
+  - id: "P1"
+    unidad: "II"
+    tipo: examen_parcial
+    rubro: examenes
+    valor: 5
+    semanas: [7]
+    enunciado: "Integrar el análisis organizacional y el modelado de procesos en la primera evaluación parcial."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Relacionar los requerimientos de información con el análisis del entorno y los procesos organizacionales."
+    sesiones:
+      - ambiente: presencial
+        semana: 7
+        actividad_tabla: "Primera evaluación parcial"
+        pasos:
+          - "Presenta la primera evaluación parcial sobre el análisis organizacional, los requerimientos de información y el modelado de procesos."
+      - ambiente: virtual
+        semana: 7
+        actividad_tabla: "Guía de repaso"
+        pasos:
+          - "Revisa la guía de repaso publicada en Blackboard y plantea tus dudas antes de la evaluación."
+    evidencias: [{nombre: "Primera evaluación parcial", tipo: "Examen", recurso: "M P1_Primera evaluación parcial"}]
+    criterios_evaluacion: ["Integra los conceptos y procedimientos de las unidades I y II para analizar una situación organizacional."]
+    reflexion: ["Relacioné el análisis del entorno, los requerimientos de información y el modelado de procesos."]
+    cubre_temas: []
+
+  - id: "3.1"
+    unidad: "III"
+    rubro: practicas
+    valor: 5
+    semanas: [8]
+    enunciado: "Aplicar un flujo ETL para preparar datos del caso de estudio."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Distinguir las etapas de extracción, limpieza, conformación y entrega de datos."
+      - "Identificar los procesos y transformaciones necesarios para integrar datos de un sistema."
+    sesiones:
+      - ambiente: presencial
+        semana: 8
+        actividad_tabla: "Práctica de flujo ETL"
+        pasos:
+          - "El docente demostrará las etapas del flujo ETL con datos de ejemplo y explicará los criterios de calidad."
+          - "Aplica con tu equipo la extracción, limpieza, transformación y carga de un conjunto de datos del caso."
+      - ambiente: virtual
+        semana: 8
+        actividad_tabla: "Reporte de práctica ETL"
+        pasos:
+          - "Documenta las fuentes, transformaciones, problemas de calidad y resultados de cada etapa del flujo ETL."
+          - "Adjunta el reporte en el espacio de entrega M3.1_Reporte ETL."
+    evidencias: [{nombre: "Reporte de flujo ETL", tipo: "Reporte de práctica", recurso: "M3.1_Reporte ETL"}]
+    criterios_evaluacion:
+      - "Describe las etapas del flujo de datos y las relaciona con las fuentes del caso."
+      - "Justifica las transformaciones aplicadas para atender los requerimientos identificados."
+    reflexion:
+      - "Apliqué un flujo ETL para preparar los datos del caso de estudio."
+      - "Documenté las transformaciones y los criterios de calidad utilizados."
+    cubre_temas:
+      - "3.1. Análisis de datos"
+      - "3.1.1. Fundamentos al Data Warehouse"
+      - "3.1.1.1. Extracción"
+      - "3.1.1.2. Limpieza"
+      - "3.1.1.3. Conformación"
+      - "3.1.1.4. Entrega"
+      - "3.2. Técnicas ETL"
+      - "3.2.1. Identificación de procesos en sistemas"
+      - "3.2.2. Extracción (Análisis de datos extraídos)"
+      - "3.2.3. Transformación"
+      - "3.3.4. Carga"
+
+  - id: "3.2"
+    unidad: "III"
+    rubro: practicas
+    valor: 5
+    semanas: [9]
+    enunciado: "Comparar estructuras de datos para seleccionar la fuente adecuada al requerimiento de información."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Distinguir las características de archivos planos, archivos XML y bases de datos relacionales."
+      - "Reconocer la función de los metadatos al interpretar y utilizar una fuente de datos."
+    sesiones:
+      - ambiente: presencial
+        semana: 9
+        actividad_tabla: "Práctica de estructuras de datos"
+        pasos:
+          - "El docente mostrará ejemplos de archivos planos, XML y bases de datos relacionales, incluyendo los metadatos asociados."
+          - "Examina las estructuras disponibles para el caso y registra sus ventajas, limitaciones y metadatos relevantes."
+      - ambiente: virtual
+        semana: 9
+        actividad_tabla: "Comparativo de fuentes de datos"
+        pasos:
+          - "Elabora un comparativo de las estructuras de datos revisadas y selecciona la fuente más adecuada para un requerimiento del caso."
+          - "Adjunta el archivo en el espacio de entrega M3.2_Comparativo de fuentes."
+    evidencias: [{nombre: "Comparativo de estructuras de datos", tipo: "Reporte de práctica", recurso: "M3.2_Comparativo de fuentes"}]
+    criterios_evaluacion:
+      - "Diferencia las estructuras de datos por su organización, uso y limitaciones."
+      - "Justifica la selección de una fuente con base en los requerimientos de información."
+    reflexion:
+      - "Comparé estructuras de datos y reconocí la función de sus metadatos."
+      - "Seleccioné una fuente de datos congruente con un requerimiento de información."
+    cubre_temas:
+      - "3.3. Estructuras de datos en un sistema"
+      - "3.3.1. Archivos planos (Flat Files)"
+      - "3.3.2. Repositorio de archivos XML"
+      - "3.3.3. Bases de datos relacionales"
+      - "3.3.4. Metadatos"
+
+  - id: "3.3"
+    unidad: "III"
+    rubro: practicas
+    valor: 5
+    semanas: [10]
+    enunciado: "Construir un modelo de datos que represente los requerimientos de información del caso de estudio."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Distinguir los niveles conceptual, lógico y físico del modelado de datos."
+      - "Representar entidades, relaciones y atributos mediante un diagrama de datos."
+    sesiones:
+      - ambiente: presencial
+        semana: 10
+        actividad_tabla: "Práctica de modelado de datos"
+        pasos:
+          - "El docente explicará los tipos de modelado de datos y demostrará la construcción de un diagrama a partir de requerimientos."
+          - "Construye con tu equipo el modelo conceptual y lógico del caso, indicando las entidades, atributos y relaciones."
+      - ambiente: virtual
+        semana: 10
+        actividad_tabla: "Diagrama de modelo de datos"
+        pasos:
+          - "Ajusta el diagrama con base en la retroalimentación y describe cómo se llevaría al modelo físico."
+          - "Adjunta el archivo en el espacio de entrega M3.3_Modelo de datos."
+    evidencias: [{nombre: "Modelo de datos", tipo: "Reporte de práctica", recurso: "M3.3_Modelo de datos"}]
+    criterios_evaluacion:
+      - "El modelo representa entidades y relaciones necesarias para los requerimientos identificados."
+      - "Distingue los niveles conceptual, lógico y físico de la propuesta."
+    reflexion:
+      - "Construí un modelo de datos a partir de los requerimientos del caso."
+      - "Diferencié los niveles conceptual, lógico y físico del modelado."
+    cubre_temas:
+      - "3.4. Modelado de datos"
+      - "3.4.1. Tipos de modelado de datos"
+      - "3.4.1.1. Modelo conceptual."
+      - "3.4.1.2. Modelo lógico."
+      - "3.4.1.3. Modelo físico."
+      - "3.5. Diagramación de modelado de datos"
+
+  - id: "3.4"
+    unidad: "III"
+    rubro: practicas
+    valor: 5
+    semanas: [11]
+    enunciado: "Documentar un diccionario de datos que describa los flujos y elementos del modelo propuesto."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Definir los flujos de datos y describir los elementos que intervienen en ellos."
+      - "Elaborar un diccionario de datos que facilite la interpretación y mantenimiento del modelo."
+    sesiones:
+      - ambiente: presencial
+        semana: 11
+        actividad_tabla: "Práctica de diccionario de datos"
+        pasos:
+          - "El docente explicará la estructura de un diccionario de datos y su relación con los flujos de información."
+          - "Define con tu equipo los flujos de datos del modelo y registra los atributos, origen, destino y reglas relevantes."
+      - ambiente: virtual
+        semana: 11
+        actividad_tabla: "Diccionario de datos"
+        pasos:
+          - "Completa el diccionario de datos y revisa que cada elemento del modelo tenga una descripción clara."
+          - "Adjunta el archivo en el espacio de entrega M3.4_Diccionario de datos."
+    evidencias: [{nombre: "Diccionario de datos", tipo: "Reporte de práctica", recurso: "M3.4_Diccionario de datos"}]
+    criterios_evaluacion:
+      - "Describe los flujos de datos con origen, destino y propósito identificables."
+      - "Documenta los elementos del modelo con nombres, definiciones y reglas comprensibles."
+    reflexion:
+      - "Definí los flujos de datos del modelo propuesto."
+      - "Documenté un diccionario de datos para interpretar los elementos y sus relaciones."
+    cubre_temas:
+      - "3.6. Diccionario de datos"
+      - "3.6.1. Definición de los flujos de datos"
+      - "3.6.2. Descripción de los flujos de datos"
+      - "3.6.3. Creación de diccionario de diccionario de datos"
+      - "3.6.4. Documentación de diccionarios de datos"
+
+  - id: "P2"
+    unidad: "III"
+    tipo: examen_parcial
+    rubro: examenes
+    valor: 5
+    semanas: [12]
+    enunciado: "Integrar el análisis y modelado de datos en la segunda evaluación parcial."
+    caracter: individual
+    que_voy_a_aprender:
+      - "Relacionar las técnicas ETL, las estructuras de datos, el modelado y la documentación de datos."
+    sesiones:
+      - ambiente: presencial
+        semana: 12
+        actividad_tabla: "Segunda evaluación parcial"
+        pasos:
+          - "Presenta la segunda evaluación parcial sobre análisis, preparación, modelado y documentación de datos."
+      - ambiente: virtual
+        semana: 12
+        actividad_tabla: "Guía de repaso"
+        pasos:
+          - "Revisa la guía de repaso publicada en Blackboard y plantea tus dudas antes de la evaluación."
+    evidencias: [{nombre: "Segunda evaluación parcial", tipo: "Examen", recurso: "M P2_Segunda evaluación parcial"}]
+    criterios_evaluacion: ["Relaciona las técnicas de preparación y modelado de datos con los requerimientos de información del caso."]
+    reflexion: ["Integré las técnicas ETL, las estructuras de datos y el modelo de información del caso."]
+    cubre_temas: []
+
+  - id: "3.5"
+    unidad: "III"
+    rubro: proyecto
+    valor: 10
+    semanas: [12]
+    enunciado: "Integrar un avance de la propuesta de solución con los análisis de entorno, procesos y datos realizados."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Articular los requerimientos de información, el modelo de procesos y el modelo de datos en una propuesta de solución."
+    sesiones:
+      - ambiente: presencial
+        semana: 12
+        actividad_tabla: "Taller de integración del proyecto"
+        pasos:
+          - "El docente revisará la estructura del avance y proporcionará retroalimentación sobre la congruencia entre los análisis realizados."
+          - "Integra con tu equipo los diagnósticos, modelos y diccionario de datos en un avance de la propuesta."
+      - ambiente: virtual
+        semana: 12
+        actividad_tabla: "Avance de propuesta de solución"
+        pasos:
+          - "Redacta el avance explicando la problemática, los requerimientos de información, el proceso y el modelo de datos propuesto."
+          - "Adjunta el archivo en el espacio de entrega M3.5_Avance de propuesta."
+    evidencias: [{nombre: "Avance de propuesta de solución", tipo: "Avance de proyecto", recurso: "M3.5_Avance de propuesta"}]
+    criterios_evaluacion:
+      - "Integra los análisis realizados sin contradicciones entre requerimientos, proceso y datos."
+      - "Explica cómo la propuesta atiende la problemática identificada."
+    reflexion:
+      - "Integré los análisis del entorno, procesos y datos en un avance de solución."
+    cubre_temas: []
+
+  - id: "4.1"
+    unidad: "IV"
+    rubro: proyecto
+    valor: 5
+    semanas: [13]
+    enunciado: "Aplicar técnicas de análisis de decisiones para evaluar alternativas de solución."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Reconocer las etapas y técnicas del análisis de decisiones."
+      - "Representar alternativas mediante árboles y tablas de decisión."
+    sesiones:
+      - ambiente: presencial
+        semana: 13
+        actividad_tabla: "Análisis de alternativas"
+        pasos:
+          - "El docente presentará las etapas del análisis de decisiones y demostrará el uso de árboles y tablas de decisión."
+          - "Construye con tu equipo un árbol o tabla de decisión para comparar alternativas de solución del caso."
+      - ambiente: virtual
+        semana: 13
+        actividad_tabla: "Matriz de decisión"
+        pasos:
+          - "Documenta las alternativas, criterios, consecuencias y recomendación preliminar para el caso de estudio."
+          - "Adjunta el archivo en el espacio de entrega M4.1_Matriz de decisión."
+    evidencias: [{nombre: "Matriz de decisión", tipo: "Avance de proyecto", recurso: "M4.1_Matriz de decisión"}]
+    criterios_evaluacion:
+      - "Define alternativas y criterios de decisión congruentes con la problemática del caso."
+      - "Justifica la técnica de análisis empleada y la recomendación preliminar."
+    reflexion:
+      - "Apliqué una técnica de análisis de decisiones para comparar alternativas."
+      - "Justifiqué una recomendación preliminar con criterios explícitos."
+    cubre_temas:
+      - "4.1. Análisis de decisiones."
+      - "4.1.1. Etapas del análisis de decisiones"
+      - "4.1.2. Técnicas de análisis de decisiones"
+      - "4.1.3. Árboles de decisiones"
+      - "4.1.4. Tablas de decisión"
+
+  - id: "4.2"
+    unidad: "IV"
+    rubro: proyecto
+    valor: 5
+    semanas: [14]
+    enunciado: "Representar iteraciones de un proceso mediante pseudocódigo para comunicar la lógica de la solución."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Identificar ciclos e iteraciones en un proceso de operación."
+      - "Escribir pseudocódigo o español estructurado que comunique una secuencia de decisiones."
+    sesiones:
+      - ambiente: presencial
+        semana: 14
+        actividad_tabla: "Modelado de ciclos e iteraciones"
+        pasos:
+          - "El docente explicará cómo representar iteraciones y decisiones de un proceso mediante pseudocódigo o español estructurado."
+          - "Identifica un ciclo relevante del proceso y redacta con tu equipo la lógica de operación propuesta."
+      - ambiente: virtual
+        semana: 14
+        actividad_tabla: "Pseudocódigo de la solución"
+        pasos:
+          - "Ajusta el pseudocódigo para que exprese entradas, decisiones, iteraciones y salidas de forma comprensible."
+          - "Adjunta el archivo en el espacio de entrega M4.2_Pseudocódigo de la solución."
+    evidencias: [{nombre: "Pseudocódigo de la solución", tipo: "Avance de proyecto", recurso: "M4.2_Pseudocódigo de la solución"}]
+    criterios_evaluacion:
+      - "Representa correctamente las decisiones e iteraciones del proceso seleccionado."
+      - "La lógica propuesta es comprensible y congruente con el modelo de procesos."
+    reflexion:
+      - "Identifiqué iteraciones en el proceso y las representé de forma estructurada."
+      - "Redacté una secuencia de decisiones congruente con la solución propuesta."
+    cubre_temas:
+      - "4.2. Análisis de iteraciones o ciclos"
+      - "4.2.1. Pseudocódigo o español estructurado"
+
+  - id: "4.3"
+    unidad: "IV"
+    rubro: proyecto
+    valor: 15
+    semanas: [15]
+    enunciado: "Evaluar y ajustar la propuesta de solución estandarizada con base en los requerimientos y alternativas analizadas."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Valorar la viabilidad de una propuesta al relacionar los requerimientos, modelos y decisiones del caso."
+      - "Argumentar los ajustes necesarios para que la solución responda a la problemática identificada."
+    sesiones:
+      - ambiente: presencial
+        semana: 15
+        actividad_tabla: "Revisión de propuesta de solución"
+        pasos:
+          - "El docente revisará los proyectos y orientará la verificación de la congruencia entre problemática, requerimientos, modelos y alternativa elegida."
+          - "Presenta con tu equipo la propuesta y registra la retroalimentación para realizar los ajustes necesarios."
+      - ambiente: virtual
+        semana: 15
+        actividad_tabla: "Versión ajustada de la propuesta"
+        pasos:
+          - "Integra la retroalimentación y redacta la justificación de la alternativa de solución seleccionada."
+          - "Adjunta la versión ajustada en el espacio de entrega M4.3_Propuesta ajustada."
+    evidencias: [{nombre: "Propuesta de solución ajustada", tipo: "Avance de proyecto", recurso: "M4.3_Propuesta ajustada"}]
+    criterios_evaluacion:
+      - "La propuesta responde a la problemática y a los requerimientos de información identificados."
+      - "Justifica la alternativa seleccionada con los modelos y criterios de decisión desarrollados."
+    reflexion:
+      - "Evalué la congruencia de mi propuesta con los requerimientos y modelos del caso."
+      - "Ajusté la alternativa de solución con base en la retroalimentación recibida."
+    cubre_temas: []
+
+  - id: "C"
+    unidad: "IV"
+    tipo: cierre
+    rubro: proyecto
+    valor: 15
+    semanas: [16]
+    enunciado: "Presentar una propuesta de solución estandarizada que integre los análisis del entorno, procesos y datos de una organización."
+    caracter: colaborativa
+    que_voy_a_aprender:
+      - "Comunicar una propuesta de solución sustentada en el análisis del entorno, procesos, datos y decisiones."
+      - "Integrar las evidencias del curso en un producto comprensible para un tomador de decisiones."
+    sesiones:
+      - ambiente: presencial
+        semana: 16
+        actividad_tabla: "Presentación de propuestas de solución"
+        pasos:
+          - "Presenta con tu equipo la propuesta de solución estandarizada y explica cómo atiende la problemática organizacional."
+          - "Participa en la retroalimentación de las propuestas presentadas por los demás equipos."
+      - ambiente: virtual
+        semana: 16
+        actividad_tabla: "Entrega final de la propuesta"
+        pasos:
+          - "Integra el diagnóstico, requerimientos, modelos de procesos y datos, análisis de decisiones y propuesta de solución en un documento final."
+          - "Adjunta el archivo final en el espacio de entrega M4.4_Propuesta de solución estandarizada."
+    evidencias: [{nombre: "Propuesta de solución estandarizada", tipo: "Proyecto", recurso: "M4.4_Propuesta de solución estandarizada"}]
+    criterios_evaluacion:
+      - "Integra los análisis del entorno, procesos y datos en una propuesta coherente."
+      - "Especifica los requerimientos de información y justifica la alternativa de solución."
+      - "Comunica la propuesta con claridad y sustento en las evidencias desarrolladas."
+    reflexion:
+      - "Integré los análisis del entorno, procesos y datos en una propuesta de solución estandarizada."
+      - "Comuniqué y justifiqué una alternativa de solución para la problemática del caso."
+    cubre_temas: []
