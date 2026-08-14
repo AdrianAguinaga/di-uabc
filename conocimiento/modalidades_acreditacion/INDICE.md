@@ -12,13 +12,18 @@ en comentarios HTML; sirven para consulta y no sustituyen la fuente oficial.
 | `b.Metodologia de los Estudios de Fundamentacion.md` | Contextual de alto nivel | Sitúa las modalidades de aprendizaje y la obtención de créditos dentro del diseño y evaluación de programas educativos. Útil para justificar pertinencia, no para decidir requisitos operativos de un registro individual. |
 | `c.Documentoejecutivo-evaluacion externa_interna-PE_licenciatura.md` | Indirecta | Sirve para evidencia y evaluación de programas educativos; no establece el llenado ni la aprobación de modalidades. |
 | `d. Formatos_Metodologicos_para_la_creacion_de_programas_educativos.docx.md` | Indirecta | Es un conjunto de formatos para creación o modificación de programas educativos; orienta la redacción por competencias, pero no corresponde al Registro de Modalidades. |
+| `ejemplos-asesoria-academica.md` | Operativa, no normativa | Contrasta tres registros reales despersonalizados, fija el rótulo observado de asesoría académica y documenta riesgos de copia, fechas, evaluación y privacidad. Los originales no se versionan porque contienen datos estudiantiles. |
 
 ## Hallazgos que sí afectan el formato
 
 - El formato solicita: unidad académica, periodo de estudio, tipo y nombre de modalidad, clave, distribución de créditos, plan de estudio, etapa de formación, programas participantes, estudiantes, responsables y firmas.
 - El documento de modalidades identifica como opciones: estudios independientes; ayudantías docente, de laboratorio y de investigación; ejercicio investigativo; apoyo a actividades de extensión y vinculación; y proyectos de vinculación con valor en créditos (PVVC).
 - La fuente directa describe requisitos distintos por modalidad y distingue registros iniciados por académico de UABC, alumno y PVVC. Por ello el llenador no debe asumir un único conjunto fijo de requisitos.
+- Los ejemplos operativos usan “Unidad de Aprendizaje por Asesoría Académica”, una etiqueta que no debe confundirse ni homologarse automáticamente con las OMA del catálogo normativo.
 
 ## Siguiente decisión de implementación
 
-Antes de automatizar el llenado, hay que transcribir literalmente las reglas aplicables por modalidad —en especial límites, etapa, créditos, responsables, aprobación y evidencias— a un catálogo versionado. No se inferirán de la plantilla ni de los documentos contextuales.
+Antes de convertir las reglas de cada modalidad en validaciones automáticas, hay que transcribirlas
+literalmente a un catálogo versionado —en especial límites, etapa, créditos, responsables,
+aprobación y evidencias—. Los tres ejemplos permiten probar el flujo de asesoría académica, pero no
+son autoridad suficiente para inventar ese catálogo.

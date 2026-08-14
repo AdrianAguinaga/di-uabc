@@ -30,8 +30,9 @@ no se edita el Markdown a mano.
 
 | Documento | Qué aporta | Original |
 |---|---|---|
-| [Índice y pertinencia de fuentes](modalidades_acreditacion/INDICE.md) | Mapa de las seis fuentes nuevas, con qué regula cada una y cuáles aplican directamente al Registro de Modalidades de Acreditación Diversas. | `referencias/modalidades_acreditacion/` |
+| [Índice y pertinencia de fuentes](modalidades_acreditacion/INDICE.md) | Mapa de las seis fuentes institucionales y la evidencia operativa, con su autoridad y uso dentro del Registro de Modalidades de Acreditación Diversas. | `referencias/modalidades_acreditacion/` |
 | [Modalidades de aprendizaje y obtención de créditos](modalidades_acreditacion/Modalidades_de_Aprendizaje_2021.md) | Fuente principal: modalidades del Art. 155, requisitos y flujos de registro de OMA y PVVC. | `Modalidades_de_Aprendizaje_2021.pdf` |
+| [Ejemplos operativos de asesoría académica](modalidades_acreditacion/ejemplos-asesoria-academica.md) | Tres registros despersonalizados: patrón común, riesgos de copia y flujo reforzado. | Originales externos no versionados por contener datos estudiantiles. |
 
 ## Estilo y rúbrica
 

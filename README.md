@@ -47,6 +47,25 @@ Un documento por grupo, fusionando:
 El orquestador pregunta: **ciclo → materia → profesor → modalidad → grupos → esquema de evaluación**.
 Si el PUA de la materia todavía no está en `puas/md/`, lo pide y ofrece ingerirlo en el momento.
 
+### Registro de asesoría académica
+
+El formato complementario de **Modalidades de Acreditación Diversas** se llena desde su propio
+`registro.yaml`:
+
+```powershell
+python src/render_registro_modalidades.py <registro.yaml> <salida.docx>
+```
+
+Para una asesoría académica, `tipo_modalidad` usa el rótulo institucional observado
+`Unidad de Aprendizaje por Asesoría Académica`. El periodo debe coincidir con `ciclo`; cada actividad
+declara un rango de semanas válido o un periodo del calendario oficial. El comando trabaja sobre una
+copia verificada de la plantilla y solo reemplaza la salida tras guardar el documento completo.
+
+La [comparación despersonalizada de tres registros reales](conocimiento/modalidades_acreditacion/ejemplos-asesoria-academica.md)
+documenta el flujo, sus límites y un caso real de justificación copiada entre materias. El resultado
+es un borrador: el docente todavía debe comprobar la coherencia del contenido y que la evaluación
+declare lo exigido por el Estatuto.
+
 ### El grafo del dominio
 
 ```

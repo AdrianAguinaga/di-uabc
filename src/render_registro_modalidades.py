@@ -11,7 +11,8 @@ Uso:
 from __future__ import annotations
 
 import sys
-from datetime import date, datetime, timedelta
+import tempfile
+from datetime import date, timedelta
 from pathlib import Path
 
 import yaml
@@ -22,10 +23,10 @@ from docx.oxml.ns import qn
 from docx.shared import Pt, RGBColor
 from docx.text.paragraph import Paragraph
 
+from calendario import ErrorCalendario, Periodo, cargar
 from plantillas import copia_de_trabajo
 
 PLANTILLA = "registro_modalidades_acreditacion_diversas"
-RAIZ = Path(__file__).resolve().parent.parent
 
 MESES = (
     "enero",
@@ -117,39 +118,23 @@ def _salto_antes_de_actividades(documento: Document) -> None:
     raise ErrorRegistro("No se localizó el salto de página previo a las actividades.")
 
 
-def _fecha(valor: date | datetime | str) -> date:
-    if isinstance(valor, datetime):
-        return valor.date()
-    if isinstance(valor, date):
-        return valor
-    return date.fromisoformat(str(valor))
-
-
 def _fecha_larga(valor: date) -> str:
     return f"{valor.day} de {MESES[valor.month - 1]} de {valor.year}"
 
 
 def _rango_actividad(actividad: dict, ciclo: str) -> str:
-    calendario = yaml.safe_load((RAIZ / "calendarios" / f"{ciclo}.yaml").read_text(encoding="utf-8"))
-    clases = calendario["clases"]
-    inicio_clases = _fecha(clases["inicio"])
-    fin_clases = _fecha(clases["fin"])
-    suspensiones = {_fecha(item["fecha"]) for item in calendario.get("suspensiones", [])}
+    calendario = cargar(ciclo)
 
     if periodo := actividad.get("periodo_calendario"):
-        datos = calendario["periodos"].get(periodo)
-        if not datos:
+        datos = calendario.periodos.get(periodo)
+        if not isinstance(datos, Periodo):
             raise ErrorRegistro(f"Periodo inexistente en el calendario {ciclo}: {periodo}")
-        inicio, fin = _fecha(datos["inicio"]), _fecha(datos["fin"])
+        inicio, fin = datos.inicio, datos.fin
     else:
-        inicio_semana = actividad["inicio_semana"]
-        fin_semana = actividad["fin_semana"]
-        inicio = inicio_clases + timedelta(weeks=inicio_semana - 1)
-        fin = inicio_clases + timedelta(weeks=fin_semana - 1, days=5)
-        while inicio in suspensiones:
+        inicio = calendario.semana(actividad["inicio_semana"]).inicio
+        fin = calendario.semana(actividad["fin_semana"]).fin
+        while calendario.es_suspension(inicio):
             inicio += timedelta(days=1)
-        if inicio < inicio_clases or fin > fin_clases:
-            raise ErrorRegistro("Una actividad quedó fuera del periodo oficial de clases.")
 
     return f"Del {_fecha_larga(inicio)} al {_fecha_larga(fin)}"
 
@@ -202,7 +187,11 @@ def _rellenar_cuerpo(documento: Document, registro: dict) -> None:
 
 
 def _validar(datos: dict) -> None:
+    if not isinstance(datos, dict):
+        raise ErrorRegistro("El archivo debe contener un objeto registro.")
     registro = datos.get("registro") or {}
+    if not isinstance(registro, dict):
+        raise ErrorRegistro("registro debe declararse como campos.")
     requeridos = (
         "unidad_academica",
         "periodo_estudio",
@@ -226,78 +215,142 @@ def _validar(datos: dict) -> None:
     if faltan:
         raise ErrorRegistro("Faltan datos obligatorios: " + ", ".join(faltan))
 
+    if str(registro["periodo_estudio"]) != str(registro["ciclo"]):
+        raise ErrorRegistro("El periodo de estudio debe coincidir con el ciclo del calendario.")
+
+    try:
+        calendario = cargar(str(registro["ciclo"]))
+    except ErrorCalendario as error:
+        raise ErrorRegistro(str(error)) from error
+
+    for campo in ("programas", "referencias", "actividades"):
+        if not isinstance(registro[campo], list):
+            raise ErrorRegistro(f"{campo} debe declararse como lista.")
+    for campo in ("programas", "referencias"):
+        if any(not isinstance(valor, str) or not valor.strip() for valor in registro[campo]):
+            raise ErrorRegistro(f"{campo} contiene un valor vacío o que no es texto.")
+
     creditos = registro["creditos"]
+    if not isinstance(creditos, dict):
+        raise ErrorRegistro("Los créditos y horas deben declararse como campos.")
     campos_creditos = ("hc", "hl", "ht", "hpc", "hcl", "cr")
     faltan_creditos = [campo for campo in campos_creditos if campo not in creditos]
     if faltan_creditos:
         raise ErrorRegistro("Faltan créditos u horas: " + ", ".join(faltan_creditos))
 
+    if not isinstance(registro["estudiantes"], list):
+        raise ErrorRegistro("Los estudiantes deben declararse como lista.")
+    if not isinstance(registro["responsables"], list):
+        raise ErrorRegistro("Los responsables deben declararse como lista.")
     if len(registro["estudiantes"]) > 6:
         raise ErrorRegistro("La plantilla admite como máximo seis estudiantes por registro.")
     if len(registro["responsables"]) > 4:
         raise ErrorRegistro("La plantilla admite como máximo cuatro responsables por registro.")
 
     for i, estudiante in enumerate(registro["estudiantes"], start=1):
+        if not isinstance(estudiante, dict):
+            raise ErrorRegistro(f"Estudiante {i}: debe declararse como campos.")
         faltan = [campo for campo in ("matricula", "nombre", "programa") if not estudiante.get(campo)]
         if faltan:
             raise ErrorRegistro(f"Estudiante {i}: faltan " + ", ".join(faltan))
     for i, responsable in enumerate(registro["responsables"], start=1):
+        if not isinstance(responsable, dict):
+            raise ErrorRegistro(f"Responsable {i}: debe declararse como campos.")
         faltan = [campo for campo in ("nombre", "adscripcion", "ciudad") if not responsable.get(campo)]
         if faltan:
             raise ErrorRegistro(f"Responsable {i}: faltan " + ", ".join(faltan))
 
-    if not (RAIZ / "calendarios" / f"{registro['ciclo']}.yaml").exists():
-        raise ErrorRegistro(f"No existe el calendario oficial del ciclo {registro['ciclo']}.")
+    for i, actividad in enumerate(registro["actividades"], start=1):
+        if not isinstance(actividad, dict) or not actividad.get("descripcion"):
+            raise ErrorRegistro(f"Actividad {i}: falta descripcion.")
+        periodo = actividad.get("periodo_calendario")
+        semanas = "inicio_semana" in actividad or "fin_semana" in actividad
+        if periodo and semanas:
+            raise ErrorRegistro(
+                f"Actividad {i}: declara periodo_calendario y semanas al mismo tiempo."
+            )
+        if periodo:
+            if not isinstance(calendario.periodos.get(periodo), Periodo):
+                raise ErrorRegistro(
+                    f"Actividad {i}: periodo inexistente en el calendario {registro['ciclo']}: "
+                    f"{periodo}"
+                )
+            continue
+        faltan = [campo for campo in ("inicio_semana", "fin_semana") if campo not in actividad]
+        if faltan:
+            raise ErrorRegistro(f"Actividad {i}: faltan " + ", ".join(faltan))
+        inicio, fin = actividad["inicio_semana"], actividad["fin_semana"]
+        if (
+            isinstance(inicio, bool)
+            or isinstance(fin, bool)
+            or not isinstance(inicio, int)
+            or not isinstance(fin, int)
+            or not 1 <= inicio <= fin <= calendario.total_semanas
+        ):
+            raise ErrorRegistro(
+                f"Actividad {i}: el rango de semanas debe cumplir "
+                f"1 <= inicio <= fin <= {calendario.total_semanas}."
+            )
 
 
 def renderizar(entrada: Path, salida: Path) -> Path:
     datos = yaml.safe_load(Path(entrada).read_text(encoding="utf-8")) or {}
     _validar(datos)
     registro = datos["registro"]
+    salida = Path(salida)
+    salida.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=f".{salida.stem}-", dir=salida.parent) as temporal:
+        trabajo = Path(temporal) / salida.name
+        copia_de_trabajo(PLANTILLA, trabajo)
+        documento = Document(trabajo)
 
-    copia_de_trabajo(PLANTILLA, salida)
-    documento = Document(salida)
+        generales = documento.tables[0]
+        for fila, campo in enumerate(
+            ("unidad_academica", "periodo_estudio", "tipo_modalidad", "clave", "nombre_modalidad")
+        ):
+            _campo(generales, fila, 1, registro[campo])
 
-    generales = documento.tables[0]
-    for fila, campo in enumerate(
-        ("unidad_academica", "periodo_estudio", "tipo_modalidad", "clave", "nombre_modalidad")
-    ):
-        _campo(generales, fila, 1, registro[campo])
+        creditos = documento.tables[1]
+        for columna, campo in (
+            (1, "hc"),
+            (3, "hl"),
+            (5, "ht"),
+            (7, "hpc"),
+            (9, "hcl"),
+            (11, "cr"),
+        ):
+            _campo(creditos, 1, columna, registro["creditos"][campo])
 
-    creditos = documento.tables[1]
-    for columna, campo in ((1, "hc"), (3, "hl"), (5, "ht"), (7, "hpc"), (9, "hcl"), (11, "cr")):
-        _campo(creditos, 1, columna, registro["creditos"][campo])
+        plan = documento.tables[2]
+        _campo(plan, 0, 1, registro["plan_estudios"])
+        _campo(plan, 0, 3, registro["etapa_formacion"])
 
-    plan = documento.tables[2]
-    _campo(plan, 0, 1, registro["plan_estudios"])
-    _campo(plan, 0, 3, registro["etapa_formacion"])
+        programas = documento.tables[3]
+        _campo(programas, 1, 0, "\n".join(registro["programas"]))
 
-    programas = documento.tables[3]
-    _campo(programas, 1, 0, "\n".join(registro["programas"]))
+        estudiantes = documento.tables[4]
+        for fila, estudiante in enumerate(registro["estudiantes"], start=2):
+            _campo(estudiantes, fila, 0, estudiante["matricula"])
+            _campo(estudiantes, fila, 1, estudiante["nombre"])
+            _campo(estudiantes, fila, 2, estudiante["programa"])
+        _recortar_filas(estudiantes, 2 + len(registro["estudiantes"]))
 
-    estudiantes = documento.tables[4]
-    for fila, estudiante in enumerate(registro["estudiantes"], start=2):
-        _campo(estudiantes, fila, 0, estudiante["matricula"])
-        _campo(estudiantes, fila, 1, estudiante["nombre"])
-        _campo(estudiantes, fila, 2, estudiante["programa"])
-    _recortar_filas(estudiantes, 2 + len(registro["estudiantes"]))
+        responsables = documento.tables[5]
+        for fila, responsable in enumerate(registro["responsables"], start=2):
+            _campo(responsables, fila, 0, responsable["nombre"])
+            _campo(responsables, fila, 1, responsable["adscripcion"])
+            _campo(responsables, fila, 2, responsable["ciudad"])
+        _recortar_filas(responsables, 2 + len(registro["responsables"]))
 
-    responsables = documento.tables[5]
-    for fila, responsable in enumerate(registro["responsables"], start=2):
-        _campo(responsables, fila, 0, responsable["nombre"])
-        _campo(responsables, fila, 1, responsable["adscripcion"])
-        _campo(responsables, fila, 2, responsable["ciudad"])
-    _recortar_filas(responsables, 2 + len(registro["responsables"]))
+        firmas = registro.get("firmas") or {}
+        pie = documento.tables[6]
+        for columna, campo in ((1, "coordinacion_extension"), (3, "direccion_subdireccion")):
+            if firmas.get(campo):
+                _campo(pie, 1, columna, firmas[campo])
 
-    firmas = registro.get("firmas") or {}
-    pie = documento.tables[6]
-    for columna, campo in ((1, "coordinacion_extension"), (3, "direccion_subdireccion")):
-        if firmas.get(campo):
-            _campo(pie, 1, columna, firmas[campo])
-
-    _rellenar_cuerpo(documento, registro)
-
-    documento.save(salida)
+        _rellenar_cuerpo(documento, registro)
+        documento.save(trabajo)
+        trabajo.replace(salida)
     return salida
 
 
